@@ -1,14 +1,14 @@
-package co.edu.uco.sibe.dominio.modelo;
-
-import java.util.UUID;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+
+import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class TipoUsuario {
+public class TipoUsuarioDTO {
     UUID identificador;
     String nombre;
     boolean crear;
@@ -16,7 +16,7 @@ public class TipoUsuario {
     boolean eliminar;
     boolean consultar;
 
-    public TipoUsuario(){
+    public TipoUsuarioDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setCrear(crear);
@@ -25,7 +25,7 @@ public class TipoUsuario {
         setConsultar(consultar);
     }
 
-    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+    private TipoUsuarioDTO(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
         setIdentificador(identificador);
         setNombre(nombre);
         setCrear(crear);
@@ -34,40 +34,40 @@ public class TipoUsuario {
         setConsultar(consultar);
     }
 
-    public static TipoUsuario obtenerValorDefecto(){
-        return new TipoUsuario();
+    public static TipoUsuarioDTO obtenerValorDefecto(){
+        return new TipoUsuarioDTO();
     }
 
-    public static TipoUsuario obtenerValorDefecto(final TipoUsuario tipoUsuario){
+    public static TipoUsuarioDTO obtenerValorDefecto(final TipoUsuarioDTO tipoUsuario){
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoUsuario, obtenerValorDefecto());
     }
 
-    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        return new TipoUsuario(identificador, nombre, crear, modificar, eliminar, consultar);
+    public static TipoUsuarioDTO construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+        return new TipoUsuarioDTO(identificador, nombre, crear, modificar, eliminar, consultar);
     }
 
-    public void setIdentificador(UUID identificador) {
+    private void setIdentificador(UUID identificador) {
         this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
-    public void setNombre(String nombre) {
+    private void setNombre(String nombre) {
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
 
     }
 
-    public void setCrear(boolean crear) {
+    private void setCrear(boolean crear) {
         this.crear = crear;
     }
 
-    public void setModificar(boolean modificar) {
+    private void setModificar(boolean modificar) {
         this.modificar = modificar;
     }
 
-    public void setEliminar(boolean eliminar) {
+    private void setEliminar(boolean eliminar) {
         this.eliminar = eliminar;
     }
 
-    public void setConsultar(boolean consultar) {
+    private void setConsultar(boolean consultar) {
         this.consultar = consultar;
     }
 }

@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.dominio.modelo;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
@@ -12,40 +12,40 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Actividad {
+public class ActividadDTO {
     private UUID identificador;
     private  String nombreCapacitacionOEvento;
     private String Objetivo;
-    private Usuario colaborador;
-    private Usuario creador;
-    private Indicador indicador;
+    private UsuarioDTO colaborador;
+    private UsuarioDTO creador;
+    private IndicadorDTO indicador;
     private LocalDateTime fechaCreacion;
     private LocalDate fechaProgramada;
     private LocalDate fechaRealizacion;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private EstadoActividad estadoActividad;
-    private Area area;
+    private EstadoActividadDTO estadoActividad;
+    private AreaDTO area;
     private String rutaInsumos;
 
-    public Actividad(){
+    public ActividadDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombreCapacitacionOEvento(UtilTexto.getInstance().obtenerValorDefecto());
         setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
-        setColaborador(Usuario.obtenerValorDefecto());
-        setCreador(Usuario.obtenerValorDefecto());
-        setIndicador(Indicador.obtenerValorDefecto());
+        setColaborador(UsuarioDTO.obtenerValorDefecto());
+        setCreador(UsuarioDTO.obtenerValorDefecto());
+        setIndicador(IndicadorDTO.obtenerValorDefecto());
         setFechaCreacion(UtilFecha.getInstance().obtenerHoraFechaDefecto());
         setFechaProgramada(UtilFecha.getInstance().obtenerFechaDefecto());
         setFechaRealizacion(UtilFecha.getInstance().obtenerFechaDefecto());
         setHoraInicio(UtilFecha.getInstance().obtenerHoraDefecto());
         setHoraFin(UtilFecha.getInstance().obtenerHoraDefecto());
-        setEstadoActividad(EstadoActividad.obtenerValorDefecto());
-        setArea(Area.obtenerValorDefecto());
+        setEstadoActividad(EstadoActividadDTO.obtenerValorDefecto());
+        setArea(AreaDTO.obtenerValorDefecto());
         setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    public Actividad(UUID identificador, String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Usuario creador, Indicador indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividad estadoActividad, Area area, String rutaInsumos){
+    public ActividadDTO(UUID identificador, String nombreCapacitacionOEvento, String objetivo, UsuarioDTO colaborador, UsuarioDTO creador, IndicadorDTO indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividadDTO estadoActividad, AreaDTO area, String rutaInsumos){
         setIdentificador(identificador);
         setNombreCapacitacionOEvento(nombreCapacitacionOEvento);
         setObjetivo(objetivo);
@@ -57,21 +57,21 @@ public class Actividad {
         setFechaRealizacion(fechaRealizacion);
         setHoraInicio(horaInicio);
         setHoraFin(horaFin);
-        setEstadoActividad(EstadoActividad.obtenerValorDefecto());
-        setArea(Area.obtenerValorDefecto());
-        setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
+        setEstadoActividad(estadoActividad);
+        setArea(area);
+        setRutaInsumos(rutaInsumos);
     }
 
-    public static Actividad obtenerValorDefecto(){
-        return new Actividad();
+    public static ActividadDTO obtenerValorDefecto(){
+        return new ActividadDTO();
     }
 
-    public static Actividad obtenerValorDefecto(final Actividad actividad){
+    public static ActividadDTO obtenerValorDefecto(final ActividadDTO actividad){
         return UtilObjeto.getInstance().obtenerValorDefecto(actividad, obtenerValorDefecto());
     }
 
-    public static Actividad construir(UUID identificador, String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Indicador indicador, LocalDate fechaProgramada, Area area, String rutaInsumos){
-        return new Actividad(identificador, nombreCapacitacionOEvento, objetivo, colaborador, null, indicador, UtilFecha.getInstance().obtenerHoraFechaDefecto(), fechaProgramada, UtilFecha.getInstance().obtenerFechaDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), null, area, rutaInsumos);
+    public static ActividadDTO construir(UUID identificador, String nombreCapacitacionOEvento, String objetivo, UsuarioDTO colaborador, IndicadorDTO indicador, LocalDate fechaProgramada, AreaDTO area, String rutaInsumos){
+        return new ActividadDTO(identificador, nombreCapacitacionOEvento, objetivo, colaborador, null, indicador, UtilFecha.getInstance().obtenerHoraFechaDefecto(), fechaProgramada, UtilFecha.getInstance().obtenerFechaDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), null, area, rutaInsumos);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -86,16 +86,16 @@ public class Actividad {
         Objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
     }
 
-    public void setColaborador(Usuario colaborador) {
-        this.colaborador = Usuario.obtenerValorDefecto(colaborador);
+    public void setColaborador(UsuarioDTO colaborador) {
+        this.colaborador = UsuarioDTO.obtenerValorDefecto(colaborador);
     }
 
-    public void setCreador(Usuario creador) {
-        this.creador = Usuario.obtenerValorDefecto(creador);
+    public void setCreador(UsuarioDTO creador) {
+        this.creador = UsuarioDTO.obtenerValorDefecto(creador);
     }
 
-    public void setIndicador(Indicador indicador) {
-        this.indicador = Indicador.obtenerValorDefecto(indicador);
+    public void setIndicador(IndicadorDTO indicador) {
+        this.indicador = IndicadorDTO.obtenerValorDefecto(indicador);
     }
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
@@ -118,12 +118,12 @@ public class Actividad {
         this.horaFin = (horaFin != null) ? horaFin : UtilFecha.getInstance().obtenerHoraDefecto();
     }
 
-    public void setEstadoActividad(EstadoActividad estadoActividad) {
-        this.estadoActividad = EstadoActividad.obtenerValorDefecto(estadoActividad);
+    public void setEstadoActividad(EstadoActividadDTO estadoActividad) {
+        this.estadoActividad = EstadoActividadDTO.obtenerValorDefecto(estadoActividad);
     }
 
-    public void setArea(Area area) {
-        this.area = Area.obtenerValorDefecto(area);
+    public void setArea(AreaDTO area) {
+        this.area = AreaDTO.obtenerValorDefecto(area);
     }
 
     public void setRutaInsumos(String rutaInsumos) {

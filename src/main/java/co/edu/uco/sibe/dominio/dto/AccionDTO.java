@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.dominio.modelo;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -7,21 +7,21 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Accion {
+public class AccionDTO {
     private UUID identificador;
     private String detalle;
     private String objetivo;
-    private Proyecto proyecto;
+    private ProyectoDTO proyecto;
 
-    private Accion(UUID identificador, String detalle, String objetivo, Proyecto proyecto) {
+    private AccionDTO(UUID identificador, String detalle, String objetivo, ProyectoDTO proyecto) {
         setIdentificador(identificador);
         setDetalle(detalle);
         setObjetivo(objetivo);
         setProyecto(proyecto);
     }
 
-    public static Accion construir(UUID identificador, String detalle, String objetivo, Proyecto proyecto){
-        return new Accion(identificador, detalle, objetivo, proyecto);
+    public static AccionDTO construir(UUID identificador, String detalle, String objetivo, ProyectoDTO proyecto){
+        return new AccionDTO(identificador, detalle, objetivo, proyecto);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -36,7 +36,7 @@ public class Accion {
         this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = Proyecto.obtenerValorDefecto(proyecto);
+    public void setProyecto(ProyectoDTO proyecto) {
+        this.proyecto = ProyectoDTO.obtenerValorDefecto(proyecto);
     }
 }

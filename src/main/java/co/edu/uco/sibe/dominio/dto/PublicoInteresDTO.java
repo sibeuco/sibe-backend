@@ -1,37 +1,37 @@
-package co.edu.uco.sibe.dominio.modelo;
-
-import java.util.UUID;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+
+import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Temporalidad {
+public class PublicoInteresDTO {
     private UUID identificador;
     private String nombre;
 
-    public Temporalidad(){
+    public PublicoInteresDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Temporalidad(UUID identificador, String nombre){
+    private PublicoInteresDTO(UUID identificador, String nombre){
         setIdentificador(identificador);
         setNombre(nombre);
     }
 
-    public static Temporalidad obtenerValorDefecto(){
-        return new Temporalidad();
+    public static PublicoInteresDTO obtenerValorDefecto(){
+        return new PublicoInteresDTO();
     }
 
-    public static Temporalidad obtenerValorDefecto(final Temporalidad temporalidad){
-        return UtilObjeto.getInstance().obtenerValorDefecto(temporalidad, obtenerValorDefecto());
+    public static PublicoInteresDTO obtenerValorDefecto(final PublicoInteresDTO publicoInteres){
+        return UtilObjeto.getInstance().obtenerValorDefecto(publicoInteres, obtenerValorDefecto());
     }
 
-    public static Temporalidad construir(UUID identificador, String nombre){
-        return new Temporalidad(identificador, nombre);
+    public static PublicoInteresDTO construir(UUID identificador, String nombre){
+        return new PublicoInteresDTO(identificador, nombre);
     }
 
     public void setIdentificador(UUID identificador) {

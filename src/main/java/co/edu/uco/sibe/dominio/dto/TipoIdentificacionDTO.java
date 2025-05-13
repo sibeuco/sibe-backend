@@ -1,51 +1,51 @@
-package co.edu.uco.sibe.dominio.modelo;
-
-import java.util.UUID;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+
+import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class TipoIdentificacion {
+public class TipoIdentificacionDTO {
     private UUID identificador;
     private String sigla;
     private String descripcion;
 
-    public TipoIdentificacion(){
+    public TipoIdentificacionDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setSigla(UtilTexto.getInstance().obtenerValorDefecto());
         setDescripcion(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIdentificacion(UUID identificador, String sigla, String descripcion){
+    private TipoIdentificacionDTO(UUID identificador, String sigla, String descripcion){
         setIdentificador(identificador);
         setSigla(sigla);
         setDescripcion(descripcion);
     }
 
-    public static TipoIdentificacion obtenerValorDefecto(){
-        return new TipoIdentificacion();
+    public static TipoIdentificacionDTO obtenerValorDefecto(){
+        return new TipoIdentificacionDTO();
     }
 
-    public static TipoIdentificacion obtenerValorDefecto(final TipoIdentificacion tipoIdentificacion){
+    public static TipoIdentificacionDTO obtenerValorDefecto(final TipoIdentificacionDTO tipoIdentificacion){
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoIdentificacion, obtenerValorDefecto());
     }
 
-    public static TipoIdentificacion construir(UUID identificador, String sigla, String descripcion){
-        return new TipoIdentificacion(identificador, sigla, descripcion);
+    public static TipoIdentificacionDTO construir(UUID identificador, String sigla, String descripcion){
+        return new TipoIdentificacionDTO(identificador, sigla, descripcion);
     }
 
-    public void setIdentificador(UUID identificador) {
+    private void setIdentificador(UUID identificador) {
         this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
-    public void setSigla(String sigla) {
+    private void setSigla(String sigla) {
         this.sigla = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(sigla);
     }
 
-    public void setDescripcion(String descripcion) {
+    private void setDescripcion(String descripcion) {
         this.descripcion = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(descripcion);
     }
 }

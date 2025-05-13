@@ -1,5 +1,6 @@
-package co.edu.uco.sibe.dominio.modelo;
+package co.edu.uco.sibe.dominio.dto;
 
+import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -8,7 +9,7 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Persona {
+public class PersonaDTO {
     private UUID identificador;
     private TipoIdentificacion tipoIdentificacion;
     private String documento;
@@ -17,7 +18,7 @@ public class Persona {
     private String primerApellido;
     private String segundoApellido;
 
-    public Persona(){
+    public PersonaDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setTipoIdentificacion(TipoIdentificacion.obtenerValorDefecto());
         setDocumento(UtilTexto.getInstance().obtenerValorDefecto());
@@ -27,7 +28,7 @@ public class Persona {
         setSegundoApellido(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Persona(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
+    private PersonaDTO(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
         setIdentificador(identificador);
         setTipoIdentificacion(tipoIdentificacion);
         setDocumento(documento);
@@ -37,43 +38,43 @@ public class Persona {
         setSegundoApellido(segundoApellido);
     }
 
-    public static Persona obtenerValorDefecto(){
-        return new Persona();
+    public static PersonaDTO obtenerValorDefecto(){
+        return new PersonaDTO();
     }
 
-    public static Persona obtenerValorDefecto(final Persona persona){
+    public static PersonaDTO obtenerValorDefecto(final PersonaDTO persona){
         return UtilObjeto.getInstance().obtenerValorDefecto(persona, obtenerValorDefecto());
     }
 
-    public static Persona construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
-        return new Persona(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
+    public static PersonaDTO construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
+        return new PersonaDTO(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
     }
 
-    public void setIdentificador(UUID identificador) {
+    private void setIdentificador(UUID identificador) {
         this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
-    public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
+    private void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
         this.tipoIdentificacion = TipoIdentificacion.obtenerValorDefecto(tipoIdentificacion);
     }
 
-    public void setDocumento(String documento) {
+    private void setDocumento(String documento) {
         this.documento = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(documento);
     }
 
-    public void setPrimerNombre(String primerNombre) {
+    private void setPrimerNombre(String primerNombre) {
         this.primerNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerNombre);
     }
 
-    public void setPrimerApellido(String primerApellido) {
+    private void setPrimerApellido(String primerApellido) {
         this.primerApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerApellido);
     }
 
-    public void setSegundoNombre(String segundoNombre) {
+    private void setSegundoNombre(String segundoNombre) {
         this.segundoNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoNombre);
     }
 
-    public void setSegundoApellido(String segundoApellido) {
+    private void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoApellido);
     }
 }

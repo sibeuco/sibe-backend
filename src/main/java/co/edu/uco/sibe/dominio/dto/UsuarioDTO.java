@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.dominio.modelo;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
@@ -8,26 +8,26 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Usuario {
+public class UsuarioDTO {
     private UUID identificador;
     private String correo;
     private String contrasena;
-    private TipoUsuario tipoUsuario;
+    private TipoUsuarioDTO tipoUsuario;
     private boolean estaActivo;
-    private Area area;
-    private Persona persona;
+    private AreaDTO area;
+    private PersonaDTO persona;
 
-    public Usuario(){
+    public UsuarioDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
         setContrasena(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipoUsuario(TipoUsuario.obtenerValorDefecto());
+        setTipoUsuario(TipoUsuarioDTO.obtenerValorDefecto());
         setEstaActivo(false);
-        setArea(Area.obtenerValorDefecto());
-        setPersona(Persona.obtenerValorDefecto());
+        setArea(AreaDTO.obtenerValorDefecto());
+        setPersona(PersonaDTO.obtenerValorDefecto());
     }
 
-    private Usuario(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
+    private UsuarioDTO(UUID identificador, String correo, String contrasena, TipoUsuarioDTO tipoUsuario, boolean estaActivo, AreaDTO area, PersonaDTO persona){
         setIdentificador(identificador);
         setCorreo(correo);
         setContrasena(contrasena);
@@ -37,16 +37,16 @@ public class Usuario {
         setPersona(persona);
     }
 
-    public static Usuario obtenerValorDefecto(){
-        return new Usuario();
+    public static UsuarioDTO obtenerValorDefecto(){
+        return new UsuarioDTO();
     }
 
-    public static Usuario obtenerValorDefecto(final Usuario usuario){
+    public static UsuarioDTO obtenerValorDefecto(final UsuarioDTO usuario){
         return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
-    public static Usuario construir(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
-        return new Usuario(identificador, correo, contrasena, tipoUsuario, false, area, persona);
+    public static UsuarioDTO construir(UUID identificador, String correo, String contrasena, TipoUsuarioDTO tipoUsuario, AreaDTO area, PersonaDTO persona){
+        return new UsuarioDTO(identificador, correo, contrasena, tipoUsuario, false, area, persona);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -61,19 +61,19 @@ public class Usuario {
         this.contrasena = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(contrasena);
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = TipoUsuario.obtenerValorDefecto(tipoUsuario);
+    public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {
+        this.tipoUsuario = TipoUsuarioDTO.obtenerValorDefecto(tipoUsuario);
     }
 
     public void setEstaActivo(boolean estaActivo) {
         this.estaActivo = estaActivo;
     }
 
-    public void setArea(Area area) {
-        this.area = Area.obtenerValorDefecto(area);
+    public void setArea(AreaDTO area) {
+        this.area = AreaDTO.obtenerValorDefecto(area);
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = Persona.obtenerValorDefecto(persona);
+    public void setPersona(PersonaDTO persona) {
+        this.persona = PersonaDTO.obtenerValorDefecto(persona);
     }
 }

@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.dominio.modelo;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
@@ -8,37 +8,37 @@ import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class Area {
+public class AreaDTO {
     private UUID identificador;
     private String nombreArea;
-    private TipoArea tipoArea;
-    private Area areaPadre;
+    private TipoAreaDTO tipoArea;
+    private AreaDTO areaPadre;
 
-    public Area(){
+    public AreaDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombreArea(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipoArea(TipoArea.obtenerValorDefecto());
-        setAreaPadre(Area.obtenerValorDefecto());
+        setTipoArea(TipoAreaDTO.obtenerValorDefecto());
+        setAreaPadre(AreaDTO.obtenerValorDefecto());
     }
 
-    private Area(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
+    private AreaDTO(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
         setIdentificador(identificador);
         setNombreArea(nombreArea);
         setTipoArea(tipoArea);
         setAreaPadre(areaPadre);
     }
 
-    public static Area obtenerValorDefecto(){
-        return new Area();
+    public static AreaDTO obtenerValorDefecto(){
+        return new AreaDTO();
     }
 
-    public static Area obtenerValorDefecto(final Area area){
+    public static AreaDTO obtenerValorDefecto(final AreaDTO area){
         return UtilObjeto.getInstance().obtenerValorDefecto(area, obtenerValorDefecto());
 
     }
 
-    public static Area construir(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
-        return new Area(identificador, nombreArea, tipoArea, areaPadre);
+    public static AreaDTO construir(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
+        return new AreaDTO(identificador, nombreArea, tipoArea, areaPadre);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -49,12 +49,11 @@ public class Area {
         this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
     }
 
-    public void setTipoArea(TipoArea tipoArea) {
-        this.tipoArea = TipoArea.obtenerValorDefecto(tipoArea);
+    public void setTipoArea(TipoAreaDTO tipoArea) {
+        this.tipoArea = TipoAreaDTO.obtenerValorDefecto(tipoArea);
     }
 
-    public void setAreaPadre(Area areaPadre) {
-        this.areaPadre = (areaPadre == this) ? Area.obtenerValorDefecto() : Area.obtenerValorDefecto(areaPadre);
+    public void setAreaPadre(AreaDTO areaPadre) {
+        this.areaPadre = (areaPadre == this) ? AreaDTO.obtenerValorDefecto() : AreaDTO.obtenerValorDefecto(areaPadre);
     }
-
 }

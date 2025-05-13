@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
@@ -15,14 +16,30 @@ public class Indicador {
     private Proyecto proyecto;
     private PublicoInteres publicoInteres;
 
+    public Indicador(){
+        setIdentificador(UtilUUID.obtenerValorDefecto());
+        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
+        setTipoIndicador(TipoIndicador.obtenerValorDefecto());
+        setTemporalidad(Temporalidad.obtenerValorDefecto());
+        setProyecto(Proyecto.obtenerValorDefecto());
+        setPublicoInteres(PublicoInteres.obtenerValorDefecto());
+    }
+
     private Indicador(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
         setIdentificador(identificador);
         setNombre(nombre);
-        this.nombre = nombre;
-        this.tipoIndicador = tipoIndicador;
-        this.temporalidad = temporalidad;
-        this.proyecto = proyecto;
-        this.publicoInteres = publicoInteres;
+        setTipoIndicador(tipoIndicador);
+        setTemporalidad(temporalidad);
+        setProyecto(proyecto);
+        setPublicoInteres(publicoInteres);
+    }
+
+    public static Indicador obtenerValorDefecto(){
+        return new Indicador();
+    }
+
+    public static Indicador obtenerValorDefecto(final Indicador indicador){
+        return UtilObjeto.getInstance().obtenerValorDefecto(indicador, obtenerValorDefecto());
     }
 
     public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres){
@@ -37,4 +54,19 @@ public class Indicador {
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 
+    public void setTipoIndicador(TipoIndicador tipoIndicador) {
+        this.tipoIndicador = TipoIndicador.obtenerValorDefecto(tipoIndicador);
+    }
+
+    public void setTemporalidad(Temporalidad temporalidad) {
+        this.temporalidad = Temporalidad.obtenerValorDefecto(temporalidad);
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = Proyecto.obtenerValorDefecto(proyecto);
+    }
+
+    public void setPublicoInteres(PublicoInteres publicoInteres) {
+        this.publicoInteres = PublicoInteres.obtenerValorDefecto(publicoInteres);
+    }
 }

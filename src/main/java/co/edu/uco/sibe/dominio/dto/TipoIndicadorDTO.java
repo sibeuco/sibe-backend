@@ -1,51 +1,51 @@
-package co.edu.uco.sibe.dominio.modelo;
-
-import java.util.UUID;
+package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+
+import java.util.UUID;
 import lombok.Getter;
 
 @Getter
-public class TipoIndicador {
+public class TipoIndicadorDTO {
     private UUID identificador;
     private String naturalezaIndicador;
     private String tipologiaIndicador;
 
-    public TipoIndicador(){
+    public TipoIndicadorDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setNaturalezaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
         setTipologiaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIndicador(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
+    private TipoIndicadorDTO(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
         setIdentificador(identificador);
         setNaturalezaIndicador(naturalezaIndicador);
         setTipologiaIndicador(tipologiaIndicador);
     }
 
-    public static TipoIndicador obtenerValorDefecto(){
-        return new TipoIndicador();
+    public static TipoIndicadorDTO obtenerValorDefecto(){
+        return new TipoIndicadorDTO();
     }
 
-    public static TipoIndicador obtenerValorDefecto(final TipoIndicador tipoIndicador){
+    public static TipoIndicadorDTO obtenerValorDefecto(final TipoIndicadorDTO tipoIndicador){
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoIndicador, obtenerValorDefecto());
     }
 
-    public static TipoIndicador construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
-        return new TipoIndicador(identificador, naturalezaIndicador, tipologiaIndicador);
+    public static TipoIndicadorDTO construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
+        return new TipoIndicadorDTO(identificador, naturalezaIndicador, tipologiaIndicador);
     }
 
-    public void setIdentificador(UUID identificador) {
+    private void setIdentificador(UUID identificador) {
         this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
-    public void setNaturalezaIndicador(String naturalezaIndicador) {
+    private void setNaturalezaIndicador(String naturalezaIndicador) {
         this.naturalezaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(naturalezaIndicador);
     }
 
-    public void setTipologiaIndicador(String tipologiaIndicador) {
+    private void setTipologiaIndicador(String tipologiaIndicador) {
         this.tipologiaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(tipologiaIndicador);
     }
 }
