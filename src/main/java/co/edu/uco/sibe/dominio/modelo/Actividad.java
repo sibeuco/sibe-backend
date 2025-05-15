@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 public class Actividad {
     private UUID identificador;
-    private  String nombreCapacitacionOEvento;
+    private String nombreCapacitacionOEvento;
     private String Objetivo;
     private Usuario colaborador;
     private Usuario creador;
