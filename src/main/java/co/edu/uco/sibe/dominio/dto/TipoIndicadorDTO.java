@@ -19,7 +19,7 @@ public class TipoIndicadorDTO {
         setTipologiaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIndicadorDTO(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
+    public TipoIndicadorDTO(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
         setIdentificador(identificador);
         setNaturalezaIndicador(naturalezaIndicador);
         setTipologiaIndicador(tipologiaIndicador);

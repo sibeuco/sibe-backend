@@ -21,7 +21,7 @@ public class ProyectoDTO {
         setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private ProyectoDTO(UUID identificador, String numeroProyecto, String nombre, String objetivo){
+    public ProyectoDTO(UUID identificador, String numeroProyecto, String nombre, String objetivo){
         setIdentificador(identificador);
         setNumeroProyecto(numeroProyecto);
         setNombre(nombre);

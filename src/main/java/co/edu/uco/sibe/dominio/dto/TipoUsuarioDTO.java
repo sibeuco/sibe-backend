@@ -25,7 +25,7 @@ public class TipoUsuarioDTO {
         setConsultar(consultar);
     }
 
-    private TipoUsuarioDTO(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+    public TipoUsuarioDTO(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
         setIdentificador(identificador);
         setNombre(nombre);
         setCrear(crear);

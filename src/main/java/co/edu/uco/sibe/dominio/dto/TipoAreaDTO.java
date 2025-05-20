@@ -22,7 +22,7 @@ public class TipoAreaDTO {
         setNivel(UtilNumero.getInstance().obtenerValorDefecto());
     }
 
-    private TipoAreaDTO(UUID identificador, String nombre, boolean gestionable, int nivel){
+    public TipoAreaDTO(UUID identificador, String nombre, boolean gestionable, int nivel){
         setIdentificador(identificador);
         setNombre(nombre);
         setGestionable(gestionable);

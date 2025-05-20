@@ -17,7 +17,7 @@ public class TemporalidadDTO {
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TemporalidadDTO(UUID identificador, String nombre){
+    public TemporalidadDTO(UUID identificador, String nombre){
         setIdentificador(identificador);
         setNombre(nombre);
     }

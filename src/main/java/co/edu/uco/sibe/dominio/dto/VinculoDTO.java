@@ -18,7 +18,7 @@ public class VinculoDTO {
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private VinculoDTO(UUID identificador, String nombre){
+    public VinculoDTO(UUID identificador, String nombre){
         setIdentificador(identificador);
         setNombre(nombre);
     }

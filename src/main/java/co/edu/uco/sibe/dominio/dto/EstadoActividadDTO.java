@@ -17,7 +17,7 @@ public class EstadoActividadDTO {
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private EstadoActividadDTO(UUID identificador, String nombre){
+    public EstadoActividadDTO(UUID identificador, String nombre){
         setIdentificador(identificador);
         setNombre(nombre);
     }

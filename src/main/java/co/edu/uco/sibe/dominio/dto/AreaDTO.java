@@ -21,7 +21,7 @@ public class AreaDTO {
         setAreaPadre(AreaDTO.obtenerValorDefecto());
     }
 
-    private AreaDTO(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
+    public AreaDTO(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
         setIdentificador(identificador);
         setNombreArea(nombreArea);
         setTipoArea(tipoArea);

@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class PersonaDTO {
     private UUID identificador;
-    private TipoIdentificacion tipoIdentificacion;
+    private TipoIdentificacionDTO tipoIdentificacion;
     private String documento;
     private String primerNombre;
     private String segundoNombre;
@@ -20,7 +20,7 @@ public class PersonaDTO {
 
     public PersonaDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setTipoIdentificacion(TipoIdentificacion.obtenerValorDefecto());
+        setTipoIdentificacion(TipoIdentificacionDTO.obtenerValorDefecto());
         setDocumento(UtilTexto.getInstance().obtenerValorDefecto());
         setPrimerNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setSegundoNombre(UtilTexto.getInstance().obtenerValorDefecto());
@@ -28,7 +28,7 @@ public class PersonaDTO {
         setSegundoApellido(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private PersonaDTO(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
+    public PersonaDTO(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
         setIdentificador(identificador);
         setTipoIdentificacion(tipoIdentificacion);
         setDocumento(documento);
@@ -46,7 +46,7 @@ public class PersonaDTO {
         return UtilObjeto.getInstance().obtenerValorDefecto(persona, obtenerValorDefecto());
     }
 
-    public static PersonaDTO construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
+    public static PersonaDTO construir(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
         return new PersonaDTO(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
     }
 
@@ -54,8 +54,8 @@ public class PersonaDTO {
         this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
-    private void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
-        this.tipoIdentificacion = TipoIdentificacion.obtenerValorDefecto(tipoIdentificacion);
+    private void setTipoIdentificacion(TipoIdentificacionDTO tipoIdentificacion) {
+        this.tipoIdentificacion = TipoIdentificacionDTO.obtenerValorDefecto(tipoIdentificacion);
     }
 
     private void setDocumento(String documento) {
