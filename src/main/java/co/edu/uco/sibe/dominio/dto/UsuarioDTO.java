@@ -11,7 +11,7 @@ import lombok.Getter;
 public class UsuarioDTO {
     private UUID identificador;
     private String correo;
-    private String contrasena;
+    //private String contrasena;
     private TipoUsuarioDTO tipoUsuario;
     private boolean estaActivo;
     private AreaDTO area;
@@ -20,17 +20,15 @@ public class UsuarioDTO {
     public UsuarioDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
-        setContrasena(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuarioDTO.obtenerValorDefecto());
         setEstaActivo(false);
         setArea(AreaDTO.obtenerValorDefecto());
         setPersona(PersonaDTO.obtenerValorDefecto());
     }
 
-    private UsuarioDTO(UUID identificador, String correo, String contrasena, TipoUsuarioDTO tipoUsuario, boolean estaActivo, AreaDTO area, PersonaDTO persona){
+    public UsuarioDTO(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario, boolean estaActivo, AreaDTO area, PersonaDTO persona){
         setIdentificador(identificador);
         setCorreo(correo);
-        setContrasena(contrasena);
         setTipoUsuario(tipoUsuario);
         setEstaActivo(estaActivo);
         setArea(area);
@@ -45,8 +43,8 @@ public class UsuarioDTO {
         return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
-    public static UsuarioDTO construir(UUID identificador, String correo, String contrasena, TipoUsuarioDTO tipoUsuario, AreaDTO area, PersonaDTO persona){
-        return new UsuarioDTO(identificador, correo, contrasena, tipoUsuario, false, area, persona);
+    public static UsuarioDTO construir(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario, AreaDTO area, PersonaDTO persona){
+        return new UsuarioDTO(identificador, correo, tipoUsuario, false, area, persona);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -55,10 +53,6 @@ public class UsuarioDTO {
 
     public void setCorreo(String correo) {
         this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(contrasena);
     }
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {

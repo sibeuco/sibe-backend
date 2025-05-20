@@ -63,5 +63,5 @@ public class ActividadEntidad {
     private AreaEntidad area;
 
     @Column(name = "link_insumos", length = 200)
-    private String linkInsumos;
+    private String rutaInsumos;
 }

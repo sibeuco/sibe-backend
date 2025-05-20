@@ -17,7 +17,7 @@ public class PublicoInteresDTO {
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private PublicoInteresDTO(UUID identificador, String nombre){
+    public PublicoInteresDTO(UUID identificador, String nombre){
         setIdentificador(identificador);
         setNombre(nombre);
     }

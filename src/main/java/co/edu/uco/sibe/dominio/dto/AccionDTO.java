@@ -13,7 +13,7 @@ public class AccionDTO {
     private String objetivo;
     private ProyectoDTO proyecto;
 
-    private AccionDTO(UUID identificador, String detalle, String objetivo, ProyectoDTO proyecto) {
+    public AccionDTO(UUID identificador, String detalle, String objetivo, ProyectoDTO proyecto) {
         setIdentificador(identificador);
         setDetalle(detalle);
         setObjetivo(objetivo);

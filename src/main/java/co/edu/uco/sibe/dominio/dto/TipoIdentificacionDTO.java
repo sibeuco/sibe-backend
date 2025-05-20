@@ -19,7 +19,7 @@ public class TipoIdentificacionDTO {
         setDescripcion(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIdentificacionDTO(UUID identificador, String sigla, String descripcion){
+    public TipoIdentificacionDTO(UUID identificador, String sigla, String descripcion){
         setIdentificador(identificador);
         setSigla(sigla);
         setDescripcion(descripcion);

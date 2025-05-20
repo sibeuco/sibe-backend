@@ -21,10 +21,10 @@ public class AccionEntidad {
     @Column(length = 400, nullable = false)
     private String detalle;
 
+    @Column(length = 750, nullable = false)
+    private String objetivo;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "proyecto", nullable = false)
     private ProyectoEntidad proyecto;
-
-    @Column(length = 750, nullable = false)
-    private String objetivo;
 }

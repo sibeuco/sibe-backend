@@ -18,7 +18,7 @@ public class Usuario {
     private Persona persona;
 
     public Usuario(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        setIdentificador();
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
         setContrasena(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuario.obtenerValorDefecto());
@@ -27,8 +27,8 @@ public class Usuario {
         setPersona(Persona.obtenerValorDefecto());
     }
 
-    private Usuario(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
-        setIdentificador(identificador);
+    private Usuario( String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
+        setIdentificador();
         setCorreo(correo);
         setContrasena(contrasena);
         setTipoUsuario(tipoUsuario);
@@ -45,12 +45,12 @@ public class Usuario {
         return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
-    public static Usuario construir(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
-        return new Usuario(identificador, correo, contrasena, tipoUsuario, false, area, persona);
+    public static Usuario construir(String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
+        return new Usuario(correo, contrasena, tipoUsuario, false, area, persona);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setCorreo(String correo) {

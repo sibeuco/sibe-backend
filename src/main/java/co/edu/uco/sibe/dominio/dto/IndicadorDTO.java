@@ -25,7 +25,7 @@ public class IndicadorDTO {
         setPublicoInteres(PublicoInteresDTO.obtenerValorDefecto());
     }
 
-    private IndicadorDTO(UUID identificador, String nombre, TipoIndicadorDTO tipoIndicador, TemporalidadDTO temporalidad, ProyectoDTO proyecto, PublicoInteresDTO publicoInteres) {
+    public IndicadorDTO(UUID identificador, String nombre, TipoIndicadorDTO tipoIndicador, TemporalidadDTO temporalidad, ProyectoDTO proyecto, PublicoInteresDTO publicoInteres) {
         setIdentificador(identificador);
         setNombre(nombre);
         setTipoIndicador(tipoIndicador);
