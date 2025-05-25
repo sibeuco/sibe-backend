@@ -13,12 +13,12 @@ public class Vinculo {
     private String nombre;
 
     public Vinculo(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Vinculo(UUID identificador, String nombre){
-        setIdentificador(identificador);
+    private Vinculo(String nombre){
+        setIdentificador();
         setNombre(nombre);
     }
 
@@ -31,11 +31,11 @@ public class Vinculo {
     }
 
     public static Vinculo construir(UUID identificador, String nombre){
-        return new Vinculo(identificador, nombre);
+        return new Vinculo(nombre);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

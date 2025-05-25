@@ -16,14 +16,14 @@ public class TipoArea {
     private int nivel;
 
     public TipoArea(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setGestionable(gestionable);
         setNivel(UtilNumero.getInstance().obtenerValorDefecto());
     }
 
-    private TipoArea(UUID identificador, String nombre, boolean gestionable, int nivel){
-        setIdentificador(identificador);
+    private TipoArea(String nombre, boolean gestionable, int nivel){
+        setIdentificador();
         setNombre(nombre);
         setGestionable(gestionable);
         setNivel(nivel);
@@ -37,12 +37,12 @@ public class TipoArea {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoArea, obtenerValorDefecto());
     }
 
-    public static TipoArea construir(UUID identificador, String nombre, boolean gestionable, int nivel){
-        return new TipoArea(identificador, nombre, gestionable, nivel);
+    public static TipoArea construir(String nombre, boolean gestionable, int nivel){
+        return new TipoArea(nombre, gestionable, nivel);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

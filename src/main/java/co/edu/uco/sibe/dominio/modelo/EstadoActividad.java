@@ -13,12 +13,12 @@ public class EstadoActividad {
     private String nombre;
 
     public EstadoActividad(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private EstadoActividad(UUID identificador, String nombre){
-        setIdentificador(identificador);
+    private EstadoActividad(String nombre){
+        setIdentificador();
         setNombre(nombre);
     }
 
@@ -30,12 +30,12 @@ public class EstadoActividad {
         return UtilObjeto.getInstance().obtenerValorDefecto(estadoActividad, obtenerValorDefecto());
     }
 
-    public static EstadoActividad construir(UUID identificador, String nombre){
-        return new EstadoActividad(identificador, nombre);
+    public static EstadoActividad construir(String nombre){
+        return new EstadoActividad(nombre);
     }
 
-    public void setIdentificador(UUID identifiacador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

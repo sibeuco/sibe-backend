@@ -13,12 +13,12 @@ public class Temporalidad {
     private String nombre;
 
     public Temporalidad(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Temporalidad(UUID identificador, String nombre){
-        setIdentificador(identificador);
+    private Temporalidad(String nombre){
+        setIdentificador();
         setNombre(nombre);
     }
 
@@ -30,12 +30,12 @@ public class Temporalidad {
         return UtilObjeto.getInstance().obtenerValorDefecto(temporalidad, obtenerValorDefecto());
     }
 
-    public static Temporalidad construir(UUID identificador, String nombre){
-        return new Temporalidad(identificador, nombre);
+    public static Temporalidad construir(String nombre){
+        return new Temporalidad(nombre);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

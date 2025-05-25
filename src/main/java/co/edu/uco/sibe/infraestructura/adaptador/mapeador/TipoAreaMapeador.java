@@ -5,6 +5,8 @@ import co.edu.uco.sibe.dominio.modelo.TipoArea;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoAreaEntidad;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class TipoAreaMapeador {
 
@@ -14,6 +16,10 @@ public class TipoAreaMapeador {
 
     public TipoAreaEntidad construirEntidad(TipoArea tipoArea){
         return new TipoAreaEntidad(tipoArea.getIdentificador(), tipoArea.getNombre(), tipoArea.isGestionable(), tipoArea.getNivel());
+    }
+
+    public List<TipoAreaDTO> construirDTOs(List<TipoAreaEntidad> tiposArea){
+        return tiposArea.stream().map(new TipoAreaMapeador()::construirDTO).toList();
     }
 
 }

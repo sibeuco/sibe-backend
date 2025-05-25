@@ -13,19 +13,19 @@ public class Accion {
     private String objetivo;
     private Proyecto proyecto;
 
-    private Accion(UUID identificador, String detalle, String objetivo, Proyecto proyecto) {
-        setIdentificador(identificador);
+    private Accion(String detalle, String objetivo, Proyecto proyecto) {
+        setIdentificador();
         setDetalle(detalle);
         setObjetivo(objetivo);
         setProyecto(proyecto);
     }
 
-    public static Accion construir(UUID identificador, String detalle, String objetivo, Proyecto proyecto){
-        return new Accion(identificador, detalle, objetivo, proyecto);
+    public static Accion construir(String detalle, String objetivo, Proyecto proyecto){
+        return new Accion(detalle, objetivo, proyecto);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setDetalle(String detalle) {

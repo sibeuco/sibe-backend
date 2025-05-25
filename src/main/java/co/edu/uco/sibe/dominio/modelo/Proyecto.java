@@ -15,14 +15,14 @@ public class Proyecto {
     private String objetivo;
 
     public Proyecto(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNumeroProyecto(UtilTexto.getInstance().obtenerValorDefecto());
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Proyecto(UUID identificador, String numeroProyecto, String nombre, String objetivo){
-        setIdentificador(identificador);
+    private Proyecto(String numeroProyecto, String nombre, String objetivo){
+        setIdentificador();
         setNumeroProyecto(numeroProyecto);
         setNombre(nombre);
         setObjetivo(objetivo);
@@ -36,12 +36,12 @@ public class Proyecto {
         return UtilObjeto.getInstance().obtenerValorDefecto(proyecto, obtenerValorDefecto());
     }
 
-    public static Proyecto construir(UUID identificador, String numeroProyecto, String nombre, String objetivo){
-        return new Proyecto(identificador, numeroProyecto, nombre, objetivo);
+    public static Proyecto construir(String numeroProyecto, String nombre, String objetivo){
+        return new Proyecto(numeroProyecto, nombre, objetivo);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNumeroProyecto(String numeroProyecto) {

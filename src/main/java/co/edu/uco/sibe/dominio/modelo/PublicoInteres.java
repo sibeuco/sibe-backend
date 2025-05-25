@@ -13,12 +13,12 @@ public class PublicoInteres {
     private String nombre;
 
     public PublicoInteres(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private PublicoInteres(UUID identificador, String nombre){
-        setIdentificador(identificador);
+    private PublicoInteres(String nombre){
+        setIdentificador();
         setNombre(nombre);
     }
 
@@ -30,12 +30,12 @@ public class PublicoInteres {
         return UtilObjeto.getInstance().obtenerValorDefecto(publicoInteres, obtenerValorDefecto());
     }
 
-    public static PublicoInteres construir(UUID identificador, String nombre){
-        return new PublicoInteres(identificador, nombre);
+    public static PublicoInteres construir(String nombre){
+        return new PublicoInteres(nombre);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

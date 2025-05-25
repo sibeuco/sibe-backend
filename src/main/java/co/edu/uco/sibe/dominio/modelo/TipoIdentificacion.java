@@ -14,13 +14,13 @@ public class TipoIdentificacion {
     private String descripcion;
 
     public TipoIdentificacion(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setSigla(UtilTexto.getInstance().obtenerValorDefecto());
         setDescripcion(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIdentificacion(UUID identificador, String sigla, String descripcion){
-        setIdentificador(identificador);
+    private TipoIdentificacion(String sigla, String descripcion){
+        setIdentificador();
         setSigla(sigla);
         setDescripcion(descripcion);
     }
@@ -33,12 +33,12 @@ public class TipoIdentificacion {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoIdentificacion, obtenerValorDefecto());
     }
 
-    public static TipoIdentificacion construir(UUID identificador, String sigla, String descripcion){
-        return new TipoIdentificacion(identificador, sigla, descripcion);
+    public static TipoIdentificacion construir(String sigla, String descripcion){
+        return new TipoIdentificacion(sigla, descripcion);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setSigla(String sigla) {

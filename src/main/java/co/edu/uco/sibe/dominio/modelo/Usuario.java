@@ -18,7 +18,7 @@ public class Usuario {
     private Persona persona;
 
     public Usuario(){
-        setIdentificador();
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
         setContrasena(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuario.obtenerValorDefecto());
@@ -27,7 +27,7 @@ public class Usuario {
         setPersona(Persona.obtenerValorDefecto());
     }
 
-    private Usuario( String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
+    private Usuario(String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
         setIdentificador();
         setCorreo(correo);
         setContrasena(contrasena);
