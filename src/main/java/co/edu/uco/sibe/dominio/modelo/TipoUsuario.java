@@ -17,7 +17,7 @@ public class TipoUsuario {
     boolean consultar;
 
     public TipoUsuario(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setCrear(crear);
         setModificar(modificar);
@@ -25,8 +25,8 @@ public class TipoUsuario {
         setConsultar(consultar);
     }
 
-    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        setIdentificador(identificador);
+    private TipoUsuario(String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+        setIdentificador();
         setNombre(nombre);
         setCrear(crear);
         setModificar(modificar);
@@ -42,12 +42,12 @@ public class TipoUsuario {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoUsuario, obtenerValorDefecto());
     }
 
-    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        return new TipoUsuario(identificador, nombre, crear, modificar, eliminar, consultar);
+    public static TipoUsuario construir(String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+        return new TipoUsuario(nombre, crear, modificar, eliminar, consultar);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

@@ -21,8 +21,15 @@ public class TipoUsuarioEntidad {
     @Column(length = 30, nullable = false)
     private String nombre;
 
+    @Column
     private boolean crear;
+
+    @Column
     private boolean modificar;
+
+    @Column
     private boolean eliminar;
+
+    @Column
     private boolean consultar;
 }

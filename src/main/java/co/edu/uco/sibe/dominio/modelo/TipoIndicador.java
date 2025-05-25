@@ -14,13 +14,13 @@ public class TipoIndicador {
     private String tipologiaIndicador;
 
     public TipoIndicador(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNaturalezaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
         setTipologiaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIndicador(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
-        setIdentificador(identificador);
+    private TipoIndicador(String naturalezaIndicador, String tipologiaIndicador){
+        setIdentificador();
         setNaturalezaIndicador(naturalezaIndicador);
         setTipologiaIndicador(tipologiaIndicador);
     }
@@ -33,12 +33,12 @@ public class TipoIndicador {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoIndicador, obtenerValorDefecto());
     }
 
-    public static TipoIndicador construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
-        return new TipoIndicador(identificador, naturalezaIndicador, tipologiaIndicador);
+    public static TipoIndicador construir(String naturalezaIndicador, String tipologiaIndicador){
+        return new TipoIndicador(naturalezaIndicador, tipologiaIndicador);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNaturalezaIndicador(String naturalezaIndicador) {

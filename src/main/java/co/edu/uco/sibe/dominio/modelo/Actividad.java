@@ -29,7 +29,7 @@ public class Actividad {
     private String rutaInsumos;
 
     public Actividad(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombreCapacitacionOEvento(UtilTexto.getInstance().obtenerValorDefecto());
         setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
         setColaborador(Usuario.obtenerValorDefecto());
@@ -45,8 +45,8 @@ public class Actividad {
         setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    public Actividad(UUID identificador, String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Usuario creador, Indicador indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividad estadoActividad, Area area, String rutaInsumos){
-        setIdentificador(identificador);
+    public Actividad(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Usuario creador, Indicador indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividad estadoActividad, Area area, String rutaInsumos){
+        setIdentificador();
         setNombreCapacitacionOEvento(nombreCapacitacionOEvento);
         setObjetivo(objetivo);
         setColaborador(colaborador);
@@ -70,12 +70,12 @@ public class Actividad {
         return UtilObjeto.getInstance().obtenerValorDefecto(actividad, obtenerValorDefecto());
     }
 
-    public static Actividad construir(UUID identificador, String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Indicador indicador, LocalDate fechaProgramada, Area area, String rutaInsumos){
-        return new Actividad(identificador, nombreCapacitacionOEvento, objetivo, colaborador, null, indicador, UtilFecha.getInstance().obtenerHoraFechaDefecto(), fechaProgramada, UtilFecha.getInstance().obtenerFechaDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), null, area, rutaInsumos);
+    public static Actividad construir(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Indicador indicador, LocalDate fechaProgramada, Area area, String rutaInsumos){
+        return new Actividad(nombreCapacitacionOEvento, objetivo, colaborador, null, indicador, UtilFecha.getInstance().obtenerHoraFechaDefecto(), fechaProgramada, UtilFecha.getInstance().obtenerFechaDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), null, area, rutaInsumos);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombreCapacitacionOEvento(String nombreCapacitacionOEvento) {

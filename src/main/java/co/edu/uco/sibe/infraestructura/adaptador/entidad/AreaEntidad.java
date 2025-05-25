@@ -18,7 +18,7 @@ public class AreaEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 50, nullable = false)
+    @Column(name = "nombre_area", length = 50, nullable = false)
     private String nombreArea;
 
     @ManyToOne

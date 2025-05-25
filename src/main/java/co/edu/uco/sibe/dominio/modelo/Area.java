@@ -15,14 +15,14 @@ public class Area {
     private Area areaPadre;
 
     public Area(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombreArea(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoArea(TipoArea.obtenerValorDefecto());
         setAreaPadre(Area.obtenerValorDefecto());
     }
 
-    private Area(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
-        setIdentificador(identificador);
+    private Area(String nombreArea, TipoArea tipoArea, Area areaPadre){
+        setIdentificador();
         setNombreArea(nombreArea);
         setTipoArea(tipoArea);
         setAreaPadre(areaPadre);
@@ -37,12 +37,12 @@ public class Area {
 
     }
 
-    public static Area construir(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
-        return new Area(identificador, nombreArea, tipoArea, areaPadre);
+    public static Area construir(String nombreArea, TipoArea tipoArea, Area areaPadre){
+        return new Area(nombreArea, tipoArea, areaPadre);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombreArea(String nombreArea) {

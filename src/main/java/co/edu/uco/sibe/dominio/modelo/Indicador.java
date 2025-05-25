@@ -17,7 +17,7 @@ public class Indicador {
     private PublicoInteres publicoInteres;
 
     public Indicador(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoIndicador(TipoIndicador.obtenerValorDefecto());
         setTemporalidad(Temporalidad.obtenerValorDefecto());
@@ -25,8 +25,8 @@ public class Indicador {
         setPublicoInteres(PublicoInteres.obtenerValorDefecto());
     }
 
-    private Indicador(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
-        setIdentificador(identificador);
+    private Indicador(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
+        setIdentificador();
         setNombre(nombre);
         setTipoIndicador(tipoIndicador);
         setTemporalidad(temporalidad);
@@ -42,12 +42,12 @@ public class Indicador {
         return UtilObjeto.getInstance().obtenerValorDefecto(indicador, obtenerValorDefecto());
     }
 
-    public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres){
-        return new Indicador(identificador, nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
+    public static Indicador construir(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres){
+        return new Indicador(nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setNombre(String nombre) {

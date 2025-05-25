@@ -18,7 +18,7 @@ public class Persona {
     private String segundoApellido;
 
     public Persona(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
+        this.identificador = UtilUUID.obtenerValorDefecto();
         setTipoIdentificacion(TipoIdentificacion.obtenerValorDefecto());
         setDocumento(UtilTexto.getInstance().obtenerValorDefecto());
         setPrimerNombre(UtilTexto.getInstance().obtenerValorDefecto());
@@ -27,8 +27,8 @@ public class Persona {
         setSegundoApellido(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Persona(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
-        setIdentificador(identificador);
+    private Persona(TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
+        setIdentificador();
         setTipoIdentificacion(tipoIdentificacion);
         setDocumento(documento);
         setPrimerNombre(primerNombre);
@@ -45,12 +45,12 @@ public class Persona {
         return UtilObjeto.getInstance().obtenerValorDefecto(persona, obtenerValorDefecto());
     }
 
-    public static Persona construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
-        return new Persona(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
+    public static Persona construir(TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
+        return new Persona(tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public void setIdentificador() {
+        this.identificador = UtilUUID.generarNuevoUUID();
     }
 
     public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {

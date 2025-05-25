@@ -6,11 +6,6 @@ import java.util.UUID;
 
 public interface TipoIdentificacionRepositorioComando {
 
-    UUID agregarNuevoTipoIdentificacion(TipoIdentificacion tipoIdentificacion, UUID identificador);
-
-    UUID modificarTipoIdentificacion(TipoIdentificacion tipoIdentificacion, UUID identificador);
-
-    UUID eliminarTipoIdentificacion(UUID identificador);
-
+    UUID agregarNuevoTipoIdentificacion(TipoIdentificacion tipoIdentificacion);
 
 }
