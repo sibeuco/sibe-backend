@@ -18,7 +18,7 @@ public class TipoIdentificacionEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 5, nullable = false)
     private String sigla;
 
     @Column(length = 40, nullable = false)

@@ -19,6 +19,10 @@ public class TipoIdentificacionMapeador {
         return new TipoIdentificacionEntidad(tipoIdentificacion.getIdentificador(), tipoIdentificacion.getSigla(), tipoIdentificacion.getDescripcion());
     }
 
+    public TipoIdentificacion construirDominio(TipoIdentificacionDTO tipoIdentificacionDTO) {
+        return TipoIdentificacion.construir(tipoIdentificacionDTO.getIdentificador(), tipoIdentificacionDTO.getSigla(), tipoIdentificacionDTO.getDescripcion());
+    }
+
     public List<TipoIdentificacionDTO> construirDTOs(List<TipoIdentificacionEntidad> tiposIdentificacion){
         return tiposIdentificacion.stream().map(new TipoIdentificacionMapeador()::construirDTO).toList();
     }

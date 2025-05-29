@@ -23,6 +23,19 @@ public interface PersonaDAO extends JpaRepository<PersonaEntidad, UUID> {
     """, nativeQuery = true)
     PersonaEntidad consultarPersonaPorIdentificador(UUID identificador);
 
+    @Query(value = """
+    SELECT identificador,
+           tipo_identificacion,
+           documento,
+           primer_nombre,
+           segundo_nombre,
+           primer_apellido,
+           segundo_apellido
+    FROM persona
+    WHERE documento = :documento
+    """, nativeQuery = true)
+    PersonaEntidad consultarPersonaPorDocumento(String documento);
+
     @Modifying
     @Transactional
     @Query(value = """

@@ -11,7 +11,6 @@ import lombok.Getter;
 public class UsuarioDTO {
     private UUID identificador;
     private String correo;
-    //private String contrasena;
     private TipoUsuarioDTO tipoUsuario;
     private boolean estaActivo;
     private AreaDTO area;

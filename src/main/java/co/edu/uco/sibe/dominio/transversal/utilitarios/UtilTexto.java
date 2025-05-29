@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
+import co.edu.uco.sibe.dominio.transversal.excepcion.LongitudExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.PatronExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorObligatorioExcepcion;
 
@@ -60,6 +61,20 @@ public class UtilTexto {
     public void validarPatronURLEsValido(String valor, String mensaje) {
         if (!cadenaURL(valor)) {
             throw new PatronExcepcion(mensaje);
+        }
+    }
+
+    public void validarLongitud(String valor, int longitudMinima, int longitudMaxima, String mensaje) {
+        String texto = quitarEspaciosBlancoInicioFin(valor);
+        if (texto.length() < longitudMinima || texto.length() > longitudMaxima) {
+            throw new LongitudExcepcion(mensaje);
+        }
+    }
+
+    public void validarLongitudNoObligatorio(String valor, int longitudMaxima, String mensaje) {
+        String texto = quitarEspaciosBlancoInicioFin(valor);
+        if (texto.length() > longitudMaxima) {
+            throw new LongitudExcepcion(mensaje);
         }
     }
 

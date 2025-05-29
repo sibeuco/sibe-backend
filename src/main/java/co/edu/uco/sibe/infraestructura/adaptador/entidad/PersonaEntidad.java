@@ -22,18 +22,18 @@ public class PersonaEntidad {
     @JoinColumn(name = "tipo_identificacion", nullable = false)
     private TipoIdentificacionEntidad tipoIdentificacion;
 
-    @Column(length = 11, nullable = false)
+    @Column(length = 12, nullable = false)
     private String documento;
 
-    @Column(name = "primer_nombre", length = 30, nullable = false)
+    @Column(name = "primer_nombre", length = 20, nullable = false)
     private String primerNombre;
 
-    @Column(name = "segundo_nombre", length = 30)
+    @Column(name = "segundo_nombre", length = 20)
     private String segundoNombre;
 
-    @Column(name = "primer_apellido", length = 30, nullable = false)
+    @Column(name = "primer_apellido", length = 20, nullable = false)
     private String primerApellido;
 
-    @Column(name = "segundo_apellido", length = 30)
+    @Column(name = "segundo_apellido", length = 20)
     private String segundoApellido;
 }

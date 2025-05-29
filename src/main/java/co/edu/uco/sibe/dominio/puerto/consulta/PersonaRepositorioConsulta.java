@@ -10,7 +10,7 @@ public interface PersonaRepositorioConsulta {
 
     PersonaDTO consultarPersonaPorIdentificador(UUID identificador);
 
-    PersonaDTO consultarPersonaPorDocumento(String docuemnto);
+    PersonaDTO consultarPersonaPorDocumento(String documento);
 
     UsuarioDTO consultarUsuarioPorIdentificador(UUID identificador);
 
