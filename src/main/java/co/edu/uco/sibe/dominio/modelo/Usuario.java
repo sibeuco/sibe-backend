@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -18,7 +19,7 @@ public class Usuario {
     private Persona persona;
 
     public Usuario(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
         setContrasena(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuario.obtenerValorDefecto());
@@ -27,8 +28,8 @@ public class Usuario {
         setPersona(Persona.obtenerValorDefecto());
     }
 
-    private Usuario(String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
-        setIdentificador();
+    private Usuario(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo, Area area, Persona persona){
+        setIdentificador(identificador);
         setCorreo(correo);
         setContrasena(contrasena);
         setTipoUsuario(tipoUsuario);
@@ -45,19 +46,23 @@ public class Usuario {
         return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
-    public static Usuario construir(String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
-        return new Usuario(correo, contrasena, tipoUsuario, false, area, persona);
+    public static Usuario construir(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
+        return new Usuario(identificador,correo, contrasena, tipoUsuario, false, area, persona);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setCorreo(String correo) {
+        UtilTexto.getInstance().validarObligatorio(correo, Mensajes.CORREO_USUARIO_VACIO);
+        UtilTexto.getInstance().validarCorreoEsValido(correo, Mensajes.PATRON_CORREO_INVALIDO);
         this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
     }
 
     public void setContrasena(String contrasena) {
+        UtilTexto.getInstance().validarObligatorio(contrasena, Mensajes.CONTRASENA_VACIA);
+        UtilTexto.getInstance().validarContrasenaEsValida(contrasena, Mensajes.PATRON_CONTRASENA_INVALIDO);
         this.contrasena = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(contrasena);
     }
 

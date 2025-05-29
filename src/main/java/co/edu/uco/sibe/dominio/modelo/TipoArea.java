@@ -2,10 +2,7 @@ package co.edu.uco.sibe.dominio.modelo;
 
 import java.util.UUID;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
 
 @Getter
@@ -16,14 +13,14 @@ public class TipoArea {
     private int nivel;
 
     public TipoArea(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setGestionable(gestionable);
         setNivel(UtilNumero.getInstance().obtenerValorDefecto());
     }
 
-    private TipoArea(String nombre, boolean gestionable, int nivel){
-        setIdentificador();
+    private TipoArea(UUID identificador, String nombre, boolean gestionable, int nivel){
+        setIdentificador(identificador);
         setNombre(nombre);
         setGestionable(gestionable);
         setNivel(nivel);
@@ -37,15 +34,18 @@ public class TipoArea {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoArea, obtenerValorDefecto());
     }
 
-    public static TipoArea construir(String nombre, boolean gestionable, int nivel){
-        return new TipoArea(nombre, gestionable, nivel);
+    public static TipoArea construir(UUID identificador, String nombre, boolean gestionable, int nivel){
+        return new TipoArea(identificador, nombre, gestionable, nivel);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setNombre(String nombre) {
+        UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.CAMPO_OBLIGATORIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_TIPO_AREA_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(nombre, 1, 25, Mensajes.LONGITUD_NOMBRE_TIPO_AREA_INVALIDA);
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 

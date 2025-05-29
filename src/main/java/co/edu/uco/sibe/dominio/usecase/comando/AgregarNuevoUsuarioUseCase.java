@@ -3,7 +3,9 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 
 import java.util.UUID;
@@ -24,15 +26,14 @@ public class AgregarNuevoUsuarioUseCase {
     }
 
     private void validarUsuarioExisteConCorreo(String correo) {
-
         if (!UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
-            throw new ValorInvalidoExcepcion("Ya existe un usuario con el correo ingresado.");
+            throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
         }
     }
 
     private void validarPersonaExisteConDocumento(String documento) {
         if (!UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(documento))){
-            throw new ValorInvalidoExcepcion("Ya existe un usuario con el documento ingresado.");
+            throw new ValorInvalidoExcepcion(Mensajes.DOCUMENTO_EXISTENTE);
         }
     }
 

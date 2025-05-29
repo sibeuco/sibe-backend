@@ -2,6 +2,7 @@ package co.edu.uco.sibe.dominio.modelo;
 
 import java.util.UUID;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -17,7 +18,7 @@ public class TipoUsuario {
     boolean consultar;
 
     public TipoUsuario(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setCrear(crear);
         setModificar(modificar);
@@ -25,8 +26,8 @@ public class TipoUsuario {
         setConsultar(consultar);
     }
 
-    private TipoUsuario(String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        setIdentificador();
+    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+        setIdentificador(identificador);
         setNombre(nombre);
         setCrear(crear);
         setModificar(modificar);
@@ -42,15 +43,18 @@ public class TipoUsuario {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoUsuario, obtenerValorDefecto());
     }
 
-    public static TipoUsuario construir(String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        return new TipoUsuario(nombre, crear, modificar, eliminar, consultar);
+    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
+        return new TipoUsuario(identificador, nombre, crear, modificar, eliminar, consultar);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setNombre(String nombre) {
+        UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.NOMBRE_TIPO_USUARIO_VACIO);
+        UtilTexto.getInstance().validarLongitud(nombre, 1, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_TIPO_USUARIO_INVALIDO);
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
 
     }

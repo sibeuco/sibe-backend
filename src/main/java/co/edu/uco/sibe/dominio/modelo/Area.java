@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -15,14 +16,14 @@ public class Area {
     private Area areaPadre;
 
     public Area(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setNombreArea(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoArea(TipoArea.obtenerValorDefecto());
         setAreaPadre(Area.obtenerValorDefecto());
     }
 
-    private Area(String nombreArea, TipoArea tipoArea, Area areaPadre){
-        setIdentificador();
+    private Area(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
+        setIdentificador(identificador);
         setNombreArea(nombreArea);
         setTipoArea(tipoArea);
         setAreaPadre(areaPadre);
@@ -37,15 +38,18 @@ public class Area {
 
     }
 
-    public static Area construir(String nombreArea, TipoArea tipoArea, Area areaPadre){
-        return new Area(nombreArea, tipoArea, areaPadre);
+    public static Area construir(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
+        return new Area(identificador,nombreArea, tipoArea, areaPadre);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setNombreArea(String nombreArea) {
+        UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
         this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
     }
 

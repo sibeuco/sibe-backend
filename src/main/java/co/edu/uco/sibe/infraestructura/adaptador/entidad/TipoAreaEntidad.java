@@ -18,7 +18,7 @@ public class TipoAreaEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 25, nullable = false)
     private String nombre;
 
     @Column(nullable = false)

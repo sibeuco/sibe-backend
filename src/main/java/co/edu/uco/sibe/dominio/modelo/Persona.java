@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -18,7 +19,7 @@ public class Persona {
     private String segundoApellido;
 
     public Persona(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setTipoIdentificacion(TipoIdentificacion.obtenerValorDefecto());
         setDocumento(UtilTexto.getInstance().obtenerValorDefecto());
         setPrimerNombre(UtilTexto.getInstance().obtenerValorDefecto());
@@ -27,8 +28,8 @@ public class Persona {
         setSegundoApellido(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private Persona(TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
-        setIdentificador();
+    private Persona(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
+        setIdentificador(identificador);
         setTipoIdentificacion(tipoIdentificacion);
         setDocumento(documento);
         setPrimerNombre(primerNombre);
@@ -45,12 +46,12 @@ public class Persona {
         return UtilObjeto.getInstance().obtenerValorDefecto(persona, obtenerValorDefecto());
     }
 
-    public static Persona construir(TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
-        return new Persona(tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
+    public static Persona construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
+        return new Persona(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
@@ -58,22 +59,34 @@ public class Persona {
     }
 
     public void setDocumento(String documento) {
+        UtilTexto.getInstance().validarObligatorio(documento, Mensajes.DOCUMENTO_PERSONA_VACIO);
+        UtilTexto.getInstance().validarPatronDocumentoEsValido(documento, Mensajes.PATRON_DOCUMENTO_PERSONA_INVALIDO);
         this.documento = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(documento);
     }
 
     public void setPrimerNombre(String primerNombre) {
+        UtilTexto.getInstance().validarObligatorio(primerNombre, Mensajes.PRIMER_NOMBRE_PERSONA_VACIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(primerNombre, Mensajes.PATRON_NOMBRE_PERSONA_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(primerNombre, 1, 20, Mensajes.LONGITUD_NOMBRE_PERSONA_INVALIDA);
         this.primerNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerNombre);
     }
 
     public void setPrimerApellido(String primerApellido) {
+        UtilTexto.getInstance().validarObligatorio(primerApellido, Mensajes.PRIMER_APELLIDO_PERSONA_VACIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(primerApellido, Mensajes.PATRON_APELLIDO_PERSONA_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(primerApellido, 1, 20, Mensajes.LONGITUD_APELLIDO_PERSONA_INVALIDA);
         this.primerApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerApellido);
     }
 
     public void setSegundoNombre(String segundoNombre) {
+        UtilTexto.getInstance().validarPatronTextoEsValido(segundoNombre, Mensajes.PATRON_NOMBRE_PERSONA_INVALIDO);
+        UtilTexto.getInstance().validarLongitudNoObligatorio(segundoNombre, 20, Mensajes.LONGITUD_SEGUNDO_NOMBRE_PERSONA_INVALIDA);
         this.segundoNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoNombre);
     }
 
     public void setSegundoApellido(String segundoApellido) {
+        UtilTexto.getInstance().validarPatronTextoEsValido(segundoApellido, Mensajes.PATRON_APELLIDO_PERSONA_INVALIDO);
+        UtilTexto.getInstance().validarLongitudNoObligatorio(segundoApellido, 20, Mensajes.LONGITUD_SEGUNDO_APELLIDO_PERSONA_INVALIDA);
         this.segundoApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoApellido);
     }
 }

@@ -2,6 +2,7 @@ package co.edu.uco.sibe.dominio.modelo;
 
 import java.util.UUID;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
@@ -14,13 +15,13 @@ public class TipoIdentificacion {
     private String descripcion;
 
     public TipoIdentificacion(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
+        setIdentificador(UtilUUID.obtenerValorDefecto());
         setSigla(UtilTexto.getInstance().obtenerValorDefecto());
         setDescripcion(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    private TipoIdentificacion(String sigla, String descripcion){
-        setIdentificador();
+    private TipoIdentificacion(UUID identificador, String sigla, String descripcion){
+        setIdentificador(identificador);
         setSigla(sigla);
         setDescripcion(descripcion);
     }
@@ -33,19 +34,25 @@ public class TipoIdentificacion {
         return UtilObjeto.getInstance().obtenerValorDefecto(tipoIdentificacion, obtenerValorDefecto());
     }
 
-    public static TipoIdentificacion construir(String sigla, String descripcion){
-        return new TipoIdentificacion(sigla, descripcion);
+    public static TipoIdentificacion construir(UUID identificador,String sigla, String descripcion){
+        return new TipoIdentificacion(identificador, sigla, descripcion);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public void setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
     }
 
     public void setSigla(String sigla) {
+        UtilTexto.getInstance().validarObligatorio(sigla, Mensajes.CAMPO_OBLIGATORIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(sigla, Mensajes.PATRON_SIGLA_TIPO_IDENTIFICACION_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(sigla, 1, 5, Mensajes.LONGITUD_SIGLA_TIPO_IDENTIFICACION_INVALIDA);
         this.sigla = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(sigla);
     }
 
     public void setDescripcion(String descripcion) {
+        UtilTexto.getInstance().validarObligatorio(descripcion, Mensajes.CAMPO_OBLIGATORIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(descripcion, Mensajes.PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(descripcion, 1, 40, Mensajes.LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA);
         this.descripcion = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(descripcion);
     }
 }
