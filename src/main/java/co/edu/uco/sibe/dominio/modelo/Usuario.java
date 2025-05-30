@@ -47,7 +47,7 @@ public class Usuario {
     }
 
     public static Usuario construir(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, Area area, Persona persona){
-        return new Usuario(identificador,correo, contrasena, tipoUsuario, false, area, persona);
+        return new Usuario(identificador,correo, contrasena, tipoUsuario, true, area, persona);
     }
 
     public void setIdentificador(UUID identificador) {

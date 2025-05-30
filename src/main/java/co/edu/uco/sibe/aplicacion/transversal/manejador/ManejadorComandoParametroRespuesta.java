@@ -2,7 +2,7 @@ package co.edu.uco.sibe.aplicacion.transversal.manejador;
 
 import org.springframework.transaction.annotation.Transactional;
 
-public interface ManejadorComando<C> {
+public interface ManejadorComandoParametroRespuesta<C, P, R> {
     @Transactional
-    void ejecutar(C comando);
+    R ejecutar(C comando, P parametro);
 }
