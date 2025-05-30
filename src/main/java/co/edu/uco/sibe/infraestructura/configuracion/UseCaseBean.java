@@ -11,26 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class UseCaseBean {
 
     @Bean
-    public AgregarNuevaAreaUseCase agregarNuevaAreaUseCase(AreaRepositorioComando areaRepositorioComando){
-        return new AgregarNuevaAreaUseCase(areaRepositorioComando);
-    }
-
-    @Bean
-    public AgregarNuevoTipoAreaUseCase agregarNuevoTipoAreaUseCase(TipoAreaRepositorioComando tipoAreaRepositorioComando){
-        return new AgregarNuevoTipoAreaUseCase(tipoAreaRepositorioComando);
-    }
-
-    @Bean
-    public AgregarNuevoTipoIdentificacionUseCase agregarNuevoTipoIdentificacionUseCase(TipoIdentificacionRepositorioComando tipoIdentificacionRepositorioComando){
-        return new AgregarNuevoTipoIdentificacionUseCase(tipoIdentificacionRepositorioComando);
-    }
-
-    @Bean
-    public AgregarNuevoTipoUsuarioUseCase agregarNuevoTipoUsuarioUseCase(TipoUsuarioRepositorioComando tipoUsuarioRepositorioComando){
-        return new AgregarNuevoTipoUsuarioUseCase(tipoUsuarioRepositorioComando);
-    }
-
-    @Bean
     public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta){
         return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta);
     }

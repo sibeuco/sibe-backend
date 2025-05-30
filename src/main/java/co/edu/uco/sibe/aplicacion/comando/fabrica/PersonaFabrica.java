@@ -7,26 +7,36 @@ import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import lombok.AllArgsConstructor;
 
 import java.util.UUID;
 
+@AllArgsConstructor
 public class PersonaFabrica {
 
     private final TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
-    public PersonaFabrica(TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta, PersonaRepositorioConsulta personaRepositorioConsulta) {
-        this.tipoIdentificacionRepositorioConsulta = tipoIdentificacionRepositorioConsulta;
-        this.personaRepositorioConsulta = personaRepositorioConsulta;
-    }
 
     public Persona construir(PersonaComando persona){
         var identificadorPersona = generarNuevoUUIDUnico();
         TipoIdentificacionDTO tipoIdentificacionDTO = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador
                 (persona.getTipoIdentificacion());
-        TipoIdentificacion tipoIdentificacionDominio = TipoIdentificacion.construir
-                (tipoIdentificacionDTO.getIdentificador(), tipoIdentificacionDTO.getSigla(), tipoIdentificacionDTO.getDescripcion());
-        return Persona.construir(identificadorPersona, tipoIdentificacionDominio, persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido());
+        TipoIdentificacion tipoIdentificacion = TipoIdentificacion.construir
+                (tipoIdentificacionDTO.getIdentificador(),
+                        tipoIdentificacionDTO.getSigla(),
+                        tipoIdentificacionDTO.getDescripcion());
+        return Persona.construir(identificadorPersona, tipoIdentificacion, persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido());
+    }
+
+    public Persona construirActualizar(PersonaComando persona, UUID identificador){
+        TipoIdentificacionDTO tipoIdentificacionDTO = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador
+                (persona.getTipoIdentificacion());
+        TipoIdentificacion tipoIdentificacion = TipoIdentificacion.construir
+                (tipoIdentificacionDTO.getIdentificador(),
+                        tipoIdentificacionDTO.getSigla(),
+                        tipoIdentificacionDTO.getDescripcion());
+        return Persona.construir(identificador, tipoIdentificacion, persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido());
     }
 
     public UUID generarNuevoUUIDUnico() {
