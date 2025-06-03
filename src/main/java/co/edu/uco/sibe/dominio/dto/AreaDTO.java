@@ -15,10 +15,6 @@ public class AreaDTO {
     private AreaDTO areaPadre;
 
     public AreaDTO(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombreArea(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipoArea(TipoAreaDTO.obtenerValorDefecto());
-        setAreaPadre(AreaDTO.obtenerValorDefecto());
     }
 
     public AreaDTO(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
@@ -54,6 +50,6 @@ public class AreaDTO {
     }
 
     public void setAreaPadre(AreaDTO areaPadre) {
-        this.areaPadre = (areaPadre == this) ? AreaDTO.obtenerValorDefecto() : AreaDTO.obtenerValorDefecto(areaPadre);
+        this.areaPadre = areaPadre;
     }
 }

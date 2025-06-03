@@ -5,9 +5,11 @@ import co.edu.uco.sibe.dominio.puerto.comando.TipoIdentificacionRepositorioComan
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoIdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoIdentificacionMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+@Repository
 public class TipoIdentificacionRepositorioComandoImplementacion implements TipoIdentificacionRepositorioComando {
 
     @Autowired

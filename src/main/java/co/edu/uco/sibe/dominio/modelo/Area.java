@@ -47,9 +47,9 @@ public class Area {
     }
 
     public void setNombreArea(String nombreArea) {
-        UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
-        UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
+        //UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
+        //UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
+        //UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
         this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
     }
 
