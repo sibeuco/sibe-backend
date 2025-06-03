@@ -43,9 +43,9 @@ public class TipoArea {
     }
 
     public void setNombre(String nombre) {
-        UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.CAMPO_OBLIGATORIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_TIPO_AREA_INVALIDO);
-        UtilTexto.getInstance().validarLongitud(nombre, 1, 25, Mensajes.LONGITUD_NOMBRE_TIPO_AREA_INVALIDA);
+        //UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.CAMPO_OBLIGATORIO);
+        //UtilTexto.getInstance().validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_TIPO_AREA_INVALIDO);
+        //UtilTexto.getInstance().validarLongitud(nombre, 1, 25, Mensajes.LONGITUD_NOMBRE_TIPO_AREA_INVALIDA);
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 

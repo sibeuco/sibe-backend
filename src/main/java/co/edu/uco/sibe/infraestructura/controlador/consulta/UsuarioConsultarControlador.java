@@ -3,7 +3,6 @@ package co.edu.uco.sibe.infraestructura.controlador.consulta;
 import co.edu.uco.sibe.aplicacion.consulta.*;
 import co.edu.uco.sibe.dominio.dto.*;
 import lombok.AllArgsConstructor;
-import org.junit.jupiter.api.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/usuarios")
-@Tag("Consulta del Usuario Controlador")
 public class UsuarioConsultarControlador {
     private final ConsultarAreaPorIdentificadorManejador consultarAreaPorIdentificadorManejador;
     private final ConsultarAreasManejador consultarAreasManejador;

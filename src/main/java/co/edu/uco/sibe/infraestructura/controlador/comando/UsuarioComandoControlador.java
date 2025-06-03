@@ -9,7 +9,6 @@ import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarPersonaManejador;
 import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarUsuarioManejador;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import lombok.AllArgsConstructor;
-import org.junit.jupiter.api.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -17,7 +16,6 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/usuarios")
-@Tag("Comando del Usuario Controlador")
 public class UsuarioComandoControlador {
     private final AgregarNuevoUsuarioManejador agregarNuevoUsuarioManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;

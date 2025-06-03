@@ -12,9 +12,11 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoAreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class UsuarioFabrica {
 
     private final TipoUsuarioRepositorioConsulta tipoUsuarioRepositorioConsulta;

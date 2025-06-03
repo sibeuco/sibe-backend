@@ -8,9 +8,11 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 @AllArgsConstructor
 public class PersonaFabrica {
 
