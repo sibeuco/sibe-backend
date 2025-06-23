@@ -32,6 +32,8 @@ public interface UsuarioDAO extends JpaRepository<UsuarioEntidad, UUID> {
     """, nativeQuery = true)
     UsuarioEntidad consultarUsuarioPorCorreo(String correo);
 
+    UsuarioEntidad findByCorreo(String correo);
+
     @Modifying
     @Transactional
     @Query(value = """
