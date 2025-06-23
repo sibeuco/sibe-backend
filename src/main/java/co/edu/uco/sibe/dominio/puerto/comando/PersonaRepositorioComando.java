@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface PersonaRepositorioComando {
 
-    UUID agregarNuevoUsuario(Usuario usuario);
+    UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String contrasenaEncriptada);
 
     UUID modificarPersona(Persona persona, UUID identificador);
 

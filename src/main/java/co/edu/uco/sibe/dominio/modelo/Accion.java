@@ -37,6 +37,6 @@ public class Accion {
     }
 
     public void setProyecto(Proyecto proyecto) {
-        this.proyecto = Proyecto.obtenerValorDefecto(proyecto);
+        this.proyecto = proyecto;
     }
 }

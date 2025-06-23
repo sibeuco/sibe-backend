@@ -15,9 +15,7 @@ public interface UsuarioDAO extends JpaRepository<UsuarioEntidad, UUID> {
            correo,
            contrasena,
            tipo_usuario,
-           esta_activo,
-           area_o_direccion,
-           persona
+           esta_activo
     FROM usuario
     WHERE identificador = ?1
     """, nativeQuery = true)
@@ -28,9 +26,7 @@ public interface UsuarioDAO extends JpaRepository<UsuarioEntidad, UUID> {
            correo,
            contrasena,
            tipo_usuario,
-           esta_activo,
-           area_o_direccion,
-           persona
+           esta_activo
     FROM usuario
     WHERE correo = ?1
     """, nativeQuery = true)
@@ -40,18 +36,18 @@ public interface UsuarioDAO extends JpaRepository<UsuarioEntidad, UUID> {
     @Transactional
     @Query(value = """
     UPDATE usuario
-    SET tipo_usuario = ?1,
-        area_o_direccion = ?2
-    WHERE identificador = ?3
+    SET tipo_usuario = :tipoUsuario,
+        correo = :correo
+    WHERE identificador = :identificador
     """, nativeQuery = true)
-    void modificarUsuario(UUID tipoUsuario, UUID areaODireccion, UUID identificador);
+    void modificarUsuario(UUID tipoUsuario, String correo, UUID identificador);
 
     @Modifying
     @Transactional
     @Query(value = """
     UPDATE usuario
-    SET contrasena = ?1
-    WHERE identificador = ?2
+    SET contrasena = :nuevaContrasena
+    WHERE identificador = :identificador
     """, nativeQuery = true)
     void cambiarContrasena(String nuevaContrasena, UUID identificador);
 }

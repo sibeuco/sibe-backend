@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import lombok.Getter;
 
 import java.util.UUID;
-import lombok.Getter;
 
 @Getter
 public class Area {
@@ -15,27 +14,11 @@ public class Area {
     private TipoArea tipoArea;
     private Area areaPadre;
 
-    public Area(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombreArea(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipoArea(TipoArea.obtenerValorDefecto());
-        setAreaPadre(Area.obtenerValorDefecto());
-    }
-
     private Area(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
         setIdentificador(identificador);
         setNombreArea(nombreArea);
         setTipoArea(tipoArea);
         setAreaPadre(areaPadre);
-    }
-
-    public static Area obtenerValorDefecto(){
-        return new Area();
-    }
-
-    public static Area obtenerValorDefecto(final Area area){
-        return UtilObjeto.getInstance().obtenerValorDefecto(area, obtenerValorDefecto());
-
     }
 
     public static Area construir(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
@@ -47,18 +30,18 @@ public class Area {
     }
 
     public void setNombreArea(String nombreArea) {
-        //UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
-        //UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
-        //UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
+        UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
+        UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
+        UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
         this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
     }
 
     public void setTipoArea(TipoArea tipoArea) {
-        this.tipoArea = TipoArea.obtenerValorDefecto(tipoArea);
+        this.tipoArea = tipoArea;
     }
 
     public void setAreaPadre(Area areaPadre) {
-        this.areaPadre = (areaPadre == this) ? Area.obtenerValorDefecto() : Area.obtenerValorDefecto(areaPadre);
+        this.areaPadre = areaPadre;
     }
 
 }

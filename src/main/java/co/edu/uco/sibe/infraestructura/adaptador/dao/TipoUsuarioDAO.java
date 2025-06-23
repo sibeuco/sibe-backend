@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface TipoUsuarioDAO extends JpaRepository<TipoUsuarioEntidad, UUID> {
 
-    @Query(value = "SELECT identificador, nombre, crear, eliminar, modificar, consultar FROM tipo_usuario WHERE identificador = ?1",nativeQuery = true)
+    @Query(value = "SELECT identificador, nombre, crear, modificar, eliminar, consultar FROM tipo_usuario WHERE identificador = :identificador",nativeQuery = true)
     TipoUsuarioEntidad consultarTipoUsuarioPorIdentificador(UUID identificador);
 
     @Modifying

@@ -6,8 +6,6 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 
-import java.util.UUID;
-
 public class ConsultarUsuarioPorCorreoUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 

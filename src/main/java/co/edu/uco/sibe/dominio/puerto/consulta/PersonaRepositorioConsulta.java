@@ -12,6 +12,8 @@ public interface PersonaRepositorioConsulta {
 
     PersonaDTO consultarPersonaPorDocumento(String documento);
 
+    PersonaDTO consultarPersonaPorCorreo(String correo);
+
     UsuarioDTO consultarUsuarioPorIdentificador(UUID identificador);
 
     UsuarioDTO consultarUsuarioPorCorreo(String correo);

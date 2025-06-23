@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import lombok.Getter;
 
 import java.util.UUID;
-import lombok.Getter;
 
 @Getter
 public class PersonaDTO {
@@ -17,6 +16,7 @@ public class PersonaDTO {
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
+    private String correo;
 
     public PersonaDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
@@ -26,9 +26,10 @@ public class PersonaDTO {
         setSegundoNombre(UtilTexto.getInstance().obtenerValorDefecto());
         setPrimerApellido(UtilTexto.getInstance().obtenerValorDefecto());
         setSegundoApellido(UtilTexto.getInstance().obtenerValorDefecto());
+        setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
     }
 
-    public PersonaDTO(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
+    public PersonaDTO(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo) {
         setIdentificador(identificador);
         setTipoIdentificacion(tipoIdentificacion);
         setDocumento(documento);
@@ -36,6 +37,7 @@ public class PersonaDTO {
         setSegundoNombre(segundoNombre);
         setPrimerApellido(primerApellido);
         setSegundoApellido(segundoApellido);
+        setCorreo(correo);
     }
 
     public static PersonaDTO obtenerValorDefecto(){
@@ -46,8 +48,8 @@ public class PersonaDTO {
         return UtilObjeto.getInstance().obtenerValorDefecto(persona, obtenerValorDefecto());
     }
 
-    public static PersonaDTO construir(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido){
-        return new PersonaDTO(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido);
+    public static PersonaDTO construir(UUID identificador, TipoIdentificacionDTO tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo){
+        return new PersonaDTO(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido, correo);
     }
 
     private void setIdentificador(UUID identificador) {
@@ -76,5 +78,9 @@ public class PersonaDTO {
 
     private void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoApellido);
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
     }
 }

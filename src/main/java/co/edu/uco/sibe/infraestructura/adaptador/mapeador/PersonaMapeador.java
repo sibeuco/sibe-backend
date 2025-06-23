@@ -16,11 +16,11 @@ public class PersonaMapeador {
     }
 
     public PersonaDTO construirDTO(PersonaEntidad persona){
-        return new PersonaDTO(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirDTO(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido());
+        return new PersonaDTO(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirDTO(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
     }
 
     public PersonaEntidad construirEntidad(Persona persona){
-        return new PersonaEntidad(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirEntidad(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido());
+        return new PersonaEntidad(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirEntidad(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
     }
 
     public List<PersonaDTO> construirDTOs(List<PersonaEntidad> personas){

@@ -10,25 +10,25 @@ import java.util.List;
 @Component
 public class UsuarioMapeador {
     private final TipoUsuarioMapeador tipoUsuarioMapeador;
-    private final AreaMapeador areaMapeador;
-    private final PersonaMapeador personaMapeador;
 
-    public UsuarioMapeador(TipoUsuarioMapeador tipoUsuarioMapeador, AreaMapeador areaMapeador, PersonaMapeador personaMapeador){
+    public UsuarioMapeador(TipoUsuarioMapeador tipoUsuarioMapeador){
         this.tipoUsuarioMapeador = tipoUsuarioMapeador;
-        this.areaMapeador = areaMapeador;
-        this.personaMapeador = personaMapeador;
     }
 
     public UsuarioDTO construirDTO(UsuarioEntidad usuario){
-        return new UsuarioDTO(usuario.getIdentificador(), usuario.getCorreo(), this.tipoUsuarioMapeador.construirDTO(usuario.getTipoUsuario()), usuario.isEstaActivo(), this.areaMapeador.construirDTO(usuario.getArea()), this.personaMapeador.construirDTO(usuario.getPersona()));
+        return new UsuarioDTO(usuario.getIdentificador(), usuario.getCorreo(), this.tipoUsuarioMapeador.construirDTO(usuario.getTipoUsuario()), usuario.isEstaActivo());
     }
 
-    public UsuarioEntidad construirEntidad(Usuario usuario){
-        return new UsuarioEntidad(usuario.getIdentificador(), usuario.getCorreo(), usuario.getContrasena(), this.tipoUsuarioMapeador.construirEntidad(usuario.getTipoUsuario()), usuario.isEstaActivo(), this.areaMapeador.construirEntidad(usuario.getArea()), this.personaMapeador.construirEntidad(usuario.getPersona()));
+    public UsuarioEntidad construirEntidad(Usuario usuario, String contrasena){
+        return new UsuarioEntidad(usuario.getIdentificador(), usuario.getCorreo(), contrasena, this.tipoUsuarioMapeador.construirEntidad(usuario.getTipoUsuario()), usuario.isEstaActivo());
     }
 
     public List<UsuarioDTO> construirDTOs(List<UsuarioEntidad> usuarios){
         return usuarios.stream().map(this::construirDTO).toList();
+    }
+
+    public void construirModificarContrasenaEntidad(UsuarioEntidad usuario, String contrasena){
+        usuario.setContrasena(contrasena);
     }
 
 }
