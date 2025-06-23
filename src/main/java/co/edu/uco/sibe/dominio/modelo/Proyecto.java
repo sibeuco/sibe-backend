@@ -1,11 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import lombok.Getter;
 
 import java.util.UUID;
-import lombok.Getter;
 
 @Getter
 public class Proyecto {
@@ -14,26 +13,11 @@ public class Proyecto {
     private String nombre;
     private String objetivo;
 
-    public Proyecto(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
-        setNumeroProyecto(UtilTexto.getInstance().obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
-        setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
-    }
-
     private Proyecto(String numeroProyecto, String nombre, String objetivo){
         setIdentificador();
         setNumeroProyecto(numeroProyecto);
         setNombre(nombre);
         setObjetivo(objetivo);
-    }
-
-    public static Proyecto obtenerValorDefecto(){
-        return new Proyecto();
-    }
-
-    public static Proyecto obtenerValorDefecto(final Proyecto proyecto){
-        return UtilObjeto.getInstance().obtenerValorDefecto(proyecto, obtenerValorDefecto());
     }
 
     public static Proyecto construir(String numeroProyecto, String nombre, String objetivo){

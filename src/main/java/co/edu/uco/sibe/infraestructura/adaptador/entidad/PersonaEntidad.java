@@ -36,4 +36,7 @@ public class PersonaEntidad {
 
     @Column(name = "segundo_apellido", length = 20)
     private String segundoApellido;
+
+    @Column(length = 40, nullable = false)
+    private String correo;
 }

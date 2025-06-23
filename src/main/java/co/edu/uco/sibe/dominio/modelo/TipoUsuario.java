@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import java.util.UUID;
-
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class TipoUsuario {
@@ -17,15 +16,6 @@ public class TipoUsuario {
     boolean eliminar;
     boolean consultar;
 
-    public TipoUsuario(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
-        setCrear(crear);
-        setModificar(modificar);
-        setEliminar(eliminar);
-        setConsultar(consultar);
-    }
-
     private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
         setIdentificador(identificador);
         setNombre(nombre);
@@ -33,14 +23,6 @@ public class TipoUsuario {
         setModificar(modificar);
         setEliminar(eliminar);
         setConsultar(consultar);
-    }
-
-    public static TipoUsuario obtenerValorDefecto(){
-        return new TipoUsuario();
-    }
-
-    public static TipoUsuario obtenerValorDefecto(final TipoUsuario tipoUsuario){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoUsuario, obtenerValorDefecto());
     }
 
     public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){

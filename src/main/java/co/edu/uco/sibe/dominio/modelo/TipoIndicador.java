@@ -1,11 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import java.util.UUID;
-
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class TipoIndicador {
@@ -13,24 +12,10 @@ public class TipoIndicador {
     private String naturalezaIndicador;
     private String tipologiaIndicador;
 
-    public TipoIndicador(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
-        setNaturalezaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipologiaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
-    }
-
     private TipoIndicador(String naturalezaIndicador, String tipologiaIndicador){
         setIdentificador();
         setNaturalezaIndicador(naturalezaIndicador);
         setTipologiaIndicador(tipologiaIndicador);
-    }
-
-    public static TipoIndicador obtenerValorDefecto(){
-        return new TipoIndicador();
-    }
-
-    public static TipoIndicador obtenerValorDefecto(final TipoIndicador tipoIndicador){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoIndicador, obtenerValorDefecto());
     }
 
     public static TipoIndicador construir(String naturalezaIndicador, String tipologiaIndicador){

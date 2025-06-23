@@ -15,10 +15,13 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AgregarNuevoUsuarioManejador implements ManejadorComandoRespuesta<UsuarioComando, ComandoRespuesta<UUID>> {
     private final UsuarioFabrica usuarioFabrica;
+    private final PersonaFabrica personaFabrica;
     private final AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase;
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(UsuarioComando comando) {
-        return new ComandoRespuesta<>(this.agregarNuevoUsuarioUseCase.ejecutar(this.usuarioFabrica.construir(comando)));
+        return new ComandoRespuesta<>(this.agregarNuevoUsuarioUseCase.ejecutar(this.usuarioFabrica.construir(comando),
+                this.personaFabrica.construir(comando)));
     }
+
 }

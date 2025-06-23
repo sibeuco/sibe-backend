@@ -1,15 +1,14 @@
 package co.edu.uco.sibe.dominio.modelo;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
-import lombok.Getter;
 
 @Getter
 public class Actividad {
@@ -28,23 +27,6 @@ public class Actividad {
     private Area area;
     private String rutaInsumos;
 
-    public Actividad(){
-        this.identificador = UtilUUID.obtenerValorDefecto();
-        setNombreCapacitacionOEvento(UtilTexto.getInstance().obtenerValorDefecto());
-        setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
-        setColaborador(Usuario.obtenerValorDefecto());
-        setCreador(Usuario.obtenerValorDefecto());
-        setIndicador(Indicador.obtenerValorDefecto());
-        setFechaCreacion(UtilFecha.getInstance().obtenerHoraFechaDefecto());
-        setFechaProgramada(UtilFecha.getInstance().obtenerFechaDefecto());
-        setFechaRealizacion(UtilFecha.getInstance().obtenerFechaDefecto());
-        setHoraInicio(UtilFecha.getInstance().obtenerHoraDefecto());
-        setHoraFin(UtilFecha.getInstance().obtenerHoraDefecto());
-        setEstadoActividad(EstadoActividad.obtenerValorDefecto());
-        setArea(Area.obtenerValorDefecto());
-        setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
-    }
-
     public Actividad(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Usuario creador, Indicador indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividad estadoActividad, Area area, String rutaInsumos){
         setIdentificador();
         setNombreCapacitacionOEvento(nombreCapacitacionOEvento);
@@ -57,17 +39,9 @@ public class Actividad {
         setFechaRealizacion(fechaRealizacion);
         setHoraInicio(horaInicio);
         setHoraFin(horaFin);
-        setEstadoActividad(EstadoActividad.obtenerValorDefecto());
-        setArea(Area.obtenerValorDefecto());
-        setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
-    }
-
-    public static Actividad obtenerValorDefecto(){
-        return new Actividad();
-    }
-
-    public static Actividad obtenerValorDefecto(final Actividad actividad){
-        return UtilObjeto.getInstance().obtenerValorDefecto(actividad, obtenerValorDefecto());
+        setEstadoActividad(estadoActividad);
+        setArea(area);
+        setRutaInsumos(rutaInsumos);
     }
 
     public static Actividad construir(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Indicador indicador, LocalDate fechaProgramada, Area area, String rutaInsumos){
@@ -87,43 +61,43 @@ public class Actividad {
     }
 
     public void setColaborador(Usuario colaborador) {
-        this.colaborador = Usuario.obtenerValorDefecto(colaborador);
+        this.colaborador = colaborador;
     }
 
     public void setCreador(Usuario creador) {
-        this.creador = Usuario.obtenerValorDefecto(creador);
+        this.creador = creador;
     }
 
     public void setIndicador(Indicador indicador) {
-        this.indicador = Indicador.obtenerValorDefecto(indicador);
+        this.indicador = indicador;
     }
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = (fechaCreacion != null) ? fechaCreacion : UtilFecha.getInstance().obtenerHoraFechaDefecto();
+        this.fechaCreacion = fechaCreacion;
     }
 
     public void setFechaProgramada(LocalDate fechaProgramada) {
-        this.fechaProgramada = (fechaProgramada != null) ? fechaProgramada : UtilFecha.getInstance().obtenerFechaDefecto();
+        this.fechaProgramada = fechaProgramada;
     }
 
     public void setFechaRealizacion(LocalDate fechaRealizacion) {
-        this.fechaRealizacion = (fechaRealizacion != null) ? fechaRealizacion : UtilFecha.getInstance().obtenerFechaDefecto();
+        this.fechaRealizacion = fechaRealizacion;
     }
 
     public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = (horaInicio != null) ? horaInicio : UtilFecha.getInstance().obtenerHoraDefecto();
+        this.horaInicio = horaInicio;
     }
 
     public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = (horaFin != null) ? horaFin : UtilFecha.getInstance().obtenerHoraDefecto();
+        this.horaFin = horaFin;
     }
 
     public void setEstadoActividad(EstadoActividad estadoActividad) {
-        this.estadoActividad = EstadoActividad.obtenerValorDefecto(estadoActividad);
+        this.estadoActividad = estadoActividad;
     }
 
     public void setArea(Area area) {
-        this.area = Area.obtenerValorDefecto(area);
+        this.area = area;
     }
 
     public void setRutaInsumos(String rutaInsumos) {

@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.aplicacion.comando.manejador;
 
-import co.edu.uco.sibe.aplicacion.comando.PersonaComando;
+import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
 import co.edu.uco.sibe.aplicacion.comando.fabrica.PersonaFabrica;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoParametroRespuesta;
@@ -12,12 +12,12 @@ import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class ModificarPersonaManejador implements ManejadorComandoParametroRespuesta<PersonaComando, UUID, ComandoRespuesta<UUID>> {
+public class ModificarPersonaManejador implements ManejadorComandoParametroRespuesta<UsuarioModificacionComando, UUID, ComandoRespuesta<UUID>> {
     private final PersonaFabrica personaFabrica;
     private final ModificarPersonaUseCase modificarPersonaUseCase;
 
     @Override
-    public ComandoRespuesta<UUID> ejecutar(PersonaComando comando, UUID parametro) {
+    public ComandoRespuesta<UUID> ejecutar(UsuarioModificacionComando comando, UUID parametro) {
         return new ComandoRespuesta<>(this.modificarPersonaUseCase.ejecutar(this.personaFabrica.construirActualizar(comando, parametro), parametro));
     }
 }

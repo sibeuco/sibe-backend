@@ -50,6 +50,16 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
+    public PersonaDTO consultarPersonaPorCorreo(String correo) {
+        var entidad = this.personaDAO.consultarPersonaPorCorreo(correo);
+
+        if (UtilObjeto.getInstance().esNulo(entidad)){
+            return null;
+        }
+        return this.personaMapeador.construirDTO(entidad);
+    }
+
+    @Override
     public UsuarioDTO consultarUsuarioPorIdentificador(UUID identificador) {
         var entidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
 

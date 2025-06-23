@@ -3,6 +3,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
@@ -28,12 +29,11 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     UsuarioMapeador usuarioMapeador;
 
     @Override
-    public UUID agregarNuevoUsuario(Usuario usuario) {
-        var entidadPersona = this.personaMapeador.construirEntidad(usuario.getPersona());
-        this.personaDAO.save(entidadPersona);
-        var entidadUsuario = this.usuarioMapeador.construirEntidad(usuario);
+    public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String contrasenaEncriptada) {
+        var entidadUsuario = this.usuarioMapeador.construirEntidad(usuario, contrasenaEncriptada);
+        var entidadPersona = this.personaMapeador.construirEntidad(persona);
 
-        entidadUsuario.setPersona(entidadPersona);
+        this.personaDAO.save(entidadPersona);
 
         return this.usuarioDAO.save(entidadUsuario).getIdentificador();
     }
@@ -43,7 +43,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         UUID tipoIdentificacionPersona = persona.getTipoIdentificacion().getIdentificador();
 
         this.personaDAO.modificarPersona(tipoIdentificacionPersona, persona.getDocumento(),
-                persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), identificador);
+                persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo(), identificador);
 
         return identificador;
 
@@ -52,17 +52,20 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     @Override
     public UUID modificarUsuario(Usuario usuario, UUID identificador) {
         UUID tipoUsuarioIdentificador = usuario.getTipoUsuario().getIdentificador();
-        UUID areaODireccionIdentificador = usuario.getArea().getIdentificador();
 
-        this.usuarioDAO.modificarUsuario(tipoUsuarioIdentificador, areaODireccionIdentificador, identificador);
+        this.usuarioDAO.modificarUsuario(tipoUsuarioIdentificador, usuario.getCorreo(), identificador);
 
         return identificador;
     }
 
     @Override
     public UUID modificarContrasena(String nuevaContrasena, UUID identificador) {
-        usuarioDAO.cambiarContrasena(nuevaContrasena, identificador);
-        return identificador;
+        var usuarioEntidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
+
+        assert !UtilObjeto.getInstance().esNulo(usuarioEntidad);
+        this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
+
+        return this.usuarioDAO.save(usuarioEntidad).getIdentificador();
     }
 
     @Override
@@ -70,7 +73,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var usuario = usuarioDAO.findById(identificador).orElse(null);
 
         assert usuario != null;
-        UUID identificadorPersona = usuario.getPersona().getIdentificador();
+        var persona = personaDAO.consultarPersonaPorCorreo(usuario.getCorreo());
+        UUID identificadorPersona = persona.getIdentificador();
 
         personaDAO.deleteById(identificadorPersona);
         usuarioDAO.deleteById(identificador);

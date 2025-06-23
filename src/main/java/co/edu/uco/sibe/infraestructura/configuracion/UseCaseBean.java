@@ -2,17 +2,19 @@ package co.edu.uco.sibe.infraestructura.configuracion;
 
 import co.edu.uco.sibe.dominio.puerto.comando.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.*;
+import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
 import co.edu.uco.sibe.dominio.usecase.consulta.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class UseCaseBean {
 
     @Bean
-    public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta){
-        return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta);
+    public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio){
+        return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio);
     }
 
     @Bean
@@ -28,6 +30,16 @@ public class UseCaseBean {
     @Bean
     public ModificarUsuarioUseCase modificarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta){
         return new ModificarUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta);
+    }
+
+    @Bean
+    public ModificarContrasenaUseCase modificarContrasenaUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta){
+        return new ModificarContrasenaUseCase(personaRepositorioComando, personaRepositorioConsulta);
+    }
+
+    @Bean
+    public LoginUseCase loginUseCase(PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encryptTextService) {
+        return new LoginUseCase(personaRepositorioConsulta, encryptTextService);
     }
 
     @Bean

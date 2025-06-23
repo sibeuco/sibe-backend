@@ -12,8 +12,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioModificacionComando {
+    private UUID tipoIdentificacion;
+    private String documento;
+    private String primerNombre;
+    private String segundoNombre;
+    private String primerApellido;
+    private String segundoApellido;
     private String correo;
     private UUID tipoUsuario;
-    private UUID area;
-    private UUID persona;
 }

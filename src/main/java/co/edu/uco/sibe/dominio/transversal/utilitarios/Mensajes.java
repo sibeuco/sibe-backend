@@ -39,6 +39,7 @@ public class Mensajes {
     public static final String NO_SE_ENCONTRARON_AREAS = "No se encontraron areas registradas.";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
+    private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
     private static final String NO_EXISTE_PERSONA_CON_DOCUMENTO = "No existe un persona con el documento ";
     private static final String NO_EXISTE_AREA_CON_IDENTIFICADOR = "No existe un área con el identificador ";
@@ -46,11 +47,21 @@ public class Mensajes {
     private static final String NO_EXISTE_TIPO_IDENTIFICACION_CON_IDENTIFICADOR = "No existe un tipo identificacion con el identificador ";
     private static final String NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR = "No existe un tipo usuario con el identificador ";
 
+    public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
+    public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
+    public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";
+    public static final String USUARIO_O_CLAVE_INCORRECTO = "El usuario o la contraseña no son validos.";
+
+
     private Mensajes() {
     }
 
     public static String obtenerNoExisteUsuarioConId(UUID identificador) {
         return NO_EXISTE_USUARIO_CON_IDENTIFICADOR + identificador;
+    }
+
+    public static String obtenerNoExistePersonaConCorreo(String correo) {
+        return NO_EXISTE_PERSONA_CON_CORREO + correo;
     }
 
     public static String obtenerNoExisteUsuarioConCorreo(String correo) {
@@ -79,6 +90,10 @@ public class Mensajes {
 
     public static String obtenerNoExisteTipoUsuarioConId(UUID identificador) {
         return NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR + identificador;
+    }
+
+    public static String getUserWasSuccessfullyAuthenticatedAndHasTheRoles(String name, String role) {
+        return "Usuario " + name + " fue autenticado exitosamente y tiene el rol de: " + role;
     }
 
 }

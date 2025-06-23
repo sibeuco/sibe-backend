@@ -13,25 +13,19 @@ public class UsuarioDTO {
     private String correo;
     private TipoUsuarioDTO tipoUsuario;
     private boolean estaActivo;
-    private AreaDTO area;
-    private PersonaDTO persona;
 
     public UsuarioDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
         setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuarioDTO.obtenerValorDefecto());
         setEstaActivo(false);
-        setArea(AreaDTO.obtenerValorDefecto());
-        setPersona(PersonaDTO.obtenerValorDefecto());
     }
 
-    public UsuarioDTO(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario, boolean estaActivo, AreaDTO area, PersonaDTO persona){
+    public UsuarioDTO(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario, boolean estaActivo){
         setIdentificador(identificador);
         setCorreo(correo);
         setTipoUsuario(tipoUsuario);
         setEstaActivo(estaActivo);
-        setArea(area);
-        setPersona(persona);
     }
 
     public static UsuarioDTO obtenerValorDefecto(){
@@ -42,8 +36,8 @@ public class UsuarioDTO {
         return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
-    public static UsuarioDTO construir(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario, AreaDTO area, PersonaDTO persona){
-        return new UsuarioDTO(identificador, correo, tipoUsuario, false, area, persona);
+    public static UsuarioDTO construir(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario){
+        return new UsuarioDTO(identificador, correo, tipoUsuario, false);
     }
 
     public void setIdentificador(UUID identificador) {
@@ -62,11 +56,4 @@ public class UsuarioDTO {
         this.estaActivo = estaActivo;
     }
 
-    public void setArea(AreaDTO area) {
-        this.area = AreaDTO.obtenerValorDefecto(area);
-    }
-
-    public void setPersona(PersonaDTO persona) {
-        this.persona = PersonaDTO.obtenerValorDefecto(persona);
-    }
 }

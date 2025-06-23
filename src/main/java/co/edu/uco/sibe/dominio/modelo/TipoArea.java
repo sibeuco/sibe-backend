@@ -1,9 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import java.util.UUID;
-
-import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class TipoArea {
@@ -12,26 +14,11 @@ public class TipoArea {
     private boolean gestionable;
     private int nivel;
 
-    public TipoArea(){
-        setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
-        setGestionable(gestionable);
-        setNivel(UtilNumero.getInstance().obtenerValorDefecto());
-    }
-
     private TipoArea(UUID identificador, String nombre, boolean gestionable, int nivel){
         setIdentificador(identificador);
         setNombre(nombre);
         setGestionable(gestionable);
         setNivel(nivel);
-    }
-
-    public static TipoArea obtenerValorDefecto(){
-        return new TipoArea();
-    }
-
-    public static TipoArea obtenerValorDefecto(final TipoArea tipoArea){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoArea, obtenerValorDefecto());
     }
 
     public static TipoArea construir(UUID identificador, String nombre, boolean gestionable, int nivel){

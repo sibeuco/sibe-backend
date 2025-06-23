@@ -21,7 +21,7 @@ public class UsuarioEntidad {
     @Column(length = 40, nullable = false)
     private String correo;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 100, nullable = false)
     private String contrasena;
 
     @ManyToOne
@@ -30,13 +30,5 @@ public class UsuarioEntidad {
 
     @Column(name = "esta_activo", nullable = false)
     private boolean estaActivo;
-
-    @ManyToOne
-    @JoinColumn(name = "area_o_direccion", nullable = false)
-    private AreaEntidad area;
-
-    @ManyToOne
-    @JoinColumn(name = "persona", nullable = false)
-    private PersonaEntidad persona;
 
 }

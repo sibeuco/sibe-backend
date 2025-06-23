@@ -26,7 +26,7 @@ public class ActividadMapeador {
     }
 
     public ActividadEntidad construirEntidad(Actividad actividad){
-        return new ActividadEntidad(actividad.getIdentificador(), actividad.getNombreCapacitacionOEvento(), actividad.getObjetivo(), this.colaboradorMapeador.construirEntidad(actividad.getColaborador()), this.creadorMapeador.construirEntidad(actividad.getCreador()), this.indicadorMapeador.construirEntidad(actividad.getIndicador()), actividad.getFechaCreacion(), actividad.getFechaProgramada(), actividad.getFechaRealizacion(), actividad.getHoraInicio(), actividad.getHoraFin(), this.estadoActividadMapeador.construirEntidad(actividad.getEstadoActividad()), this.areaMapeador.construirEntidad(actividad.getArea()), actividad.getRutaInsumos());
+        return new ActividadEntidad(actividad.getIdentificador(), actividad.getNombreCapacitacionOEvento(), actividad.getObjetivo(), this.colaboradorMapeador.construirEntidad(actividad.getColaborador(), ""), this.creadorMapeador.construirEntidad(actividad.getCreador(), ""), this.indicadorMapeador.construirEntidad(actividad.getIndicador()), actividad.getFechaCreacion(), actividad.getFechaProgramada(), actividad.getFechaRealizacion(), actividad.getHoraInicio(), actividad.getHoraFin(), this.estadoActividadMapeador.construirEntidad(actividad.getEstadoActividad()), this.areaMapeador.construirEntidad(actividad.getArea()), actividad.getRutaInsumos());
     }
 
 }

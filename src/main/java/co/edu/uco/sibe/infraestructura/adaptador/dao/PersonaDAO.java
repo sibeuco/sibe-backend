@@ -17,7 +17,8 @@ public interface PersonaDAO extends JpaRepository<PersonaEntidad, UUID> {
            primer_nombre,
            segundo_nombre,
            primer_apellido,
-           segundo_apellido
+           segundo_apellido,
+           correo
     FROM persona
     WHERE identificador = :identificador
     """, nativeQuery = true)
@@ -30,11 +31,26 @@ public interface PersonaDAO extends JpaRepository<PersonaEntidad, UUID> {
            primer_nombre,
            segundo_nombre,
            primer_apellido,
-           segundo_apellido
+           segundo_apellido,
+           correo
     FROM persona
     WHERE documento = :documento
     """, nativeQuery = true)
     PersonaEntidad consultarPersonaPorDocumento(String documento);
+
+    @Query(value = """
+    SELECT identificador,
+           tipo_identificacion,
+           documento,
+           primer_nombre,
+           segundo_nombre,
+           primer_apellido,
+           segundo_apellido,
+           correo
+    FROM persona
+    WHERE correo = :correo
+    """, nativeQuery = true)
+    PersonaEntidad consultarPersonaPorCorreo(String correo);
 
     @Modifying
     @Transactional
@@ -45,9 +61,10 @@ public interface PersonaDAO extends JpaRepository<PersonaEntidad, UUID> {
         primer_nombre = :primerNombre,
         segundo_nombre = :segundoNombre,
         primer_apellido = :primerApellido,
-        segundo_apellido = :segundoApellido
+        segundo_apellido = :segundoApellido,
+        correo = :correo
     WHERE identificador = :identificador
     """, nativeQuery = true)
-    void modificarPersona(UUID tipo_identificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, UUID identificador);
+    void modificarPersona(UUID tipo_identificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String Correo, UUID identificador);
 
 }
