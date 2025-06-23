@@ -23,7 +23,7 @@ public class UsuarioComandoControlador {
     private final ModificarUsuarioManejador modificarUsuarioManejador;
     private final ModificarPersonaManejador modificarPersonaManejador;
 
-    //@PreAuthorize(TextoConstante.HAS_ADMIN_CREATE_AUTHORITY)
+    @PreAuthorize(TextoConstante.HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
     public ComandoRespuesta<UUID> agregarNuevoUsuario(@RequestBody UsuarioComando usuario){
         return this.agregarNuevoUsuarioManejador.ejecutar(usuario);

@@ -25,12 +25,12 @@ public class TextoConstante {
     public static final String PERSON_ID_PATH = "/persons/{id}";
     public static final String USER_EMAIL_PATH = "/email/{email}";
 
-    public static final String USER_UPDATE_AUTHORITY = "USER_UPDATE";
-    public static final String USER_GET_AUTHORITY = "USER_READ";
-    public static final String ADMIN_DELETE_AUTHORITY = "ADMIN_DELETE";
-    public static final String ADMIN_UPDATE_AUTHORITY = "ADMIN_UPDATE";
-    public static final String ADMIN_GET_AUTHORITY = "ADMIN_READ";
-    private static final String ADMIN_CREATE_AUTHORITY = "ADMIN_CREATE";
+    public static final String USER_UPDATE_AUTHORITY = "COLABORADOR_UPDATE";
+    public static final String USER_GET_AUTHORITY = "COLABORADOR_READ";
+    public static final String ADMIN_DELETE_AUTHORITY = "ADMINISTRADOR_DIRECCION_DELETE";
+    public static final String ADMIN_UPDATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_UPDATE";
+    public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";
+    private static final String ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_CREATE";
     public static final String READ_AUTHORITY = "READ";
     public static final String CREATE_AUTHORITY = "CREATE";
     public static final String UPDATE_AUTHORITY = "UPDATE";
