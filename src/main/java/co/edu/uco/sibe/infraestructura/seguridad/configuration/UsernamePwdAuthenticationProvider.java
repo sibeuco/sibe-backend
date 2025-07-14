@@ -54,7 +54,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         var username = authentication.getName();
         var pwd = authentication.getCredentials().toString();
-        var user = usuarioDAO.consultarUsuarioPorCorreo(username);
+        var user = usuarioDAO.findByCorreo(username);
         var userDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
 
         // Check if the user exists in the database

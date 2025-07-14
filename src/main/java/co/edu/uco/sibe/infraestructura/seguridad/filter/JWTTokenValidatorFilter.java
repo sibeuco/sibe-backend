@@ -64,7 +64,7 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                         AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e) {
-                throw new BadCredentialsException(Mensajes.TOKEN_RECIBIDO_INVALIDO + " - " + e.getMessage());
+                throw new BadCredentialsException(Mensajes.TOKEN_RECIBIDO_INVALIDO);
             }
         }
         chain.doFilter(request, response);

@@ -36,7 +36,6 @@ public class TipoUsuario {
     public void setNombre(String nombre) {
         UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.NOMBRE_TIPO_USUARIO_VACIO);
         UtilTexto.getInstance().validarLongitud(nombre, 1, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(nombre, Mensajes.PATRON_NOMBRE_TIPO_USUARIO_INVALIDO);
         this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
 
     }
