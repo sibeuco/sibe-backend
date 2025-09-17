@@ -1,8 +1,8 @@
 package co.edu.uco.sibe.dominio.dto;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.time.LocalDate;
@@ -30,8 +30,8 @@ public class ActividadDTO {
 
     public ActividadDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombreCapacitacionOEvento(UtilTexto.getInstance().obtenerValorDefecto());
-        setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
+        setNombreCapacitacionOEvento(ValidadorTexto.getInstance().obtenerValorDefecto());
+        setObjetivo(ValidadorTexto.getInstance().obtenerValorDefecto());
         setColaborador(UsuarioDTO.obtenerValorDefecto());
         setCreador(UsuarioDTO.obtenerValorDefecto());
         setIndicador(IndicadorDTO.obtenerValorDefecto());
@@ -42,7 +42,7 @@ public class ActividadDTO {
         setHoraFin(UtilFecha.getInstance().obtenerHoraDefecto());
         setEstadoActividad(EstadoActividadDTO.obtenerValorDefecto());
         setArea(AreaDTO.obtenerValorDefecto());
-        setRutaInsumos(UtilTexto.getInstance().obtenerValorDefecto());
+        setRutaInsumos(ValidadorTexto.getInstance().obtenerValorDefecto());
     }
 
     public ActividadDTO(UUID identificador, String nombreCapacitacionOEvento, String objetivo, UsuarioDTO colaborador, UsuarioDTO creador, IndicadorDTO indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividadDTO estadoActividad, AreaDTO area, String rutaInsumos){
@@ -67,7 +67,7 @@ public class ActividadDTO {
     }
 
     public static ActividadDTO obtenerValorDefecto(final ActividadDTO actividad){
-        return UtilObjeto.getInstance().obtenerValorDefecto(actividad, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(actividad, obtenerValorDefecto());
     }
 
     public static ActividadDTO construir(UUID identificador, String nombreCapacitacionOEvento, String objetivo, UsuarioDTO colaborador, IndicadorDTO indicador, LocalDate fechaProgramada, AreaDTO area, String rutaInsumos){
@@ -79,11 +79,11 @@ public class ActividadDTO {
     }
 
     public void setNombreCapacitacionOEvento(String nombreCapacitacionOEvento) {
-        this.nombreCapacitacionOEvento = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreCapacitacionOEvento);
+        this.nombreCapacitacionOEvento = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreCapacitacionOEvento);
     }
 
     public void setObjetivo(String objetivo) {
-        Objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+        Objetivo = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
     }
 
     public void setColaborador(UsuarioDTO colaborador) {
@@ -127,6 +127,6 @@ public class ActividadDTO {
     }
 
     public void setRutaInsumos(String rutaInsumos) {
-        this.rutaInsumos = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(rutaInsumos);
+        this.rutaInsumos = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(rutaInsumos);
     }
 }

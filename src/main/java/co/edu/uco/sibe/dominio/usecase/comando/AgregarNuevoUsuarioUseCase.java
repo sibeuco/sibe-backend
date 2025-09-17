@@ -5,7 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public class AgregarNuevoUsuarioUseCase {
     }
 
     private void validarUsuarioExisteConCorreo(String correo) {
-        if (!UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
+        if (!ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
             throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
         }
     }

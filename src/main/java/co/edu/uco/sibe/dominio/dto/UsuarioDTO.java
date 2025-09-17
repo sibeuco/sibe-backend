@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -16,7 +16,7 @@ public class UsuarioDTO {
 
     public UsuarioDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setCorreo(UtilTexto.getInstance().obtenerValorDefecto());
+        setCorreo(ValidadorTexto.getInstance().obtenerValorDefecto());
         setTipoUsuario(TipoUsuarioDTO.obtenerValorDefecto());
         setEstaActivo(false);
     }
@@ -33,7 +33,7 @@ public class UsuarioDTO {
     }
 
     public static UsuarioDTO obtenerValorDefecto(final UsuarioDTO usuario){
-        return UtilObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(usuario, obtenerValorDefecto());
     }
 
     public static UsuarioDTO construir(UUID identificador, String correo, TipoUsuarioDTO tipoUsuario){
@@ -45,7 +45,7 @@ public class UsuarioDTO {
     }
 
     public void setCorreo(String correo) {
-        this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
+        this.correo = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
     }
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {

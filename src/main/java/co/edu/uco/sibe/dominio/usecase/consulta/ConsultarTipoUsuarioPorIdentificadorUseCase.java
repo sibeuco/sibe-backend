@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class ConsultarTipoUsuarioPorIdentificadorUseCase {
     }
 
     private void validarSiNoExisteTipoUsuarioConId(UUID identificador) {
-        if (UtilObjeto.getInstance().esNulo(this.tipoUsuarioRepositorioConsulta.consultarTipoUsuarioPorIdentificador(identificador))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.tipoUsuarioRepositorioConsulta.consultarTipoUsuarioPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteTipoUsuarioConId(identificador));
         }
     }

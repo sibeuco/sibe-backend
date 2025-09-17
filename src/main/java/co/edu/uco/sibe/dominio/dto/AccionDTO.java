@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -29,11 +29,11 @@ public class AccionDTO {
     }
 
     public void setDetalle(String detalle) {
-        this.detalle = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(detalle);
+        this.detalle = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(detalle);
     }
 
     public void setObjetivo(String objetivo) {
-        this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+        this.objetivo = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
     }
 
     public void setProyecto(ProyectoDTO proyecto) {

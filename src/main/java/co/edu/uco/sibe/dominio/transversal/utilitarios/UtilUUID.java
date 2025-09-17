@@ -11,11 +11,11 @@ public class UtilUUID {
     }
 
     public static UUID convertirAUUID(final String uuidComoTexto) {
-        return UUID.fromString(UtilTexto.getInstance().obtenerValorDefecto(uuidComoTexto, UUID_DEFECTO_TEXTO));
+        return UUID.fromString(ValidadorTexto.getInstance().obtenerValorDefecto(uuidComoTexto, UUID_DEFECTO_TEXTO));
     }
 
     public static UUID obtenerValorDefecto(final UUID valorOriginal, final UUID valorDefecto) {
-        return UtilObjeto.getInstance().obtenerValorDefecto(valorOriginal, valorDefecto);
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(valorOriginal, valorDefecto);
     }
 
     public static UUID obtenerValorDefecto() {

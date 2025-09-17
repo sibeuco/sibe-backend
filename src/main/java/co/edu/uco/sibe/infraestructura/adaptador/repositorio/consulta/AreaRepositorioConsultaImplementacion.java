@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.AreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     public AreaDTO consultarAreaPorIdentificador(UUID identificador) {
         var entidad = this.areaDAO.consultarAreaPorIdentificador(identificador);
 
-        if (UtilObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.getInstance().esNulo(entidad)){
             return null;
         }
         return this.areaMapeador.construirDTO(entidad);

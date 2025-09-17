@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -14,7 +14,7 @@ public class TemporalidadDTO {
 
     public TemporalidadDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
+        setNombre(ValidadorTexto.getInstance().obtenerValorDefecto());
     }
 
     public TemporalidadDTO(UUID identificador, String nombre){
@@ -27,7 +27,7 @@ public class TemporalidadDTO {
     }
 
     public static TemporalidadDTO obtenerValorDefecto(final TemporalidadDTO temporalidad){
-        return UtilObjeto.getInstance().obtenerValorDefecto(temporalidad, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(temporalidad, obtenerValorDefecto());
     }
 
     public static TemporalidadDTO construir(UUID identificador, String nombre){
@@ -39,6 +39,6 @@ public class TemporalidadDTO {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+        this.nombre = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 }

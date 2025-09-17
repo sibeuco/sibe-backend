@@ -30,6 +30,8 @@ public class TextoConstante {
     public static final String ADMIN_DELETE_AUTHORITY = "ADMINISTRADOR_DIRECCION_DELETE";
     public static final String ADMIN_UPDATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_UPDATE";
     public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";
+    public static final String VACIO = "";
+    public static final String NO_VERIFICADO = "unchecked";
     private static final String ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_CREATE";
     public static final String READ_AUTHORITY = "READ";
     public static final String CREATE_AUTHORITY = "CREATE";

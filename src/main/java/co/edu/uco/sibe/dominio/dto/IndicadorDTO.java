@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class IndicadorDTO {
 
     public IndicadorDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
+        setNombre(ValidadorTexto.getInstance().obtenerValorDefecto());
         setTipoIndicador(TipoIndicadorDTO.obtenerValorDefecto());
         setTemporalidad(TemporalidadDTO.obtenerValorDefecto());
         setProyecto(ProyectoDTO.obtenerValorDefecto());
@@ -39,7 +39,7 @@ public class IndicadorDTO {
     }
 
     public static IndicadorDTO obtenerValorDefecto(final IndicadorDTO indicador){
-        return UtilObjeto.getInstance().obtenerValorDefecto(indicador, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(indicador, obtenerValorDefecto());
     }
 
     public static IndicadorDTO construir(UUID identificador, String nombre, TipoIndicadorDTO tipoIndicador, TemporalidadDTO temporalidad, ProyectoDTO proyecto, PublicoInteresDTO publicoInteres){
@@ -51,7 +51,7 @@ public class IndicadorDTO {
     }
 
     private void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+        this.nombre = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 
     private void setTipoIndicador(TipoIndicadorDTO tipoIndicador) {

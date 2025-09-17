@@ -5,7 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class ModificarUsuarioUseCase {
     }
 
     private void validarSiNoExisteUsuarioConId(UUID identificador) {
-        if (UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(identificador));
         }
     }
@@ -35,7 +35,7 @@ public class ModificarUsuarioUseCase {
     private void validarQueExistaUsuarioConCorreo(Usuario usuario) {
         var usuarioExistente = this.personaRepositorioConsulta.consultarUsuarioPorCorreo(usuario.getCorreo());
 
-        if (!UtilObjeto.getInstance().esNulo(usuarioExistente) &&
+        if (!ValidadorObjeto.getInstance().esNulo(usuarioExistente) &&
                 !usuarioExistente.getIdentificador().equals(usuario.getIdentificador())) {
             throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
         }

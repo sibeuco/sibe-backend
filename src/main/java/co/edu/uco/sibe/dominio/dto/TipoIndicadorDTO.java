@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -15,8 +15,8 @@ public class TipoIndicadorDTO {
 
     public TipoIndicadorDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNaturalezaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
-        setTipologiaIndicador(UtilTexto.getInstance().obtenerValorDefecto());
+        setNaturalezaIndicador(ValidadorTexto.getInstance().obtenerValorDefecto());
+        setTipologiaIndicador(ValidadorTexto.getInstance().obtenerValorDefecto());
     }
 
     public TipoIndicadorDTO(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
@@ -30,7 +30,7 @@ public class TipoIndicadorDTO {
     }
 
     public static TipoIndicadorDTO obtenerValorDefecto(final TipoIndicadorDTO tipoIndicador){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoIndicador, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(tipoIndicador, obtenerValorDefecto());
     }
 
     public static TipoIndicadorDTO construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador){
@@ -42,10 +42,10 @@ public class TipoIndicadorDTO {
     }
 
     private void setNaturalezaIndicador(String naturalezaIndicador) {
-        this.naturalezaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(naturalezaIndicador);
+        this.naturalezaIndicador = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(naturalezaIndicador);
     }
 
     private void setTipologiaIndicador(String tipologiaIndicador) {
-        this.tipologiaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(tipologiaIndicador);
+        this.tipologiaIndicador = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(tipologiaIndicador);
     }
 }

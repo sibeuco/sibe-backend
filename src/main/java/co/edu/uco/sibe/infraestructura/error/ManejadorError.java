@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.error;
 
 import co.edu.uco.sibe.dominio.transversal.excepcion.*;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         String mensaje = exception.getMessage();
         Integer codigo = CODIGOS_ESTADO.get(excepcionNombre);
 
-        if (!UtilObjeto.getInstance().esNulo(codigo)) {
+        if (!ValidadorObjeto.getInstance().esNulo(codigo)) {
             Error error = new Error(excepcionNombre, mensaje);
             resultado = new ResponseEntity<>(error, HttpStatus.valueOf(codigo));
         } else {

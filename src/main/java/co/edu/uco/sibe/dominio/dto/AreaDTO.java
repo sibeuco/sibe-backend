@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class AreaDTO {
     }
 
     public static AreaDTO obtenerValorDefecto(final AreaDTO area){
-        return UtilObjeto.getInstance().obtenerValorDefecto(area, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(area, obtenerValorDefecto());
 
     }
 
@@ -42,7 +42,7 @@ public class AreaDTO {
     }
 
     public void setNombreArea(String nombreArea) {
-        this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
+        this.nombreArea = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
     }
 
     public void setTipoArea(TipoAreaDTO tipoArea) {

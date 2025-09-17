@@ -1,13 +1,10 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.PersonaDTO;
-import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-
-import java.util.UUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 public class ConsultarPersonaPorDocumentoUseCase {
 
@@ -25,7 +22,7 @@ public class ConsultarPersonaPorDocumentoUseCase {
     }
 
     private void validarSiNoExistePersonaConDocumento(String documento) {
-        if (UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(documento))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(documento))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConDocumento(documento));
         }
     }

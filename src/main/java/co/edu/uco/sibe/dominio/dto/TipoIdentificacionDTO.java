@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -15,8 +15,8 @@ public class TipoIdentificacionDTO {
 
     public TipoIdentificacionDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setSigla(UtilTexto.getInstance().obtenerValorDefecto());
-        setDescripcion(UtilTexto.getInstance().obtenerValorDefecto());
+        setSigla(ValidadorTexto.getInstance().obtenerValorDefecto());
+        setDescripcion(ValidadorTexto.getInstance().obtenerValorDefecto());
     }
 
     public TipoIdentificacionDTO(UUID identificador, String sigla, String descripcion){
@@ -30,7 +30,7 @@ public class TipoIdentificacionDTO {
     }
 
     public static TipoIdentificacionDTO obtenerValorDefecto(final TipoIdentificacionDTO tipoIdentificacion){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoIdentificacion, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(tipoIdentificacion, obtenerValorDefecto());
     }
 
     public static TipoIdentificacionDTO construir(UUID identificador, String sigla, String descripcion){
@@ -42,10 +42,10 @@ public class TipoIdentificacionDTO {
     }
 
     private void setSigla(String sigla) {
-        this.sigla = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(sigla);
+        this.sigla = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(sigla);
     }
 
     private void setDescripcion(String descripcion) {
-        this.descripcion = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(descripcion);
+        this.descripcion = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(descripcion);
     }
 }

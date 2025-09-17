@@ -1,8 +1,8 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -17,9 +17,9 @@ public class TipoAreaDTO {
 
     public TipoAreaDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
+        setNombre(ValidadorTexto.getInstance().obtenerValorDefecto());
         setGestionable(gestionable);
-        setNivel(UtilNumero.getInstance().obtenerValorDefecto());
+        setNivel(ValidadorNumero.getInstance().obtenerValorDefecto());
     }
 
     public TipoAreaDTO(UUID identificador, String nombre, boolean gestionable, int nivel){
@@ -34,7 +34,7 @@ public class TipoAreaDTO {
     }
 
     public static TipoAreaDTO obtenerValorDefecto(final TipoAreaDTO tipoArea){
-        return UtilObjeto.getInstance().obtenerValorDefecto(tipoArea, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(tipoArea, obtenerValorDefecto());
     }
 
     public static TipoAreaDTO construir(UUID identificador, String nombre, boolean gestionable, int nivel){
@@ -46,7 +46,7 @@ public class TipoAreaDTO {
     }
 
     private void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+        this.nombre = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 
     private void setGestionable(boolean gestionable) {
@@ -54,6 +54,6 @@ public class TipoAreaDTO {
     }
 
     private void setNivel(int nivel) {
-        this.nivel = UtilNumero.getInstance().obtenerValorDefecto(nivel);
+        this.nivel = ValidadorNumero.getInstance().obtenerValorDefecto(nivel);
     }
 }

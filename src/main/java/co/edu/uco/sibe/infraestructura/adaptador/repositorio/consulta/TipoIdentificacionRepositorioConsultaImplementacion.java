@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoIdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoIdentificacionMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
     @Override
     public TipoIdentificacionDTO consultarTipoIdentificacionPorIdentificador(UUID identificador) {
         var entidad = this.tipoIdentificacionDAO.consultarTipoIdentificacionPorIdentificador(identificador);
-        if (UtilObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.getInstance().esNulo(entidad)){
             return null;
         }
 

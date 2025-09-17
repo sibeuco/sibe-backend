@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.dto.TipoAreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoAreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class ConsultarTipoAreaPorIdentificadorUseCase {
     }
 
     private void validarSiNoExisteTipoAreaConId(UUID identificador) {
-        if (UtilObjeto.getInstance().esNulo(this.tipoAreaRepositorioConsulta.consultarTipoAreaPorIdentificador(identificador))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.tipoAreaRepositorioConsulta.consultarTipoAreaPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteTipoAreaConId(identificador));
         }
     }

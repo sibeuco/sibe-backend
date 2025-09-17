@@ -6,7 +6,7 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -58,7 +58,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
         var userDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
 
         // Check if the user exists in the database
-        if(!UtilObjeto.getInstance().esNulo(user)) {
+        if(!ValidadorObjeto.getInstance().esNulo(user)) {
             // Validate the password using the encryption service
             if (this.encriptarClaveServicio.existe(pwd, user.getContrasena())) {
                 // Build the Authentication object with authorities

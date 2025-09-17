@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 
 import java.util.UUID;
@@ -16,9 +16,9 @@ public class ProyectoDTO {
 
     public ProyectoDTO(){
         setIdentificador(UtilUUID.obtenerValorDefecto());
-        setNumeroProyecto(UtilTexto.getInstance().obtenerValorDefecto());
-        setNombre(UtilTexto.getInstance().obtenerValorDefecto());
-        setObjetivo(UtilTexto.getInstance().obtenerValorDefecto());
+        setNumeroProyecto(ValidadorTexto.getInstance().obtenerValorDefecto());
+        setNombre(ValidadorTexto.getInstance().obtenerValorDefecto());
+        setObjetivo(ValidadorTexto.getInstance().obtenerValorDefecto());
     }
 
     public ProyectoDTO(UUID identificador, String numeroProyecto, String nombre, String objetivo){
@@ -33,7 +33,7 @@ public class ProyectoDTO {
     }
 
     public static ProyectoDTO obtenerValorDefecto(final ProyectoDTO proyecto){
-        return UtilObjeto.getInstance().obtenerValorDefecto(proyecto, obtenerValorDefecto());
+        return ValidadorObjeto.getInstance().obtenerValorDefecto(proyecto, obtenerValorDefecto());
     }
 
     public static ProyectoDTO construir(UUID identificador, String numeroProyecto, String nombre, String objetivo){
@@ -45,14 +45,14 @@ public class ProyectoDTO {
     }
 
     public void setNumeroProyecto(String numeroProyecto) {
-        this.numeroProyecto = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(numeroProyecto);
+        this.numeroProyecto = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(numeroProyecto);
     }
 
     public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+        this.nombre = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
     }
 
     public void setObjetivo(String objetivo) {
-        this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+        this.objetivo = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
     }
 }

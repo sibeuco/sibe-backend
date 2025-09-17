@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.TipoAreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoAreaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoAreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoAreaMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class TipoAreaRepositorioConsultaImplementacion implements TipoAreaReposi
     @Override
     public TipoAreaDTO consultarTipoAreaPorIdentificador(UUID identificador) {
         var entidad = this.tipoAreaDAO.consultarTipoAreaPorIdentificador(identificador);
-        if (UtilObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.getInstance().esNulo(entidad)){
             return null;
         }
         return this.tipoAreaMapeador.construirDTO(entidad);

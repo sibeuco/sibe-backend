@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.transversal.constante;
 public class NumeroConstante {
 
     public static final int NEGATIVE_ONE = -1;
-    public static final int ZERO = 0;
+    public static final int CERO = 0;
     public static final int ONE = 1;
     public static final int SIX = 6;
     public static final int SEVEN = 7;

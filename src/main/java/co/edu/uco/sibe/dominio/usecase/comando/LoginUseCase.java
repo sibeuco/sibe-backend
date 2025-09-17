@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class LoginUseCase {
     }
 
     private void validarSiNoExisteUsuarioConCorreo(String email) {
-        if (UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(email))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(email))) {
             throw new AuthorizationException(Mensajes.USUARIO_O_CLAVE_INCORRECTO);
         }
     }

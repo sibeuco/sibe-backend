@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
@@ -60,7 +60,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public UUID modificarContrasena(String nuevaContrasena, UUID identificador) {
         var usuarioEntidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
 
-        assert !UtilObjeto.getInstance().esNulo(usuarioEntidad);
+        assert !ValidadorObjeto.getInstance().esNulo(usuarioEntidad);
         this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
 
         return this.usuarioDAO.save(usuarioEntidad).getIdentificador();

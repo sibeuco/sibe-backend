@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.dto.PersonaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class ConsultarPersonaPorIdentificadorUseCase {
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
-        if (UtilObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
         }
     }
