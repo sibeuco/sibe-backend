@@ -1,42 +1,54 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
+import java.util.List;
 import java.util.UUID;
 
-@Getter
 public class Proyecto {
     private UUID identificador;
     private String numeroProyecto;
     private String nombre;
-    private String objetivo;
+    private List<Accion> acciones;
 
-    private Proyecto(String numeroProyecto, String nombre, String objetivo){
-        setIdentificador();
+    private Proyecto(UUID identificador, String numeroProyecto, String nombre, List<Accion> acciones) {
+        setIdentificador(identificador);
         setNumeroProyecto(numeroProyecto);
         setNombre(nombre);
-        setObjetivo(objetivo);
+        setAcciones(acciones);
     }
 
-    public static Proyecto construir(String numeroProyecto, String nombre, String objetivo){
-        return new Proyecto(numeroProyecto, nombre, objetivo);
+    public static Proyecto construir(UUID identificador, String numeroProyecto, String nombre, List<Accion> acciones) {
+        return new Proyecto(identificador, numeroProyecto, nombre, acciones);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNumeroProyecto(String numeroProyecto) {
-        this.numeroProyecto = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(numeroProyecto);
+    public String getNumeroProyecto() {
+        return numeroProyecto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+    public List<Accion> getAcciones() {
+        return acciones;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNumeroProyecto(String numeroProyecto) {
+        this.numeroProyecto = numeroProyecto;
+    }
+
+    private void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    private void setAcciones(List<Accion> acciones) {
+        this.acciones = acciones;
     }
 }

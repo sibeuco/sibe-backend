@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
-import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
 import org.springframework.stereotype.Component;
 

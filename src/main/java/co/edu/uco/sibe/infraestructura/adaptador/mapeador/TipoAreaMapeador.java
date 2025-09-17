@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.TipoAreaDTO;
-import co.edu.uco.sibe.dominio.modelo.TipoArea;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoAreaEntidad;
 import org.springframework.stereotype.Component;
 

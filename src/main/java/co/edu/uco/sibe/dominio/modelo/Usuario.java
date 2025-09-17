@@ -1,54 +1,63 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class Usuario {
     private UUID identificador;
     private String correo;
-    private String contrasena;
+    private String clave;
     private TipoUsuario tipoUsuario;
-    private boolean estaActivo;
+    private Boolean estaActivo;
 
-    private Usuario(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario, boolean estaActivo) {
+    private Usuario(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, Boolean estaActivo) {
         setIdentificador(identificador);
         setCorreo(correo);
-        setContrasena(contrasena);
+        setClave(clave);
         setTipoUsuario(tipoUsuario);
         setEstaActivo(estaActivo);
     }
 
-    public static Usuario construir(UUID identificador, String correo, String contrasena, TipoUsuario tipoUsuario) {
-        return new Usuario(identificador, correo, contrasena, tipoUsuario, true);
+    public static Usuario construir(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, Boolean estaActivo) {
+        return new Usuario(identificador, correo, clave, tipoUsuario, estaActivo);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setCorreo(String correo) {
-        UtilTexto.getInstance().validarObligatorio(correo, Mensajes.CORREO_USUARIO_VACIO);
-        UtilTexto.getInstance().validarCorreoEsValido(correo, Mensajes.PATRON_CORREO_INVALIDO);
-        this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setContrasena(String contrasena) {
-        UtilTexto.getInstance().validarObligatorio(contrasena, Mensajes.CONTRASENA_VACIA);
-        UtilTexto.getInstance().validarContrasenaEsValida(contrasena, Mensajes.PATRON_CONTRASENA_INVALIDO);
-        this.contrasena = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(contrasena);
+    public String getClave() {
+        return clave;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    private void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    private void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public void setEstaActivo(boolean estaActivo) {
+    private void setEstaActivo(Boolean estaActivo) {
         this.estaActivo = estaActivo;
     }
-
 }

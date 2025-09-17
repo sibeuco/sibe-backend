@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 
-import co.edu.uco.sibe.dominio.modelo.TipoArea;
 import co.edu.uco.sibe.dominio.puerto.comando.TipoAreaRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoAreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoAreaMapeador;

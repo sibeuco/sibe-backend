@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.TemporalidadDTO;
-import co.edu.uco.sibe.dominio.modelo.Temporalidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TemporalidadEntidad;
 import org.springframework.stereotype.Component;
 

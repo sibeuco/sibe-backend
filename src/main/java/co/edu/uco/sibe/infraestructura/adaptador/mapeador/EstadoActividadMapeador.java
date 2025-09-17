@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.EstadoActividadDTO;
-import co.edu.uco.sibe.dominio.modelo.EstadoActividad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.EstadoActividadEntidad;
 import org.springframework.stereotype.Component;
 

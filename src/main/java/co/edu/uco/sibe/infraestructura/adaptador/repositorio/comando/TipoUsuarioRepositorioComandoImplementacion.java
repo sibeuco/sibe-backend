@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 
-import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.puerto.comando.TipoUsuarioRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoUsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoUsuarioMapeador;

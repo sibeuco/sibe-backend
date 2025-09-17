@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.VinculoDTO;
-import co.edu.uco.sibe.dominio.modelo.Vinculo;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.VinculoEntidad;
 import org.springframework.stereotype.Component;
 

@@ -1,36 +1,43 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class TipoIndicador {
     private UUID identificador;
     private String naturalezaIndicador;
     private String tipologiaIndicador;
 
-    private TipoIndicador(String naturalezaIndicador, String tipologiaIndicador){
-        setIdentificador();
+    private TipoIndicador(UUID identificador, String naturalezaIndicador, String tipologiaIndicador) {
+        setIdentificador(identificador);
         setNaturalezaIndicador(naturalezaIndicador);
         setTipologiaIndicador(tipologiaIndicador);
     }
 
-    public static TipoIndicador construir(String naturalezaIndicador, String tipologiaIndicador){
-        return new TipoIndicador(naturalezaIndicador, tipologiaIndicador);
+    public static TipoIndicador construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador) {
+        return new TipoIndicador(identificador, naturalezaIndicador, tipologiaIndicador);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNaturalezaIndicador(String naturalezaIndicador) {
-        this.naturalezaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(naturalezaIndicador);
+    public String getNaturalezaIndicador() {
+        return naturalezaIndicador;
     }
 
-    public void setTipologiaIndicador(String tipologiaIndicador) {
-        this.tipologiaIndicador = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(tipologiaIndicador);
+    public String getTipologiaIndicador() {
+        return tipologiaIndicador;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNaturalezaIndicador(String naturalezaIndicador) {
+        this.naturalezaIndicador = naturalezaIndicador;
+    }
+
+    private void setTipologiaIndicador(String tipologiaIndicador) {
+        this.tipologiaIndicador = tipologiaIndicador;
     }
 }

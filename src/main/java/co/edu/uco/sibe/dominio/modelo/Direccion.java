@@ -3,21 +3,21 @@ package co.edu.uco.sibe.dominio.modelo;
 import java.util.List;
 import java.util.UUID;
 
-public class Area {
+public class Direccion {
     private UUID identificador;
     private String nombre;
-    private List<Subarea> subareas;
+    private List<Area> areas;
     private List<Actividad> actividades;
 
-    private Area(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
+    private Direccion(UUID identificador, String nombre, List<Area> areas, List<Actividad> actividades) {
         setIdentificador(identificador);
         setNombre(nombre);
-        setSubareas(subareas);
+        setAreas(areas);
         setActividades(actividades);
     }
 
-    public static Area construir(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
-        return new Area(identificador, nombre, subareas, actividades);
+    public static Direccion construir(UUID identificador, String nombre, List<Area> areas, List<Actividad> actividades) {
+        return new Direccion(identificador, nombre, areas, actividades);
     }
 
     public UUID getIdentificador() {
@@ -28,8 +28,8 @@ public class Area {
         return nombre;
     }
 
-    public List<Subarea> getSubareas() {
-        return subareas;
+    public List<Area> getAreas() {
+        return areas;
     }
 
     public List<Actividad> getActividades() {
@@ -44,8 +44,8 @@ public class Area {
         this.nombre = nombre;
     }
 
-    private void setSubareas(List<Subarea> subareas) {
-        this.subareas = subareas;
+    private void setAreas(List<Area> areas) {
+        this.areas = areas;
     }
 
     private void setActividades(List<Actividad> actividades) {

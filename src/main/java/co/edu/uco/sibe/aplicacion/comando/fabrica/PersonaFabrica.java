@@ -3,8 +3,6 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
 import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
-import co.edu.uco.sibe.dominio.modelo.Persona;
-import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;

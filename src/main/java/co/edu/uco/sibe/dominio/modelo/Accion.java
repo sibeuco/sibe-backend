@@ -1,42 +1,43 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-
 import java.util.UUID;
-import lombok.Getter;
 
-@Getter
 public class Accion {
     private UUID identificador;
     private String detalle;
     private String objetivo;
-    private Proyecto proyecto;
 
-    private Accion(String detalle, String objetivo, Proyecto proyecto) {
-        setIdentificador();
+    private Accion(UUID identificador, String detalle, String objetivo) {
+        setIdentificador(identificador);
         setDetalle(detalle);
         setObjetivo(objetivo);
-        setProyecto(proyecto);
     }
 
-    public static Accion construir(String detalle, String objetivo, Proyecto proyecto){
-        return new Accion(detalle, objetivo, proyecto);
+    public static Accion construir(UUID identificador, String detalle, String objetivo) {
+        return new Accion(identificador, detalle, objetivo);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(detalle);
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+    public String getObjetivo() {
+        return objetivo;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    private void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
     }
 }

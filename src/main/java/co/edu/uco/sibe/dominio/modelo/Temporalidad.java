@@ -1,30 +1,33 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class Temporalidad {
     private UUID identificador;
     private String nombre;
 
-    private Temporalidad(String nombre){
-        setIdentificador();
+    private Temporalidad(UUID identificador, String nombre) {
+        setIdentificador(identificador);
         setNombre(nombre);
     }
 
-    public static Temporalidad construir(String nombre){
-        return new Temporalidad(nombre);
+    public static Temporalidad construir(UUID identificador, String nombre) {
+        return new Temporalidad(identificador, nombre);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+    public String getNombre() {
+        return nombre;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

@@ -1,80 +1,63 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class Persona {
     private UUID identificador;
-    private TipoIdentificacion tipoIdentificacion;
-    private String documento;
-    private String primerNombre;
-    private String segundoNombre;
-    private String primerApellido;
-    private String segundoApellido;
+    private String nombres;
+    private String apellidos;
     private String correo;
+    private Identificacion identificacion;
 
-    private Persona(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo) {
+    private Persona(UUID identificador, String nombres, String apellidos, String correo, Identificacion identificacion) {
         setIdentificador(identificador);
-        setTipoIdentificacion(tipoIdentificacion);
-        setDocumento(documento);
-        setPrimerNombre(primerNombre);
-        setSegundoNombre(segundoNombre);
-        setPrimerApellido(primerApellido);
-        setSegundoApellido(segundoApellido);
+        setNombres(nombres);
+        setApellidos(apellidos);
         setCorreo(correo);
-    }
-    public static Persona construir(UUID identificador, TipoIdentificacion tipoIdentificacion, String documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo){
-        return new Persona(identificador, tipoIdentificacion, documento, primerNombre, segundoNombre, primerApellido, segundoApellido, correo);
+        setIdentificacion(identificacion);
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public static Persona construir(UUID identificador, String nombres, String apellidos, String correo, Identificacion identificacion) {
+        return new Persona(identificador, nombres, apellidos, correo, identificacion);
     }
 
-    public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setDocumento(String documento) {
-        UtilTexto.getInstance().validarObligatorio(documento, Mensajes.DOCUMENTO_PERSONA_VACIO);
-        UtilTexto.getInstance().validarPatronDocumentoEsValido(documento, Mensajes.PATRON_DOCUMENTO_PERSONA_INVALIDO);
-        this.documento = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(documento);
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setPrimerNombre(String primerNombre) {
-        UtilTexto.getInstance().validarObligatorio(primerNombre, Mensajes.PRIMER_NOMBRE_PERSONA_VACIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(primerNombre, Mensajes.PATRON_NOMBRE_PERSONA_INVALIDO);
-        UtilTexto.getInstance().validarLongitud(primerNombre, 1, 20, Mensajes.LONGITUD_NOMBRE_PERSONA_INVALIDA);
-        this.primerNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerNombre);
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setPrimerApellido(String primerApellido) {
-        UtilTexto.getInstance().validarObligatorio(primerApellido, Mensajes.PRIMER_APELLIDO_PERSONA_VACIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(primerApellido, Mensajes.PATRON_APELLIDO_PERSONA_INVALIDO);
-        UtilTexto.getInstance().validarLongitud(primerApellido, 1, 20, Mensajes.LONGITUD_APELLIDO_PERSONA_INVALIDA);
-        this.primerApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(primerApellido);
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setSegundoNombre(String segundoNombre) {
-        UtilTexto.getInstance().validarPatronTextoEsValido(segundoNombre, Mensajes.PATRON_NOMBRE_PERSONA_INVALIDO);
-        UtilTexto.getInstance().validarLongitudNoObligatorio(segundoNombre, 20, Mensajes.LONGITUD_SEGUNDO_NOMBRE_PERSONA_INVALIDA);
-        this.segundoNombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoNombre);
+    public Identificacion getIdentificacion() {
+        return identificacion;
     }
 
-    public void setSegundoApellido(String segundoApellido) {
-        UtilTexto.getInstance().validarPatronTextoEsValido(segundoApellido, Mensajes.PATRON_APELLIDO_PERSONA_INVALIDO);
-        UtilTexto.getInstance().validarLongitudNoObligatorio(segundoApellido, 20, Mensajes.LONGITUD_SEGUNDO_APELLIDO_PERSONA_INVALIDA);
-        this.segundoApellido = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(segundoApellido);
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
     }
 
-    public void setCorreo(String correo) {
-        UtilTexto.getInstance().validarObligatorio(correo, Mensajes.CORREO_USUARIO_VACIO);
-        UtilTexto.getInstance().validarCorreoEsValido(correo, Mensajes.PATRON_CORREO_INVALIDO);
-        this.correo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(correo);
+    private void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    private void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    private void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    private void setIdentificacion(Identificacion identificacion) {
+        this.identificacion = identificacion;
     }
 }

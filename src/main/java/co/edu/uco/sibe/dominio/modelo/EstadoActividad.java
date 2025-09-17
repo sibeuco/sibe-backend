@@ -1,30 +1,34 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class EstadoActividad {
+
     private UUID identificador;
     private String nombre;
 
-    private EstadoActividad(String nombre){
-        setIdentificador();
+    private EstadoActividad(UUID identificador, String nombre) {
+        setIdentificador(identificador);
         setNombre(nombre);
     }
 
-    public static EstadoActividad construir(String nombre){
-        return new EstadoActividad(nombre);
+    public static EstadoActividad construir(UUID identificador, String nombre) {
+        return new EstadoActividad(identificador, nombre);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+    public String getNombre() {
+        return nombre;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

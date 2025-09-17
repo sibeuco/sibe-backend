@@ -1,12 +1,7 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
 import java.util.UUID;
 
-@Getter
 public class Indicador {
     private UUID identificador;
     private String nombre;
@@ -15,8 +10,8 @@ public class Indicador {
     private Proyecto proyecto;
     private PublicoInteres publicoInteres;
 
-    private Indicador(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
-        setIdentificador();
+    private Indicador(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
+        setIdentificador(identificador);
         setNombre(nombre);
         setTipoIndicador(tipoIndicador);
         setTemporalidad(temporalidad);
@@ -24,31 +19,55 @@ public class Indicador {
         setPublicoInteres(publicoInteres);
     }
 
-    public static Indicador construir(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres){
-        return new Indicador(nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
+    public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
+        return new Indicador(identificador, nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTipoIndicador(TipoIndicador tipoIndicador) {
+    public TipoIndicador getTipoIndicador() {
+        return tipoIndicador;
+    }
+
+    public Temporalidad getTemporalidad() {
+        return temporalidad;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public PublicoInteres getPublicoInteres() {
+        return publicoInteres;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    private void setTipoIndicador(TipoIndicador tipoIndicador) {
         this.tipoIndicador = tipoIndicador;
     }
 
-    public void setTemporalidad(Temporalidad temporalidad) {
+    private void setTemporalidad(Temporalidad temporalidad) {
         this.temporalidad = temporalidad;
     }
 
-    public void setProyecto(Proyecto proyecto) {
+    private void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
 
-    public void setPublicoInteres(PublicoInteres publicoInteres) {
+    private void setPublicoInteres(PublicoInteres publicoInteres) {
         this.publicoInteres = publicoInteres;
     }
 }

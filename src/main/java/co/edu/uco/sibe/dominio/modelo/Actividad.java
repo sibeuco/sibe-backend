@@ -1,106 +1,112 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import lombok.Getter;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.UUID;
 
-@Getter
 public class Actividad {
-    private UUID identificador;
-    private String nombreCapacitacionOEvento;
-    private String Objetivo;
-    private Usuario colaborador;
-    private Usuario creador;
-    private Indicador indicador;
-    private LocalDateTime fechaCreacion;
-    private LocalDate fechaProgramada;
-    private LocalDate fechaRealizacion;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
-    private EstadoActividad estadoActividad;
-    private Area area;
-    private String rutaInsumos;
 
-    public Actividad(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Usuario creador, Indicador indicador, LocalDateTime fechaCreacion, LocalDate fechaProgramada, LocalDate fechaRealizacion, LocalTime horaInicio, LocalTime horaFin, EstadoActividad estadoActividad, Area area, String rutaInsumos){
-        setIdentificador();
-        setNombreCapacitacionOEvento(nombreCapacitacionOEvento);
+    private UUID identificador;
+    private String nombre;
+    private String objetivo;
+    private String semestre;
+    private String rutaInsumos;
+    private Indicador indicador;
+    private UUID colaborador;
+    private UUID creador;
+
+    private Actividad(
+            UUID identificador,
+            String nombre,
+            String objetivo,
+            String semestre,
+            String rutaInsumos,
+            Indicador indicador,
+            UUID colaborador,
+            UUID creador
+    ) {
+        setIdentificador(identificador);
+        setNombre(nombre);
         setObjetivo(objetivo);
+        setSemestre(semestre);
+        setRutaInsumos(rutaInsumos);
+        setIndicador(indicador);
         setColaborador(colaborador);
         setCreador(creador);
-        setIndicador(indicador);
-        setFechaCreacion(fechaCreacion);
-        setFechaProgramada(fechaProgramada);
-        setFechaRealizacion(fechaRealizacion);
-        setHoraInicio(horaInicio);
-        setHoraFin(horaFin);
-        setEstadoActividad(estadoActividad);
-        setArea(area);
-        setRutaInsumos(rutaInsumos);
     }
 
-    public static Actividad construir(String nombreCapacitacionOEvento, String objetivo, Usuario colaborador, Indicador indicador, LocalDate fechaProgramada, Area area, String rutaInsumos){
-        return new Actividad(nombreCapacitacionOEvento, objetivo, colaborador, null, indicador, UtilFecha.getInstance().obtenerHoraFechaDefecto(), fechaProgramada, UtilFecha.getInstance().obtenerFechaDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), UtilFecha.getInstance().obtenerHoraDefecto(), null, area, rutaInsumos);
+    public static Actividad construir(
+            UUID identificador,
+            String nombre,
+            String objetivo,
+            String semestre,
+            String rutaInsumos,
+            Indicador indicador,
+            UUID colaborador,
+            UUID creador
+    ) {
+        return new Actividad(identificador, nombre, objetivo, semestre, rutaInsumos, indicador, colaborador, creador);
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
+    public UUID getIdentificador() {
+        return identificador;
     }
 
-    public void setNombreCapacitacionOEvento(String nombreCapacitacionOEvento) {
-        this.nombreCapacitacionOEvento = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreCapacitacionOEvento);
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setObjetivo(String objetivo) {
-        Objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+    public String getObjetivo() {
+        return objetivo;
     }
 
-    public void setColaborador(Usuario colaborador) {
-        this.colaborador = colaborador;
+    public String getSemestre() {
+        return semestre;
     }
 
-    public void setCreador(Usuario creador) {
-        this.creador = creador;
+    public String getRutaInsumos() {
+        return rutaInsumos;
     }
 
-    public void setIndicador(Indicador indicador) {
+    public Indicador getIndicador() {
+        return indicador;
+    }
+
+    public UUID getColaborador() {
+        return colaborador;
+    }
+
+    public UUID getCreador() {
+        return creador;
+    }
+
+    private void setIdentificador(UUID identificador) {
+        this.identificador = identificador;
+    }
+
+    private void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    private void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    private void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
+    private void setRutaInsumos(String rutaInsumos) {
+        this.rutaInsumos = rutaInsumos;
+    }
+
+    private void setIndicador(Indicador indicador) {
         this.indicador = indicador;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    private void setColaborador(UUID colaborador) {
+        this.colaborador = colaborador;
     }
 
-    public void setFechaProgramada(LocalDate fechaProgramada) {
-        this.fechaProgramada = fechaProgramada;
-    }
-
-    public void setFechaRealizacion(LocalDate fechaRealizacion) {
-        this.fechaRealizacion = fechaRealizacion;
-    }
-
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
-    }
-
-    public void setEstadoActividad(EstadoActividad estadoActividad) {
-        this.estadoActividad = estadoActividad;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
-    public void setRutaInsumos(String rutaInsumos) {
-        this.rutaInsumos = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(rutaInsumos);
+    private void setCreador(UUID creador) {
+        this.creador = creador;
     }
 }

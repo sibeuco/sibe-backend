@@ -2,27 +2,27 @@ package co.edu.uco.sibe.dominio.modelo;
 
 import java.util.UUID;
 
-public class TipoIdentificacion {
+public class CentroCostos {
     private UUID identificador;
-    private String sigla;
+    private String codigo;
     private String descripcion;
 
-    private TipoIdentificacion(UUID identificador, String sigla, String descripcion) {
+    private CentroCostos(UUID identificador, String codigo, String descripcion) {
         setIdentificador(identificador);
-        setSigla(sigla);
+        setCodigo(codigo);
         setDescripcion(descripcion);
     }
 
-    public static TipoIdentificacion construir(UUID identificador, String sigla, String descripcion) {
-        return new TipoIdentificacion(identificador, sigla, descripcion);
+    public static CentroCostos construir(UUID identificador, String codigo, String descripcion) {
+        return new CentroCostos(identificador, codigo, descripcion);
     }
 
     public UUID getIdentificador() {
         return identificador;
     }
 
-    public String getSigla() {
-        return sigla;
+    public String getCodigo() {
+        return codigo;
     }
 
     public String getDescripcion() {
@@ -33,8 +33,8 @@ public class TipoIdentificacion {
         this.identificador = identificador;
     }
 
-    private void setSigla(String sigla) {
-        this.sigla = sigla;
+    private void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     private void setDescripcion(String descripcion) {

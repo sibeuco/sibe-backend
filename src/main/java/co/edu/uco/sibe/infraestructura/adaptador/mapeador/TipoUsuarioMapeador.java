@@ -1,12 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
-import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoUsuarioEntidad;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.*;
 
 @Component
 public class TipoUsuarioMapeador {

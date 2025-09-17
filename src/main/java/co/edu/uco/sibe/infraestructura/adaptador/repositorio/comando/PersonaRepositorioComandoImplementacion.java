@@ -1,7 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 
-import co.edu.uco.sibe.dominio.modelo.Persona;
-import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
