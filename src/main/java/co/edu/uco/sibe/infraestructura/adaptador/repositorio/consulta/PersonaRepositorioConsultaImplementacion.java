@@ -1,7 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
-import co.edu.uco.sibe.dominio.dto.PersonaDTO;
-import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;

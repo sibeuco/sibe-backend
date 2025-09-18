@@ -1,9 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 
 public class Actividad {
-
     private UUID identificador;
     private String nombre;
     private String objetivo;
@@ -83,18 +84,34 @@ public class Actividad {
     }
 
     private void setNombre(String nombre) {
+        ValidadorTexto.validarObligatorio(nombre, "");
+        ValidadorTexto.validarTextoValido(nombre, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+
         this.nombre = nombre;
     }
 
     private void setObjetivo(String objetivo) {
+        ValidadorTexto.validarObligatorio(objetivo, "");
+        ValidadorTexto.validarTextoValido(objetivo, "");
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 1, 50, "");
+
         this.objetivo = objetivo;
     }
 
     private void setSemestre(String semestre) {
+        ValidadorTexto.validarObligatorio(semestre, "");
+        ValidadorTexto.validarTextoValido(semestre, "");
+        ValidadorNumero.validarNumeroEntre(semestre.length(), 1, 50, "");
+
         this.semestre = semestre;
     }
 
     private void setRutaInsumos(String rutaInsumos) {
+        ValidadorTexto.validarObligatorio(rutaInsumos, "");
+        ValidadorTexto.validarTextoValido(rutaInsumos, "");
+        ValidadorNumero.validarNumeroEntre(rutaInsumos.length(), 1, 50, "");
+
         this.rutaInsumos = rutaInsumos;
     }
 

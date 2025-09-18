@@ -2,19 +2,20 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.excepcion.LongitudExcepcion;
 
 public class ValidadorNumero {
     private ValidadorNumero() { }
 
     public static <T extends Number> void validarNumeroEntre(T numero, T minimo, T maximo, String mensaje) {
         if (ValidadorObjeto.esNulo(numero) || !esNumeroEntre(numero, minimo, maximo)) {
-            throw new IllegalArgumentException(mensaje);
+            throw new LongitudExcepcion(mensaje);
         }
     }
 
     public static <T extends Number> void validarNumeroMayorOIgual(T numero, T numeroComparador, String mensaje) {
         if (!esNumeroMayorOIgual(numero, numeroComparador)) {
-            throw new IllegalStateException(mensaje);
+            throw new LongitudExcepcion(mensaje);
         }
     }
 

@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.aplicacion.consulta;
 
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorRespuesta;
-import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.usecase.consulta.ConsultarUsuariosUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

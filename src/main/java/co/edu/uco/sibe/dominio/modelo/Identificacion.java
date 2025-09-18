@@ -1,5 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Identificacion {
@@ -34,6 +38,10 @@ public class Identificacion {
     }
 
     private void setNumeroIdentificacion(String numeroIdentificacion) {
+        ValidadorTexto.validarObligatorio(numeroIdentificacion, Mensajes.DOCUMENTO_PERSONA_VACIO);
+        ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, Mensajes.PATRON_DOCUMENTO_PERSONA_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 1, 10, "");
+
         this.numeroIdentificacion = numeroIdentificacion;
     }
 

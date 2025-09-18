@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class TipoIndicador {
@@ -34,10 +37,18 @@ public class TipoIndicador {
     }
 
     private void setNaturalezaIndicador(String naturalezaIndicador) {
+        ValidadorTexto.validarObligatorio(naturalezaIndicador, "");
+        ValidadorTexto.validarTextoValido(naturalezaIndicador, "");
+        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 1, 30, "");
+
         this.naturalezaIndicador = naturalezaIndicador;
     }
 
     private void setTipologiaIndicador(String tipologiaIndicador) {
+        ValidadorTexto.validarObligatorio(tipologiaIndicador, "");
+        ValidadorTexto.validarTextoValido(tipologiaIndicador, "");
+        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 1, 30, "");
+
         this.tipologiaIndicador = tipologiaIndicador;
     }
 }

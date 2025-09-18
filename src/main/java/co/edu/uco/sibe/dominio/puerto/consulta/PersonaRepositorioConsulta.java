@@ -1,8 +1,5 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
-import co.edu.uco.sibe.dominio.dto.PersonaDTO;
-import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
-
 import java.util.List;
 import java.util.UUID;
 

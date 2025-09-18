@@ -1,5 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Persona {
@@ -46,14 +50,26 @@ public class Persona {
     }
 
     private void setNombres(String nombres) {
+        ValidadorTexto.validarObligatorio(nombres, Mensajes.PRIMER_NOMBRE_PERSONA_VACIO);
+        ValidadorTexto.validarTextoValido(nombres, Mensajes.PATRON_NOMBRE_PERSONA_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombres.length(), 1, 50, Mensajes.LONGITUD_NOMBRE_PERSONA_INVALIDA);
+
         this.nombres = nombres;
     }
 
     private void setApellidos(String apellidos) {
+        ValidadorTexto.validarObligatorio(nombres, Mensajes.PRIMER_APELLIDO_PERSONA_VACIO);
+        ValidadorTexto.validarTextoValido(nombres, Mensajes.PATRON_APELLIDO_PERSONA_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombres.length(), 1, 50, Mensajes.LONGITUD_APELLIDO_PERSONA_INVALIDA);
+
         this.apellidos = apellidos;
     }
 
     private void setCorreo(String correo) {
+        ValidadorTexto.validarObligatorio(nombres, Mensajes.CORREO_USUARIO_VACIO);
+        ValidadorTexto.validarCorreoValido(nombres, Mensajes.PATRON_CORREO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombres.length(), 1, 50, "");
+
         this.correo = correo;
     }
 

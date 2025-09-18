@@ -1,9 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class RelacionLaboral {
-
     private UUID identificador;
     private String codigo;
     private String descripcion;
@@ -35,10 +37,18 @@ public class RelacionLaboral {
     }
 
     private void setCodigo(String codigo) {
+        ValidadorTexto.validarObligatorio(codigo, "");
+        ValidadorTexto.validarTextoValido(codigo, "");
+        ValidadorNumero.validarNumeroEntre(codigo.length(), 1, 4, "");
+
         this.codigo = codigo;
     }
 
     private void setDescripcion(String descripcion) {
+        ValidadorTexto.validarObligatorio(descripcion, "");
+        ValidadorTexto.validarTextoValido(descripcion, "");
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 1, 50, "");
+
         this.descripcion = descripcion;
     }
 }

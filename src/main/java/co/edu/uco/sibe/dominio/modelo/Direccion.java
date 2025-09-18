@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +44,10 @@ public class Direccion {
     }
 
     private void setNombre(String nombre) {
+        ValidadorTexto.validarObligatorio(nombre, "");
+        ValidadorTexto.validarTextoValido(nombre, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+
         this.nombre = nombre;
     }
 

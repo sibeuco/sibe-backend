@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
-import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;

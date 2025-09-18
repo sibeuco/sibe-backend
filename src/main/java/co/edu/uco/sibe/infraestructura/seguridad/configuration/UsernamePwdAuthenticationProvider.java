@@ -1,7 +1,6 @@
 package co.edu.uco.sibe.infraestructura.seguridad.configuration;
 
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarUsuarioPorCorreoManejador;
-import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;

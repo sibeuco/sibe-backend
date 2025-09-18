@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Interno extends Miembro {
@@ -35,10 +38,18 @@ public class Interno extends Miembro {
     }
 
     private void setIdCarnet(String idCarnet) {
+        ValidadorTexto.validarObligatorio(idCarnet, "");
+        ValidadorTexto.validarTextoAlfanumericoValido(idCarnet, "");
+        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 50, "");
+
         this.idCarnet = idCarnet;
     }
 
     private void setSexo(String sexo) {
+        ValidadorTexto.validarObligatorio(sexo, "");
+        ValidadorTexto.validarTextoValido(sexo, "");
+        ValidadorNumero.validarNumeroEntre(sexo.length(), 1, 1, "");
+
         this.sexo = sexo;
     }
 }

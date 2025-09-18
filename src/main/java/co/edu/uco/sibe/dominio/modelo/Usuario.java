@@ -1,5 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Usuario {
@@ -46,10 +50,18 @@ public class Usuario {
     }
 
     private void setCorreo(String correo) {
+        ValidadorTexto.validarObligatorio(correo, Mensajes.CORREO_USUARIO_VACIO);
+        ValidadorTexto.validarCorreoValido(correo, Mensajes.PATRON_CORREO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(correo.length(), 1, 100, "");
+
         this.correo = correo;
     }
 
     private void setClave(String clave) {
+        ValidadorTexto.validarObligatorio(clave, Mensajes.CONTRASENA_VACIA);
+        ValidadorTexto.validarClaveValida(clave, Mensajes.PATRON_CONTRASENA_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(clave.length(), 1, 100, "");
+
         this.clave = clave;
     }
 

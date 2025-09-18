@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Accion {
@@ -34,10 +37,18 @@ public class Accion {
     }
 
     private void setDetalle(String detalle) {
+        ValidadorTexto.validarObligatorio(detalle, "");
+        ValidadorTexto.validarTextoValido(detalle, "");
+        ValidadorNumero.validarNumeroEntre(detalle.length(), 1, 30, "");
+
         this.detalle = detalle;
     }
 
     private void setObjetivo(String objetivo) {
+        ValidadorTexto.validarObligatorio(objetivo, "");
+        ValidadorTexto.validarTextoValido(objetivo, "");
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 1, 30, "");
+
         this.objetivo = objetivo;
     }
 }

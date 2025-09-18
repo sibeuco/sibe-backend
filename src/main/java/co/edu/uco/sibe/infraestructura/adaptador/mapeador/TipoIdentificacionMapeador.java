@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoIdentificacionEntidad;
 import org.springframework.stereotype.Component;
 

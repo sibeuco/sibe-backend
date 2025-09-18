@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
-import co.edu.uco.sibe.dominio.dto.TipoAreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoAreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;

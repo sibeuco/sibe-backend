@@ -1,14 +1,18 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class TipoUsuario {
-    UUID identificador;
-    String nombre;
-    boolean crear;
-    boolean modificar;
-    boolean eliminar;
-    boolean consultar;
+    private UUID identificador;
+    private String nombre;
+    private boolean crear;
+    private boolean modificar;
+    private boolean eliminar;
+    private boolean consultar;
 
     private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
         setIdentificador(identificador);
@@ -36,6 +40,9 @@ public class TipoUsuario {
     }
 
     private void setNombre(String nombre) {
+        ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_TIPO_USUARIO_VACIO);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
+
         this.nombre = nombre;
     }
 

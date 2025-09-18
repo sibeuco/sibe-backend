@@ -1,55 +1,22 @@
 package co.edu.uco.sibe.dominio.dto;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-
-import java.util.UUID;
+import co.edu.uco.sibe.dominio.modelo.Actividad;
+import co.edu.uco.sibe.dominio.modelo.Subarea;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+import java.util.UUID;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AreaDTO {
     private UUID identificador;
-    private String nombreArea;
-    private TipoAreaDTO tipoArea;
-    private AreaDTO areaPadre;
-
-    public AreaDTO(){
-    }
-
-    public AreaDTO(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
-        setIdentificador(identificador);
-        setNombreArea(nombreArea);
-        setTipoArea(tipoArea);
-        setAreaPadre(areaPadre);
-    }
-
-    public static AreaDTO obtenerValorDefecto(){
-        return new AreaDTO();
-    }
-
-    public static AreaDTO obtenerValorDefecto(final AreaDTO area){
-        return ValidadorObjeto.getInstance().obtenerValorDefecto(area, obtenerValorDefecto());
-
-    }
-
-    public static AreaDTO construir(UUID identificador, String nombreArea, TipoAreaDTO tipoArea, AreaDTO areaPadre){
-        return new AreaDTO(identificador, nombreArea, tipoArea, areaPadre);
-    }
-
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
-    }
-
-    public void setNombreArea(String nombreArea) {
-        this.nombreArea = ValidadorTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
-    }
-
-    public void setTipoArea(TipoAreaDTO tipoArea) {
-        this.tipoArea = TipoAreaDTO.obtenerValorDefecto(tipoArea);
-    }
-
-    public void setAreaPadre(AreaDTO areaPadre) {
-        this.areaPadre = areaPadre;
-    }
+    private String nombre;
+    private List<SubareaDTO> subareas;
+    private List<ActividadDTO> actividades;
 }

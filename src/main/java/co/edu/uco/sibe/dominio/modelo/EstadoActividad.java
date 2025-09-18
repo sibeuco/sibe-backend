@@ -1,9 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class EstadoActividad {
-
     private UUID identificador;
     private String nombre;
 
@@ -29,6 +31,10 @@ public class EstadoActividad {
     }
 
     private void setNombre(String nombre) {
+        ValidadorTexto.validarObligatorio(nombre, "");
+        ValidadorTexto.validarTextoValido(nombre, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 30, "");
+
         this.nombre = nombre;
     }
 }

@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+
 import java.util.UUID;
 
 public class Miembro {
@@ -34,10 +37,18 @@ public class Miembro {
     }
 
     private void setNombreCompleto(String nombreCompleto) {
+        ValidadorTexto.validarObligatorio(nombreCompleto, "");
+        ValidadorTexto.validarTextoValido(nombreCompleto, "");
+        ValidadorNumero.validarNumeroEntre(nombreCompleto.length(), 1, 30, "");
+
         this.nombreCompleto = nombreCompleto;
     }
 
     private void setNumeroIdentificacion(String numeroIdentificacion) {
+        ValidadorTexto.validarObligatorio(numeroIdentificacion, "");
+        ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, "");
+        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 1, 10, "");
+
         this.numeroIdentificacion = numeroIdentificacion;
     }
 }
