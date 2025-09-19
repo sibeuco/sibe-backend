@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -18,6 +17,6 @@ public class PublicoInteresEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 30, nullable = false)
     private String nombre;
 }

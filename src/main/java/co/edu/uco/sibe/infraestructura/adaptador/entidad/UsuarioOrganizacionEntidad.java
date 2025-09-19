@@ -12,34 +12,14 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "actividad")
-public class ActividadEntidad {
+@Table(name = "usuario_organizacion")
+public class UsuarioOrganizacionEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 30, nullable = false)
-    private String nombre;
-
-    @Column(length = 30, nullable = false)
-    private String objetivo;
-
-    @Column(length = 30, nullable = false)
-    private String semestre;
-
-    @Column(name = "ruta_insumos", length = 30, nullable = false)
-    private String rutaInsumos;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "indicador", nullable = false)
-    private IndicadorEntidad indicador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "colaborador", nullable = false)
-    private ColaboradorEntidad colaborador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "creador", nullable = false)
-    private UsuarioEntidad creador;
+    @JoinColumn(name = "usuario", nullable = false)
+    private UsuarioEntidad usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "direccion", nullable = false)

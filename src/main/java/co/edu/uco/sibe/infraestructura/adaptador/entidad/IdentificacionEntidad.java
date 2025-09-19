@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -13,17 +12,11 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tipo_area")
-public class TipoAreaEntidad {
+@Table(name = "identificacion")
+public class IdentificacionEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 25, nullable = false)
-    private String nombre;
-
-    @Column(nullable = false)
-    private boolean gestionable;
-
-    @Column(nullable = false)
-    private int nivel;
+    @Column(name = "numero_identificacion", length = 20, nullable = false)
+    private String numeroIdentificacion;
 }

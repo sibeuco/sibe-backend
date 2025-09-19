@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoAreaEntidad;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

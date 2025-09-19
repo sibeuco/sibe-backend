@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.dao;
 
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.PersonaEntidad;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

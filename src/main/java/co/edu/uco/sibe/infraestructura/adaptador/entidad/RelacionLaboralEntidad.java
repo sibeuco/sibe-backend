@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -13,11 +12,14 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vinculo")
-public class VinculoEntidad {
+@Table(name = "relacion_laboral")
+public class RelacionLaboralEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 30, nullable = false)
-    private String nombre;
+    @Column(length = 100, nullable = false)
+    private String codigo;
+
+    @Column(length = 100, nullable = false)
+    private String descripcion;
 }

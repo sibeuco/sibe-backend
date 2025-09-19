@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -18,9 +17,9 @@ public class TipoIndicadorEntidad {
     @Id
     private UUID identificador;
 
-    @Column(name = "naturaleza_indicador", length = 40, nullable = false)
-    private String naturalezaIndicador;
+    @Column(length = 100, nullable = false)
+    private String naturaleza;
 
-    @Column(name = "tipologia_indicador", length = 40, nullable = false)
+    @Column(name = "tipologia_indicador", length = 100, nullable = false)
     private String tipologiaIndicador;
 }

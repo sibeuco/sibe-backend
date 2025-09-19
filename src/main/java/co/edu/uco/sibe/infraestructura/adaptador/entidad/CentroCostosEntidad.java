@@ -12,14 +12,14 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "proyecto")
-public class ProyectoEntidad {
+@Table(name = "centro_costos")
+public class CentroCostosEntidad {
     @Id
     private UUID identificador;
 
-    @Column(name = "numero_proyecto", length = 30, nullable = false)
-    private String numeroProyecto;
+    @Column(length = 100, nullable = false)
+    private String codigo;
 
     @Column(length = 100, nullable = false)
-    private String nombre;
+    private String descripcion;
 }
