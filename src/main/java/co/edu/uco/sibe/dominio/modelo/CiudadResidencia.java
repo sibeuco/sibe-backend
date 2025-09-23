@@ -33,7 +33,7 @@ public class CiudadResidencia {
     private void setDescripcion(String descripcion) {
         ValidadorTexto.validarObligatorio(descripcion, "");
         ValidadorTexto.validarTextoValido(descripcion, "");
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 3, 30, "");
 
         this.descripcion = descripcion;
     }

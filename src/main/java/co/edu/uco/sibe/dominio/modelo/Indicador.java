@@ -57,7 +57,7 @@ public class Indicador {
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, "");
         ValidadorTexto.validarTextoAlfanumericoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, "");
 
         this.nombre = nombre;
     }

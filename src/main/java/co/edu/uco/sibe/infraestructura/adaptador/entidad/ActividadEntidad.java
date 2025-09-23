@@ -35,7 +35,7 @@ public class ActividadEntidad {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "colaborador", nullable = false)
-    private ColaboradorEntidad colaborador;
+    private UsuarioEntidad colaborador;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "creador", nullable = false)

@@ -39,7 +39,7 @@ public class Accion {
     private void setDetalle(String detalle) {
         ValidadorTexto.validarObligatorio(detalle, "");
         ValidadorTexto.validarTextoValido(detalle, "");
-        ValidadorNumero.validarNumeroEntre(detalle.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(detalle.length(), 10, 500, "");
 
         this.detalle = detalle;
     }
@@ -47,7 +47,7 @@ public class Accion {
     private void setObjetivo(String objetivo) {
         ValidadorTexto.validarObligatorio(objetivo, "");
         ValidadorTexto.validarTextoValido(objetivo, "");
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, "");
 
         this.objetivo = objetivo;
     }

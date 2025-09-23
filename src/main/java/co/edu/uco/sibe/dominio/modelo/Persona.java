@@ -68,7 +68,7 @@ public class Persona {
     private void setCorreo(String correo) {
         ValidadorTexto.validarObligatorio(nombres, Mensajes.CORREO_USUARIO_VACIO);
         ValidadorTexto.validarCorreoValido(nombres, Mensajes.PATRON_CORREO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombres.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nombres.length(), 10, 100, "");
 
         this.correo = correo;
     }

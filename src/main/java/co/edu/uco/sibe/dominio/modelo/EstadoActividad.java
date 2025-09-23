@@ -33,7 +33,7 @@ public class EstadoActividad {
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, "");
         ValidadorTexto.validarTextoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 5, 15, "");
 
         this.nombre = nombre;
     }

@@ -10,7 +10,6 @@ public class Estudiante extends Interno {
     private LocalDate fechaNacimiento;
     private String nacionalidad;
     private String estadoCivil;
-    private String direccion;
     private String correoPersonal;
     private String correoInstitucional;
     private String programaAcademico;
@@ -21,7 +20,7 @@ public class Estudiante extends Interno {
     private float promedioGeneral;
     private String estadoAcademico;
     private String modalidadEstudio;
-    private String tiempoLlegadaUniversidad;
+    private int tiempoLlegadaUniversidad;
     private String medioTransporte;
 
     private Estudiante(
@@ -34,7 +33,6 @@ public class Estudiante extends Interno {
             LocalDate fechaNacimiento,
             String nacionalidad,
             String estadoCivil,
-            String direccion,
             String correoPersonal,
             String correoInstitucional,
             String programaAcademico,
@@ -45,14 +43,13 @@ public class Estudiante extends Interno {
             float promedioGeneral,
             String estadoAcademico,
             String modalidadEstudio,
-            String tiempoLlegadaUniversidad,
+            int tiempoLlegadaUniversidad,
             String medioTransporte
     ) {
         super(identificador, nombreCompleto, numeroIdentificacion, ciudadResidencia, idCarnet, sexo);
         setFechaNacimiento(fechaNacimiento);
         setNacionalidad(nacionalidad);
         setEstadoCivil(estadoCivil);
-        setDireccion(direccion);
         setCorreoPersonal(correoPersonal);
         setCorreoInstitucional(correoInstitucional);
         setProgramaAcademico(programaAcademico);
@@ -77,7 +74,6 @@ public class Estudiante extends Interno {
             LocalDate fechaNacimiento,
             String nacionalidad,
             String estadoCivil,
-            String direccion,
             String correoPersonal,
             String correoInstitucional,
             String programaAcademico,
@@ -88,7 +84,7 @@ public class Estudiante extends Interno {
             float promedioGeneral,
             String estadoAcademico,
             String modalidadEstudio,
-            String tiempoLlegadaUniversidad,
+            int tiempoLlegadaUniversidad,
             String medioTransporte
     ) {
         return new Estudiante(
@@ -101,7 +97,6 @@ public class Estudiante extends Interno {
                 fechaNacimiento,
                 nacionalidad,
                 estadoCivil,
-                direccion,
                 correoPersonal,
                 correoInstitucional,
                 programaAcademico,
@@ -127,10 +122,6 @@ public class Estudiante extends Interno {
 
     public String getEstadoCivil() {
         return estadoCivil;
-    }
-
-    public String getDireccion() {
-        return direccion;
     }
 
     public String getCorreoPersonal() {
@@ -173,7 +164,7 @@ public class Estudiante extends Interno {
         return modalidadEstudio;
     }
 
-    public String getTiempoLlegadaUniversidad() {
+    public int getTiempoLlegadaUniversidad() {
         return tiempoLlegadaUniversidad;
     }
 
@@ -188,7 +179,7 @@ public class Estudiante extends Interno {
     private void setNacionalidad(String nacionalidad) {
         ValidadorTexto.validarObligatorio(nacionalidad, "");
         ValidadorTexto.validarTextoValido(nacionalidad, "");
-        ValidadorNumero.validarNumeroEntre(nacionalidad.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nacionalidad.length(), 4, 50, "");
 
         this.nacionalidad = nacionalidad;
     }
@@ -196,23 +187,15 @@ public class Estudiante extends Interno {
     private void setEstadoCivil(String estadoCivil) {
         ValidadorTexto.validarObligatorio(estadoCivil, "");
         ValidadorTexto.validarTextoValido(estadoCivil, "");
-        ValidadorNumero.validarNumeroEntre(estadoCivil.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(estadoCivil.length(), 5, 15, "");
 
         this.estadoCivil = estadoCivil;
-    }
-
-    private void setDireccion(String direccion) {
-        ValidadorTexto.validarObligatorio(direccion, "");
-        ValidadorTexto.validarTextoValido(direccion, "");
-        ValidadorNumero.validarNumeroEntre(direccion.length(), 1, 50, "");
-
-        this.direccion = direccion;
     }
 
     private void setCorreoPersonal(String correoPersonal) {
         ValidadorTexto.validarObligatorio(correoPersonal, "");
         ValidadorTexto.validarCorreoValido(correoPersonal, "");
-        ValidadorNumero.validarNumeroEntre(correoPersonal.length(), 1, 100, "");
+        ValidadorNumero.validarNumeroEntre(correoPersonal.length(), 10, 100, "");
 
         this.correoPersonal = correoPersonal;
     }
@@ -228,7 +211,7 @@ public class Estudiante extends Interno {
     private void setProgramaAcademico(String programaAcademico) {
         ValidadorTexto.validarObligatorio(programaAcademico, "");
         ValidadorTexto.validarTextoValido(programaAcademico, "");
-        ValidadorNumero.validarNumeroEntre(programaAcademico.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(programaAcademico.length(), 5, 100, "");
 
         this.programaAcademico = programaAcademico;
     }
@@ -236,7 +219,7 @@ public class Estudiante extends Interno {
     private void setFacultad(String facultad) {
         ValidadorTexto.validarObligatorio(facultad, "");
         ValidadorTexto.validarTextoValido(facultad, "");
-        ValidadorNumero.validarNumeroEntre(facultad.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(facultad.length(), 5, 50, "");
 
         this.facultad = facultad;
     }
@@ -250,19 +233,19 @@ public class Estudiante extends Interno {
     private void setSemestreActual(String semestreActual) {
         ValidadorTexto.validarObligatorio(semestreActual, "");
         ValidadorTexto.validarTextoValido(semestreActual, "");
-        ValidadorNumero.validarNumeroEntre(semestreActual.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(semestreActual.length(), 5, 5, "");
 
         this.semestreActual = semestreActual;
     }
 
     private void setCreditosAprobados(int creditosAprobados) {
-        ValidadorNumero.validarNumeroMayorOIgual(creditosAprobados, 1, "");
+        ValidadorNumero.validarNumeroMayorOIgual(creditosAprobados, 0, "");
 
         this.creditosAprobados = creditosAprobados;
     }
 
     private void setPromedioGeneral(float promedioGeneral) {
-        ValidadorNumero.validarNumeroMayorOIgual(promedioGeneral, 1.0, "");
+        ValidadorNumero.validarNumeroMayorOIgual(promedioGeneral, 0.0, "");
 
         this.promedioGeneral = promedioGeneral;
     }
@@ -270,7 +253,7 @@ public class Estudiante extends Interno {
     private void setEstadoAcademico(String estadoAcademico) {
         ValidadorTexto.validarObligatorio(estadoAcademico, "");
         ValidadorTexto.validarTextoValido(estadoAcademico, "");
-        ValidadorNumero.validarNumeroEntre(estadoAcademico.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(estadoAcademico.length(), 6, 10, "");
 
         this.estadoAcademico = estadoAcademico;
     }
@@ -278,23 +261,20 @@ public class Estudiante extends Interno {
     private void setModalidadEstudio(String modalidadEstudio) {
         ValidadorTexto.validarObligatorio(modalidadEstudio, "");
         ValidadorTexto.validarTextoValido(modalidadEstudio, "");
-        ValidadorNumero.validarNumeroEntre(modalidadEstudio.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(modalidadEstudio.length(), 5, 50, "");
 
         this.modalidadEstudio = modalidadEstudio;
     }
 
-    private void setTiempoLlegadaUniversidad(String tiempoLlegadaUniversidad) {
-        ValidadorTexto.validarObligatorio(tiempoLlegadaUniversidad, "");
-        ValidadorTexto.validarTextoValido(tiempoLlegadaUniversidad, "");
-        ValidadorNumero.validarNumeroEntre(tiempoLlegadaUniversidad.length(), 1, 50, "");
+    private void setTiempoLlegadaUniversidad(int tiempoLlegadaUniversidad) {
+        ValidadorNumero.validarNumeroMayorOIgual(tiempoLlegadaUniversidad, 1, "");
 
         this.tiempoLlegadaUniversidad = tiempoLlegadaUniversidad;
     }
 
     private void setMedioTransporte(String medioTransporte) {
-        ValidadorTexto.validarObligatorio(medioTransporte, "");
         ValidadorTexto.validarTextoValido(medioTransporte, "");
-        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 5, 30, "");
 
         this.medioTransporte = medioTransporte;
     }

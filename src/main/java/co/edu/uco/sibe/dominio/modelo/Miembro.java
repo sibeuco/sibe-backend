@@ -39,7 +39,7 @@ public class Miembro {
     private void setNombreCompleto(String nombreCompleto) {
         ValidadorTexto.validarObligatorio(nombreCompleto, "");
         ValidadorTexto.validarTextoValido(nombreCompleto, "");
-        ValidadorNumero.validarNumeroEntre(nombreCompleto.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(nombreCompleto.length(), 5, 100, "");
 
         this.nombreCompleto = nombreCompleto;
     }
@@ -47,7 +47,7 @@ public class Miembro {
     private void setNumeroIdentificacion(String numeroIdentificacion) {
         ValidadorTexto.validarObligatorio(numeroIdentificacion, "");
         ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, "");
-        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 1, 10, "");
+        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 6, 12, "");
 
         this.numeroIdentificacion = numeroIdentificacion;
     }

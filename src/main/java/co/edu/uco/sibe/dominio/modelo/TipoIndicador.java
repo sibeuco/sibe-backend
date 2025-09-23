@@ -39,7 +39,7 @@ public class TipoIndicador {
     private void setNaturalezaIndicador(String naturalezaIndicador) {
         ValidadorTexto.validarObligatorio(naturalezaIndicador, "");
         ValidadorTexto.validarTextoValido(naturalezaIndicador, "");
-        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 5, 20, "");
 
         this.naturalezaIndicador = naturalezaIndicador;
     }
@@ -47,7 +47,7 @@ public class TipoIndicador {
     private void setTipologiaIndicador(String tipologiaIndicador) {
         ValidadorTexto.validarObligatorio(tipologiaIndicador, "");
         ValidadorTexto.validarTextoValido(tipologiaIndicador, "");
-        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 1, 30, "");
+        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 5, 15, "");
 
         this.tipologiaIndicador = tipologiaIndicador;
     }

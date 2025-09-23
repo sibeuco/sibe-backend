@@ -39,7 +39,7 @@ public class RelacionLaboral {
     private void setCodigo(String codigo) {
         ValidadorTexto.validarObligatorio(codigo, "");
         ValidadorTexto.validarTextoValido(codigo, "");
-        ValidadorNumero.validarNumeroEntre(codigo.length(), 1, 4, "");
+        ValidadorNumero.validarNumeroEntre(codigo.length(), 2, 4, "");
 
         this.codigo = codigo;
     }
@@ -47,7 +47,7 @@ public class RelacionLaboral {
     private void setDescripcion(String descripcion) {
         ValidadorTexto.validarObligatorio(descripcion, "");
         ValidadorTexto.validarTextoValido(descripcion, "");
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 5, 20, "");
 
         this.descripcion = descripcion;
     }

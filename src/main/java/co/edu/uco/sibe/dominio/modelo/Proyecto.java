@@ -10,6 +10,7 @@ public class Proyecto {
     private UUID identificador;
     private String numeroProyecto;
     private String nombre;
+    private String objetivo;
     private List<Accion> acciones;
 
     private Proyecto(UUID identificador, String numeroProyecto, String nombre, List<Accion> acciones) {
@@ -35,6 +36,10 @@ public class Proyecto {
         return nombre;
     }
 
+    public String getObjetivo() {
+        return objetivo;
+    }
+
     public List<Accion> getAcciones() {
         return acciones;
     }
@@ -46,7 +51,7 @@ public class Proyecto {
     private void setNumeroProyecto(String numeroProyecto) {
         ValidadorTexto.validarObligatorio(numeroProyecto, "");
         ValidadorTexto.validarTextoValido(numeroProyecto, "");
-        ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 5, "");
+        ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, "");
 
         this.numeroProyecto = numeroProyecto;
     }
@@ -54,9 +59,17 @@ public class Proyecto {
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, "");
         ValidadorTexto.validarTextoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, "");
 
         this.nombre = nombre;
+    }
+
+    private void setObjetivo(String objetivo) {
+        ValidadorTexto.validarObligatorio(objetivo, "");
+        ValidadorTexto.validarTextoValido(objetivo, "");
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, "");
+
+        this.objetivo = objetivo;
     }
 
     private void setAcciones(List<Accion> acciones) {

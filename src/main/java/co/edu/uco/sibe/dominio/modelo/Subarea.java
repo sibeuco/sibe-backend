@@ -40,7 +40,7 @@ public class Subarea {
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, "");
         ValidadorTexto.validarTextoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 70, "");
 
         this.nombre = nombre;
     }

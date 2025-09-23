@@ -52,7 +52,7 @@ public class Usuario {
     private void setCorreo(String correo) {
         ValidadorTexto.validarObligatorio(correo, Mensajes.CORREO_USUARIO_VACIO);
         ValidadorTexto.validarCorreoValido(correo, Mensajes.PATRON_CORREO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(correo.length(), 1, 100, "");
+        ValidadorNumero.validarNumeroEntre(correo.length(), 10, 100, "");
 
         this.correo = correo;
     }
@@ -60,7 +60,7 @@ public class Usuario {
     private void setClave(String clave) {
         ValidadorTexto.validarObligatorio(clave, Mensajes.CONTRASENA_VACIA);
         ValidadorTexto.validarClaveValida(clave, Mensajes.PATRON_CONTRASENA_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(clave.length(), 1, 100, "");
+        ValidadorNumero.validarNumeroEntre(clave.length(), 8, 20, "");
 
         this.clave = clave;
     }

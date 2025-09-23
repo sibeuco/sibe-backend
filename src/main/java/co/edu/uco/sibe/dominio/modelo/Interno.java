@@ -40,7 +40,7 @@ public class Interno extends Miembro {
     private void setIdCarnet(String idCarnet) {
         ValidadorTexto.validarObligatorio(idCarnet, "");
         ValidadorTexto.validarTextoAlfanumericoValido(idCarnet, "");
-        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 20, "");
 
         this.idCarnet = idCarnet;
     }

@@ -86,7 +86,7 @@ public class Actividad {
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, "");
         ValidadorTexto.validarTextoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 200, "");
 
         this.nombre = nombre;
     }
@@ -94,7 +94,7 @@ public class Actividad {
     private void setObjetivo(String objetivo) {
         ValidadorTexto.validarObligatorio(objetivo, "");
         ValidadorTexto.validarTextoValido(objetivo, "");
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, "");
 
         this.objetivo = objetivo;
     }
@@ -102,7 +102,7 @@ public class Actividad {
     private void setSemestre(String semestre) {
         ValidadorTexto.validarObligatorio(semestre, "");
         ValidadorTexto.validarTextoValido(semestre, "");
-        ValidadorNumero.validarNumeroEntre(semestre.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(semestre.length(), 6, 6, "");
 
         this.semestre = semestre;
     }
@@ -110,7 +110,7 @@ public class Actividad {
     private void setRutaInsumos(String rutaInsumos) {
         ValidadorTexto.validarObligatorio(rutaInsumos, "");
         ValidadorTexto.validarTextoValido(rutaInsumos, "");
-        ValidadorNumero.validarNumeroEntre(rutaInsumos.length(), 1, 50, "");
+        ValidadorNumero.validarNumeroEntre(rutaInsumos.length(), 10, 3000, "");
 
         this.rutaInsumos = rutaInsumos;
     }

@@ -40,7 +40,7 @@ public class Identificacion {
     private void setNumeroIdentificacion(String numeroIdentificacion) {
         ValidadorTexto.validarObligatorio(numeroIdentificacion, Mensajes.DOCUMENTO_PERSONA_VACIO);
         ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, Mensajes.PATRON_DOCUMENTO_PERSONA_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 1, 10, "");
+        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 5, 12, "");
 
         this.numeroIdentificacion = numeroIdentificacion;
     }

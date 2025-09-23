@@ -41,7 +41,7 @@ public class TipoUsuario {
 
     private void setNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_TIPO_USUARIO_VACIO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 1, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
 
         this.nombre = nombre;
     }
