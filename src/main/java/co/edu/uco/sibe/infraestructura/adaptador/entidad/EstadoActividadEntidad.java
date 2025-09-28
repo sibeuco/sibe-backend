@@ -17,6 +17,6 @@ public class EstadoActividadEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 15, nullable = false)
     private String nombre;
 }

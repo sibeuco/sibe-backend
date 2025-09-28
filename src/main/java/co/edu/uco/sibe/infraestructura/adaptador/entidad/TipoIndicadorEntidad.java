@@ -17,9 +17,9 @@ public class TipoIndicadorEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 20, nullable = false)
     private String naturaleza;
 
-    @Column(name = "tipologia_indicador", length = 100, nullable = false)
+    @Column(name = "tipologia_indicador", length = 15, nullable = false)
     private String tipologiaIndicador;
 }

@@ -17,7 +17,7 @@ public class CentroCostosEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 6, nullable = false)
     private String codigo;
 
     @Column(length = 100, nullable = false)

@@ -17,6 +17,6 @@ public class CiudadResidenciaEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 30, nullable = false)
     private String descripcion;
 }

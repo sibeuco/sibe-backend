@@ -20,7 +20,7 @@ public class UsuarioEntidad {
     @Column(length = 100, nullable = false)
     private String correo;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String clave;
 
     @Column(name = "esta_activo", nullable = false)

@@ -17,9 +17,9 @@ public class RelacionLaboralEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 4, nullable = false)
     private String codigo;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 20, nullable = false)
     private String descripcion;
 }
