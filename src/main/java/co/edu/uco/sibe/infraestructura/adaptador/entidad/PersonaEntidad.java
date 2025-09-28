@@ -26,7 +26,7 @@ public class PersonaEntidad {
     @Column(length = 100, nullable = false)
     private String correo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identificacion", nullable = false)
     private IdentificacionEntidad identificacion;
 }

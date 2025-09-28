@@ -1,23 +1,24 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario_tipo_usuario")
-public class UsuarioTipoUsuarioEntidad {
+@Table(name = "interno_ciudad_residencia")
+public class InternoCiudadResidenciaEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_usuario")
-    private TipoUsuarioEntidad tipoUsuario;
+    @JoinColumn(name = "ciudad_residencia")
+    private CiudadResidenciaEntidad ciudadResidencia;
 }

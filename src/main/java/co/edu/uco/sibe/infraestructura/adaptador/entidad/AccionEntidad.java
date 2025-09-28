@@ -15,15 +15,12 @@ import jakarta.persistence.*;
 @Table(name = "accion")
 public class AccionEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "detalle", nullable = false, length = 500)
     private String detalle;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "objetivo", nullable = false, length = 500)
     private String objetivo;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "proyecto", nullable = false)
-    private ProyectoEntidad proyecto;
 }

@@ -13,19 +13,13 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "participante_empleado")
-public class ParticipanteEmpleadoEntidad {
-    @Id
-    private UUID identificador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+@PrimaryKeyJoinColumn(name = "identificador")
+public class ParticipanteEmpleadoEntidad extends ParticipanteInternoEntidad {
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "relacion_laboral", nullable = false)
-    private RelacionLaboralEntidad relacionLaboral;
+    private EmpleadoRelacionLaboralEntidad relacionLaboral;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "centro_costos", nullable = false)
-    private CentroCostosEntidad centroCostos;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "participante_interno", nullable = false)
-    private ParticipanteInternoEntidad participanteInterno;
+    private EmpleadoCentroCostosEntidad centroCostos;
 }

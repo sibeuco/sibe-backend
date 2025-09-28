@@ -1,11 +1,11 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
 import lombok.Getter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import jakarta.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,41 +15,30 @@ import jakarta.persistence.*;
 @Table(name = "actividad")
 public class ActividadEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "objetivo", nullable = false, length = 500)
     private String objetivo;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "semestre", nullable = false, length = 6)
     private String semestre;
 
-    @Column(name = "ruta_insumos", length = 30, nullable = false)
+    @Column(name = "ruta_insumos", nullable = false, length = 3000)
     private String rutaInsumos;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "indicador", nullable = false)
-    private IndicadorEntidad indicador;
+    @ManyToOne
+    @JoinColumn(name = "indicador")
+    private IndicadorEntidad indicadorEntidad;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "colaborador", nullable = false)
-    private UsuarioEntidad colaborador;
+    private UUID colaborador;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "creador", nullable = false)
-    private UsuarioEntidad creador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "direccion", nullable = false)
-    private DireccionEntidad direccion;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "area", nullable = false)
-    private AreaEntidad area;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "subarea", nullable = false)
-    private SubareaEntidad subarea;
+    private UUID creador;
 }

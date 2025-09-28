@@ -1,13 +1,15 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import lombok.Getter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,59 +17,50 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "estudiante")
-public class EstudianteEntidad {
-    @Id
-    private UUID identificador;
-
+@PrimaryKeyJoinColumn(name = "identificador")
+public class EstudianteEntidad extends InternoEntidad {
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "nacionalidad", nullable = false, length = 50)
     private String nacionalidad;
 
-    @Column(name = "estado_civil", length = 30, nullable = false)
+    @Column(name = "estado_civil", nullable = false, length = 15)
     private String estadoCivil;
 
-    @Column(length = 30, nullable = false)
-    private String direccion;
-
-    @Column(name = "correo_personal", length = 30, nullable = false)
+    @Column(name = "correo_personal", nullable = false, length = 100)
     private String correoPersonal;
 
-    @Column(name = "correo_institucional", length = 30, nullable = false)
+    @Column(name = "correo_institucional", nullable = false, length = 100)
     private String correoInstitucional;
 
-    @Column(name = "programa_academico", length = 30, nullable = false)
+    @Column(name = "programa_academico", nullable = false, length = 100)
     private String programaAcademico;
 
-    @Column(length = 30, nullable = false)
+    @Column(name = "facultad", nullable = false, length = 50)
     private String facultad;
 
-    @Column(name = "anno_ingreso", length = 30, nullable = false)
-    private String annoIngreso;
+    @Column(name = "anno_ingreso", nullable = false)
+    private int annoIngreso;
 
-    @Column(name = "semestre_actual", length = 30, nullable = false)
+    @Column(name = "semestre_actual", nullable = false, length = 5)
     private String semestreActual;
 
     @Column(name = "creditos_aprobados", nullable = false)
     private int creditosAprobados;
 
-    @Column(name = "promedio_general", precision = 10, scale = 2, nullable = false)
-    private BigDecimal promedioGeneral;
+    @Column(name = "promedio_general", nullable = false)
+    private float promedioGeneral;
 
-    @Column(name = "estado_academico", length = 30, nullable = false)
+    @Column(name = "estado_academico", nullable = false, length = 10)
     private String estadoAcademico;
 
-    @Column(name = "modalidad_estudio", length = 30, nullable = false)
+    @Column(name = "modalidad_estudio", nullable = false, length = 50)
     private String modalidadEstudio;
 
-    @Column(name = "tiempo_llegada_universidad", length = 30, nullable = false)
-    private String tiempoLlegadaUniversidad;
+    @Column(name = "tiempo_llegada_universidad", nullable = false)
+    private int tiempoLlegadaUniversidad;
 
-    @Column(name = "medio_transporte", length = 30, nullable = false)
+    @Column(name = "medio_transporte", nullable = false, length = 30)
     private String medioTransporte;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "interno", nullable = false)
-    private InternoEntidad interno;
 }

@@ -19,4 +19,8 @@ public class IdentificacionEntidad {
 
     @Column(name = "numero_identificacion", length = 20, nullable = false)
     private String numeroIdentificacion;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "identificacion")
+    private IdentificacionTipoIdentificacionEntidad tipoIdentificacion;
 }

@@ -1,11 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -13,19 +12,13 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "empleado")
-public class EmpleadoEntidad {
-    @Id
-    private UUID identificador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+@PrimaryKeyJoinColumn(name = "identificador")
+public class EmpleadoEntidad extends InternoEntidad {
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "relacion_laboral", nullable = false)
-    private RelacionLaboralEntidad relacionLaboral;
+    private EmpleadoRelacionLaboralEntidad relacionLaboral;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "centro_costos", nullable = false)
-    private CentroCostosEntidad centroCostos;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "interno", nullable = false)
-    private InternoEntidad interno;
+    private EmpleadoCentroCostosEntidad centroCostos;
 }

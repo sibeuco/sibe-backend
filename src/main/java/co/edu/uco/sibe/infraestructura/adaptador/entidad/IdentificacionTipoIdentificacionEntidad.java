@@ -17,11 +17,7 @@ public class IdentificacionTipoIdentificacionEntidad {
     @Id
     private UUID identificador;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "identificacion", nullable = false)
-    private IdentificacionEntidad identificacion;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "tipo_identificacion", nullable = false)
     private TipoIdentificacionEntidad tipoIdentificacion;
 }

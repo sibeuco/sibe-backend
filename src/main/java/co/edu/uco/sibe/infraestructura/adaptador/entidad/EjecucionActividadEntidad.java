@@ -1,13 +1,13 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import lombok.Getter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import jakarta.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,21 +17,26 @@ import jakarta.persistence.*;
 @Table(name = "ejecucion_actividad")
 public class EjecucionActividadEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "fechaProgramada", nullable = false)
+    @Column(name = "fecha_programada", nullable = false)
     private LocalDate fechaProgramada;
 
-    @Column(name = "fechaRealizacion", nullable = false)
+    @Column(name = "fecha_realizacion")
     private LocalDate fechaRealizacion;
 
-    @Column(name = "horaInicio", nullable = false)
+    @Column(name = "hora_inicio")
     private LocalTime horaInicio;
 
-    @Column(name = "horaFin", nullable = false)
+    @Column(name = "hora_fin")
     private LocalTime horaFin;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "actividad", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ejecucion_actividad", nullable = false)
+    private EjecucionActividadEstadoActividadEntidad estadoActividad;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "actividad_id", nullable = false)
     private ActividadEntidad actividad;
 }

@@ -12,13 +12,13 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "participante")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class ParticipanteEntidad {
+@Table(name = "indicador_proyecto")
+public class IndicadorProyectoEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "miembro", nullable = false)
-    private MiembroEntidad miembro;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "proyecto", nullable = false)
+    private ProyectoEntidad proyecto;
 }

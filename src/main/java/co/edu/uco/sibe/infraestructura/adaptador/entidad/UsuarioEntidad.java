@@ -25,4 +25,8 @@ public class UsuarioEntidad {
 
     @Column(name = "esta_activo", nullable = false)
     private boolean estaActivo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario", nullable = false)
+    private UsuarioTipoUsuarioEntidad rol;
 }
