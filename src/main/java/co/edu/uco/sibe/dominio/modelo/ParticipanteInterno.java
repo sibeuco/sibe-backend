@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -38,17 +39,17 @@ public class ParticipanteInterno extends Participante {
     }
 
     private void setIdCarnet(String idCarnet) {
-        ValidadorTexto.validarObligatorio(idCarnet, "");
-        ValidadorTexto.validarTextoAlfanumericoValido(idCarnet, "");
-        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 20, "");
+        ValidadorTexto.validarObligatorio(idCarnet, Mensajes.ID_CARNET_INTERNO_OBLIGATORIO);
+        ValidadorTexto.validarTextoAlfanumericoValido(idCarnet, Mensajes.ID_CARNET_INTERNO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 20, Mensajes.LONGITUD_ID_CARNET_INTERNO_INVALIDA);
 
         this.idCarnet = idCarnet;
     }
 
     private void setSexo(String sexo) {
-        ValidadorTexto.validarObligatorio(sexo, "");
-        ValidadorTexto.validarTextoValido(sexo, "");
-        ValidadorNumero.validarNumeroEntre(sexo.length(), 1, 1, "");
+        ValidadorTexto.validarObligatorio(sexo, Mensajes.SEXO_PARTICIPANTE_INTERNO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(sexo, Mensajes.SEXO_PARTICIPANTE_INTERNO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(sexo.length(), 1, 1, Mensajes.LONGITUD_SEXO_PARTICIPANTE_INTERNO_INVALIDA);
 
         this.sexo = sexo;
     }

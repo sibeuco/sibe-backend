@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -55,9 +56,9 @@ public class Indicador {
     }
 
     private void setNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, "");
-        ValidadorTexto.validarTextoAlfanumericoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, "");
+        ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_INDICADOR_OBLIGATORIO);
+        ValidadorTexto.validarTextoAlfanumericoValido(nombre, Mensajes.NOMBRE_INDICADOR_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, Mensajes.LONGITUD_NOMBRE_INDICADOR_INVALIDA);
 
         this.nombre = nombre;
     }

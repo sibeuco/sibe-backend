@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -37,17 +38,17 @@ public class TipoIndicador {
     }
 
     private void setNaturalezaIndicador(String naturalezaIndicador) {
-        ValidadorTexto.validarObligatorio(naturalezaIndicador, "");
-        ValidadorTexto.validarTextoValido(naturalezaIndicador, "");
-        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 5, 20, "");
+        ValidadorTexto.validarObligatorio(naturalezaIndicador, Mensajes.NATURALEZA_TIPO_INDICADOR_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(naturalezaIndicador, Mensajes.NATURALEZA_TIPO_INDICADOR_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 5, 20, Mensajes.LONGITUD_NATURALEZA_TIPO_INDICADOR_INVALIDA);
 
         this.naturalezaIndicador = naturalezaIndicador;
     }
 
     private void setTipologiaIndicador(String tipologiaIndicador) {
-        ValidadorTexto.validarObligatorio(tipologiaIndicador, "");
-        ValidadorTexto.validarTextoValido(tipologiaIndicador, "");
-        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 5, 15, "");
+        ValidadorTexto.validarObligatorio(tipologiaIndicador, Mensajes.TIPOLOGIA_TIPO_INDICADOR_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(tipologiaIndicador, Mensajes.TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 5, 15, Mensajes.LONGITUD_TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
 
         this.tipologiaIndicador = tipologiaIndicador;
     }

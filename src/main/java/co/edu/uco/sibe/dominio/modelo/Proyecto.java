@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -49,25 +50,25 @@ public class Proyecto {
     }
 
     private void setNumeroProyecto(String numeroProyecto) {
-        ValidadorTexto.validarObligatorio(numeroProyecto, "");
-        ValidadorTexto.validarTextoValido(numeroProyecto, "");
-        ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, "");
+        ValidadorTexto.validarObligatorio(numeroProyecto, Mensajes.NUMERO_PROYECTO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(numeroProyecto, Mensajes.NUMERO_PROYECTO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, Mensajes.LONGITUD_NUMERO_PROYECTO_INVALIDA);
 
         this.numeroProyecto = numeroProyecto;
     }
 
     private void setNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, "");
-        ValidadorTexto.validarTextoValido(nombre, "");
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, "");
+        ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_PROYECTO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(nombre, Mensajes.NOMBRE_PROYECTO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, Mensajes.LONGITUD_NOMBRE_PROYECTO_INVALIDA);
 
         this.nombre = nombre;
     }
 
     private void setObjetivo(String objetivo) {
-        ValidadorTexto.validarObligatorio(objetivo, "");
-        ValidadorTexto.validarTextoValido(objetivo, "");
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, "");
+        ValidadorTexto.validarObligatorio(objetivo, Mensajes.OBJETIVO_PROYECTO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(objetivo, Mensajes.OBJETIVO_PROYECTO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, Mensajes.LONGITUD_OBJETIVO_PROYECTO_INVALIDA);
 
         this.objetivo = objetivo;
     }

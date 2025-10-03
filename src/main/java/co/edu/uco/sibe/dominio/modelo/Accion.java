@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -37,17 +38,17 @@ public class Accion {
     }
 
     private void setDetalle(String detalle) {
-        ValidadorTexto.validarObligatorio(detalle, "");
-        ValidadorTexto.validarTextoValido(detalle, "");
-        ValidadorNumero.validarNumeroEntre(detalle.length(), 10, 500, "");
+        ValidadorTexto.validarObligatorio(detalle, Mensajes.DETALLE_ACCION_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(detalle, Mensajes.DETALLE_ACCION_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(detalle.length(), 10, 500, Mensajes.LONGITUD_DETALLE_ACCION_INVALIDA);
 
         this.detalle = detalle;
     }
 
     private void setObjetivo(String objetivo) {
-        ValidadorTexto.validarObligatorio(objetivo, "");
-        ValidadorTexto.validarTextoValido(objetivo, "");
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, "");
+        ValidadorTexto.validarObligatorio(objetivo, Mensajes.OBJETIVO_ACCION_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(objetivo, Mensajes.OBJETIVO_ACCION_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, Mensajes.LONGITUD_OBJETIVO_ACCION_INVALIDA);
 
         this.objetivo = objetivo;
     }

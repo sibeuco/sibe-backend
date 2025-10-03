@@ -1,8 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
+import javax.swing.*;
+import java.beans.XMLEncoder;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -177,49 +180,49 @@ public class Estudiante extends Interno {
     }
 
     private void setNacionalidad(String nacionalidad) {
-        ValidadorTexto.validarObligatorio(nacionalidad, "");
-        ValidadorTexto.validarTextoValido(nacionalidad, "");
-        ValidadorNumero.validarNumeroEntre(nacionalidad.length(), 4, 50, "");
+        ValidadorTexto.validarObligatorio(nacionalidad, Mensajes.NACIONALIDAD_ESTUDIANTE_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(nacionalidad, Mensajes.NACIONALIDAD_ESTUDIANTE_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(nacionalidad.length(), 4, 50, Mensajes.LONGITUD_NACIONALIDAD_ESTUDIANTE_INVALIDA);
 
         this.nacionalidad = nacionalidad;
     }
 
     private void setEstadoCivil(String estadoCivil) {
-        ValidadorTexto.validarObligatorio(estadoCivil, "");
-        ValidadorTexto.validarTextoValido(estadoCivil, "");
-        ValidadorNumero.validarNumeroEntre(estadoCivil.length(), 5, 15, "");
+        ValidadorTexto.validarObligatorio(estadoCivil, Mensajes.ESTADO_CIVIL_ESTUDIANTE_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(estadoCivil, Mensajes.ESTADO_CIVIL_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(estadoCivil.length(), 5, 15, Mensajes.LONGITUD_ESTADO_CIVIL_ESTUDIANTE_INVALIDA);
 
         this.estadoCivil = estadoCivil;
     }
 
     private void setCorreoPersonal(String correoPersonal) {
-        ValidadorTexto.validarObligatorio(correoPersonal, "");
-        ValidadorTexto.validarCorreoValido(correoPersonal, "");
-        ValidadorNumero.validarNumeroEntre(correoPersonal.length(), 10, 100, "");
+        ValidadorTexto.validarObligatorio(correoPersonal, Mensajes.CORREO_PERSONAL_ESTUDIANTE_OBLIGATORIO);
+        ValidadorTexto.validarCorreoValido(correoPersonal, Mensajes.CORREO_PERSONAL_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(correoPersonal.length(), 10, 100, Mensajes.LONGITUD_CORREO_PERSONAL_ESTUDIANTE_INVALIDA);
 
         this.correoPersonal = correoPersonal;
     }
 
     private void setCorreoInstitucional(String correoInstitucional) {
-        ValidadorTexto.validarObligatorio(correoInstitucional, "");
-        ValidadorTexto.validarCorreoValido(correoInstitucional, "");
-        ValidadorNumero.validarNumeroEntre(correoInstitucional.length(), 1, 100, "");
+        ValidadorTexto.validarObligatorio(correoInstitucional, Mensajes.CORREO_INSTITUCIONAL_ESTUDIANTE_OBLIGATORIO);
+        ValidadorTexto.validarCorreoValido(correoInstitucional, Mensajes.CORREO_INSTITUCIONAL_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(correoInstitucional.length(), 10, 100, Mensajes.LONGITUD_CORREO_INSTITUCIONAL_ESTUDIANTE_INVALIDA);
 
         this.correoInstitucional = correoInstitucional;
     }
 
     private void setProgramaAcademico(String programaAcademico) {
-        ValidadorTexto.validarObligatorio(programaAcademico, "");
-        ValidadorTexto.validarTextoValido(programaAcademico, "");
-        ValidadorNumero.validarNumeroEntre(programaAcademico.length(), 5, 100, "");
+        ValidadorTexto.validarObligatorio(programaAcademico, Mensajes.PROGRAMA_ACADEMICO_ESTUDIANTE_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(programaAcademico, Mensajes.PROGRAMA_ACADEMICO_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(programaAcademico.length(), 5, 100, Mensajes.LONGITUD_PROGRAMA_ACADEMICO_ESTUDIANTE_INVALIDA);
 
         this.programaAcademico = programaAcademico;
     }
 
     private void setFacultad(String facultad) {
-        ValidadorTexto.validarObligatorio(facultad, "");
-        ValidadorTexto.validarTextoValido(facultad, "");
-        ValidadorNumero.validarNumeroEntre(facultad.length(), 5, 50, "");
+        ValidadorTexto.validarObligatorio(facultad, Mensajes.FACULTAD_ESTUDIANTE_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(facultad, Mensajes.FACULTAD_ESTUDIANTE_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(facultad.length(), 5, 50, Mensajes.LONGITUD_FACULTAD_ESTUDIANTE_INVALIDA);
 
         this.facultad = facultad;
     }
@@ -233,48 +236,48 @@ public class Estudiante extends Interno {
     private void setSemestreActual(String semestreActual) {
         ValidadorTexto.validarObligatorio(semestreActual, "");
         ValidadorTexto.validarTextoValido(semestreActual, "");
-        ValidadorNumero.validarNumeroEntre(semestreActual.length(), 5, 5, "");
+        ValidadorNumero.validarNumeroEntre(semestreActual.length(), 5, 5, Mensajes.ANNO_INGRESO_ESTUDIANTE_INVALIDO);
 
         this.semestreActual = semestreActual;
     }
 
     private void setCreditosAprobados(int creditosAprobados) {
-        ValidadorNumero.validarNumeroMayorOIgual(creditosAprobados, 0, "");
+        ValidadorNumero.validarNumeroMayorOIgual(creditosAprobados, 0, Mensajes.CREDITOS_APROBADOS_ESTUDIANTE_INVALIDOS);
 
         this.creditosAprobados = creditosAprobados;
     }
 
     private void setPromedioGeneral(float promedioGeneral) {
-        ValidadorNumero.validarNumeroMayorOIgual(promedioGeneral, 0.0, "");
+        ValidadorNumero.validarNumeroMayorOIgual(promedioGeneral, 0.0, Mensajes.PROMEDIO_GENERAL_ESTUDIANTE_INVALIDO);
 
         this.promedioGeneral = promedioGeneral;
     }
 
     private void setEstadoAcademico(String estadoAcademico) {
-        ValidadorTexto.validarObligatorio(estadoAcademico, "");
-        ValidadorTexto.validarTextoValido(estadoAcademico, "");
-        ValidadorNumero.validarNumeroEntre(estadoAcademico.length(), 6, 10, "");
+        ValidadorTexto.validarObligatorio(estadoAcademico, Mensajes.ESTADO_ACADEMICO_ESTUDIANTE_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(estadoAcademico, Mensajes.ESTADO_ACADEMICO_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(estadoAcademico.length(), 6, 10, Mensajes.LONGITUD_ESTADO_ACADEMICO_ESTUDIANTE_INVALIDA);
 
         this.estadoAcademico = estadoAcademico;
     }
 
     private void setModalidadEstudio(String modalidadEstudio) {
-        ValidadorTexto.validarObligatorio(modalidadEstudio, "");
-        ValidadorTexto.validarTextoValido(modalidadEstudio, "");
-        ValidadorNumero.validarNumeroEntre(modalidadEstudio.length(), 5, 50, "");
+        ValidadorTexto.validarObligatorio(modalidadEstudio, Mensajes.MODALIDAD_ESTUDIO_ESTUDIANTE_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(modalidadEstudio, Mensajes.MODALIDAD_ESTUDIO_ESTUDIANTE_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(modalidadEstudio.length(), 5, 50, Mensajes.LONGITUD_MODALIDAD_ESTUDIO_ESTUDIANTE_INVALIDA);
 
         this.modalidadEstudio = modalidadEstudio;
     }
 
     private void setTiempoLlegadaUniversidad(int tiempoLlegadaUniversidad) {
-        ValidadorNumero.validarNumeroMayorOIgual(tiempoLlegadaUniversidad, 1, "");
+        ValidadorNumero.validarNumeroMayorOIgual(tiempoLlegadaUniversidad, 1, Mensajes.TIEMPO_LLEGADA_ESTUDIANTE_INVALIDO);
 
         this.tiempoLlegadaUniversidad = tiempoLlegadaUniversidad;
     }
 
     private void setMedioTransporte(String medioTransporte) {
-        ValidadorTexto.validarTextoValido(medioTransporte, "");
-        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 5, 30, "");
+        ValidadorTexto.validarTextoValido(medioTransporte, Mensajes.MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 5, 30, Mensajes.LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA);
 
         this.medioTransporte = medioTransporte;
     }

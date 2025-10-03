@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -37,17 +38,17 @@ public class Miembro {
     }
 
     private void setNombreCompleto(String nombreCompleto) {
-        ValidadorTexto.validarObligatorio(nombreCompleto, "");
-        ValidadorTexto.validarTextoValido(nombreCompleto, "");
-        ValidadorNumero.validarNumeroEntre(nombreCompleto.length(), 5, 100, "");
+        ValidadorTexto.validarObligatorio(nombreCompleto, Mensajes.NOMBRE_COMPLETO_MIEMBRO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(nombreCompleto, Mensajes.NOMBRE_COMPLETO_MIEMBRO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(nombreCompleto.length(), 5, 100, Mensajes.LONGITUD_NOMBRE_COMPLETO_MIEMBRO_INVALIDA);
 
         this.nombreCompleto = nombreCompleto;
     }
 
     private void setNumeroIdentificacion(String numeroIdentificacion) {
-        ValidadorTexto.validarObligatorio(numeroIdentificacion, "");
-        ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, "");
-        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 6, 12, "");
+        ValidadorTexto.validarObligatorio(numeroIdentificacion, Mensajes.NUMERO_IDENTIFICACION_MIEMBRO_OBLIGATORIO);
+        ValidadorTexto.validarNumeroIdentificacionValido(numeroIdentificacion, Mensajes.NUMERO_IDENTIFICACION_MIEMBRO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(numeroIdentificacion.length(), 6, 12, Mensajes.LONGITUD_NUMERO_IDENTIFICACION_MIEMBRO_INVALIDA);
 
         this.numeroIdentificacion = numeroIdentificacion;
     }

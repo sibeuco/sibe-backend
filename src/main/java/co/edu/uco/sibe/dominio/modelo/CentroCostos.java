@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
@@ -37,17 +38,17 @@ public class CentroCostos {
     }
 
     private void setCodigo(String codigo) {
-        ValidadorTexto.validarObligatorio(codigo, "");
-        ValidadorTexto.validarTextoValido(codigo, "");
-        ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, "");
+        ValidadorTexto.validarObligatorio(codigo, Mensajes.CODIGO_CENTRO_COSTOS_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(codigo, Mensajes.CODIGO_CENTRO_COSTOS_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, Mensajes.LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
 
         this.codigo = codigo;
     }
 
     private void setDescripcion(String descripcion) {
-        ValidadorTexto.validarObligatorio(descripcion, "");
-        ValidadorTexto.validarTextoValido(descripcion, "");
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 10, 100, "");
+        ValidadorTexto.validarObligatorio(descripcion, Mensajes.DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(descripcion, Mensajes.DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 10, 100, Mensajes.LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
 
         this.descripcion = descripcion;
     }
