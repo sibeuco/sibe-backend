@@ -26,6 +26,8 @@ public final class ParticipanteEstudianteRegla implements Regla<ParticipanteEstu
 
     @Override
     public void validarCampos(ParticipanteEstudiante modelo) {
+        validarIdCarnet(modelo.getIdCarnet());
+        validarSexo(modelo.getSexo());
         validarEstadoCivil(modelo.getEstadoCivil());
         validarProgramaAcademico(modelo.getProgramaAcademico());
         validarFacultad(modelo.getFacultad());
@@ -37,6 +39,18 @@ public final class ParticipanteEstudianteRegla implements Regla<ParticipanteEstu
         validarModalidadEstudio(modelo.getModalidadEstudio());
         validarTiempoLlegadaUniversidad(modelo.getTiempoLlegadaUniversidad());
         validarMedioTransporte(modelo.getMedioTransporte());
+    }
+
+    private void validarIdCarnet(String idCarnet) {
+        ValidadorTexto.validarObligatorio(idCarnet, Mensajes.ID_CARNET_INTERNO_OBLIGATORIO);
+        ValidadorTexto.validarTextoAlfanumericoValido(idCarnet, Mensajes.ID_CARNET_INTERNO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(idCarnet.length(), 1, 20, Mensajes.LONGITUD_ID_CARNET_INTERNO_INVALIDA);
+    }
+
+    private void validarSexo(String sexo) {
+        ValidadorTexto.validarObligatorio(sexo, Mensajes.SEXO_PARTICIPANTE_INTERNO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(sexo, Mensajes.SEXO_PARTICIPANTE_INTERNO_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(sexo.length(), 1, 1, Mensajes.LONGITUD_SEXO_PARTICIPANTE_INTERNO_INVALIDA);
     }
 
     private void validarEstadoCivil(String estadoCivil) {
