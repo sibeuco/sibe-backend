@@ -193,6 +193,7 @@ public class Mensajes {
     public static final String PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO = "La descripción del tipo identificacion solo debe contener letras y espacios.";
     public static final String LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA = "El campo de la descripción debe contener entre 1 y 40 caracteres.";
     public static final String NO_SE_ENCONTRARON_AREAS = "No se encontraron areas registradas.";
+    public static final String IDENTIFICADOR_USUARIO_NULO = "El identificiador de un usuario no puede ser nulo";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";

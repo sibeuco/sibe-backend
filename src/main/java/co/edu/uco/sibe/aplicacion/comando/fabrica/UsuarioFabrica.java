@@ -2,8 +2,11 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import org.springframework.stereotype.Component;
 
@@ -31,8 +34,13 @@ public class UsuarioFabrica {
                 tipoUsuarioDTO.isEliminar(),
                 tipoUsuarioDTO.isConsultar());
 
-        return Usuario.construir(identificadorUsuario, usuario.getCorreo(), usuario.getContrasena(), tipoUsuario);
 
+
+        var modelo = Usuario.construir(identificadorUsuario, usuario.getCorreo(), usuario.getContrasena(), tipoUsuario);
+
+        MotoresFabrica.MOTOR_USUARIO.ejecutar(modelo, TipoOperacion.CREAR);
+
+        return modelo;
     }
 
     public Usuario construirActualizar(UsuarioModificacionComando usuario, UUID identificador){

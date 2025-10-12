@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public class Direccion {
     private UUID identificador;
     private String nombre;
@@ -14,49 +13,13 @@ public class Direccion {
     private List<Actividad> actividades;
 
     private Direccion(UUID identificador, String nombre, List<Area> areas, List<Actividad> actividades) {
-        setIdentificador(identificador);
-        setNombre(nombre);
-        setAreas(areas);
-        setActividades(actividades);
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.areas = areas;
+        this.actividades = actividades;
     }
 
     public static Direccion construir(UUID identificador, String nombre, List<Area> areas, List<Actividad> actividades) {
         return new Direccion(identificador, nombre, areas, actividades);
-    }
-
-    public UUID getIdentificador() {
-        return identificador;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public List<Area> getAreas() {
-        return areas;
-    }
-
-    public List<Actividad> getActividades() {
-        return actividades;
-    }
-
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
-    }
-
-    private void setNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_DIRECCION_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(nombre, Mensajes.NOMBRE_DIRECCION_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 70, Mensajes.LONGITUD_NOMBRE_DIRECCION_INVALIDA);
-
-        this.nombre = nombre;
-    }
-
-    private void setAreas(List<Area> areas) {
-        this.areas = areas;
-    }
-
-    private void setActividades(List<Actividad> actividades) {
-        this.actividades = actividades;
     }
 }

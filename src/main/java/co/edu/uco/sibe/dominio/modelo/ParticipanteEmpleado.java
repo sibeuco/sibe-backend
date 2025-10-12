@@ -1,7 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import lombok.Getter;
+
 import java.util.UUID;
 
+@Getter
 public class ParticipanteEmpleado extends ParticipanteInterno {
     private RelacionLaboral relacionLaboral;
     private CentroCostos centroCostos;
@@ -16,8 +19,8 @@ public class ParticipanteEmpleado extends ParticipanteInterno {
             CentroCostos centroCostos
     ) {
         super(identificador, miembro, ciudadResidencia, idCarnet, sexo);
-        setRelacionLaboral(relacionLaboral);
-        setCentroCostos(centroCostos);
+        this.relacionLaboral = relacionLaboral;
+        this.centroCostos = centroCostos;
     }
 
     public static ParticipanteEmpleado construir(
@@ -38,21 +41,5 @@ public class ParticipanteEmpleado extends ParticipanteInterno {
                 relacionLaboral,
                 centroCostos
         );
-    }
-
-    public RelacionLaboral getRelacionLaboral() {
-        return relacionLaboral;
-    }
-
-    public CentroCostos getCentroCostos() {
-        return centroCostos;
-    }
-
-    private void setRelacionLaboral(RelacionLaboral relacionLaboral) {
-        this.relacionLaboral = relacionLaboral;
-    }
-
-    private void setCentroCostos(CentroCostos centroCostos) {
-        this.centroCostos = centroCostos;
     }
 }

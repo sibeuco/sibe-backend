@@ -1,11 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
 public class Indicador {
     private UUID identificador;
     private String nombre;
@@ -15,67 +14,15 @@ public class Indicador {
     private PublicoInteres publicoInteres;
 
     private Indicador(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
-        setIdentificador(identificador);
-        setNombre(nombre);
-        setTipoIndicador(tipoIndicador);
-        setTemporalidad(temporalidad);
-        setProyecto(proyecto);
-        setPublicoInteres(publicoInteres);
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.tipoIndicador = tipoIndicador;
+        this.temporalidad = temporalidad;
+        this.proyecto = proyecto;
+        this.publicoInteres = publicoInteres;
     }
 
     public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
         return new Indicador(identificador, nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
-    }
-
-    public UUID getIdentificador() {
-        return identificador;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public TipoIndicador getTipoIndicador() {
-        return tipoIndicador;
-    }
-
-    public Temporalidad getTemporalidad() {
-        return temporalidad;
-    }
-
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public PublicoInteres getPublicoInteres() {
-        return publicoInteres;
-    }
-
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
-    }
-
-    private void setNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, Mensajes.NOMBRE_INDICADOR_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(nombre, Mensajes.NOMBRE_INDICADOR_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, Mensajes.LONGITUD_NOMBRE_INDICADOR_INVALIDA);
-
-        this.nombre = nombre;
-    }
-
-    private void setTipoIndicador(TipoIndicador tipoIndicador) {
-        this.tipoIndicador = tipoIndicador;
-    }
-
-    private void setTemporalidad(Temporalidad temporalidad) {
-        this.temporalidad = temporalidad;
-    }
-
-    private void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    private void setPublicoInteres(PublicoInteres publicoInteres) {
-        this.publicoInteres = publicoInteres;
     }
 }

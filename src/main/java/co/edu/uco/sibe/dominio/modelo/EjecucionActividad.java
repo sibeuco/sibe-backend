@@ -1,9 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@Getter
 public class EjecucionActividad {
     private UUID identificador;
     private LocalDate fechaProgramada;
@@ -22,13 +25,13 @@ public class EjecucionActividad {
             EstadoActividad estadoActividad,
             Actividad actividad
     ) {
-        setIdentificador(identificador);
-        setFechaProgramada(fechaProgramada);
-        setFechaRealizacion(fechaRealizacion);
-        setHoraInicio(horaInicio);
-        setHoraFin(horaFin);
-        setEstadoActividad(estadoActividad);
-        setActividad(actividad);
+        this.fechaProgramada = fechaProgramada;
+        this.identificador = identificador;
+        this.fechaRealizacion = fechaRealizacion;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.estadoActividad = estadoActividad;
+        this.actividad = actividad;
     }
 
     public static EjecucionActividad construir(
@@ -49,61 +52,5 @@ public class EjecucionActividad {
                 estadoActividad,
                 actividad
         );
-    }
-
-    public UUID getIdentificador() {
-        return identificador;
-    }
-
-    public LocalDate getFechaProgramada() {
-        return fechaProgramada;
-    }
-
-    public LocalDate getFechaRealizacion() {
-        return fechaRealizacion;
-    }
-
-    public LocalTime getHoraInicio() {
-        return horaInicio;
-    }
-
-    public LocalTime getHoraFin() {
-        return horaFin;
-    }
-
-    public EstadoActividad getEstadoActividad() {
-        return estadoActividad;
-    }
-
-    public Actividad getActividad() {
-        return actividad;
-    }
-
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
-    }
-
-    private void setFechaProgramada(LocalDate fechaProgramada) {
-        this.fechaProgramada = fechaProgramada;
-    }
-
-    private void setFechaRealizacion(LocalDate fechaRealizacion) {
-        this.fechaRealizacion = fechaRealizacion;
-    }
-
-    private void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    private void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
-    }
-
-    private void setEstadoActividad(EstadoActividad estadoActividad) {
-        this.estadoActividad = estadoActividad;
-    }
-
-    private void setActividad(Actividad actividad) {
-        this.actividad = actividad;
     }
 }

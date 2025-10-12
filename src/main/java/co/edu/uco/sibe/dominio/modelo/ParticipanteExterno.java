@@ -1,7 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import lombok.Getter;
 import java.util.UUID;
 
+@Getter
 public class ParticipanteExterno extends Participante {
     private ParticipanteExterno(UUID identificador, Miembro miembro) {
         super(identificador, miembro);
