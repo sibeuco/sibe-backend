@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -89,26 +92,52 @@ public class Estudiante extends Interno {
     ) {
         return new Estudiante(
                 identificador,
-                nombreCompleto,
-                numeroIdentificacion,
-                ciudadResidencia,
-                idCarnet,
-                sexo,
-                fechaNacimiento,
-                nacionalidad,
-                estadoCivil,
-                correoPersonal,
-                correoInstitucional,
-                programaAcademico,
-                facultad,
-                annoIngreso,
-                semestreActual,
-                creditosAprobados,
-                promedioGeneral,
-                estadoAcademico,
-                modalidadEstudio,
-                tiempoLlegadaUniversidad,
-                medioTransporte
+                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
+                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
+                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
+                ValidadorTexto.obtenerValorPorDefecto(sexo),
+                UtilFecha.getInstance().obtenerValorFechaPorDefecto(fechaNacimiento),
+                ValidadorTexto.obtenerValorPorDefecto(nacionalidad),
+                ValidadorTexto.obtenerValorPorDefecto(estadoCivil),
+                ValidadorTexto.obtenerValorPorDefecto(correoPersonal),
+                ValidadorTexto.obtenerValorPorDefecto(correoInstitucional),
+                ValidadorTexto.obtenerValorPorDefecto(programaAcademico),
+                ValidadorTexto.obtenerValorPorDefecto(facultad),
+                ValidadorNumero.obtenerNumeroPorDefecto(annoIngreso),
+                ValidadorTexto.obtenerValorPorDefecto(semestreActual),
+                ValidadorNumero.obtenerNumeroPorDefecto(creditosAprobados),
+                ValidadorNumero.obtenerNumeroPorDefecto(promedioGeneral),
+                ValidadorTexto.obtenerValorPorDefecto(estadoAcademico),
+                ValidadorTexto.obtenerValorPorDefecto(modalidadEstudio),
+                ValidadorNumero.obtenerNumeroPorDefecto(tiempoLlegadaUniversidad),
+                ValidadorTexto.obtenerValorPorDefecto(medioTransporte)
+        );
+    }
+
+    public static Estudiante construir() {
+        return new Estudiante(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                CiudadResidencia.construir(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                UtilFecha.getInstance().obtenerFechaDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                NumeroConstante.CERO,
+                TextoConstante.VACIO,
+                NumeroConstante.CERO,
+                NumeroConstante.CERO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                NumeroConstante.CERO,
+                TextoConstante.VACIO
         );
     }
 }

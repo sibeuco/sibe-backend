@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -17,6 +20,10 @@ public class Miembro {
     }
 
     public static Miembro construir(UUID identificador, String nombreCompleto, String numeroIdentificacion) {
-        return new Miembro(identificador, nombreCompleto, numeroIdentificacion);
+        return new Miembro(identificador, ValidadorTexto.obtenerValorPorDefecto(nombreCompleto), ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion));
+    }
+
+    public static Miembro construir() {
+        return new Miembro(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO);
     }
 }

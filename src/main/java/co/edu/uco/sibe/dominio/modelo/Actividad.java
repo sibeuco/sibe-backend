@@ -1,8 +1,7 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -47,7 +46,11 @@ public class Actividad {
             UUID colaborador,
             UUID creador
     ) {
-        return new Actividad(identificador, nombre, objetivo, semestre, rutaInsumos, indicador, colaborador, creador);
+        return new Actividad(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre), ValidadorTexto.obtenerValorPorDefecto(objetivo), ValidadorTexto.obtenerValorPorDefecto(semestre), ValidadorTexto.obtenerValorPorDefecto(rutaInsumos), ValidadorObjeto.obtenerValorPorDefecto(indicador,Indicador.construir()), colaborador, creador);
+    }
+
+    public static Actividad construir() {
+        return new Actividad(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO, TextoConstante.VACIO, TextoConstante.VACIO, Indicador.construir(), UtilUUID.obtenerValorDefecto(), UtilUUID.obtenerValorDefecto());
     }
 
     private void setIdentificador(UUID identificador) {

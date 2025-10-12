@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import lombok.Getter;
 import java.util.UUID;
 
@@ -16,6 +18,10 @@ public class RegistroAsistencia {
     }
 
     public static RegistroAsistencia construir(UUID identificador, EjecucionActividad ejecucionActividad, Participante participante) {
-        return new RegistroAsistencia(identificador, ejecucionActividad, participante);
+        return new RegistroAsistencia(identificador, ValidadorObjeto.obtenerValorPorDefecto(ejecucionActividad, EjecucionActividad.construir()), ValidadorObjeto.obtenerValorPorDefecto(participante, Participante.construir()));
+    }
+
+    public static RegistroAsistencia construir() {
+        return new RegistroAsistencia(UtilUUID.obtenerValorDefecto(), EjecucionActividad.construir(), Participante.construir());
     }
 }

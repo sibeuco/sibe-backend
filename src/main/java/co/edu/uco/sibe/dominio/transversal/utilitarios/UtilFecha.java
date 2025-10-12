@@ -31,6 +31,14 @@ public class UtilFecha {
         return HORA_DEFECTO;
     }
 
+    public LocalDate obtenerValorFechaPorDefecto(LocalDate fecha) {
+        return (fecha != null) ? fecha : FECHA_DEFECTO;
+    }
+
+    public LocalTime obtenerValorHoraPorDefecto(LocalTime hora) {
+        return (hora != null) ? hora : HORA_DEFECTO;
+    }
+
     public LocalDateTime obtenerHoraFechaDefecto(){
         return FECHA_HORA_DEFECTO;
     }

@@ -1,7 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +25,10 @@ public class Area {
     }
 
     public static Area construir(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
-        return new Area(identificador, nombre, subareas, actividades);
+        return new Area(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre), ValidadorObjeto.obtenerValorPorDefecto(subareas, new ArrayList<Subarea>()), ValidadorObjeto.obtenerValorPorDefecto(actividades, new ArrayList<Actividad>()));
+    }
+
+    public static Area construir() {
+        return new Area(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, new ArrayList<Subarea>(), new ArrayList<Actividad>());
     }
 }

@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import lombok.Getter;
 import java.util.UUID;
 
@@ -10,6 +12,10 @@ public class ParticipanteExterno extends Participante {
     }
 
     public static ParticipanteExterno construir(UUID identificador, Miembro miembro) {
-        return new ParticipanteExterno(identificador, miembro);
+        return new ParticipanteExterno(identificador, ValidadorObjeto.obtenerValorPorDefecto(miembro, Miembro.construir()));
+    }
+
+    public static ParticipanteExterno construir() {
+        return new ParticipanteExterno(UtilUUID.obtenerValorDefecto(), Miembro.construir());
     }
 }

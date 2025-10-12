@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class UtilUUID {
 
-    private static final String UUID_DEFECTO_TEXTO = "00000000-0000-0000-0000-000000000000";
+    public static final String UUID_DEFECTO_TEXTO = "00000000-0000-0000-0000-000000000000";
 
     private UtilUUID() {
         super();

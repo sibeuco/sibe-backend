@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -15,6 +18,10 @@ public class PublicoInteres {
     }
 
     public static PublicoInteres construir(UUID identificador, String nombre) {
-        return new PublicoInteres(identificador, nombre);
+        return new PublicoInteres(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre));
+    }
+
+    public static PublicoInteres construir() {
+        return new PublicoInteres(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO);
     }
 }

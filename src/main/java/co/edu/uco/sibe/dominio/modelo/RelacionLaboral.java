@@ -1,5 +1,8 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 
@@ -16,6 +19,10 @@ public class RelacionLaboral {
     }
 
     public static RelacionLaboral construir(UUID identificador, String codigo, String descripcion) {
-        return new RelacionLaboral(identificador, codigo, descripcion);
+        return new RelacionLaboral(identificador, ValidadorTexto.obtenerValorPorDefecto(codigo), ValidadorTexto.obtenerValorPorDefecto(descripcion));
+    }
+
+    public static RelacionLaboral construir() {
+        return new RelacionLaboral(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO);
     }
 }

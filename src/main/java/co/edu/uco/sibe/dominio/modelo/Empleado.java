@@ -1,5 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -34,6 +38,10 @@ public class Empleado extends Interno {
             RelacionLaboral relacionLaboral,
             CentroCostos centroCostos
     ) {
-        return new Empleado(identificador, nombreCompleto, numeroIdentificacion, ciudadResidencia, idCarnet, sexo, relacionLaboral, centroCostos);
+        return new Empleado(identificador, ValidadorTexto.obtenerValorPorDefecto(nombreCompleto), ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion), ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()), ValidadorTexto.obtenerValorPorDefecto(idCarnet), ValidadorTexto.obtenerValorPorDefecto(sexo), ValidadorObjeto.obtenerValorPorDefecto(relacionLaboral, RelacionLaboral.construir()), ValidadorObjeto.obtenerValorPorDefecto(centroCostos, CentroCostos.construir()));
+    }
+
+    public static Empleado construir() {
+        return new Empleado(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO, CiudadResidencia.construir(), TextoConstante.VACIO, TextoConstante.VACIO, RelacionLaboral.construir(), CentroCostos.construir());
     }
 }
