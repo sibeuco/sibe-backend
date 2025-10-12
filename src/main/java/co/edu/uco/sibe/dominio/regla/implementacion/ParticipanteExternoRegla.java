@@ -8,6 +8,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
 public class ParticipanteExternoRegla implements Regla<ParticipanteExterno> {
+    private static final ParticipanteExternoRegla INSTANCIA = new ParticipanteExternoRegla();
+
+    private ParticipanteExternoRegla() {
+        super();
+    }
+
+    public static ParticipanteExternoRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO);

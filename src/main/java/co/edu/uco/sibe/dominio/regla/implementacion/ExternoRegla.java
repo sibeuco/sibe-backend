@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.regla.implementacion;
 
-import co.edu.uco.sibe.dominio.modelo.Empleado;
+import co.edu.uco.sibe.dominio.modelo.Externo;
 import co.edu.uco.sibe.dominio.regla.Regla;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
@@ -9,14 +9,24 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 
 import java.util.UUID;
 
-public class ExternoRegla implements Regla<Empleado> {
+public class ExternoRegla implements Regla<Externo> {
+    private static final ExternoRegla INSTANCIA = new ExternoRegla();
+
+    private ExternoRegla() {
+        super();
+    }
+
+    public static ExternoRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_EXTERNO_NULO);
     }
 
     @Override
-    public void validarCampos(Empleado modelo) {
+    public void validarCampos(Externo modelo) {
         validarNombreCompleto(modelo.getNombreCompleto());
         validarNumeroIdentificacion(modelo.getNumeroIdentificacion());
     }

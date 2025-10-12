@@ -10,6 +10,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 
 public class EmpleadoRegla implements Regla<Empleado> {
+    private static final EmpleadoRegla INSTANCIA = new EmpleadoRegla();
+
+    private EmpleadoRegla() {
+        super();
+    }
+
+    public static EmpleadoRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_EMPLEADO_NULO);

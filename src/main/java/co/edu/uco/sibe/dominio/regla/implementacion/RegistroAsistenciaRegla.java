@@ -8,6 +8,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
 public class RegistroAsistenciaRegla implements Regla<RegistroAsistencia> {
+    private static final RegistroAsistenciaRegla INSTANCIA = new RegistroAsistenciaRegla();
+
+    private RegistroAsistenciaRegla() {
+        super();
+    }
+
+    public static RegistroAsistenciaRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO);

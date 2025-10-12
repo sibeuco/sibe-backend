@@ -27,7 +27,8 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
 
     @Override
     public void validarCampos(CentroCostos modelo) {
-
+        validarCodigo(modelo.getCodigo());
+        validarDescripcion(modelo.getDescripcion());
     }
 
     private void validarCodigo(String codigo) {

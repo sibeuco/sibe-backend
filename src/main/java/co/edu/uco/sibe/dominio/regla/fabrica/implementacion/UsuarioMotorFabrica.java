@@ -19,16 +19,16 @@ public final class UsuarioMotorFabrica implements MotorFabrica<Usuario> {
 
     @Override
     public MotorRegla<Usuario> obtenerMotorReglas() {
-        var motorUsuario = new MotorRegla<Usuario>();
-        var reglaUsuario = UsuarioRegla.obtenerInstancia();
+        var motor = new MotorRegla<Usuario>();
+        var regla = UsuarioRegla.obtenerInstancia();
 
-        motorUsuario.agregarRegla(TipoOperacion.CREAR, usuario -> reglaUsuario.validarIdentificador(usuario.getIdentificador()));
-        motorUsuario.agregarRegla(TipoOperacion.CREAR, reglaUsuario::validarCampos);
-        motorUsuario.agregarRegla(TipoOperacion.ACTUALIZAR, usuario -> reglaUsuario.validarIdentificador(usuario.getIdentificador()));
-        motorUsuario.agregarRegla(TipoOperacion.ACTUALIZAR, reglaUsuario::validarCampos);
-        motorUsuario.agregarRegla(TipoOperacion.ELIMINAR, usuario -> reglaUsuario.validarIdentificador(usuario.getIdentificador()));
-        motorUsuario.agregarRegla(TipoOperacion.CONSULTAR, usuario -> reglaUsuario.validarIdentificador(usuario.getIdentificador()));
+        motor.agregarRegla(TipoOperacion.CREAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
+        motor.agregarRegla(TipoOperacion.CREAR, regla::validarCampos);
+        motor.agregarRegla(TipoOperacion.ACTUALIZAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
+        motor.agregarRegla(TipoOperacion.ACTUALIZAR, regla::validarCampos);
+        motor.agregarRegla(TipoOperacion.ELIMINAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
+        motor.agregarRegla(TipoOperacion.CONSULTAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
 
-        return motorUsuario;
+        return motor;
     }
 }

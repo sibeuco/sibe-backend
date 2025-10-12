@@ -7,6 +7,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
 public class EjecucionActividadRegla implements Regla<EjecucionActividad> {
+    private static final EjecucionActividadRegla INSTANCIA = new EjecucionActividadRegla();
+
+    private EjecucionActividadRegla() {
+        super();
+    }
+
+    public static EjecucionActividadRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_EJECUCION_ACTIVIDAD_NULO);

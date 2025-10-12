@@ -7,6 +7,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
 public class UsuarioOrganizacionRegla implements Regla<UsuarioOrganizacion> {
+    private static final UsuarioOrganizacionRegla INSTANCIA = new UsuarioOrganizacionRegla();
+
+    private UsuarioOrganizacionRegla() {
+        super();
+    }
+
+    public static UsuarioOrganizacionRegla obtenerInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public void validarIdentificador(UUID identificador) {
         ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_USUARIO_ORGANIZACION_NULO);
