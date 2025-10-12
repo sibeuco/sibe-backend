@@ -21,7 +21,7 @@ public final class ProyectoRegla implements Regla<Proyecto> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PROYECTO_NULO);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -17,6 +18,6 @@ public class Accion {
     }
 
     public static Accion construir(UUID identificador, String detalle, String objetivo) {
-        return new Accion(identificador, detalle, objetivo);
+        return new Accion(identificador, ValidadorTexto.obtenerValorPorDefecto(detalle), objetivo);
     }
 }

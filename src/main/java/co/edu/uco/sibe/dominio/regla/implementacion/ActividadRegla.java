@@ -22,7 +22,7 @@ public final class ActividadRegla implements Regla<Actividad> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_ACTIVIDAD_NULO);
     }
 
     @Override

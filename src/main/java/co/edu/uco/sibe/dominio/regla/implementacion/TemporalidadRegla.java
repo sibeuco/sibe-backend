@@ -22,7 +22,7 @@ public final class TemporalidadRegla implements Regla<Temporalidad> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_TEMPORALIDAD_NULO);
     }
 
     @Override

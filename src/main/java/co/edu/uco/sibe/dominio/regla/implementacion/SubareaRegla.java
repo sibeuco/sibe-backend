@@ -21,7 +21,7 @@ public final class SubareaRegla implements Regla<Subarea> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_SUBAREA_NULO);
     }
 
     @Override

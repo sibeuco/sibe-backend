@@ -21,7 +21,7 @@ public final class RelacionLaboralRegla implements Regla<RelacionLaboral> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_RELACION_LABORAL_NULO);
     }
 
     @Override

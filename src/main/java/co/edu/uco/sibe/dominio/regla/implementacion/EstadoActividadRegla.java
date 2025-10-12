@@ -21,7 +21,7 @@ public final class EstadoActividadRegla implements Regla<EstadoActividad> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_ESTADO_ACTIVIDAD_NULO);
     }
 
     @Override

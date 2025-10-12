@@ -21,7 +21,7 @@ public final class IndicadorRegla implements Regla<Indicador> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_INDICADOR_NULO);
     }
 
     @Override

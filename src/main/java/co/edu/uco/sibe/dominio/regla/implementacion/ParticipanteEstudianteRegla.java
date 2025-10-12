@@ -21,7 +21,7 @@ public final class ParticipanteEstudianteRegla implements Regla<ParticipanteEstu
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PARTICIPANTE_ESTUDIANTE_NULO);
     }
 
     @Override

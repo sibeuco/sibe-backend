@@ -22,7 +22,7 @@ public final class TipoIdentificacionRegla implements Regla<TipoIdentificacion> 
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_TIPO_IDENTIFICACION_NULO);
     }
 
     @Override

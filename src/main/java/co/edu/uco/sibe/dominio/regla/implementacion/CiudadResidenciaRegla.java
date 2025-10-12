@@ -22,7 +22,7 @@ public final class CiudadResidenciaRegla implements Regla<CiudadResidencia> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_CIUDAD_RESIDENCIA_NULO);
     }
 
     @Override

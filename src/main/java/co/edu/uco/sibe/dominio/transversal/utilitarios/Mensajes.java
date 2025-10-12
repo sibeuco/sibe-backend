@@ -195,6 +195,29 @@ public class Mensajes {
     public static final String NO_SE_ENCONTRARON_AREAS = "No se encontraron areas registradas.";
     public static final String IDENTIFICADOR_USUARIO_NULO = "El identificiador de un usuario no puede ser nulo";
     public static final String NO_HAY_CAMPOS_POR_VALIDAR = "No hay campos por validar para este modelo de dominio";
+    public static final String IDENTIFICADOR_TIPO_USUARIO_NULO = "El identificador del tipo usuario no puede ser nulo.";
+    public static final String IDENTIFICADOR_TIPO_INDICADOR_NULO = "El identificador del tipo indicador no puede ser nulo.";
+    public static final String IDENTIFICADOR_TIPO_IDENTIFICACION_NULO = "El identificador del tipo identificacion no puede ser nulo.";
+    public static final String IDENTIFICADOR_TEMPORALIDAD_NULO = "El identificador de la temporalidad no puede ser nulo.";
+    public static final String IDENTIFICADOR_SUBAREA_NULO = "El identificador de la sub área no puede ser nulo.";
+    public static final String IDENTIFICADOR_RELACION_LABORAL_NULO = "El identificador de la relación laboral no puede ser nulo.";
+    public static final String IDENTIFICADOR_PUBLICO_INTERES_NULO = "El identificador del público interés no puede ser nulo.";
+    public static final String IDENTIFICADOR_PROYECTO_NULO = "El identificador del proyecto no puede ser nulo.";
+    public static final String IDENTIFICADOR_PERSONA_NULO = "El identificador de la persona no puede ser nulo.";
+    public static final String IDENTIFICADOR_PARTICIPANTE_INTERNO_NULO = "El identificador del participante interno no puede ser nulo.";
+    public static final String IDENTIFICADOR_PARTICIPANTE_ESTUDIANTE_NULO = "El identificador del participante estudiante no puede ser nulo.";
+    public static final String IDENTIFICADOR_MIEMBRO_NULO = "El identificador del miembro no puede ser nulo.";
+    public static final String IDENTIFICADOR_INTERNO_NULO = "El identificador del interno no puede ser nulo.";
+    public static final String IDENTIFICADOR_INDICADOR_NULO = "El identificador del indicador no puede ser nulo.";
+    public static final String IDENTIFICADOR_IDENTIFICACION_NULO = "El identificador de la identificación no puede ser nulo.";
+    public static final String IDENTIFICADOR_ESTUDIANTE_NULO = "El identificador del estudiante no puede ser nulo.";
+    public static final String IDENTIFICADOR_ESTADO_ACTIVIDAD_NULO = "El identificador del estado actividad no puede ser nulo.";
+    public static final String IDENTIFICADOR_DIRECCION_NULO = "El identificador de la dirección no puede ser nulo.";
+    public static final String IDENTIFICADOR_CIUDAD_RESIDENCIA_NULO = "El identificador de la ciudad de residencia no puede ser nulo.";
+    public static final String IDENTIFICADOR_CENTRO_COSTOS_NULO = "El identificador del centro de costos no puede ser nulo.";
+    public static final String IDENTIFICADOR_AREA_NULO = "El identificador del área no puede ser nulo.";
+    public static final String IDENTIFICADOR_ACTIVIDAD_NULO = "El identificador de la actividad no puede ser nulo.";
+    public static final String IDENTIFICADOR_ACCION_NULO = "El identificador de la acción no puede ser nulo.";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
@@ -204,6 +227,7 @@ public class Mensajes {
     private static final String NO_EXISTE_TIPO_AREA_CON_IDENTIFICADOR = "No existe un tipo área con el identificador ";
     private static final String NO_EXISTE_TIPO_IDENTIFICACION_CON_IDENTIFICADOR = "No existe un tipo identificacion con el identificador ";
     private static final String NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR = "No existe un tipo usuario con el identificador ";
+
     public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
     public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
     public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";

@@ -22,7 +22,7 @@ public final class DireccionRegla implements Regla<Direccion> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_DIRECCION_NULO);
     }
 
     @Override

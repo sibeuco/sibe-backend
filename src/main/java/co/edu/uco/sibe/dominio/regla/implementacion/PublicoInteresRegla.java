@@ -21,7 +21,7 @@ public final class PublicoInteresRegla implements Regla<PublicoInteres> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PUBLICO_INTERES_NULO);
     }
 
     @Override

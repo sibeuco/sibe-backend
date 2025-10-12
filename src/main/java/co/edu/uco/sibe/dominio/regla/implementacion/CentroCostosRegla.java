@@ -22,7 +22,7 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_CENTRO_COSTOS_NULO);
     }
 
     @Override

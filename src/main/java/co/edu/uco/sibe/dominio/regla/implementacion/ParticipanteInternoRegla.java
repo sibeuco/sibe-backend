@@ -21,7 +21,7 @@ public final class ParticipanteInternoRegla implements Regla<ParticipanteInterno
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PARTICIPANTE_INTERNO_NULO);
     }
 
     @Override

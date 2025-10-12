@@ -22,7 +22,7 @@ public final class AreaRegla implements Regla<Area> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_AREA_NULO);
     }
 
     @Override

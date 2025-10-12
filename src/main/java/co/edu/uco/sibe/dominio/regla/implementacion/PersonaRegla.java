@@ -23,7 +23,7 @@ public final class PersonaRegla implements Regla<Persona> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PERSONA_NULO);
     }
 
     @Override

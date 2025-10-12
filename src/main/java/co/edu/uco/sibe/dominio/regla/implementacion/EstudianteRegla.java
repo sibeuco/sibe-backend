@@ -22,7 +22,7 @@ public final class EstudianteRegla implements Regla<Estudiante> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_ESTUDIANTE_NULO);
     }
 
     @Override

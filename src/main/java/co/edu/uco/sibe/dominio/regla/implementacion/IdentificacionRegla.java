@@ -22,7 +22,7 @@ public final class IdentificacionRegla implements Regla<Identificacion> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_IDENTIFICACION_NULO);
     }
 
     @Override

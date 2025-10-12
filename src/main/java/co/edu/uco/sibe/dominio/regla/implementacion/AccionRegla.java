@@ -21,7 +21,7 @@ public final class AccionRegla implements Regla<Accion> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_ACCION_NULO);
     }
 
     @Override

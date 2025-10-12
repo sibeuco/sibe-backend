@@ -22,7 +22,7 @@ public final class InternoRegla implements Regla<Interno> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_INTERNO_NULO);
     }
 
     @Override

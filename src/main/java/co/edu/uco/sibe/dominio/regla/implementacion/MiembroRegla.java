@@ -22,7 +22,7 @@ public final class MiembroRegla implements Regla<Miembro> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_MIEMBRO_NULO);
     }
 
     @Override
