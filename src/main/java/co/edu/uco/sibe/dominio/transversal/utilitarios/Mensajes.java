@@ -194,6 +194,7 @@ public class Mensajes {
     public static final String LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA = "El campo de la descripción debe contener entre 1 y 40 caracteres.";
     public static final String NO_SE_ENCONTRARON_AREAS = "No se encontraron areas registradas.";
     public static final String IDENTIFICADOR_USUARIO_NULO = "El identificiador de un usuario no puede ser nulo";
+    public static final String NO_HAY_CAMPOS_POR_VALIDAR = "No hay campos por validar para este modelo de dominio";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
@@ -203,7 +204,6 @@ public class Mensajes {
     private static final String NO_EXISTE_TIPO_AREA_CON_IDENTIFICADOR = "No existe un tipo área con el identificador ";
     private static final String NO_EXISTE_TIPO_IDENTIFICACION_CON_IDENTIFICADOR = "No existe un tipo identificacion con el identificador ";
     private static final String NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR = "No existe un tipo usuario con el identificador ";
-
     public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
     public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
     public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";
