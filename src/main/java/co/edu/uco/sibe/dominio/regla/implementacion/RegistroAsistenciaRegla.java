@@ -10,7 +10,7 @@ import java.util.UUID;
 public class RegistroAsistenciaRegla implements Regla<RegistroAsistencia> {
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO);
     }
 
     @Override

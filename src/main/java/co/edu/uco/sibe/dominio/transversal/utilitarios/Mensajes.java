@@ -204,7 +204,8 @@ public class Mensajes {
     public static final String IDENTIFICADOR_PUBLICO_INTERES_NULO = "El identificador del público interés no puede ser nulo.";
     public static final String IDENTIFICADOR_PROYECTO_NULO = "El identificador del proyecto no puede ser nulo.";
     public static final String IDENTIFICADOR_PERSONA_NULO = "El identificador de la persona no puede ser nulo.";
-    public static final String IDENTIFICADOR_PARTICIPANTE_INTERNO_NULO = "El identificador del participante interno no puede ser nulo.";
+    public static final String IDENTIFICADOR_PARTICIPANTE_EMPLEADO_NULO = "El identificador del participante empleado no puede ser nulo.";
+    public static final String IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO = "El identificador del participante externo no puede ser nulo.";
     public static final String IDENTIFICADOR_PARTICIPANTE_ESTUDIANTE_NULO = "El identificador del participante estudiante no puede ser nulo.";
     public static final String IDENTIFICADOR_MIEMBRO_NULO = "El identificador del miembro no puede ser nulo.";
     public static final String IDENTIFICADOR_INTERNO_NULO = "El identificador del interno no puede ser nulo.";
@@ -218,6 +219,11 @@ public class Mensajes {
     public static final String IDENTIFICADOR_AREA_NULO = "El identificador del área no puede ser nulo.";
     public static final String IDENTIFICADOR_ACTIVIDAD_NULO = "El identificador de la actividad no puede ser nulo.";
     public static final String IDENTIFICADOR_ACCION_NULO = "El identificador de la acción no puede ser nulo.";
+    public static final String IDENTIFICADOR_EJECUCION_ACTIVIDAD_NULO = "El identificador de la ejecución de la actividad no puede ser nulo.";
+    public static final String IDENTIFICADOR_EMPLEADO_NULO = "El identificador del empleado no puede ser nulo.";
+    public static final String IDENTIFICADOR_EXTERNO_NULO = "El identificador del externo no puede ser nulo.";
+    public static final String IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO = "El identificador del registro de asistencia no puede ser nulo.";
+    public static final String IDENTIFICADOR_USUARIO_ORGANIZACION_NULO = "El identificador del usuario organizaicón no puede ser nulo.";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";

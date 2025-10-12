@@ -9,7 +9,7 @@ import java.util.UUID;
 public class EjecucionActividadRegla implements Regla<EjecucionActividad> {
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_EJECUCION_ACTIVIDAD_NULO);
     }
 
     @Override

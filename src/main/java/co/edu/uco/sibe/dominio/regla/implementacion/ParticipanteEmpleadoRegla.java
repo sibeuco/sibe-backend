@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ParticipanteEmpleadoRegla implements Regla<ParticipanteEmpleado> {
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PARTICIPANTE_EMPLEADO_NULO);
     }
 
     @Override

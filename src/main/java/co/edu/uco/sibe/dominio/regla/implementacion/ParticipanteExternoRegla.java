@@ -10,7 +10,7 @@ import java.util.UUID;
 public class ParticipanteExternoRegla implements Regla<ParticipanteExterno> {
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.UUID;
 public class UsuarioOrganizacionRegla implements Regla<UsuarioOrganizacion> {
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, "");
+        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_USUARIO_ORGANIZACION_NULO);
     }
 
     @Override
