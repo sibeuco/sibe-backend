@@ -1,14 +1,15 @@
 package co.edu.uco.sibe.dominio.puerto.comando;
 
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
+
 import java.util.UUID;
 
 public interface PersonaRepositorioComando {
 
     UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String contrasenaEncriptada);
 
-    UUID modificarPersona(Persona persona, UUID identificador);
-
-    UUID modificarUsuario(Usuario usuario, UUID identificador);
+    UUID modificarUsuario(Usuario usuario, Persona persona, UUID identificador);
 
     UUID modificarContrasena(String nuevaContrasena, UUID identificador);
 

@@ -1,22 +1,35 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
+import co.edu.uco.sibe.dominio.dto.PersonaDTO;
+import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
+
 import java.util.List;
 import java.util.UUID;
 
 public interface PersonaRepositorioConsulta {
 
-    PersonaDTO consultarPersonaPorIdentificador(UUID identificador);
+    PersonaDTO consultarPersonaPorIdentificadorDTO(UUID identificador);
 
-    PersonaDTO consultarPersonaPorDocumento(String documento);
+    Persona consultarPersonaPorIdentificador(UUID identificador);
 
-    PersonaDTO consultarPersonaPorCorreo(String correo);
+    PersonaDTO consultarPersonaPorCorreoDTO(String correo);
 
-    UsuarioDTO consultarUsuarioPorIdentificador(UUID identificador);
+    Persona consultarPersonaPorCorreo(String correo);
 
-    UsuarioDTO consultarUsuarioPorCorreo(String correo);
+    Persona consultarPersonaPorDocumento(String documento);
 
-    List<PersonaDTO> consultarPersonas();
+    UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador);
 
-    List<UsuarioDTO> consultarUsuarios();
+    Usuario consultarUsuarioPorIdentificador(UUID identificador);
+
+    UsuarioDTO consultarUsuarioPorCorreoDTO(String correo);
+
+    Usuario consultarUsuarioPorCorreo(String correo);
+
+    List<UsuarioDTO> consultarUsuariosDTO();
+
+    List<Usuario> consultarUsuarios();
 
 }

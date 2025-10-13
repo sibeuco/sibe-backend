@@ -24,7 +24,7 @@ public class LoginUseCase {
     }
 
     private void validarSiNoExisteUsuarioConCorreo(String email) {
-        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(email))) {
+        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(email))) {
             throw new AuthorizationException(Mensajes.USUARIO_O_CLAVE_INCORRECTO);
         }
     }

@@ -43,11 +43,6 @@ public class UseCaseBean {
     }
 
     @Bean
-    public ConsultarAreaPorIdentificadorUseCase consultarAreaPorIdentificadorUseCase(AreaRepositorioConsulta areaRepositorioConsulta){
-        return new ConsultarAreaPorIdentificadorUseCase(areaRepositorioConsulta);
-    }
-
-    @Bean
     public ConsultarAreasUseCase consultarAreasUseCase(AreaRepositorioConsulta areaRepositorioConsulta){
         return new ConsultarAreasUseCase(areaRepositorioConsulta);
     }
@@ -58,38 +53,8 @@ public class UseCaseBean {
     }
 
     @Bean
-    public ConsultarPersonaPorDocumentoUseCase consultarPersonaPorDocumentoUseCase(PersonaRepositorioConsulta personaRepositorioConsulta){
-        return new ConsultarPersonaPorDocumentoUseCase(personaRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarPersonasUseCase consultarPersonasUseCase(PersonaRepositorioConsulta personaRepositorioConsulta){
-        return new ConsultarPersonasUseCase(personaRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarTipoAreaPorIdentificadorUseCase consultarTipoAreaPorIdentificadorUseCase(TipoAreaRepositorioConsulta tipoAreaRepositorioConsulta){
-        return new ConsultarTipoAreaPorIdentificadorUseCase(tipoAreaRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarTiposAreaUseCase consultarTiposAreaUseCase(TipoAreaRepositorioConsulta tipoAreaRepositorioConsulta){
-        return new ConsultarTiposAreaUseCase(tipoAreaRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarTipoIdentificacionPorIdentificadorUseCase consultarTipoIdentificacionPorIdentificadorUseCase(TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta){
-        return new ConsultarTipoIdentificacionPorIdentificadorUseCase(tipoIdentificacionRepositorioConsulta);
-    }
-
-    @Bean
     public ConsultarTiposIdentificacionUseCase consultarTiposIdentificacionUseCase(TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta){
         return new ConsultarTiposIdentificacionUseCase(tipoIdentificacionRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarTipoUsuarioPorIdentificadorUseCase consultarTipoUsuarioPorIdentificador(TipoUsuarioRepositorioConsulta tipoUsuarioRepositorioConsulta){
-        return new ConsultarTipoUsuarioPorIdentificadorUseCase(tipoUsuarioRepositorioConsulta);
     }
 
     @Bean

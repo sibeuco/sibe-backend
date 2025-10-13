@@ -4,7 +4,6 @@ import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
 import co.edu.uco.sibe.aplicacion.comando.manejador.AgregarNuevoUsuarioManejador;
 import co.edu.uco.sibe.aplicacion.comando.manejador.EliminarPersonaManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarPersonaManejador;
 import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarUsuarioManejador;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
@@ -21,18 +20,11 @@ public class UsuarioComandoControlador {
     private final AgregarNuevoUsuarioManejador agregarNuevoUsuarioManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;
     private final ModificarUsuarioManejador modificarUsuarioManejador;
-    private final ModificarPersonaManejador modificarPersonaManejador;
 
     @PreAuthorize(TextoConstante.HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
     public ComandoRespuesta<UUID> agregarNuevoUsuario(@RequestBody UsuarioComando usuario){
         return this.agregarNuevoUsuarioManejador.ejecutar(usuario);
-    }
-
-    @PreAuthorize(TextoConstante.HAS_USER_OR_ADMIN_UPDATE_AUTHORITY)
-    @PutMapping("/persona/{identificador}")
-    public ComandoRespuesta<UUID> modificarPersona(@RequestBody UsuarioModificacionComando persona, @PathVariable("identificador") UUID identificador){
-        return modificarPersonaManejador.ejecutar(persona, identificador);
     }
 
     @PreAuthorize(TextoConstante.HAS_USER_OR_ADMIN_UPDATE_AUTHORITY)

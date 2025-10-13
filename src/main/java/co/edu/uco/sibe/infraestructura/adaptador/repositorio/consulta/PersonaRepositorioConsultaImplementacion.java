@@ -26,7 +26,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     UsuarioMapeador usuarioMapeador;
 
     @Override
-    public PersonaDTO consultarPersonaPorIdentificador(UUID identificador) {
+    public PersonaDTO consultarPersonaPorIdentificadorDTO(UUID identificador) {
         var entidad = this.personaDAO.consultarPersonaPorIdentificador(identificador);
 
         if (ValidadorObjeto.getInstance().esNulo(entidad)){
@@ -46,7 +46,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public PersonaDTO consultarPersonaPorCorreo(String correo) {
+    public PersonaDTO consultarPersonaPorCorreoDTO(String correo) {
         var entidad = this.personaDAO.consultarPersonaPorCorreo(correo);
 
         if (ValidadorObjeto.getInstance().esNulo(entidad)){
@@ -56,7 +56,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public UsuarioDTO consultarUsuarioPorIdentificador(UUID identificador) {
+    public UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador) {
         var entidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
 
         if (ValidadorObjeto.getInstance().esNulo(entidad)){
@@ -66,7 +66,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public UsuarioDTO consultarUsuarioPorCorreo(String correo) {
+    public UsuarioDTO consultarUsuarioPorCorreoDTO(String correo) {
         var entidad = this.usuarioDAO.consultarUsuarioPorCorreo(correo);
 
         if (ValidadorObjeto.getInstance().esNulo(entidad)){
@@ -83,7 +83,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     }
 
     @Override
-    public List<UsuarioDTO> consultarUsuarios() {
+    public List<UsuarioDTO> consultarUsuariosDTO() {
         var entidades = this.usuarioDAO.findAll();
 
         return this.usuarioMapeador.construirDTOs(entidades);

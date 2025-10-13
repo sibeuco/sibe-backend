@@ -2,6 +2,8 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
+import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
+import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
@@ -59,7 +61,7 @@ public class UsuarioFabrica {
         UUID nuevoUUID;
         do {
             nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (personaRepositorioConsulta.consultarUsuarioPorIdentificador(nuevoUUID) != null);
+        } while (personaRepositorioConsulta.consultarUsuarioPorIdentificadorDTO(nuevoUUID) != null);
         return nuevoUUID;
     }
 

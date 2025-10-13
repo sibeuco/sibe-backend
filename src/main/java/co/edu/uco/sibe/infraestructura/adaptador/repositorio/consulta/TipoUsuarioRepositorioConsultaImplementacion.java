@@ -28,7 +28,7 @@ public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuario
     }
 
     @Override
-    public List<TipoUsuarioDTO> consultarTiposUsuario() {
+    public List<TipoUsuarioDTO> consultarTiposUsuarioDTO() {
         var entidades = this.tipoUsuarioDAO.findAll();
 
         return this.tipoUsuarioMapeador.construirDTOs(entidades);

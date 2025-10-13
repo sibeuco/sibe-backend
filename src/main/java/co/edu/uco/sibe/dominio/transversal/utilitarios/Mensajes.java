@@ -224,6 +224,7 @@ public class Mensajes {
     public static final String IDENTIFICADOR_EXTERNO_NULO = "El identificador del externo no puede ser nulo.";
     public static final String IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO = "El identificador del registro de asistencia no puede ser nulo.";
     public static final String IDENTIFICADOR_USUARIO_ORGANIZACION_NULO = "El identificador del usuario organizaicón no puede ser nulo.";
+    public static final String DOCUMENTO_EXISTENTE = "Ya existe un usuario con el número de identificación suministrado.";
     private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";

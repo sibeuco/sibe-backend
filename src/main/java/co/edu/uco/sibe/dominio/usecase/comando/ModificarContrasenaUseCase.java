@@ -24,7 +24,7 @@ public class ModificarContrasenaUseCase {
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
-        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
         }
     }

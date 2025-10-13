@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.AreaDTO;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

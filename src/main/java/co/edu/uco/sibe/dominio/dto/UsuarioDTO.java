@@ -13,7 +13,10 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UsuarioDTO {
     private UUID identificador;
+    private String nombres;
+    private String apellidos;
     private String correo;
+    private IdentificacionDTO identificacion;
     private TipoUsuarioDTO tipoUsuario;
     private Boolean estaActivo;
 }

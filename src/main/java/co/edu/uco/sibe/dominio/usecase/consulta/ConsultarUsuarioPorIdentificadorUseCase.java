@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
+import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
@@ -18,12 +19,12 @@ public class ConsultarUsuarioPorIdentificadorUseCase {
     public UsuarioDTO ejecutar(UUID identificador){
         validarSiNoExisteUsuarioConId(identificador);
 
-        return personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador);
+        return personaRepositorioConsulta.consultarUsuarioPorIdentificadorDTO(identificador);
 
     }
 
     private void validarSiNoExisteUsuarioConId(UUID identificador) {
-        if (ValidadorObjeto.getInstance().esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
+        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(identificador));
         }
     }

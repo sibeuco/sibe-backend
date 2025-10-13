@@ -29,7 +29,7 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
     }
 
     @Override
-    public List<TipoIdentificacionDTO> consultarTiposIdentificacion() {
+    public List<TipoIdentificacionDTO> consultarTiposIdentificacionDTO() {
         var entidades = this.tipoIdentificacionDAO.findAll();
 
         return this.tipoIdentificacionMapeador.construirDTOs(entidades);
