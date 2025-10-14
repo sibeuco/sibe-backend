@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -18,9 +17,9 @@ public class TipoIdentificacionEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 5, nullable = false)
+    @Column(length = 6, nullable = false)
     private String sigla;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 30, nullable = false)
     private String descripcion;
 }

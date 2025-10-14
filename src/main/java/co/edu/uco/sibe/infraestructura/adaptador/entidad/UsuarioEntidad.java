@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -18,17 +17,16 @@ public class UsuarioEntidad {
     @Id
     private UUID identificador;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 100, nullable = false)
     private String correo;
 
-    @Column(length = 100, nullable = false)
-    private String contrasena;
-
-    @ManyToOne
-    @JoinColumn(name = "tipo_usuario", nullable = false)
-    private TipoUsuarioEntidad tipoUsuario;
+    @Column(nullable = false)
+    private String clave;
 
     @Column(name = "esta_activo", nullable = false)
     private boolean estaActivo;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario", nullable = false)
+    private UsuarioTipoUsuarioEntidad rol;
 }

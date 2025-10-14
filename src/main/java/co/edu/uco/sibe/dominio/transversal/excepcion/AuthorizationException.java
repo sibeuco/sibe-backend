@@ -1,8 +1,6 @@
 package co.edu.uco.sibe.dominio.transversal.excepcion;
 
 import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-
 import java.io.Serial;
 
 public class AuthorizationException extends RuntimeException {

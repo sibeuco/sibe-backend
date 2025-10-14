@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter

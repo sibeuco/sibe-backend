@@ -6,8 +6,6 @@ import co.edu.uco.sibe.dominio.usecase.consulta.ConsultarUsuarioPorCorreoUseCase
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @AllArgsConstructor
 public class ConsultarUsuarioPorCorreoManejador implements ManejadorParametroRespuesta<String, UsuarioDTO> {

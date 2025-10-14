@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import java.util.UUID;
 import lombok.Getter;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -16,15 +15,12 @@ import java.util.UUID;
 @Table(name = "accion")
 public class AccionEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(length = 400, nullable = false)
+    @Column(name = "detalle", nullable = false, length = 500)
     private String detalle;
 
-    @Column(length = 750, nullable = false)
+    @Column(name = "objetivo", nullable = false, length = 500)
     private String objetivo;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "proyecto", nullable = false)
-    private ProyectoEntidad proyecto;
 }

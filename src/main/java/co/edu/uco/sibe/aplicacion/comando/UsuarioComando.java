@@ -13,12 +13,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UsuarioComando {
     private UUID tipoIdentificacion;
-    private String documento;
-    private String primerNombre;
-    private String segundoNombre;
-    private String primerApellido;
-    private String segundoApellido;
+    private String numeroIdentificacion;
+    private String nombres;
+    private String apellidos;
     private String correo;
-    private String contrasena;
+    private String clave;
     private UUID tipoUsuario;
+    private AreaComando area;
 }

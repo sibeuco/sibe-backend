@@ -1,58 +1,48 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
 public class TipoUsuario {
-    UUID identificador;
-    String nombre;
-    boolean crear;
-    boolean modificar;
-    boolean eliminar;
-    boolean consultar;
+    private UUID identificador;
+    private String nombre;
+    private boolean crear;
+    private boolean modificar;
+    private boolean eliminar;
+    private boolean consultar;
 
-    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        setIdentificador(identificador);
-        setNombre(nombre);
-        setCrear(crear);
-        setModificar(modificar);
-        setEliminar(eliminar);
-        setConsultar(consultar);
-    }
-
-    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar){
-        return new TipoUsuario(identificador, nombre, crear, modificar, eliminar, consultar);
-    }
-
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
-    }
-
-    public void setNombre(String nombre) {
-        UtilTexto.getInstance().validarObligatorio(nombre, Mensajes.NOMBRE_TIPO_USUARIO_VACIO);
-        UtilTexto.getInstance().validarLongitud(nombre, 1, 30, Mensajes.LONGITUD_NOMBRE_TIPO_USUARIO);
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
-
-    }
-
-    public void setCrear(boolean crear) {
+    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
+        this.identificador = identificador;
+        this.nombre = nombre;
         this.crear = crear;
-    }
-
-    public void setModificar(boolean modificar) {
         this.modificar = modificar;
-    }
-
-    public void setEliminar(boolean eliminar) {
         this.eliminar = eliminar;
+        this.consultar = consultar;
     }
 
-    public void setConsultar(boolean consultar) {
-        this.consultar = consultar;
+    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
+        return new TipoUsuario(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                crear,
+                modificar,
+                eliminar,
+                consultar
+        );
+    }
+
+    public static TipoUsuario construir() {
+        return new TipoUsuario(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                false,
+                false,
+                false,
+                false
+        );
     }
 }

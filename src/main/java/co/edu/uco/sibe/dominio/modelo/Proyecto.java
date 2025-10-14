@@ -1,9 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -12,31 +15,34 @@ public class Proyecto {
     private String numeroProyecto;
     private String nombre;
     private String objetivo;
+    private List<Accion> acciones;
 
-    private Proyecto(String numeroProyecto, String nombre, String objetivo){
-        setIdentificador();
-        setNumeroProyecto(numeroProyecto);
-        setNombre(nombre);
-        setObjetivo(objetivo);
+    public Proyecto(UUID identificador, String numeroProyecto, String nombre, String objetivo, List<Accion> acciones) {
+        this.identificador = identificador;
+        this.numeroProyecto = numeroProyecto;
+        this.nombre = nombre;
+        this.objetivo = objetivo;
+        this.acciones = acciones;
     }
 
-    public static Proyecto construir(String numeroProyecto, String nombre, String objetivo){
-        return new Proyecto(numeroProyecto, nombre, objetivo);
+    public static Proyecto construir(UUID identificador, String numeroProyecto, String nombre, String objetivo, List<Accion> acciones) {
+        return new Proyecto(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(numeroProyecto),
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                ValidadorTexto.obtenerValorPorDefecto(objetivo),
+                ValidadorObjeto.obtenerValorPorDefecto(acciones,
+                        new ArrayList<>())
+        );
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
-    }
-
-    public void setNumeroProyecto(String numeroProyecto) {
-        this.numeroProyecto = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(numeroProyecto);
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
-    }
-
-    public void setObjetivo(String objetivo) {
-        this.objetivo = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(objetivo);
+    public static Proyecto construir() {
+        return new Proyecto(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                new ArrayList<>()
+        );
     }
 }

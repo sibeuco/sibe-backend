@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import java.util.UUID;
 import lombok.Getter;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -15,25 +14,26 @@ import java.util.UUID;
 @Entity
 @Table(name = "indicador")
 public class IndicadorEntidad {
-        @Id
-        private UUID identificador;
+    @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
+    private UUID identificador;
 
-        @Column(length = 40, nullable = false)
-        private String nombre;
+    @Column(name = "nombre", nullable = false, length = 100)
+    private String nombre;
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "tipo_indicador", nullable = false)
-        private TipoIndicadorEntidad tipoIndicador;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "tipo_indicador", referencedColumnName = "identificador")
+    private IndicadorTipoIndicadorEntidad tipoIndicador;
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "temporalidad", nullable = false)
-        private TemporalidadEntidad temporalidad;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "temporalidad", referencedColumnName = "identificador")
+    private IndicadorTemporalidadEntidad temporalidad;
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "proyecto", nullable = false)
-        private ProyectoEntidad proyecto;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "proyecto", referencedColumnName = "identificador")
+    private IndicadorProyectoEntidad proyecto;
 
-        @ManyToOne(optional = false)
-        @JoinColumn(name = "publico_interes", nullable = false)
-        private PublicoInteresEntidad publicoInteres;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "publico_interes", referencedColumnName = "identificador")
+    private IndicadorPublicoInteresEntidad publicoInteres;
 }

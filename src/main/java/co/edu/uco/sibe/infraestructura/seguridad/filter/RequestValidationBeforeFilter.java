@@ -67,7 +67,7 @@ public class RequestValidationBeforeFilter implements Filter {
                         // Credentials are not in expected format
                         throw new BadCredentialsException(Mensajes.TOKEN_RECIBIDO_INVALIDO);
                     }
-                    var email = token.substring(NumeroConstante.ZERO, delim);
+                    var email = token.substring(NumeroConstante.CERO, delim);
                     // Custom business validation: reject test cases
                     if (email.toLowerCase().contains(TextoConstante.TEST_CASE)) {
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);

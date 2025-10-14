@@ -1,47 +1,44 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 public class Area {
     private UUID identificador;
-    private String nombreArea;
-    private TipoArea tipoArea;
-    private Area areaPadre;
+    private String nombre;
+    private List<Subarea> subareas;
+    private List<Actividad> actividades;
 
-    private Area(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
-        setIdentificador(identificador);
-        setNombreArea(nombreArea);
-        setTipoArea(tipoArea);
-        setAreaPadre(areaPadre);
+    private Area(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.subareas = subareas;
+        this.actividades = actividades;
     }
 
-    public static Area construir(UUID identificador, String nombreArea, TipoArea tipoArea, Area areaPadre){
-        return new Area(identificador,nombreArea, tipoArea, areaPadre);
+    public static Area construir(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
+        return new Area(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                ValidadorObjeto.obtenerValorPorDefecto(subareas, new ArrayList<>()),
+                ValidadorObjeto.obtenerValorPorDefecto(actividades, new ArrayList<>())
+        );
     }
 
-    public void setIdentificador(UUID identificador) {
-        this.identificador = UtilUUID.obtenerValorDefecto(identificador);
+    public static Area construir() {
+        return new Area(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
     }
-
-    public void setNombreArea(String nombreArea) {
-        UtilTexto.getInstance().validarObligatorio(nombreArea, Mensajes.CAMPO_OBLIGATORIO);
-        UtilTexto.getInstance().validarPatronTextoEsValido(nombreArea, Mensajes.PATRON_NOMBRE_AREA_INVALIDO);
-        UtilTexto.getInstance().validarLongitud(nombreArea, 1, 50, Mensajes.LONGITUD_NOMBRE_AREA_INVALIDA);
-        this.nombreArea = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombreArea);
-    }
-
-    public void setTipoArea(TipoArea tipoArea) {
-        this.tipoArea = tipoArea;
-    }
-
-    public void setAreaPadre(Area areaPadre) {
-        this.areaPadre = areaPadre;
-    }
-
 }

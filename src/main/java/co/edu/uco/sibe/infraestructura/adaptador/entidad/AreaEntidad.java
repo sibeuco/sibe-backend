@@ -1,12 +1,12 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import java.util.UUID;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,17 +16,21 @@ import java.util.UUID;
 @Table(name = "area")
 public class AreaEntidad {
     @Id
+    @Column(name = "identificador", nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "nombre_area", length = 50, nullable = false)
-    private String nombreArea;
+    @Column(name = "nombre", nullable = false, length = 70)
+    private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "tipo_area", nullable = false)
-    private TipoAreaEntidad tipoArea;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area")
+    private List<SubareaEntidad> subareas;
 
-    @ManyToOne
-    @JoinColumn(name = "area_padre", nullable = false)
-    private AreaEntidad areaPadre;
-
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "area_actividad",
+            joinColumns = @JoinColumn(name = "area", referencedColumnName = "identificador"),
+            inverseJoinColumns = @JoinColumn(name = "actividad", referencedColumnName = "identificador")
+    )
+    private List<ActividadEntidad> actividades;
 }

@@ -1,9 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
@@ -11,20 +11,22 @@ public class EstadoActividad {
     private UUID identificador;
     private String nombre;
 
-    private EstadoActividad(String nombre){
-        setIdentificador();
-        setNombre(nombre);
+    private EstadoActividad(UUID identificador, String nombre) {
+        this.identificador = identificador;
+        this.nombre = nombre;
     }
 
-    public static EstadoActividad construir(String nombre){
-        return new EstadoActividad(nombre);
+    public static EstadoActividad construir(UUID identificador, String nombre) {
+        return new EstadoActividad(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre)
+        );
     }
 
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
+    public static EstadoActividad construir() {
+        return new EstadoActividad(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO
+        );
     }
 }

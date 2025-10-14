@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter
@@ -18,25 +17,16 @@ public class PersonaEntidad {
     @Id
     private UUID identificador;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "tipo_identificacion", nullable = false)
-    private TipoIdentificacionEntidad tipoIdentificacion;
+    @Column(length = 50, nullable = false)
+    private String nombres;
 
-    @Column(length = 12, nullable = false)
-    private String documento;
+    @Column(length = 50, nullable = false)
+    private String apellidos;
 
-    @Column(name = "primer_nombre", length = 20, nullable = false)
-    private String primerNombre;
-
-    @Column(name = "segundo_nombre", length = 20)
-    private String segundoNombre;
-
-    @Column(name = "primer_apellido", length = 20, nullable = false)
-    private String primerApellido;
-
-    @Column(name = "segundo_apellido", length = 20)
-    private String segundoApellido;
-
-    @Column(length = 40, nullable = false)
+    @Column(length = 100, nullable = false)
     private String correo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "identificacion", nullable = false)
+    private IdentificacionEntidad identificacion;
 }

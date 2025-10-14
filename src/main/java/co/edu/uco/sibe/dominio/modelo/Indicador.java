@@ -1,9 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilTexto;
+import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
@@ -15,40 +16,34 @@ public class Indicador {
     private Proyecto proyecto;
     private PublicoInteres publicoInteres;
 
-    private Indicador(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
-        setIdentificador();
-        setNombre(nombre);
-        setTipoIndicador(tipoIndicador);
-        setTemporalidad(temporalidad);
-        setProyecto(proyecto);
-        setPublicoInteres(publicoInteres);
-    }
-
-    public static Indicador construir(String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres){
-        return new Indicador(nombre, tipoIndicador, temporalidad, proyecto, publicoInteres);
-    }
-
-    public void setIdentificador() {
-        this.identificador = UtilUUID.generarNuevoUUID();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = UtilTexto.getInstance().quitarEspaciosBlancoInicioFin(nombre);
-    }
-
-    public void setTipoIndicador(TipoIndicador tipoIndicador) {
+    private Indicador(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
+        this.identificador = identificador;
+        this.nombre = nombre;
         this.tipoIndicador = tipoIndicador;
-    }
-
-    public void setTemporalidad(Temporalidad temporalidad) {
         this.temporalidad = temporalidad;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
+        this.publicoInteres = publicoInteres;
     }
 
-    public void setPublicoInteres(PublicoInteres publicoInteres) {
-        this.publicoInteres = publicoInteres;
+    public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
+        return new Indicador(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                ValidadorObjeto.obtenerValorPorDefecto(tipoIndicador, TipoIndicador.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(temporalidad, Temporalidad.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(proyecto, Proyecto.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(publicoInteres, PublicoInteres.construir())
+        );
+    }
+
+    public static Indicador construir() {
+        return new Indicador(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TipoIndicador.construir(),
+                Temporalidad.construir(),
+                Proyecto.construir(),
+                PublicoInteres.construir()
+        );
     }
 }
