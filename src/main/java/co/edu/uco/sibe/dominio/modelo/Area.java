@@ -25,10 +25,20 @@ public class Area {
     }
 
     public static Area construir(UUID identificador, String nombre, List<Subarea> subareas, List<Actividad> actividades) {
-        return new Area(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre), ValidadorObjeto.obtenerValorPorDefecto(subareas, new ArrayList<Subarea>()), ValidadorObjeto.obtenerValorPorDefecto(actividades, new ArrayList<Actividad>()));
+        return new Area(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                ValidadorObjeto.obtenerValorPorDefecto(subareas, new ArrayList<>()),
+                ValidadorObjeto.obtenerValorPorDefecto(actividades, new ArrayList<>())
+        );
     }
 
     public static Area construir() {
-        return new Area(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, new ArrayList<Subarea>(), new ArrayList<Actividad>());
+        return new Area(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
     }
 }

@@ -8,7 +8,6 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
 
 public class ModificarUsuarioUseCase {
@@ -25,7 +24,7 @@ public class ModificarUsuarioUseCase {
         validarQueExistaUsuarioConDocumento(persona);
         validarQueExistaUsuarioConCorreo(persona);
 
-        return this.personaRepositorioComando.modificarUsuario(usuario, persona, identificador);
+        return this.personaRepositorioComando.modificarUsuario(usuario, persona);
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
@@ -51,5 +50,4 @@ public class ModificarUsuarioUseCase {
             throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
         }
     }
-
 }

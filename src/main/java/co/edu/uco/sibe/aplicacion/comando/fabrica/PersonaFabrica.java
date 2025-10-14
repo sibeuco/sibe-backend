@@ -2,11 +2,13 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
-import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
+import co.edu.uco.sibe.dominio.modelo.Identificacion;
 import co.edu.uco.sibe.dominio.modelo.Persona;
-import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
+import co.edu.uco.sibe.dominio.puerto.consulta.IdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,35 +20,56 @@ import java.util.UUID;
 public class PersonaFabrica {
 
     private final TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta;
+    private final IdentificacionRepositorioConsulta identificacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
 
 
-    public Persona construir(UsuarioComando persona){
-        var identificadorPersona = generarNuevoUUIDUnico();
-        TipoIdentificacionDTO tipoIdentificacionDTO = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador
-                (persona.getTipoIdentificacion());
-        TipoIdentificacion tipoIdentificacion = TipoIdentificacion.construir
-                (tipoIdentificacionDTO.getIdentificador(),
-                        tipoIdentificacionDTO.getSigla(),
-                        tipoIdentificacionDTO.getDescripcion());
-        return Persona.construir(identificadorPersona, tipoIdentificacion, persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
+    public Persona construir(UsuarioComando comando){
+        var identificadorIdentificacion = generarNuevoUUIDIdentificacion();
+        var identificadorPersona = generarNuevoUUIDPersona();
+
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(comando.getTipoIdentificacion());
+        var identificacion = Identificacion.construir(identificadorIdentificacion, comando.getNumeroIdentificacion(), tipoIdentificacion);
+
+        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.CREAR);
+
+        var persona = Persona.construir(identificadorPersona, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
+
+        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.CREAR);
+
+        return persona;
     }
 
-    public Persona construirActualizar(UsuarioModificacionComando persona, UUID identificador){
-        TipoIdentificacionDTO tipoIdentificacionDTO = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador
-                (persona.getTipoIdentificacion());
-        TipoIdentificacion tipoIdentificacion = TipoIdentificacion.construir
-                (tipoIdentificacionDTO.getIdentificador(),
-                        tipoIdentificacionDTO.getSigla(),
-                        tipoIdentificacionDTO.getDescripcion());
-        return Persona.construir(identificador, tipoIdentificacion, persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
+    public Persona construirActualizar(UsuarioModificacionComando comando, UUID identificador){
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(comando.getTipoIdentificacion());
+        var correoActual = personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador).getCorreo();
+        var personaIdentificador = personaRepositorioConsulta.consultarPersonaPorCorreo(correoActual).getIdentificador();
+        var identificacionIdentificador = personaRepositorioConsulta.consultarPersonaPorCorreo(correoActual).getIdentificacion().getIdentificador();
+
+        var identificacion = Identificacion.construir(identificacionIdentificador, comando.getNumeroIdentificacion(), tipoIdentificacion);
+
+        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.ACTUALIZAR);
+
+        var persona = Persona.construir(personaIdentificador, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
+
+        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
+
+        return persona;
     }
 
-    public UUID generarNuevoUUIDUnico() {
+    public UUID generarNuevoUUIDIdentificacion() {
         UUID nuevoUUID;
         do {
             nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (personaRepositorioConsulta.consultarPersonaPorIdentificadorDTO(nuevoUUID) != null);
+        } while (identificacionRepositorioConsulta.consultarPorIdentificador(nuevoUUID) != null);
+        return nuevoUUID;
+    }
+
+    public UUID generarNuevoUUIDPersona() {
+        UUID nuevoUUID;
+        do {
+            nuevoUUID = UtilUUID.generarNuevoUUID();
+        } while (personaRepositorioConsulta.consultarPersonaPorIdentificador(nuevoUUID) != null);
         return nuevoUUID;
     }
 }

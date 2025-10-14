@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
@@ -26,10 +25,24 @@ public class TipoUsuario {
     }
 
     public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
-        return new TipoUsuario(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre), crear, modificar, eliminar, consultar);
+        return new TipoUsuario(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                crear,
+                modificar,
+                eliminar,
+                consultar
+        );
     }
 
     public static TipoUsuario construir() {
-        return new TipoUsuario(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, false, false, false, false);
+        return new TipoUsuario(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                false,
+                false,
+                false,
+                false
+        );
     }
 }

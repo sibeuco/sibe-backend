@@ -38,7 +38,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         String mensaje = exception.getMessage();
         Integer codigo = CODIGOS_ESTADO.get(excepcionNombre);
 
-        if (!ValidadorObjeto.getInstance().esNulo(codigo)) {
+        if (!ValidadorObjeto.esNulo(codigo)) {
             Error error = new Error(excepcionNombre, mensaje);
             resultado = new ResponseEntity<>(error, HttpStatus.valueOf(codigo));
         } else {

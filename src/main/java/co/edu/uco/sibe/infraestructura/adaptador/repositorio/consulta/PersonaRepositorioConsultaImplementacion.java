@@ -1,18 +1,23 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
+import co.edu.uco.sibe.dominio.dto.PersonaDTO;
+import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta {
-
     @Autowired
     PersonaDAO personaDAO;
 
@@ -25,61 +30,107 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Autowired
     UsuarioMapeador usuarioMapeador;
 
+    @Autowired
+    IdentificacionDAO identificacionDAO;
+
     @Override
     public PersonaDTO consultarPersonaPorIdentificadorDTO(UUID identificador) {
-        var entidad = this.personaDAO.consultarPersonaPorIdentificador(identificador);
+        var entidad = this.personaDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.esNulo(entidad)){
             return null;
         }
+
         return this.personaMapeador.construirDTO(entidad);
     }
 
     @Override
-    public PersonaDTO consultarPersonaPorDocumento(String documento) {
-        var entidad = this.personaDAO.consultarPersonaPorDocumento(documento);
+    public Persona consultarPersonaPorIdentificador(UUID identificador) {
+        var entidad = this.personaDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.esNulo(entidad)){
             return null;
         }
-        return this.personaMapeador.construirDTO(entidad);
+
+        return this.personaMapeador.construirModelo(entidad);
     }
 
     @Override
     public PersonaDTO consultarPersonaPorCorreoDTO(String correo) {
-        var entidad = this.personaDAO.consultarPersonaPorCorreo(correo);
+        var entidad = this.personaDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.esNulo(entidad)){
             return null;
         }
+
         return this.personaMapeador.construirDTO(entidad);
     }
 
     @Override
-    public UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador) {
-        var entidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
+    public Persona consultarPersonaPorCorreo(String correo) {
+        var entidad = this.personaDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.esNulo(entidad)){
             return null;
         }
+
+        return this.personaMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public Persona consultarPersonaPorDocumento(String documento) {
+        var identificacionEntidad = this.identificacionDAO.findByNumeroIdentificacion(documento);
+        var entidad = this.personaDAO.findByIdentificacion(identificacionEntidad);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.personaMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador) {
+        var entidad = this.usuarioDAO.findById(identificador).orElse(null);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
         return this.usuarioMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public Usuario consultarUsuarioPorIdentificador(UUID identificador) {
+        var entidad = this.usuarioDAO.findById(identificador).orElse(null);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.usuarioMapeador.construirModelo(entidad);
     }
 
     @Override
     public UsuarioDTO consultarUsuarioPorCorreoDTO(String correo) {
-        var entidad = this.usuarioDAO.consultarUsuarioPorCorreo(correo);
+        var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.getInstance().esNulo(entidad)){
+        if (ValidadorObjeto.esNulo(entidad)){
             return null;
         }
+
         return this.usuarioMapeador.construirDTO(entidad);
     }
 
     @Override
-    public List<PersonaDTO> consultarPersonas() {
-        var entidades = this.personaDAO.findAll();
+    public Usuario consultarUsuarioPorCorreo(String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        return  this.personaMapeador.construirDTOs(entidades);
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.usuarioMapeador.construirModelo(entidad);
     }
 
     @Override

@@ -12,10 +12,16 @@ public class ParticipanteExterno extends Participante {
     }
 
     public static ParticipanteExterno construir(UUID identificador, Miembro miembro) {
-        return new ParticipanteExterno(identificador, ValidadorObjeto.obtenerValorPorDefecto(miembro, Miembro.construir()));
+        return new ParticipanteExterno(
+                identificador,
+                ValidadorObjeto.obtenerValorPorDefecto(miembro, Miembro.construir())
+        );
     }
 
     public static ParticipanteExterno construir() {
-        return new ParticipanteExterno(UtilUUID.obtenerValorDefecto(), Miembro.construir());
+        return new ParticipanteExterno(
+                UtilUUID.obtenerValorDefecto(),
+                Miembro.construir()
+        );
     }
 }

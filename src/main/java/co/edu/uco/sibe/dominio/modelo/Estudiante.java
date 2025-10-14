@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.UUID;
 

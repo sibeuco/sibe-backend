@@ -18,10 +18,18 @@ public class RegistroAsistencia {
     }
 
     public static RegistroAsistencia construir(UUID identificador, EjecucionActividad ejecucionActividad, Participante participante) {
-        return new RegistroAsistencia(identificador, ValidadorObjeto.obtenerValorPorDefecto(ejecucionActividad, EjecucionActividad.construir()), ValidadorObjeto.obtenerValorPorDefecto(participante, Participante.construir()));
+        return new RegistroAsistencia(
+                identificador,
+                ValidadorObjeto.obtenerValorPorDefecto(ejecucionActividad, EjecucionActividad.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(participante, Participante.construir())
+        );
     }
 
     public static RegistroAsistencia construir() {
-        return new RegistroAsistencia(UtilUUID.obtenerValorDefecto(), EjecucionActividad.construir(), Participante.construir());
+        return new RegistroAsistencia(
+                UtilUUID.obtenerValorDefecto(),
+                EjecucionActividad.construir(),
+                Participante.construir()
+        );
     }
 }

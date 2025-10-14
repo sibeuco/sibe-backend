@@ -1,27 +1,39 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.PersonaDTO;
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.PersonaEntidad;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
+@AllArgsConstructor
 public class PersonaMapeador {
-    private final TipoIdentificacionMapeador tipoIdentificacionMapeador;
-
-    public PersonaMapeador(TipoIdentificacionMapeador tipoIdentificacionMapeador){
-        this.tipoIdentificacionMapeador = tipoIdentificacionMapeador;
-    }
+    private final IdentificacionMapeador identificacionMapeador;
 
     public PersonaDTO construirDTO(PersonaEntidad persona){
-        return new PersonaDTO(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirDTO(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
+        var identificacion = this.identificacionMapeador.construirDTO(persona.getIdentificacion());
+
+        return new PersonaDTO(persona.getIdentificador(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacion);
     }
 
     public PersonaEntidad construirEntidad(Persona persona){
-        return new PersonaEntidad(persona.getIdentificador(), this.tipoIdentificacionMapeador.construirEntidad(persona.getTipoIdentificacion()), persona.getDocumento(), persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo());
+        var identificacion = this.identificacionMapeador.construirEntidad(persona.getIdentificacion());
+
+        return new PersonaEntidad(persona.getIdentificador(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacion);
     }
 
-    public List<PersonaDTO> construirDTOs(List<PersonaEntidad> personas){
-        return personas.stream().map(this::construirDTO).toList();
+    public void modificarEntidad(PersonaEntidad personaEntidad, Persona persona) {
+        personaEntidad.setNombres(persona.getNombres());
+        personaEntidad.setApellidos(persona.getApellidos());
+        personaEntidad.setCorreo(persona.getCorreo());
+
+        this.identificacionMapeador.modificarEntidad(personaEntidad.getIdentificacion(), persona.getIdentificacion());
     }
 
+    public Persona construirModelo(PersonaEntidad entidad) {
+        var identificacion = this.identificacionMapeador.construirModelo(entidad.getIdentificacion());
+
+        return Persona.construir(entidad.getIdentificador(), entidad.getNombres(), entidad.getApellidos(), entidad.getCorreo(), identificacion);
+    }
 }

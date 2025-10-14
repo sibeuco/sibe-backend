@@ -20,10 +20,17 @@ public class Identificacion {
     }
 
     public static Identificacion construir(UUID identificador, String numeroIdentificacion, TipoIdentificacion tipoIdentificacion) {
-        return new Identificacion(identificador, ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion), ValidadorObjeto.obtenerValorPorDefecto(tipoIdentificacion, TipoIdentificacion.construir()));
+        return new Identificacion(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
+                ValidadorObjeto.obtenerValorPorDefecto(tipoIdentificacion, TipoIdentificacion.construir())
+        );
     }
 
     public static Identificacion construir() {
-        return new Identificacion(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TipoIdentificacion.construir());
+        return new Identificacion(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO, TipoIdentificacion.construir()
+        );
     }
 }

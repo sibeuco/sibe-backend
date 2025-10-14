@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PersonaRepositorioConsulta {
-
     PersonaDTO consultarPersonaPorIdentificadorDTO(UUID identificador);
 
     Persona consultarPersonaPorIdentificador(UUID identificador);
@@ -29,7 +28,4 @@ public interface PersonaRepositorioConsulta {
     Usuario consultarUsuarioPorCorreo(String correo);
 
     List<UsuarioDTO> consultarUsuariosDTO();
-
-    List<Usuario> consultarUsuarios();
-
 }

@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
 
 public class ConsultarPersonaPorIdentificadorUseCase {
@@ -28,5 +27,4 @@ public class ConsultarPersonaPorIdentificadorUseCase {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
         }
     }
-
 }

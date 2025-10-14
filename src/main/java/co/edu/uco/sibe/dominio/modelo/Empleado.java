@@ -38,10 +38,28 @@ public class Empleado extends Interno {
             RelacionLaboral relacionLaboral,
             CentroCostos centroCostos
     ) {
-        return new Empleado(identificador, ValidadorTexto.obtenerValorPorDefecto(nombreCompleto), ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion), ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()), ValidadorTexto.obtenerValorPorDefecto(idCarnet), ValidadorTexto.obtenerValorPorDefecto(sexo), ValidadorObjeto.obtenerValorPorDefecto(relacionLaboral, RelacionLaboral.construir()), ValidadorObjeto.obtenerValorPorDefecto(centroCostos, CentroCostos.construir()));
+        return new Empleado(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
+                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
+                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
+                ValidadorTexto.obtenerValorPorDefecto(sexo),
+                ValidadorObjeto.obtenerValorPorDefecto(relacionLaboral, RelacionLaboral.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(centroCostos, CentroCostos.construir())
+        );
     }
 
     public static Empleado construir() {
-        return new Empleado(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO, CiudadResidencia.construir(), TextoConstante.VACIO, TextoConstante.VACIO, RelacionLaboral.construir(), CentroCostos.construir());
+        return new Empleado(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                CiudadResidencia.construir(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                RelacionLaboral.construir(),
+                CentroCostos.construir()
+        );
     }
 }

@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
@@ -14,9 +13,9 @@ public class Usuario {
     private String correo;
     private String clave;
     private TipoUsuario tipoUsuario;
-    private Boolean estaActivo;
+    private boolean estaActivo;
 
-    private Usuario(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, Boolean estaActivo) {
+    private Usuario(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, boolean estaActivo) {
         this.identificador = identificador;
         this.correo = correo;
         this.clave = clave;
@@ -24,11 +23,23 @@ public class Usuario {
         this.estaActivo = estaActivo;
     }
 
-    public static Usuario construir(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, Boolean estaActivo) {
-        return new Usuario(identificador, ValidadorTexto.obtenerValorPorDefecto(correo), ValidadorTexto.obtenerValorPorDefecto(clave), ValidadorObjeto.obtenerValorPorDefecto(tipoUsuario, TipoUsuario.construir()), estaActivo);
+    public static Usuario construir(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, boolean estaActivo) {
+        return new Usuario(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(correo),
+                ValidadorTexto.obtenerValorPorDefecto(clave),
+                ValidadorObjeto.obtenerValorPorDefecto(tipoUsuario, TipoUsuario.construir()),
+                estaActivo
+        );
     }
 
     public static Usuario construir() {
-        return new Usuario(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO, TipoUsuario.construir(), false);
+        return new Usuario(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO,
+                TipoUsuario.construir(),
+                false
+        );
     }
 }

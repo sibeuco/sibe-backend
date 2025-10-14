@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import lombok.Getter;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;

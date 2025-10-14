@@ -3,7 +3,6 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 import java.util.UUID;
 
 public class UtilUUID {
-
     public static final String UUID_DEFECTO_TEXTO = "00000000-0000-0000-0000-000000000000";
 
     private UtilUUID() {
@@ -11,7 +10,7 @@ public class UtilUUID {
     }
 
     public static UUID convertirAUUID(final String uuidComoTexto) {
-        return UUID.fromString(ValidadorTexto.obtenerValorPorDefecto(uuidComoTexto, UUID_DEFECTO_TEXTO));
+        return UUID.fromString(ValidadorObjeto.obtenerValorPorDefecto(uuidComoTexto, UUID_DEFECTO_TEXTO));
     }
 
     public static UUID obtenerValorDefecto(final UUID valorOriginal, final UUID valorDefecto) {
@@ -34,10 +33,6 @@ public class UtilUUID {
         return UUID.randomUUID();
     }
 
-    public static String generarNuevoUUIDComoTexto() {
-        return generarNuevoUUID().toString();
-    }
-
     public static boolean esValorDefecto(final UUID valor) {
         return obtenerValorDefecto(valor, obtenerValorDefecto()).equals(obtenerValorDefecto());
     }
@@ -45,5 +40,4 @@ public class UtilUUID {
     public static boolean esValorDefecto(final String uuidComoTexto) {
         return obtenerValorDefecto(convertirAUUID(uuidComoTexto), obtenerValorDefecto()).equals(obtenerValorDefecto());
     }
-
 }

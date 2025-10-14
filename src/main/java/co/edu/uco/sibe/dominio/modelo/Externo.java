@@ -13,10 +13,18 @@ public class Externo extends Miembro {
     }
 
     public static Externo construir(UUID identificador, String nombreCompleto, String numeroIdentificacion) {
-        return new Externo(identificador, ValidadorTexto.obtenerValorPorDefecto(nombreCompleto), ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion));
+        return new Externo(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
+                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion)
+        );
     }
 
     public static Externo construir() {
-        return new Externo(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO);
+        return new Externo(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO
+        );
     }
 }

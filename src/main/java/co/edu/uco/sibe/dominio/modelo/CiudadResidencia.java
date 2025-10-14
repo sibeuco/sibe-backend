@@ -18,10 +18,16 @@ public class CiudadResidencia {
     }
 
     public static CiudadResidencia construir(UUID identificador, String descripcion) {
-        return new CiudadResidencia(identificador, ValidadorTexto.obtenerValorPorDefecto(descripcion));
+        return new CiudadResidencia(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(descripcion)
+        );
     }
 
     public static CiudadResidencia construir() {
-        return new CiudadResidencia(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO);
+        return new CiudadResidencia(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO
+        );
     }
 }

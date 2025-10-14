@@ -10,8 +10,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "participante_externo")
 @PrimaryKeyJoinColumn(name = "identificador")

@@ -58,9 +58,9 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
         var userDTO = this.consultarUsuarioPorCorreoManejador.ejecutar(username);
 
         // Check if the user exists in the database
-        if(!ValidadorObjeto.getInstance().esNulo(user)) {
+        if(!ValidadorObjeto.esNulo(user)) {
             // Validate the password using the encryption service
-            if (this.encriptarClaveServicio.existe(pwd, user.getContrasena())) {
+            if (this.encriptarClaveServicio.existe(pwd, user.getClave())) {
                 // Build the Authentication object with authorities
                 var authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(userDTO.getTipoUsuario()));
                 authenticationToken.setDetails(user.getIdentificador());

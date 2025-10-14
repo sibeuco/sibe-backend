@@ -21,7 +21,7 @@ public class PersonaEntidad {
     private String nombres;
 
     @Column(length = 50, nullable = false)
-    private String apellido;
+    private String apellidos;
 
     @Column(length = 100, nullable = false)
     private String correo;

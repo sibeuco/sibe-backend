@@ -3,14 +3,13 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 import java.util.UUID;
 
 public class Mensajes {
-    //mensajes clase accion
     public static final String DETALLE_ACCION_OBLIGATORIO = "El detalle de la acción es obligatorio.";
     public static final String DETALLE_ACCION_INVALIDO = "El detalle proporcionado para la acción es inválido.";
     public static final String LONGITUD_DETALLE_ACCION_INVALIDA = "El detalle de la acción debe tener entre 10 y 500 caracteres.";
     public static final String OBJETIVO_ACCION_OBLIGATORIO = "El objetivo de la acción es obligatorio.";
     public static final String OBJETIVO_ACCION_INVALIDO = "El objetivo proporcionado para la acción es inválido.";
     public static final String LONGITUD_OBJETIVO_ACCION_INVALIDA = "El objetivo de la acción debe tener entre 10 y 500 caracteres.";
-    //mensajes clase actividad
+
     public static final String NOMBRE_ACTIVIDAD_OBLIGATORIO = "El nombre de la actividad es obligatorio.";
     public static final String NOMBRE_ACTIVIDAD_INVALIDO = "El nombre proporcionado para la actividad es inválido.";
     public static final String LONGITUD_NOMBRE_ACTIVIDAD_INVALIDA = "El nombre de la actividad debe tener entre 10 y 200 caracteres.";
@@ -23,30 +22,30 @@ public class Mensajes {
     public static final String RUTA_INSUMOS_ACTIVIDAD_OBLIGATORIA = "La ruta de los insumos de la actividad es obligatoria.";
     public static final String RUTA_INSUMOS_ACTIVIDAD_INVALIDA = "La ruta de los insumos proporcionada para la actividad es inválida.";
     public static final String LONGITUD_RUTA_INSUMOS_ACTIVIDAD_INVALIDA = "La ruta de los insumos de la actividad debe tener entre 10 y 3000 caracteres.";
-    //mensajes clase area
+
     public static final String NOMBRE_AREA_OBLIGATORIO = "El nombre del área es obligatorio.";
     public static final String NOMBRE_AREA_INVALIDO = "El nombre proporcionado para el área es inválido.";
     public static final String LONGITUD_NOMBRE_AREA_INVALIDA = "El nombre del área debe tener entre 10 y 70 caracteres.";
-    //mensajes clase centro costos
+
     public static final String CODIGO_CENTRO_COSTOS_OBLIGATORIO = "El código del centro de costos es obligatorio.";
     public static final String CODIGO_CENTRO_COSTOS_INVALIDO = "El código proporcionado para el centro de costos es inválido.";
     public static final String LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA = "El código del centro de costos debe tener entre 4 y 6 caracteres.";
     public static final String DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA = "La descripción del centro de costos es obligatoria.";
     public static final String DESCRIPCION_CENTRO_COSTOS_INVALIDA = "La descripción proporcionada para el centro de costos es inválida.";
     public static final String LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA = "La descripción del centro de costos debe tener entre 10 y 100 caracteres.";
-    //mensajes clase ciudad residencia
+
     public static final String DESCRIPCION_CIUDAD_RESIDENCIA_OBLIGATORIA = "La descripción de la ciudad de residencia es obligatoria.";
     public static final String DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA = "La descripción proporcionada para la ciudad de residencia es inválida.";
     public static final String LONGITUD_DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA = "La descripción de la ciudad de residencia debe tener entre 3 y 30 caracteres.";
-    //mensajes clase direccion
+
     public static final String NOMBRE_DIRECCION_OBLIGATORIO = "El nombre de la Dirección es obligatorio.";
     public static final String NOMBRE_DIRECCION_INVALIDO = "El nombre proporcionado para la Dirección es inválido.";
     public static final String LONGITUD_NOMBRE_DIRECCION_INVALIDA = "El nombre de la Dirección debe tener entre 10 y 70 caracteres.";
-    //mensajes clase estado actividad
+
     public static final String NOMBRE_ESTADO_ACTIVIDAD_OBLIGATORIO = "El nombre del estado de la actividad es obligatorio.";
     public static final String NOMBRE_ESTADO_ACTIVIDAD_INVALIDO = "El nombre proporcionado para el estado de la actividad es inválido.";
     public static final String LONGITUD_NOMBRE_ESTADO_ACTIVIDAD_INVALIDA = "El nombre del estado de la actividad debe tener entre 5 y 15 caracteres.";
-    //mensajes clase estudiante
+
     public static final String NACIONALIDAD_ESTUDIANTE_OBLIGATORIA = "La nacionalidad del estudiante es obligatoria.";
     public static final String NACIONALIDAD_ESTUDIANTE_INVALIDA = "La nacionalidad proporcionada para el estudiante es inválida.";
     public static final String LONGITUD_NACIONALIDAD_ESTUDIANTE_INVALIDA = "La nacionalidad del estudiante debe tener entre 4 y 50 caracteres.";
@@ -77,25 +76,25 @@ public class Mensajes {
     public static final String TIEMPO_LLEGADA_ESTUDIANTE_INVALIDO = "El tiempo de llegada del estudiante debe ser mayor o igual a un 1 minuto.";
     public static final String MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDO = "El medio de transporte proporcionado para el estudiante es inválido.";
     public static final String LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA = "El medio de transporte del estudiante debe tener entre 5 y 30 caracteres.";
-    //mensajes clase indicador
+
     public static final String NOMBRE_INDICADOR_OBLIGATORIO = "El nombre del indicador es obligatorio.";
     public static final String NOMBRE_INDICADOR_INVALIDO = "El nombre proporcionado para el indicador es inválido.";
     public static final String LONGITUD_NOMBRE_INDICADOR_INVALIDA = "El nombre del indicador debe tener entre 10 y 100 caracteres.";
-    //mensajes clase interno
+
     public static final String ID_CARNET_OBLIGATORIO = "El ID de carnet es obligatorio.";
     public static final String ID_CARNET_INVALIDO = "El ID de carnet proporcionado es inválido.";
     public static final String LONGITUD_ID_CARNET_INVALIDA = "El ID del carnet debe tener entre 1 y 20 caracteres.";
     public static final String SEXO_OBLIGATORIO = "El campo sexo es obligatorio.";
     public static final String SEXO_INVALIDO = "El sexo proporcionado es inválido.";
     public static final String LONGITUD_SEXO_INVALIDA = "El sexo solo debe tener 1 carácter.";
-    //mensajes clase miembro
+
     public static final String NOMBRE_COMPLETO_MIEMBRO_OBLIGATORIO = "El nombre completo del miembro es obligatorio.";
     public static final String NOMBRE_COMPLETO_MIEMBRO_INVALIDO = "El nombre proporcionado para el miembro es inválido.";
     public static final String LONGITUD_NOMBRE_COMPLETO_MIEMBRO_INVALIDA = "El nombre completo del miembro debe tener entre 5 y 100 caracteres.";
     public static final String NUMERO_IDENTIFICACION_MIEMBRO_OBLIGATORIO = "El número de identificación del miembro es obligatorio.";
     public static final String NUMERO_IDENTIFICACION_MIEMBRO_INVALIDO = "El número de identificación proporcionado para el miembro es inválido.";
     public static final String LONGITUD_NUMERO_IDENTIFICACION_MIEMBRO_INVALIDA = "El número de identificación del miembro debe tener entre 6 y 12 caracteres.";
-    //mensajes clase participante estudiante
+
     public static final String ESTADO_CIVIL_PARTICIPANTE_ESTUDIANTE_OBLIGATORIO = "El estado civil del participante estudiante es obligatorio.";
     public static final String ESTADO_CIVIL_PARTICIPANTE_ESTUDIANTE_INVALIDO = "El estado civil proporcionado para el participante estudiante es inválido.";
     public static final String LONGITUD_ESTADO_CIVIL_PARTICIPANTE_ESTUDIANTE_INVALIDA = "El estado civil del participante estudiante debe tener entre 5 y 15 caracteres.";
@@ -120,16 +119,16 @@ public class Mensajes {
     public static final String TIEMPO_LLEGADA_PARTICIPANTE_ESTUDIANTE_INVALIDO = "El tiempo de llegada del participante estudiante debe ser mayor o igual a un 1 minuto.";
     public static final String MEDIO_TRANSPORTE_PARTICIPANTE_ESTUDIANTE_INVALIDO = "El medio de transporte proporcionado para el participante estudiante es inválido.";
     public static final String LONGITUD_MEDIO_TRANSPORTE_PARTICIPANTE_ESTUDIANTE_INVALIDA = "El medio de transporte del participante estudiante debe tener entre 5 y 30 caracteres.";
-    //mensajes clase participante INTERNO
+
     public static final String ID_CARNET_INTERNO_OBLIGATORIO = "El ID de carnet del participante interno es obligatorio.";
     public static final String ID_CARNET_INTERNO_INVALIDO = "El ID de carnet proporcionado para el participante interno es inválido.";
     public static final String LONGITUD_ID_CARNET_INTERNO_INVALIDA = "El ID del carnet del participante interno debe tener entre 1 y 20 caracteres.";
     public static final String SEXO_PARTICIPANTE_INTERNO_OBLIGATORIO = "El campo sexo del participante interno es obligatorio.";
     public static final String SEXO_PARTICIPANTE_INTERNO_INVALIDO = "El sexo proporcionado para el participante interno es inválido.";
     public static final String LONGITUD_SEXO_PARTICIPANTE_INTERNO_INVALIDA = "El sexo del participante interno solo debe tener 1 carácter.";
-    //mensajes clase persona
+
     public static final String LONGITUD_CORREO_PERSONA_INVALIDA = "El correo de la persona debe tener entre 10 y 100 caracteres.";
-    //mensajes clase proyecto
+
     public static final String NUMERO_PROYECTO_OBLIGATORIO = "El número de proyecto es obligatorio.";
     public static final String NUMERO_PROYECTO_INVALIDO = "El número de proyecto es inválido.";
     public static final String LONGITUD_NUMERO_PROYECTO_INVALIDA = "El número de proyecto solo debe tener entre 1 y 12 caracteres.";
@@ -139,33 +138,33 @@ public class Mensajes {
     public static final String OBJETIVO_PROYECTO_OBLIGATORIO = "El objetivo del proyecto es obligatorio.";
     public static final String OBJETIVO_PROYECTO_INVALIDO = "El objetivo proporcionado para el proyecto es inválido.";
     public static final String LONGITUD_OBJETIVO_PROYECTO_INVALIDA = "El objetico del proyecto debe tener entre 10 y 500 caracteres.";
-    //mensajes clase publico interés
+
     public static final String NOMBRE_PUBLICO_OBLIGATORIO = "El nombre del público objetivo es obligatorio.";
     public static final String NOMBRE_PUBLICO_INVALIDO = "El nombre proporcionado para el público objetivo es inválido.";
     public static final String LONGITUD_NOMBRE_PUBLICO_INVALIDA = "El nombre del público objetivo debe tener entre 5 y 50 caracteres.";
-    //mensajes clase relación laboral
+
     public static final String CODIGO_RELACION_OBLIGATORIO = "El código de la relación laboral es obligatorio.";
     public static final String CODIGO_RELACION_INVALIDO = "El código proporcionado de la relación laboral es inválido.";
     public static final String LONGITUD_CODIGO_RELACION_INVALIDA = "El código de la relación laboral debe tener entre 2 y 4 caracteres.";
     public static final String DESCRIPCION_RELACION_LABORAL_OBLIGATORIA = "La descripción de la relación laboral es obligatoria.";
     public static final String DESCRIPCION_RELACION_LABORAL_INVALIDA = "La descripción proporcionada para la relación laboral es inválida.";
     public static final String LONGITUD_DESCRIPCION_RELACION_LABORAL_INVALIDA = "La descripción de la relación laboral debe tener entre 5 y 20 caracteres.";
-    //mensajes clase sub area
+
     public static final String NOMBRE_SUB_AREA_OBLIGATORIO = "El nombre de la sub área es obligatorio.";
     public static final String NOMBRE_SUB_AREA_INVALIDO = "El nombre proporcionado para la sub área es inválido.";
     public static final String LONGITUD_NOMBRE_SUB_AREA_INVALIDA = "El nombre de la sub área debe tener entre 10 y 70 caracteres.";
-    //mensajes clase temporalidad
+
     public static final String NOMBRE_TEMPORALIDAD_OBLIGATORIO = "El nombre de la temporalidad es obligatorio.";
     public static final String NOMBRE_TEMPORALIDAD_INVALIDO = "El nombre proporcionado para la temporalidad es inválido.";
     public static final String LONGITUD_NOMBRE_TEMPORALIDAD_INVALIDA = "El nombre de la temporalidad debe tener entre 5 y 30 caracteres.";
-    //mensajes clase tipo indicador
+
     public static final String NATURALEZA_TIPO_INDICADOR_OBLIGATORIA = "La naturaleza del tipo indicador es obligatoria.";
     public static final String NATURALEZA_TIPO_INDICADOR_INVALIDA = "La naturaleza proporcionada para el tipo indicador es inválida.";
     public static final String LONGITUD_NATURALEZA_TIPO_INDICADOR_INVALIDA = "La naturaleza del tipo indicador debe tener entre 5 y 20 caracteres.";
     public static final String TIPOLOGIA_TIPO_INDICADOR_OBLIGATORIA = "La tipología del tipo indicador es obligatoria.";
     public static final String TIPOLOGIA_TIPO_INDICADOR_INVALIDA = "La tipología proporcionada para el tipo indicador es inválida.";
     public static final String LONGITUD_TIPOLOGIA_TIPO_INDICADOR_INVALIDA = "La tipología del tipo indicador debe tener entre 5 y 15 caracteres.";
-    //mensajes clase usuario
+
     public static final String LONGITUD_CORREO_USUARIO_INVALIDA = "El correo del usuario debe tener entre 10 y 100 caracteres.";
     public static final String LONGITUD_CLAVE_USUARIO_INVALIDA = "La clave del usuario debe tener entre 8 y 20 caracteres.";
 
@@ -207,8 +206,6 @@ public class Mensajes {
     public static final String IDENTIFICADOR_PARTICIPANTE_EMPLEADO_NULO = "El identificador del participante empleado no puede ser nulo.";
     public static final String IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO = "El identificador del participante externo no puede ser nulo.";
     public static final String IDENTIFICADOR_PARTICIPANTE_ESTUDIANTE_NULO = "El identificador del participante estudiante no puede ser nulo.";
-    public static final String IDENTIFICADOR_MIEMBRO_NULO = "El identificador del miembro no puede ser nulo.";
-    public static final String IDENTIFICADOR_INTERNO_NULO = "El identificador del interno no puede ser nulo.";
     public static final String IDENTIFICADOR_INDICADOR_NULO = "El identificador del indicador no puede ser nulo.";
     public static final String IDENTIFICADOR_IDENTIFICACION_NULO = "El identificador de la identificación no puede ser nulo.";
     public static final String IDENTIFICADOR_ESTUDIANTE_NULO = "El identificador del estudiante no puede ser nulo.";
@@ -229,11 +226,6 @@ public class Mensajes {
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
-    private static final String NO_EXISTE_PERSONA_CON_DOCUMENTO = "No existe un persona con el documento ";
-    private static final String NO_EXISTE_AREA_CON_IDENTIFICADOR = "No existe un área con el identificador ";
-    private static final String NO_EXISTE_TIPO_AREA_CON_IDENTIFICADOR = "No existe un tipo área con el identificador ";
-    private static final String NO_EXISTE_TIPO_IDENTIFICACION_CON_IDENTIFICADOR = "No existe un tipo identificacion con el identificador ";
-    private static final String NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR = "No existe un tipo usuario con el identificador ";
 
     public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
     public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
@@ -260,28 +252,7 @@ public class Mensajes {
         return NO_EXISTE_PERSONA_CON_IDENTIFICADOR + identificador;
     }
 
-    public static String obtenerNoExistePersonaConDocumento(String documento) {
-        return NO_EXISTE_PERSONA_CON_DOCUMENTO + documento;
-    }
-
-    public static String obtenerNoExisteAreaConId(UUID identificador) {
-        return NO_EXISTE_AREA_CON_IDENTIFICADOR + identificador;
-    }
-
-    public static String obtenerNoExisteTipoAreaConId(UUID identificador) {
-        return NO_EXISTE_TIPO_AREA_CON_IDENTIFICADOR + identificador;
-    }
-
-    public static String obtenerNoExisteTipoIdentificacionConId(UUID identificador) {
-        return NO_EXISTE_TIPO_IDENTIFICACION_CON_IDENTIFICADOR + identificador;
-    }
-
-    public static String obtenerNoExisteTipoUsuarioConId(UUID identificador) {
-        return NO_EXISTE_TIPO_USUARIO_CON_IDENTIFICADOR + identificador;
-    }
-
     public static String getUserWasSuccessfullyAuthenticatedAndHasTheRoles(String name, String role) {
         return "Usuario " + name + " fue autenticado exitosamente y tiene el rol de: " + role;
     }
-
 }

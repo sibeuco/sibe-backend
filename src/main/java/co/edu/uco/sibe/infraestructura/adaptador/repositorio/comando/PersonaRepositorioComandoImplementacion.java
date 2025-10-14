@@ -1,7 +1,11 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,45 +39,40 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     }
 
     @Override
-    public UUID modificarPersona(Persona persona, UUID identificador) {
-        UUID tipoIdentificacionPersona = persona.getTipoIdentificacion().getIdentificador();
+    public UUID modificarUsuario(Usuario usuario, Persona persona) {
+        var personaEntidad = this.personaDAO.findById(persona.getIdentificador()).orElse(null);
+        var usuarioEntidad = this.usuarioDAO.findById(usuario.getIdentificador()).orElse(null);
 
-        this.personaDAO.modificarPersona(tipoIdentificacionPersona, persona.getDocumento(),
-                persona.getPrimerNombre(), persona.getSegundoNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getCorreo(), identificador);
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        this.personaMapeador.modificarEntidad(personaEntidad, persona);
 
-        return identificador;
+        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        this.usuarioMapeador.modificarEntidad(usuarioEntidad, usuario);
 
-    }
-
-    @Override
-    public UUID modificarUsuario(Usuario usuario, UUID identificador) {
-        UUID tipoUsuarioIdentificador = usuario.getTipoUsuario().getIdentificador();
-
-        this.usuarioDAO.modificarUsuario(tipoUsuarioIdentificador, usuario.getCorreo(), identificador);
-
-        return identificador;
-    }
-
-    @Override
-    public UUID modificarContrasena(String nuevaContrasena, UUID identificador) {
-        var usuarioEntidad = this.usuarioDAO.consultarUsuarioPorIdentificador(identificador);
-
-        assert !ValidadorObjeto.getInstance().esNulo(usuarioEntidad);
-        this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
+        this.personaDAO.save(personaEntidad);
 
         return this.usuarioDAO.save(usuarioEntidad).getIdentificador();
     }
 
     @Override
+    public UUID modificarClave(String nuevaContrasena, UUID identificador) {
+        var usuarioEntidad = this.usuarioDAO.findById(identificador).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
+
+        return this.usuarioDAO.save(usuarioEntidad).getIdentificador();
+
+    }
+
+    @Override
     public void eliminarUsuario(UUID identificador) {
-        var usuario = usuarioDAO.findById(identificador).orElse(null);
+        var usuarioEntidad = usuarioDAO.findById(identificador).orElse(null);
 
-        assert usuario != null;
-        var persona = personaDAO.consultarPersonaPorCorreo(usuario.getCorreo());
-        UUID identificadorPersona = persona.getIdentificador();
+        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        var personaEntidad = personaDAO.findByCorreo(usuarioEntidad.getCorreo());
 
-        personaDAO.deleteById(identificadorPersona);
+        personaDAO.deleteById(personaEntidad.getIdentificador());
         usuarioDAO.deleteById(identificador);
-
     }
 }

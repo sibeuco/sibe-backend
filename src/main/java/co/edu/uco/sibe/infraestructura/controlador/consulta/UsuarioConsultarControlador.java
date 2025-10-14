@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -45,5 +44,4 @@ public class UsuarioConsultarControlador {
     public PersonaDTO consultarPersonaPorIdentificador(@PathVariable UUID identificador){
         return consultarPersonaPorIdentificadorManejador.ejecutar(identificador);
     }
-
 }

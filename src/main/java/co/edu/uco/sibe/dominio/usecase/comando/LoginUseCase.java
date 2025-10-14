@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
 
 public class LoginUseCase {
@@ -28,5 +27,4 @@ public class LoginUseCase {
             throw new AuthorizationException(Mensajes.USUARIO_O_CLAVE_INCORRECTO);
         }
     }
-
 }

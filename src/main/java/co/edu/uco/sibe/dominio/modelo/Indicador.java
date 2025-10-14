@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
@@ -27,10 +26,24 @@ public class Indicador {
     }
 
     public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, PublicoInteres publicoInteres) {
-        return new Indicador(identificador, ValidadorTexto.obtenerValorPorDefecto(nombre), ValidadorObjeto.obtenerValorPorDefecto(tipoIndicador, TipoIndicador.construir()), ValidadorObjeto.obtenerValorPorDefecto(temporalidad, Temporalidad.construir()), ValidadorObjeto.obtenerValorPorDefecto(proyecto, Proyecto.construir()), ValidadorObjeto.obtenerValorPorDefecto(publicoInteres, PublicoInteres.construir()));
+        return new Indicador(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(nombre),
+                ValidadorObjeto.obtenerValorPorDefecto(tipoIndicador, TipoIndicador.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(temporalidad, Temporalidad.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(proyecto, Proyecto.construir()),
+                ValidadorObjeto.obtenerValorPorDefecto(publicoInteres, PublicoInteres.construir())
+        );
     }
 
     public static Indicador construir() {
-        return new Indicador(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TipoIndicador.construir(), Temporalidad.construir(), Proyecto.construir(), PublicoInteres.construir());
+        return new Indicador(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TipoIndicador.construir(),
+                Temporalidad.construir(),
+                Proyecto.construir(),
+                PublicoInteres.construir()
+        );
     }
 }

@@ -1,9 +1,7 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
-import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
-
 import java.util.List;
 
 public class ConsultarTiposIdentificacionUseCase {
@@ -18,5 +16,4 @@ public class ConsultarTiposIdentificacionUseCase {
         return tipoIdentificacionRepositorioConsulta.consultarTiposIdentificacionDTO();
 
     }
-
 }

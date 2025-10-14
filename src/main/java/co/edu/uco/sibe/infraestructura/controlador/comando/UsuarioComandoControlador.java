@@ -10,7 +10,6 @@ import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
 
 @RestController

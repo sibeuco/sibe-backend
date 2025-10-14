@@ -19,10 +19,18 @@ public class RelacionLaboral {
     }
 
     public static RelacionLaboral construir(UUID identificador, String codigo, String descripcion) {
-        return new RelacionLaboral(identificador, ValidadorTexto.obtenerValorPorDefecto(codigo), ValidadorTexto.obtenerValorPorDefecto(descripcion));
+        return new RelacionLaboral(
+                identificador,
+                ValidadorTexto.obtenerValorPorDefecto(codigo),
+                ValidadorTexto.obtenerValorPorDefecto(descripcion)
+        );
     }
 
     public static RelacionLaboral construir() {
-        return new RelacionLaboral(UtilUUID.obtenerValorDefecto(), TextoConstante.VACIO, TextoConstante.VACIO);
+        return new RelacionLaboral(
+                UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
+                TextoConstante.VACIO
+        );
     }
 }

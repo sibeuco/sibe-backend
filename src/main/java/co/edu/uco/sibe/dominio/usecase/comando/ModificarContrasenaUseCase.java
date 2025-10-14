@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
 
 public class ModificarContrasenaUseCase {
@@ -20,7 +19,7 @@ public class ModificarContrasenaUseCase {
     public UUID ejecutar(String contrasena, UUID identificador){
         validarSiNoExistePersonaConId(identificador);
 
-        return this.personaRepositorioComando.modificarContrasena(contrasena, identificador);
+        return this.personaRepositorioComando.modificarClave(contrasena, identificador);
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
@@ -28,5 +27,4 @@ public class ModificarContrasenaUseCase {
             throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
         }
     }
-
 }

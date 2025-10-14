@@ -38,7 +38,7 @@ public class AuthoritiesLoggingAfterFilter implements Filter {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // If a user is authenticated, log their username and authorities
-        if (!ValidadorObjeto.getInstance().esNulo(authentication)) {
+        if (!ValidadorObjeto.esNulo(authentication)) {
             log.info(Mensajes.getUserWasSuccessfullyAuthenticatedAndHasTheRoles(authentication.getName(), authentication.getAuthorities().toString()));
         }
 
