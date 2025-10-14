@@ -34,11 +34,9 @@ public class ActividadEntidad {
     @JoinColumn(name = "indicador")
     private IndicadorEntidad indicadorEntidad;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "colaborador", nullable = false)
     private UUID colaborador;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    
     @JoinColumn(name = "creador", nullable = false)
     private UUID creador;
 }
