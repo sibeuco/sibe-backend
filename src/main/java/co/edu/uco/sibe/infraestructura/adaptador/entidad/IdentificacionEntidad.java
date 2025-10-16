@@ -21,6 +21,6 @@ public class IdentificacionEntidad {
     private String numeroIdentificacion;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "identificacion")
+    @JoinColumn(name = "tipo_identificacion")
     private IdentificacionTipoIdentificacionEntidad tipoIdentificacion;
 }

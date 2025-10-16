@@ -29,8 +29,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     UsuarioMapeador usuarioMapeador;
 
     @Override
-    public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String contrasenaEncriptada) {
-        var entidadUsuario = this.usuarioMapeador.construirEntidad(usuario, contrasenaEncriptada);
+    public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String claveEncriptada) {
+        var entidadUsuario = this.usuarioMapeador.construirEntidad(usuario, claveEncriptada);
         var entidadPersona = this.personaMapeador.construirEntidad(persona);
 
         this.personaDAO.save(entidadPersona);

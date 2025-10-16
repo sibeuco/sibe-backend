@@ -1,5 +1,10 @@
 package co.edu.uco.sibe.infraestructura.configuracion;
 
+import co.edu.uco.sibe.dominio.enums.TipoArea;
+import co.edu.uco.sibe.dominio.modelo.*;
+import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
+import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.*;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +25,10 @@ public class DataLoader implements CommandLineRunner {
     private final SubareaDAO subareaDAO;
     private final AreaDAO areaDAO;
     private final DireccionDAO direccionDAO;
+    private final UsuarioDAO usuarioDAO;
+    private final PersonaRepositorioComando personaRepositorioComando;
+    private final EncriptarClaveServicio encriptarClaveServicio;
+    private final VincularUsuarioConAreaService vincularUsuarioConAreaService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,6 +39,7 @@ public class DataLoader implements CommandLineRunner {
         cargarSubareas();
         cargarAreas();
         cargarDirecciones();
+        cargarUsuarioAdministradorDeDireccion();
     }
 
     private void cargarTiposDeUsuario() {
@@ -318,5 +328,51 @@ public class DataLoader implements CommandLineRunner {
                 areas,
                 actividades
         );
+    }
+
+    private void cargarUsuarioAdministradorDeDireccion() {
+        if(usuarioDAO.count() == 0) {
+            var tipoUsuario = TipoUsuario.construir(
+                    UUID.fromString("6a4c8c50-73c9-4f4d-9a31-3df78592d8ab"),
+                    "Administrador de dirección",
+                    true, true, true, true
+            );
+
+            var usuario = Usuario.construir(
+                    UUID.fromString("f2cf3d75-8d18-4a88-8dd4-568f3c2d7b2d"),
+                    "administrador@uco.net.co",
+                    "Admin1234",
+                    tipoUsuario,
+                    true
+            );
+
+            var tipoIdentificacion = TipoIdentificacion.construir(
+                    UUID.fromString("37a1f93d-6391-48d0-bf31-15cfc4b62f64"),
+                    "CC",
+                    "Cédula de Ciudadanía"
+            );
+
+            var identificacion = Identificacion.construir(
+                    UUID.fromString("df21eb62-52ef-49e5-b20e-1ff6bb2baf8d"),
+                    "1111111111",
+                    tipoIdentificacion
+            );
+
+            var persona = Persona.construir(
+                    UUID.fromString("eec5fda2-3264-40c0-9ae3-179f05b016dc"),
+                    "Administrador",
+                    "UCO",
+                    "administrador@uco.net.co",
+                    identificacion
+            );
+
+            var area = UUID.fromString("7c02a46c-7410-4411-8b6a-f442b7b456d3");
+            var tipoArea = TipoArea.DIRECCION;
+            var contrasenaEncriptada = this.encriptarClaveServicio.ejecutar(usuario.getClave());
+
+            var identificador = this.personaRepositorioComando.agregarNuevoUsuario(usuario, persona, contrasenaEncriptada);
+
+            this.vincularUsuarioConAreaService.ejecutar(identificador, area, tipoArea);
+        }
     }
 }

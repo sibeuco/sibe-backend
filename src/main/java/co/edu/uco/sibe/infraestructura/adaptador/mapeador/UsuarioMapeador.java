@@ -28,14 +28,14 @@ public class UsuarioMapeador {
         return new UsuarioDTO(usuario.getIdentificador(), personaEntidad.getNombres(), personaEntidad.getApellidos(), personaEntidad.getCorreo(), identificacionDTO, tipoUsuarioDTO, usuario.isEstaActivo());
     }
 
-    public UsuarioEntidad construirEntidad(Usuario usuario, String contrasena){
+    public UsuarioEntidad construirEntidad(Usuario usuario, String clave){
         var tipoUsuarioEntidad = tipoUsuarioMapeador.construirEntidad(usuario.getTipoUsuario());
         var usuarioTipoUsuarioEntidad = new UsuarioTipoUsuarioEntidad(
                 generarNuevoUUIDIdentificacionTipoIdentificacion(),
                 tipoUsuarioEntidad
         );
 
-        return new UsuarioEntidad(usuario.getIdentificador(), usuario.getCorreo(), usuario.getClave(), usuario.isEstaActivo(), usuarioTipoUsuarioEntidad);
+        return new UsuarioEntidad(usuario.getIdentificador(), usuario.getCorreo(), clave, usuario.isEstaActivo(), usuarioTipoUsuarioEntidad);
     }
 
     public UUID generarNuevoUUIDIdentificacionTipoIdentificacion() {
