@@ -28,9 +28,9 @@ public class AgregarNuevoUsuarioUseCase {
     public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea){
         validarUsuarioExisteConCorreo(usuario.getCorreo());
 
-        var contrasenaEncriptada = this.encriptarClaveServicio.ejecutar(usuario.getClave());
+        var claveEncriptada = this.encriptarClaveServicio.ejecutar(usuario.getClave());
 
-        var identificador = this.personaRepositorioComando.agregarNuevoUsuario(usuario, persona, contrasenaEncriptada);
+        var identificador = this.personaRepositorioComando.agregarNuevoUsuario(usuario, persona, claveEncriptada);
 
         this.vincularUsuarioConAreaService.ejecutar(identificador, area, tipoArea);
 
