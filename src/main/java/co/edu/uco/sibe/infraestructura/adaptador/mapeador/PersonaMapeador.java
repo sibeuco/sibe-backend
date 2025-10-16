@@ -20,7 +20,13 @@ public class PersonaMapeador {
     public PersonaEntidad construirEntidad(Persona persona){
         var identificacion = this.identificacionMapeador.construirEntidad(persona.getIdentificacion());
 
-        return new PersonaEntidad(persona.getIdentificador(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacion);
+        return new PersonaEntidad(
+                persona.getIdentificador(),
+                persona.getNombres(),
+                persona.getApellidos(),
+                persona.getCorreo(),
+                identificacion
+        );
     }
 
     public void modificarEntidad(PersonaEntidad personaEntidad, Persona persona) {
