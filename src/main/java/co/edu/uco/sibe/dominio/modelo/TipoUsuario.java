@@ -9,14 +9,16 @@ import java.util.UUID;
 @Getter
 public class TipoUsuario {
     private UUID identificador;
+    private String codigo;
     private String nombre;
     private boolean crear;
     private boolean modificar;
     private boolean eliminar;
     private boolean consultar;
 
-    private TipoUsuario(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
+    private TipoUsuario(UUID identificador, String codigo, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
         this.identificador = identificador;
+        this.codigo = codigo;
         this.nombre = nombre;
         this.crear = crear;
         this.modificar = modificar;
@@ -24,9 +26,10 @@ public class TipoUsuario {
         this.consultar = consultar;
     }
 
-    public static TipoUsuario construir(UUID identificador, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
+    public static TipoUsuario construir(UUID identificador, String codigo, String nombre, boolean crear, boolean modificar, boolean eliminar, boolean consultar) {
         return new TipoUsuario(
                 identificador,
+                ValidadorTexto.obtenerValorPorDefecto(codigo),
                 ValidadorTexto.obtenerValorPorDefecto(nombre),
                 crear,
                 modificar,
@@ -38,6 +41,7 @@ public class TipoUsuario {
     public static TipoUsuario construir() {
         return new TipoUsuario(
                 UtilUUID.obtenerValorDefecto(),
+                TextoConstante.VACIO,
                 TextoConstante.VACIO,
                 false,
                 false,

@@ -18,6 +18,9 @@ public class TipoUsuarioEntidad {
     private UUID identificador;
 
     @Column(length = 30, nullable = false)
+    private String codigo;
+
+    @Column(length = 30, nullable = false)
     private String nombre;
 
     @Column
