@@ -18,11 +18,9 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class PersonaFabrica {
-
     private final TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta;
     private final IdentificacionRepositorioConsulta identificacionRepositorioConsulta;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
-
 
     public Persona construir(UsuarioComando comando){
         var identificadorIdentificacion = generarNuevoUUIDIdentificacion();

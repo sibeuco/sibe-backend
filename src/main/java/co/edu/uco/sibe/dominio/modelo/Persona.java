@@ -15,7 +15,7 @@ public class Persona {
     private String correo;
     private Identificacion identificacion;
 
-    private Persona(UUID identificador, String nombres, String correo, String apellidos, Identificacion identificacion) {
+    private Persona(UUID identificador, String nombres, String apellidos, String correo, Identificacion identificacion) {
         this.identificador = identificador;
         this.nombres = nombres;
         this.correo = correo;
