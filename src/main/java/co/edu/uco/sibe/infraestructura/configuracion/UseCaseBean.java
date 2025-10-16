@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
+import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
 import co.edu.uco.sibe.dominio.usecase.consulta.*;
 import org.springframework.context.annotation.Bean;
@@ -12,10 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseBean {
-
     @Bean
-    public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio){
-        return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio);
+    public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService){
+        return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio, vincularUsuarioConAreaService);
     }
 
     @Bean
