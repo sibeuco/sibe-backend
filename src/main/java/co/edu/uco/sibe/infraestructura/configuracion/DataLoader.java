@@ -45,16 +45,19 @@ public class DataLoader implements CommandLineRunner {
     private void cargarTiposDeUsuario() {
         if (this.tipoUsuarioDAO.count() == 0) {
             var administradorDireccion = mapearTipoUsuario("6a4c8c50-73c9-4f4d-9a31-3df78592d8ab",
+                    "ADMINISTRADOR_DIRECCION",
                     "Administrador de dirección",
                     true, true, true, true
             );
 
             var administradorArea = mapearTipoUsuario("a0f0d8b1-1c15-46d8-b226-24ac77c51c28",
+                    "ADMINISTRADOR_AREA",
                     "Administrador de Area",
                     true, true, true, true
             );
 
             var colaborador = mapearTipoUsuario("f4b6f51e-5416-46a9-9f1a-c1eecac1738f",
+                    "COLABORADOR",
                     "Colaborador",
                     true, true, false, true
             );
@@ -67,6 +70,7 @@ public class DataLoader implements CommandLineRunner {
 
     private TipoUsuarioEntidad mapearTipoUsuario(
             String identificador,
+            String codigo,
             String nombre,
             boolean crear,
             boolean modificar,
@@ -75,6 +79,7 @@ public class DataLoader implements CommandLineRunner {
     ) {
         return new TipoUsuarioEntidad(
                 UUID.fromString(identificador),
+                codigo,
                 nombre,
                 crear,
                 modificar,
@@ -334,6 +339,7 @@ public class DataLoader implements CommandLineRunner {
         if(usuarioDAO.count() == 0) {
             var tipoUsuario = TipoUsuario.construir(
                     UUID.fromString("6a4c8c50-73c9-4f4d-9a31-3df78592d8ab"),
+                    "Administrador de dirección",
                     "Administrador de dirección",
                     true, true, true, true
             );

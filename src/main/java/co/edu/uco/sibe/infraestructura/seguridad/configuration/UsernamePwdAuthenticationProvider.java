@@ -83,7 +83,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
     private List<GrantedAuthority> getGrantedAuthorities(TipoUsuarioDTO authority) {
         var grantedAuthorities = new ArrayList<GrantedAuthority>();
         addCrudPrivilege(grantedAuthorities, authority);
-        grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo()));
 
         return grantedAuthorities;
     }
@@ -114,16 +114,16 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
      */
     private void addCrudPrivilege(List<GrantedAuthority> grantedAuthorities, TipoUsuarioDTO authority) {
         if (authority.isConsultar() && !haveReadPrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre() + TextoConstante.UNDERSCORE + TextoConstante.READ_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.READ_AUTHORITY));
         }
         if (authority.isCrear() && !haveWritePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre() + TextoConstante.UNDERSCORE + TextoConstante.CREATE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.CREATE_AUTHORITY));
         }
         if (authority.isModificar() && !haveUpdatePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre() + TextoConstante.UNDERSCORE + TextoConstante.UPDATE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.UPDATE_AUTHORITY));
         }
         if (authority.isEliminar() && !haveDeletePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre() + TextoConstante.UNDERSCORE + TextoConstante.DELETE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.DELETE_AUTHORITY));
         }
     }
 
