@@ -23,18 +23,24 @@ public class DataLoader implements CommandLineRunner {
 
     private void cargarTiposDeUsuario() {
         if (this.tipoUsuarioDAO.count() == 0) {
-            var admin = mapearTipoUsuario("d1e2f3a4-b5c6-d7e8-f9a0-b1c2d3e4f5a6",
-                    "Administrador",
+            var administradorDireccion = mapearTipoUsuario("d1e2f3a4-b5c6-d7e8-f9a0-b1c2d3e4f5a6",
+                    "Administrador de dirección",
                     true, true, true, true
             );
 
-            var usuario = mapearTipoUsuario("a0b9c8d7-e6f5-a4b3-c2d1-e0f9a8b7c6d5",
-                    "Usuario",
+            var administradorArea = mapearTipoUsuario("d1e2f3a4-b5c6-d7e8-f9a0-b1c2d3e4f5a6",
+                    "Administrador de Area",
+                    true, true, true, true
+            );
+
+            var colaborador = mapearTipoUsuario("a0b9c8d7-e6f5-a4b3-c2d1-e0f9a8b7c6d5",
+                    "Colaborador",
                     true, true, false, true
             );
 
-            tipoUsuarioDAO.save(admin);
-            tipoUsuarioDAO.save(usuario);
+            tipoUsuarioDAO.save(administradorDireccion);
+            tipoUsuarioDAO.save(administradorArea);
+            tipoUsuarioDAO.save(colaborador);
         }
     }
 
