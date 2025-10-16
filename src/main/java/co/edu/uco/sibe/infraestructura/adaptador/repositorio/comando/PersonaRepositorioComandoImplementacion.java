@@ -70,9 +70,8 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var usuarioEntidad = usuarioDAO.findById(identificador).orElse(null);
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad);
-        var personaEntidad = personaDAO.findByCorreo(usuarioEntidad.getCorreo());
+        usuarioEntidad.setEstaActivo(false);
 
-        personaDAO.deleteById(personaEntidad.getIdentificador());
-        usuarioDAO.deleteById(identificador);
+        this.usuarioDAO.save(usuarioEntidad);
     }
 }

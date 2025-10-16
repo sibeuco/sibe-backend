@@ -21,15 +21,15 @@ public class UsuarioOrganizacionEntidad {
     @JoinColumn(name = "usuario", nullable = false)
     private UsuarioEntidad usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "direccion", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "direccion")
     private DireccionEntidad direccion;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "area", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area")
     private AreaEntidad area;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "subarea", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subarea")
     private SubareaEntidad subarea;
 }
