@@ -14,6 +14,9 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     UsuarioDAO usuarioDAO;
 
     @Autowired
+    PersonaDAO personaDAO;
+
+    @Autowired
     DireccionDAO direccionDAO;
 
     @Autowired
@@ -40,6 +43,20 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     }
 
     @Override
+    public UUID cambiarVinculacionUsuarioConDireccion(UUID usuario, UUID direccion) {
+        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
+        var direccionEntidad = direccionDAO.findById(direccion).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(direccionEntidad);
+        var entidad = usuarioOrganizacionDAO.findByUsuario(usuarioEntidad);
+
+        assert !ValidadorObjeto.esNulo(entidad);
+        usuarioOrganizacionMapeador.cambiarEntidadVinculadaConDireccion(entidad, direccionEntidad);
+
+        return this.usuarioOrganizacionDAO.save(entidad).getIdentificador();
+    }
+
+    @Override
     public UUID vincularUsuarioConArea(UUID usuario, UUID area) {
         var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
         var areaEntidad = areaDAO.findById(area).orElse(null);
@@ -51,12 +68,44 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     }
 
     @Override
+    public UUID cambiarVinculacionUsuarioConArea(UUID usuario, UUID area) {
+        var personaEntidad = personaDAO.findById(usuario).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
+
+        var areaEntidad = areaDAO.findById(area).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(areaEntidad);
+        var entidad = usuarioOrganizacionDAO.findByUsuario(usuarioEntidad);
+
+        assert !ValidadorObjeto.esNulo(entidad);
+        usuarioOrganizacionMapeador.cambiarEntidadVinculadaConArea(entidad, areaEntidad);
+
+        return this.usuarioOrganizacionDAO.save(entidad).getIdentificador();
+    }
+
+    @Override
     public UUID vincularUsuarioConSubarea(UUID usuario, UUID subarea) {
         var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
         var subareaEntidad = subareaDAO.findById(subarea).orElse(null);
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(subareaEntidad);
         var entidad = usuarioOrganizacionMapeador.construirEntidadVinculadaConSubarea(usuarioEntidad, subareaEntidad);
+
+        return this.usuarioOrganizacionDAO.save(entidad).getIdentificador();
+    }
+
+    @Override
+    public UUID cambiarVinculacionUsuarioConSubarea(UUID usuario, UUID subarea) {
+        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
+        var subareaEntidad = subareaDAO.findById(subarea).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(subareaEntidad);
+        var entidad = usuarioOrganizacionDAO.findByUsuario(usuarioEntidad);
+
+        assert !ValidadorObjeto.esNulo(entidad);
+        usuarioOrganizacionMapeador.cambiarEntidadVinculadaConArea(entidad, subareaEntidad);
 
         return this.usuarioOrganizacionDAO.save(entidad).getIdentificador();
     }

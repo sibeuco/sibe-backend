@@ -40,15 +40,13 @@ public class PersonaFabrica {
 
     public Persona construirActualizar(UsuarioModificacionComando comando, UUID identificador){
         var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(comando.getTipoIdentificacion());
-        var correoActual = personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador).getCorreo();
-        var personaIdentificador = personaRepositorioConsulta.consultarPersonaPorCorreo(correoActual).getIdentificador();
-        var identificacionIdentificador = personaRepositorioConsulta.consultarPersonaPorCorreo(correoActual).getIdentificacion().getIdentificador();
+        var identificacionIdentificador = personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador).getIdentificacion().getIdentificador();
 
         var identificacion = Identificacion.construir(identificacionIdentificador, comando.getNumeroIdentificacion(), tipoIdentificacion);
 
         MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.ACTUALIZAR);
 
-        var persona = Persona.construir(personaIdentificador, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
+        var persona = Persona.construir(identificador, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
 
         MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
 

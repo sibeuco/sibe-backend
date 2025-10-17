@@ -33,8 +33,9 @@ public class UsuarioFabrica {
 
     public Usuario construirActualizar(UsuarioModificacionComando comando, UUID identificador){
         var tipoUsuario = tipoUsuarioRepositorioConsulta.consultarTiposUsuario(comando.getTipoUsuario());
-        var usuarioActual = personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador);
-        var usuario = Usuario.construir(identificador, comando.getCorreo(), usuarioActual.getClave(), tipoUsuario, usuarioActual.isEstaActivo());
+        var correoActual = personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador).getCorreo();
+        var usuarioActual = personaRepositorioConsulta.consultarUsuarioPorCorreo(correoActual);
+        var usuario = Usuario.construir(usuarioActual.getIdentificador(), comando.getCorreo(), usuarioActual.getClave(), tipoUsuario, usuarioActual.isEstaActivo());
 
         MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.ACTUALIZAR);
 

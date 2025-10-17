@@ -5,6 +5,7 @@ import co.edu.uco.sibe.aplicacion.comando.fabrica.PersonaFabrica;
 import co.edu.uco.sibe.aplicacion.comando.fabrica.UsuarioFabrica;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoParametroRespuesta;
+import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.usecase.comando.ModificarUsuarioUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,14 @@ public class ModificarUsuarioManejador implements ManejadorComandoParametroRespu
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(UsuarioModificacionComando comando, UUID parametro) {
-        return new ComandoRespuesta<>(this.modificarUsuarioUseCase.ejecutar(this.usuarioFabrica.construirActualizar(comando, parametro), this.personaFabrica.construirActualizar(comando, parametro), parametro));
+        return new ComandoRespuesta<>(
+                this.modificarUsuarioUseCase.ejecutar(
+                        this.usuarioFabrica.construirActualizar(comando, parametro),
+                        this.personaFabrica.construirActualizar(comando, parametro),
+                        UUID.fromString(comando.getArea().getArea()),
+                        TipoArea.valueOf(comando.getArea().getTipoArea()),
+                        parametro
+                )
+        );
     }
 }

@@ -23,6 +23,7 @@ public final class UsuarioMotorFabrica implements MotorFabrica<Usuario> {
         var regla = UsuarioRegla.obtenerInstancia();
 
         motor.agregarRegla(TipoOperacion.CREAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
+        motor.agregarRegla(TipoOperacion.CREAR, modelo -> regla.validarClave(modelo.getClave()));
         motor.agregarRegla(TipoOperacion.CREAR, regla::validarCampos);
         motor.agregarRegla(TipoOperacion.ACTUALIZAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
         motor.agregarRegla(TipoOperacion.ACTUALIZAR, regla::validarCampos);
