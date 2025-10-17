@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/tipos-identificacion")
+@RequestMapping("/tipos_identificacion")
 public class TipoIdentificacionConsultaControlador {
     private final ConsultarTiposIdentificacionManejador consultarTiposIdentificacionManejador;
 
