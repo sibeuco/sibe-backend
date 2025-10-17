@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import jakarta.servlet.*;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -32,7 +32,7 @@ public class AuthoritiesLoggingAtFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // Log that authentication is about to be validated.
-        log.info(Mensajes.VALIDANDO_AUTENTICACION);
+        log.info(UtilMensaje.VALIDANDO_AUTENTICACION);
 
         chain.doFilter(request, response);
     }

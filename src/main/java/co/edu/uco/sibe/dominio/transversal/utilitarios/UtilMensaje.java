@@ -2,7 +2,7 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import java.util.UUID;
 
-public class Mensajes {
+public final class UtilMensaje {
     public static final String DETALLE_ACCION_OBLIGATORIO = "El detalle de la acción es obligatorio.";
     public static final String DETALLE_ACCION_INVALIDO = "El detalle proporcionado para la acción es inválido.";
     public static final String LONGITUD_DETALLE_ACCION_INVALIDA = "El detalle de la acción debe tener entre 10 y 500 caracteres.";
@@ -170,7 +170,6 @@ public class Mensajes {
 
     public static final String CAMPO_OBLIGATORIO = "El campo no puede estar vacío.";
     public static final String OCURRIO_UN_ERROR = "Ocurrió un error inesperado, por favor contactar al administrador del sistema.";
-    public static final String NO_SE_ENCONTRARON_PERSONAS = "No se encontraron personas registradas.";
     public static final String DOCUMENTO_PERSONA_VACIO = "El documento no puede estar vacío.";
     public static final String PRIMER_NOMBRE_PERSONA_VACIO = "El primer nombre no puede estar vacío.";
     public static final String PRIMER_APELLIDO_PERSONA_VACIO = "El primer apellido no puede estar vacío.";
@@ -191,7 +190,6 @@ public class Mensajes {
     public static final String LONGITUD_SIGLA_TIPO_IDENTIFICACION_INVALIDA = "El campo sigla debe contener entre 1 y 5 caracteres.";
     public static final String PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO = "La descripción del tipo identificacion solo debe contener letras y espacios.";
     public static final String LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA = "El campo de la descripción debe contener entre 1 y 40 caracteres.";
-    public static final String NO_SE_ENCONTRARON_AREAS = "No se encontraron areas registradas.";
     public static final String IDENTIFICADOR_USUARIO_NULO = "El identificiador de un usuario no puede ser nulo";
     public static final String NO_HAY_CAMPOS_POR_VALIDAR = "No hay campos por validar para este modelo de dominio";
     public static final String IDENTIFICADOR_TIPO_USUARIO_NULO = "El identificador del tipo usuario no puede ser nulo.";
@@ -226,14 +224,13 @@ public class Mensajes {
     private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
     private static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
-
     public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
     public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
     public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";
     public static final String USUARIO_O_CLAVE_INCORRECTO = "El usuario o la contraseña no son validos.";
 
-
-    private Mensajes() {
+    private UtilMensaje() {
+        super();
     }
 
     public static String obtenerNoExisteUsuarioConId(UUID identificador) {

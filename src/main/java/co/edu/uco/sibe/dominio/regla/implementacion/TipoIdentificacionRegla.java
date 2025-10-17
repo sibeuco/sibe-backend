@@ -2,7 +2,7 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
@@ -22,7 +22,7 @@ public final class TipoIdentificacionRegla implements Regla<TipoIdentificacion> 
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_TIPO_IDENTIFICACION_NULO);
+        ValidadorObjeto.validarObligatorio(identificador, UtilMensaje.IDENTIFICADOR_TIPO_IDENTIFICACION_NULO);
     }
 
     @Override
@@ -32,14 +32,14 @@ public final class TipoIdentificacionRegla implements Regla<TipoIdentificacion> 
     }
 
     private void validarigla(String sigla) {
-        ValidadorTexto.validarObligatorio(sigla, Mensajes.CAMPO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(sigla, Mensajes.PATRON_SIGLA_TIPO_IDENTIFICACION_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(sigla.length(), 1, 6, Mensajes.LONGITUD_SIGLA_TIPO_IDENTIFICACION_INVALIDA);
+        ValidadorTexto.validarObligatorio(sigla, UtilMensaje.CAMPO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(sigla, UtilMensaje.PATRON_SIGLA_TIPO_IDENTIFICACION_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(sigla.length(), 1, 6, UtilMensaje.LONGITUD_SIGLA_TIPO_IDENTIFICACION_INVALIDA);
     }
 
     private void validarDescripcion(String descripcion) {
-        ValidadorTexto.validarObligatorio(descripcion, Mensajes.CAMPO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(descripcion, Mensajes.PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 1, 30, Mensajes.LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA);
+        ValidadorTexto.validarObligatorio(descripcion, UtilMensaje.CAMPO_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(descripcion, UtilMensaje.PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 1, 30, UtilMensaje.LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA);
     }
 }

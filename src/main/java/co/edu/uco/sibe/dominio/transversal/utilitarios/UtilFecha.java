@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class UtilFecha {
-    private static final UtilFecha instancia = new UtilFecha();
+public final class UtilFecha {
     private static final LocalDate FECHA_DEFECTO = LocalDate.of(1900, 1, 1);
     private static final LocalTime HORA_DEFECTO = LocalTime.of(0, 0, 0);
     private static final LocalDateTime FECHA_HORA_DEFECTO = LocalDateTime.of(FECHA_DEFECTO, HORA_DEFECTO);
@@ -14,37 +13,55 @@ public class UtilFecha {
     private static final DateTimeFormatter FORMATO_HORA = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final DateTimeFormatter FORMATO_FECHA_HORA = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private UtilFecha() { }
-
-    public static UtilFecha getInstance(){
-        return instancia;
+    private UtilFecha() {
+        super();
     }
 
-    public LocalDate obtenerFechaDefecto(){
+    public static LocalDate obtenerFechaDefecto(){
         return FECHA_DEFECTO;
     }
 
-    public LocalTime obtenerHoraDefecto(){
+    public static LocalTime obtenerHoraDefecto(){
         return HORA_DEFECTO;
     }
 
-    public LocalDate obtenerValorFechaPorDefecto(LocalDate fecha) {
-        return (fecha != null) ? fecha : FECHA_DEFECTO;
+    public static LocalDateTime obtenerFechaHoraDefecto() {
+        return FECHA_HORA_DEFECTO;
     }
 
-    public LocalTime obtenerValorHoraPorDefecto(LocalTime hora) {
-        return (hora != null) ? hora : HORA_DEFECTO;
+    public static LocalDate obtenerValorFechaPorDefecto(LocalDate fecha) {
+        return ValidadorObjeto.obtenerValorPorDefecto(fecha, FECHA_DEFECTO);
     }
 
-    public String formatearFecha(LocalDate fecha) {
-        return (fecha != null ? fecha : FECHA_DEFECTO).format(FORMATO_FECHA);
+    public static LocalTime obtenerValorHoraPorDefecto(LocalTime hora) {
+        return ValidadorObjeto.obtenerValorPorDefecto(hora, HORA_DEFECTO);
     }
 
-    public String formatearHora(LocalTime hora) {
-        return (hora != null ? hora : HORA_DEFECTO).format(FORMATO_HORA);
+    public static LocalDateTime obtenerValorFechaHoraPorDefecto(LocalDateTime fechaHora) {
+        return ValidadorObjeto.obtenerValorPorDefecto(fechaHora, FECHA_HORA_DEFECTO);
     }
 
-    public String formatearFechaHora(LocalDateTime fechaHora) {
-        return (fechaHora != null ? fechaHora : FECHA_HORA_DEFECTO).format(FORMATO_FECHA_HORA);
+    public static String formatearFechaATexto(LocalDate fecha) {
+        return obtenerValorFechaPorDefecto(fecha).format(FORMATO_FECHA);
+    }
+
+    public static LocalDate formatearTextoAFecha(String texto) {
+        return obtenerValorFechaPorDefecto(LocalDate.parse(texto));
+    }
+
+    public static String formatearHoraATexto(LocalTime hora) {
+        return obtenerValorHoraPorDefecto(hora).format(FORMATO_HORA);
+    }
+
+    public static LocalTime formatearTextoAHora(String texto) {
+        return obtenerValorHoraPorDefecto(LocalTime.parse(texto));
+    }
+
+    public static String formatearFechaHoraATexto(LocalDateTime fechaHora) {
+        return obtenerValorFechaHoraPorDefecto(fechaHora).format(FORMATO_FECHA_HORA);
+    }
+
+    public static LocalDateTime formatearTextoAFechaHora(String texto) {
+        return obtenerValorFechaHoraPorDefecto(LocalDateTime.parse(texto));
     }
 }

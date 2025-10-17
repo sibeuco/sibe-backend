@@ -8,7 +8,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public class ModificarUsuarioUseCase {
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
         if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
+            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExistePersonaConId(identificador));
         }
     }
 
@@ -46,7 +46,7 @@ public class ModificarUsuarioUseCase {
 
         if (!ValidadorObjeto.esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
-            throw new ValorDuplicadoExcepcion(Mensajes.DOCUMENTO_EXISTENTE);
+            throw new ValorDuplicadoExcepcion(UtilMensaje.DOCUMENTO_EXISTENTE);
         }
     }
 
@@ -55,7 +55,7 @@ public class ModificarUsuarioUseCase {
 
         if (!ValidadorObjeto.esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
-            throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
+            throw new ValorDuplicadoExcepcion(UtilMensaje.CORREO_EXISTENTE);
         }
     }
 }

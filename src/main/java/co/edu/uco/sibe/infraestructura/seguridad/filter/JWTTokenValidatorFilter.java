@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
 import co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -64,7 +64,7 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                         AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e) {
-                throw new BadCredentialsException(Mensajes.TOKEN_RECIBIDO_INVALIDO);
+                throw new BadCredentialsException(UtilMensaje.TOKEN_RECIBIDO_INVALIDO);
             }
         }
         chain.doFilter(request, response);

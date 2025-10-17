@@ -2,7 +2,7 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.TipoIndicador;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
@@ -21,7 +21,7 @@ public final class TipoIndicadorRegla implements Regla<TipoIndicador> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_TIPO_INDICADOR_NULO);
+        ValidadorObjeto.validarObligatorio(identificador, UtilMensaje.IDENTIFICADOR_TIPO_INDICADOR_NULO);
     }
 
     @Override
@@ -31,14 +31,14 @@ public final class TipoIndicadorRegla implements Regla<TipoIndicador> {
     }
 
     private void validarNaturalezaIndicador(String naturalezaIndicador) {
-        ValidadorTexto.validarObligatorio(naturalezaIndicador, Mensajes.NATURALEZA_TIPO_INDICADOR_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(naturalezaIndicador, Mensajes.NATURALEZA_TIPO_INDICADOR_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 5, 20, Mensajes.LONGITUD_NATURALEZA_TIPO_INDICADOR_INVALIDA);
+        ValidadorTexto.validarObligatorio(naturalezaIndicador, UtilMensaje.NATURALEZA_TIPO_INDICADOR_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(naturalezaIndicador, UtilMensaje.NATURALEZA_TIPO_INDICADOR_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(naturalezaIndicador.length(), 5, 20, UtilMensaje.LONGITUD_NATURALEZA_TIPO_INDICADOR_INVALIDA);
     }
 
     private void validarTipologiaIndicador(String tipologiaIndicador) {
-        ValidadorTexto.validarObligatorio(tipologiaIndicador, Mensajes.TIPOLOGIA_TIPO_INDICADOR_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(tipologiaIndicador, Mensajes.TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 5, 15, Mensajes.LONGITUD_TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
+        ValidadorTexto.validarObligatorio(tipologiaIndicador, UtilMensaje.TIPOLOGIA_TIPO_INDICADOR_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(tipologiaIndicador, UtilMensaje.TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(tipologiaIndicador.length(), 5, 15, UtilMensaje.LONGITUD_TIPOLOGIA_TIPO_INDICADOR_INVALIDA);
     }
 }
