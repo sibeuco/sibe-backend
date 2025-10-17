@@ -26,7 +26,7 @@ public class PersonaFabrica {
         var identificadorIdentificacion = generarNuevoUUIDIdentificacion();
         var identificadorPersona = generarNuevoUUIDPersona();
 
-        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(comando.getTipoIdentificacion());
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(UUID.fromString(comando.getTipoIdentificacion()));
         var identificacion = Identificacion.construir(identificadorIdentificacion, comando.getNumeroIdentificacion(), tipoIdentificacion);
 
         MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.CREAR);

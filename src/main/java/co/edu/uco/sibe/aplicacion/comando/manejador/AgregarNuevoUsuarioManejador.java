@@ -24,7 +24,7 @@ public class AgregarNuevoUsuarioManejador implements ManejadorComandoRespuesta<U
         return new ComandoRespuesta<>(this.agregarNuevoUsuarioUseCase.ejecutar(
                 this.usuarioFabrica.construir(comando),
                 this.personaFabrica.construir(comando),
-                comando.getArea().getArea(),
+                UUID.fromString(comando.getArea().getArea()),
                 TipoArea.valueOf(comando.getArea().getTipoArea())
         ));
     }

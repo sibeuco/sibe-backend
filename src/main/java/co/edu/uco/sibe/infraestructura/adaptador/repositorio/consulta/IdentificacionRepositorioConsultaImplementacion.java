@@ -2,6 +2,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.Identificacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.IdentificacionRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.IdentificacionMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class IdentificacionRepositorioConsultaImplementacion implements Identifi
     @Override
     public Identificacion consultarPorIdentificador(UUID identificador) {
         var entidad = identificacionDAO.findById(identificador).orElse(null);
+
+        if(ValidadorObjeto.esNulo(entidad)) {
+            return null;
+        }
 
         return this.identificacionMapeador.construirModelo(entidad);
     }

@@ -23,7 +23,7 @@ public class UsuarioFabrica {
 
     public Usuario construir(UsuarioComando comando){
         var identificadorUsuario = generarNuevoUUIDUnico();
-        var tipoUsuario = tipoUsuarioRepositorioConsulta.consultarTiposUsuario(comando.getTipoUsuario());
+        var tipoUsuario = tipoUsuarioRepositorioConsulta.consultarTiposUsuario(UUID.fromString(comando.getTipoUsuario()));
         var usuario = Usuario.construir(identificadorUsuario, comando.getCorreo(), comando.getClave(), tipoUsuario, true);
 
         MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.CREAR);
