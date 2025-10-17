@@ -36,23 +36,6 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     IdentificacionDAO identificacionDAO;
 
     @Override
-    public PersonaDTO consultarPersonaPorIdentificadorDTO(UUID identificador) {
-        var entidad = this.personaDAO.findById(identificador).orElse(null);
-
-        if (ValidadorObjeto.esNulo(entidad)){
-            return null;
-        }
-
-        var usuarioEntidad = this.usuarioDAO.findByCorreo(entidad.getCorreo());
-
-        if(!usuarioEntidad.isEstaActivo()) {
-            return null;
-        }
-
-        return this.personaMapeador.construirDTO(entidad);
-    }
-
-    @Override
     public Persona consultarPersonaPorIdentificador(UUID identificador) {
         var entidad = this.personaDAO.findById(identificador).orElse(null);
 

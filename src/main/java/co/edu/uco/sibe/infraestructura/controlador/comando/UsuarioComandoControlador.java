@@ -33,7 +33,7 @@ public class UsuarioComandoControlador {
     }
 
     @PreAuthorize(TextoConstante.HAS_ADMIN_DELETE_AUTHORITY)
-    @DeleteMapping
+    @DeleteMapping("usuario/{identificador}")
     public ComandoRespuesta<UUID> eliminarUsuario(@PathVariable UUID identificador){
         return this.eliminarPersonaManejador.ejecutar(identificador);
     }
