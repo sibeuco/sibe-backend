@@ -17,12 +17,31 @@ public class UsuarioOrganizacionMapeador {
         return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, direccion, null, null);
     }
 
+    public void cambiarEntidadVinculadaConDireccion(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, DireccionEntidad direccion){
+        usuarioOrganizacionEntidad.setDireccion(direccion);
+        usuarioOrganizacionEntidad.setArea(null);
+        usuarioOrganizacionEntidad.setSubarea(null);
+    }
+
     public UsuarioOrganizacionEntidad construirEntidadVinculadaConArea(UsuarioEntidad usuario, AreaEntidad area){
         return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, null, area, null);
     }
 
+    public void cambiarEntidadVinculadaConArea(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, AreaEntidad area){
+        usuarioOrganizacionEntidad.setDireccion(null);
+        usuarioOrganizacionEntidad.setArea(area);
+        usuarioOrganizacionEntidad.setSubarea(null);
+    }
+
+
     public UsuarioOrganizacionEntidad construirEntidadVinculadaConSubarea(UsuarioEntidad usuario, SubareaEntidad subarea){
         return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, null, null, subarea);
+    }
+
+    public void cambiarEntidadVinculadaConArea(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, SubareaEntidad subarea){
+        usuarioOrganizacionEntidad.setDireccion(null);
+        usuarioOrganizacionEntidad.setArea(null);
+        usuarioOrganizacionEntidad.setSubarea(subarea);
     }
 
     public UUID generarNuevoUUIDUsuarioOrganizacion() {

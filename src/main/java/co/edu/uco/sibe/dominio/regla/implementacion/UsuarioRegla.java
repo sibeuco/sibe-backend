@@ -28,7 +28,6 @@ public final class UsuarioRegla implements Regla<Usuario> {
     @Override
     public void validarCampos(Usuario modelo) {
         validarCorreo(modelo.getCorreo());
-        validarClave(modelo.getClave());
     }
 
     private void validarCorreo(String correo) {
@@ -37,7 +36,7 @@ public final class UsuarioRegla implements Regla<Usuario> {
         ValidadorNumero.validarNumeroEntre(correo.length(), 10, 100, Mensajes.LONGITUD_CORREO_USUARIO_INVALIDA);
     }
 
-    private void validarClave(String clave) {
+    public void validarClave(String clave) {
         ValidadorTexto.validarObligatorio(clave, Mensajes.CONTRASENA_VACIA);
         ValidadorTexto.validarClaveValida(clave, Mensajes.PATRON_CONTRASENA_INVALIDO);
         ValidadorNumero.validarNumeroEntre(clave.length(), 8, 20, Mensajes.LONGITUD_CLAVE_USUARIO_INVALIDA);

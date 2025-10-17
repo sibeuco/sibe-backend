@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
+import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
 import co.edu.uco.sibe.dominio.usecase.consulta.*;
@@ -24,8 +25,8 @@ public class UseCaseBean {
     }
 
     @Bean
-    public ModificarUsuarioUseCase modificarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta){
-        return new ModificarUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta);
+    public ModificarUsuarioUseCase modificarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, ModificarVinculacionUsuarioConAreaService modificarVinculacionUsuarioConAreaServicea){
+        return new ModificarUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, modificarVinculacionUsuarioConAreaServicea);
     }
 
     @Bean
