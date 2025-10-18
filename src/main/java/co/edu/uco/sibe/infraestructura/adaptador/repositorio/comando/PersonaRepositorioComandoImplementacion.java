@@ -67,7 +67,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public void eliminarUsuario(UUID identificador) {
-        var usuarioEntidad = usuarioDAO.findById(identificador).orElse(null);
+        var personaEntidad = personaDAO.findById(identificador).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad);
         usuarioEntidad.setEstaActivo(false);
