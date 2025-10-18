@@ -33,11 +33,8 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
 
     @Override
     public UUID vincularUsuarioConDireccion(UUID usuario, UUID direccion) {
+        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
         var direccionEntidad = direccionDAO.findById(direccion).orElse(null);
-        var personaEntidad = personaDAO.findById(usuario).orElse(null);
-
-        assert !ValidadorObjeto.esNulo(personaEntidad);
-        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(direccionEntidad);
         var entidad = usuarioOrganizacionMapeador.construirEntidadVinculadaConDireccion(usuarioEntidad, direccionEntidad);
@@ -46,8 +43,11 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     }
 
     @Override
-    public UUID cambiarVinculacionUsuarioConDireccion(UUID usuario, UUID direccion) {
-        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
+    public UUID cambiarVinculacionUsuarioConDireccion(UUID persona, UUID direccion) {
+        var personaEntidad = personaDAO.findById(persona).orElse(null);
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+
+        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
         var direccionEntidad = direccionDAO.findById(direccion).orElse(null);
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(direccionEntidad);
@@ -71,8 +71,8 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     }
 
     @Override
-    public UUID cambiarVinculacionUsuarioConArea(UUID usuario, UUID area) {
-        var personaEntidad = personaDAO.findById(usuario).orElse(null);
+    public UUID cambiarVinculacionUsuarioConArea(UUID persona, UUID area) {
+        var personaEntidad = personaDAO.findById(persona).orElse(null);
 
         assert !ValidadorObjeto.esNulo(personaEntidad);
         var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
@@ -100,8 +100,11 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
     }
 
     @Override
-    public UUID cambiarVinculacionUsuarioConSubarea(UUID usuario, UUID subarea) {
-        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
+    public UUID cambiarVinculacionUsuarioConSubarea(UUID persona, UUID subarea) {
+        var personaEntidad = personaDAO.findById(persona).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
         var subareaEntidad = subareaDAO.findById(subarea).orElse(null);
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(subareaEntidad);
