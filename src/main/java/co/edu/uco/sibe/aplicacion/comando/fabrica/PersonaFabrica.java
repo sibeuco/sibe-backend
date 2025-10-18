@@ -39,7 +39,7 @@ public class PersonaFabrica {
     }
 
     public Persona construirActualizar(UsuarioModificacionComando comando, UUID identificador){
-        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(comando.getTipoIdentificacion());
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(UtilUUID.convertirAUUID(comando.getTipoIdentificacion()));
         var identificacionIdentificador = personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador).getIdentificacion().getIdentificador();
 
         var identificacion = Identificacion.construir(identificacionIdentificador, comando.getNumeroIdentificacion(), tipoIdentificacion);

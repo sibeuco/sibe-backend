@@ -32,7 +32,7 @@ public class UsuarioFabrica {
     }
 
     public Usuario construirActualizar(UsuarioModificacionComando comando, UUID identificador){
-        var tipoUsuario = tipoUsuarioRepositorioConsulta.consultarTiposUsuario(comando.getTipoUsuario());
+        var tipoUsuario = tipoUsuarioRepositorioConsulta.consultarTiposUsuario(UtilUUID.convertirAUUID(comando.getTipoUsuario()));
         var correoActual = personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador).getCorreo();
         var usuarioActual = personaRepositorioConsulta.consultarUsuarioPorCorreo(correoActual);
         var usuario = Usuario.construir(usuarioActual.getIdentificador(), comando.getCorreo(), usuarioActual.getClave(), tipoUsuario, usuarioActual.isEstaActivo());
