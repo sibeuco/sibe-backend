@@ -33,8 +33,11 @@ public class UsuarioOrganizacionComandoImplementacion implements UsuarioOrganiza
 
     @Override
     public UUID vincularUsuarioConDireccion(UUID usuario, UUID direccion) {
-        var usuarioEntidad = usuarioDAO.findById(usuario).orElse(null);
         var direccionEntidad = direccionDAO.findById(direccion).orElse(null);
+        var personaEntidad = personaDAO.findById(usuario).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad) && !ValidadorObjeto.esNulo(direccionEntidad);
         var entidad = usuarioOrganizacionMapeador.construirEntidadVinculadaConDireccion(usuarioEntidad, direccionEntidad);
