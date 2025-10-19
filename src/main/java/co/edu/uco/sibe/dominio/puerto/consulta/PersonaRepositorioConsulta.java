@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.dto.PersonaDTO;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -26,4 +25,6 @@ public interface PersonaRepositorioConsulta {
     Usuario consultarUsuarioPorCorreo(String correo);
 
     List<UsuarioDTO> consultarUsuariosDTO();
+
+    boolean hayDatos();
 }

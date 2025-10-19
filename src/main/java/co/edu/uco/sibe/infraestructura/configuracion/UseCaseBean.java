@@ -40,16 +40,6 @@ public class UseCaseBean {
     }
 
     @Bean
-    public ConsultarTiposIdentificacionUseCase consultarTiposIdentificacionUseCase(TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta){
-        return new ConsultarTiposIdentificacionUseCase(tipoIdentificacionRepositorioConsulta);
-    }
-
-    @Bean
-    public ConsultarTiposUsuarioUseCase consultarTiposUsuarioUseCase(TipoUsuarioRepositorioConsulta tipoUsuarioRepositorioConsulta){
-        return new ConsultarTiposUsuarioUseCase(tipoUsuarioRepositorioConsulta);
-    }
-
-    @Bean
     public ConsultarUsuarioPorIdentificadorUseCase consultarUsuarioPorIdentificadorUseCase(PersonaRepositorioConsulta personaRepositorioConsulta){
         return new ConsultarUsuarioPorIdentificadorUseCase(personaRepositorioConsulta);
     }

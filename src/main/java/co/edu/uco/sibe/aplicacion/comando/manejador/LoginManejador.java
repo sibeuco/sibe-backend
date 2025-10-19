@@ -5,7 +5,6 @@ import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuest
 import co.edu.uco.sibe.dominio.usecase.comando.LoginUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 
 @Component
@@ -17,5 +16,4 @@ public class LoginManejador implements ManejadorComandoRespuesta<String, Comando
     public ComandoRespuesta<UUID> ejecutar(String command) {
         return new ComandoRespuesta<>(this.loginUseCase.ejecutar(command));
     }
-
 }

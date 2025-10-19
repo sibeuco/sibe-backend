@@ -32,7 +32,7 @@ public class ActividadEntidad {
 
     @ManyToOne
     @JoinColumn(name = "indicador")
-    private IndicadorEntidad indicadorEntidad;
+    private IndicadorEntidad indicador;
 
     @JoinColumn(name = "colaborador", nullable = false)
     private UUID colaborador;

@@ -16,8 +16,8 @@ import java.util.UUID;
 @Table(name = "proyecto_accion")
 public class ProyectoAccionEntidad {
     @Id
-    @Column(name = "id", updatable = false)
-    private UUID id;
+    @Column(name = "identificador", updatable = false)
+    private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accion", nullable = false)

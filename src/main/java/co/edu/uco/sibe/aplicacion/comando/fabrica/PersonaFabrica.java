@@ -25,30 +25,18 @@ public class PersonaFabrica {
     public Persona construir(UsuarioComando comando){
         var identificadorIdentificacion = generarNuevoUUIDIdentificacion();
         var identificadorPersona = generarNuevoUUIDPersona();
-
-        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(UUID.fromString(comando.getTipoIdentificacion()));
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarPorIdentificador(UtilUUID.textoAUUID(comando.getTipoIdentificacion()));
         var identificacion = Identificacion.construir(identificadorIdentificacion, comando.getNumeroIdentificacion(), tipoIdentificacion);
-
-        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.CREAR);
-
         var persona = Persona.construir(identificadorPersona, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
-
-        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.CREAR);
 
         return persona;
     }
 
     public Persona construirActualizar(UsuarioModificacionComando comando, UUID identificador){
-        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarTipoIdentificacionPorIdentificador(UtilUUID.convertirAUUID(comando.getTipoIdentificacion()));
+        var tipoIdentificacion = tipoIdentificacionRepositorioConsulta.consultarPorIdentificador(UtilUUID.textoAUUID(comando.getTipoIdentificacion()));
         var identificacionIdentificador = personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador).getIdentificacion().getIdentificador();
-
         var identificacion = Identificacion.construir(identificacionIdentificador, comando.getNumeroIdentificacion(), tipoIdentificacion);
-
-        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(identificacion, TipoOperacion.ACTUALIZAR);
-
         var persona = Persona.construir(identificador, comando.getNombres(), comando.getApellidos(), comando.getCorreo(), identificacion);
-
-        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
 
         return persona;
     }

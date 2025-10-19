@@ -6,6 +6,9 @@ import co.edu.uco.sibe.aplicacion.comando.fabrica.UsuarioFabrica;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuesta;
 import co.edu.uco.sibe.dominio.enums.TipoArea;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.usecase.comando.AgregarNuevoUsuarioUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,12 +24,24 @@ public class AgregarNuevoUsuarioManejador implements ManejadorComandoRespuesta<U
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(UsuarioComando comando) {
+        var usuario = this.usuarioFabrica.construir(comando);
+
+        MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.CREAR);
+
+        var persona = this.personaFabrica.construir(comando);
+
+        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(persona.getIdentificacion(), TipoOperacion.CREAR);
+
+        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.CREAR);
+
+        var area = UtilUUID.textoAUUID(comando.getArea().getArea());
+        var tipoArea = TipoArea.valueOf(comando.getArea().getTipoArea());
+
         return new ComandoRespuesta<>(this.agregarNuevoUsuarioUseCase.ejecutar(
-                this.usuarioFabrica.construir(comando),
-                this.personaFabrica.construir(comando),
-                UUID.fromString(comando.getArea().getArea()),
-                TipoArea.valueOf(comando.getArea().getTipoArea())
+                usuario,
+                persona,
+                area,
+                tipoArea
         ));
     }
-
 }

@@ -18,9 +18,9 @@ public class ActividadComando {
     private String objetivo;
     private String semestre;
     private String rutaInsumos;
-    private UUID indicador;
-    private UUID colaborador;
-    private UUID creador;
+    private String indicador;
+    private String colaborador;
+    private String creador;
     private List<String> fechaProgramada;
-    private UUID area;
+    private String area;
 }

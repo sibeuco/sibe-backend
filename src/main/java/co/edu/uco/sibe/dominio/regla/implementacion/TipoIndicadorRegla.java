@@ -26,8 +26,8 @@ public final class TipoIndicadorRegla implements Regla<TipoIndicador> {
 
     @Override
     public void validarCampos(TipoIndicador modelo) {
-        validarNaturalezaIndicador(modelo.getNaturalezaIndicador());
-        validarTipologiaIndicador(modelo.getTipologiaIndicador());
+        validarNaturalezaIndicador(modelo.getNaturaleza());
+        validarTipologiaIndicador(modelo.getTipologia());
     }
 
     private void validarNaturalezaIndicador(String naturalezaIndicador) {

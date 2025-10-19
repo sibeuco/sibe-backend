@@ -10,23 +10,21 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.UUID;
 
 @Repository
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando {
+    @Autowired
+    private PersonaDAO personaDAO;
 
     @Autowired
-    PersonaDAO personaDAO;
+    private PersonaMapeador personaMapeador;
 
     @Autowired
-    PersonaMapeador personaMapeador;
+    private UsuarioDAO usuarioDAO;
 
     @Autowired
-    UsuarioDAO usuarioDAO;
-
-    @Autowired
-    UsuarioMapeador usuarioMapeador;
+    private UsuarioMapeador usuarioMapeador;
 
     @Override
     public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String claveEncriptada) {
