@@ -26,7 +26,7 @@ public class EliminarUsuarioUseCase {
     }
 
     private void validarSiNoExisteUsuarioConId(UUID identificador) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
+        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
             throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExisteUsuarioConId(identificador));
         }
     }

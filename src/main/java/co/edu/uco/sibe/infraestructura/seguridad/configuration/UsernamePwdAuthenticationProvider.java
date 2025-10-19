@@ -63,7 +63,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
             if (this.encriptarClaveServicio.existe(pwd, user.getClave())) {
                 // Build the Authentication object with authorities
                 var authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(userDTO.getTipoUsuario()));
-                authenticationToken.setDetails(user.getIdentificador());
+                authenticationToken.setDetails(userDTO.getIdentificador());
 
                 return authenticationToken;
             } else {
