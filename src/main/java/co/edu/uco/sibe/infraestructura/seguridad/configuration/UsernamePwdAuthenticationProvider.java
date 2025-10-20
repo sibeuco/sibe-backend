@@ -5,7 +5,7 @@ import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +67,10 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 
                 return authenticationToken;
             } else {
-                throw new AuthorizationException(Mensajes.USUARIO_O_CLAVE_INCORRECTO);
+                throw new AuthorizationException(UtilMensaje.USUARIO_O_CLAVE_INCORRECTO);
             }
         } else {
-            throw new AuthorizationException(Mensajes.USUARIO_O_CLAVE_INCORRECTO);
+            throw new AuthorizationException(UtilMensaje.USUARIO_O_CLAVE_INCORRECTO);
         }
     }
 

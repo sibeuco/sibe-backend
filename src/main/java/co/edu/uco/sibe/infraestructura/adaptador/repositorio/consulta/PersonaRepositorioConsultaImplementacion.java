@@ -5,6 +5,8 @@ import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Repository
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta {
@@ -159,5 +160,12 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var entidades = this.usuarioDAO.findAll().stream().filter(UsuarioEntidad::isEstaActivo).toList();
 
         return this.usuarioMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public boolean hayDatos() {
+        var cantidad = usuarioDAO.count();
+
+        return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
     }
 }

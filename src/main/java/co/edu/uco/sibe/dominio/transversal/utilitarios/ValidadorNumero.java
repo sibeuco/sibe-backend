@@ -4,8 +4,10 @@ import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.LongitudExcepcion;
 
-public class ValidadorNumero {
-    private ValidadorNumero() { }
+public final class ValidadorNumero {
+    private ValidadorNumero() {
+        super();
+    }
 
     public static <T extends Number> void validarNumeroEntre(T numero, T minimo, T maximo, String mensaje) {
         if (ValidadorObjeto.esNulo(numero) || !esNumeroEntre(numero, minimo, maximo)) {

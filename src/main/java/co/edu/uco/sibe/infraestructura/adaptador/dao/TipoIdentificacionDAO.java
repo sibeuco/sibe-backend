@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface TipoIdentificacionDAO extends JpaRepository<TipoIdentificacionEntidad, UUID> {
+    TipoIdentificacionEntidad findBySigla(String sigla);
 }

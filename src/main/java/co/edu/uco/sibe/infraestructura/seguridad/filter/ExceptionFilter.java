@@ -44,13 +44,13 @@ public class ExceptionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception ex) {
             // Default to HTTP 500 (Internal Server Error)
-            var status = NumeroConstante.FIVE_HUNDRED;
+            var status = NumeroConstante.QUINIENTOS;
 
             // Map known exceptions to specific HTTP status codes
             if (ex instanceof BadCredentialsException) {
-                status = NumeroConstante.FOUR_HUNDRED;
+                status = NumeroConstante.CUATROCIENTOS;
             } else if (ex instanceof AuthorizationException) {
-                status = NumeroConstante.FOUR_HUNDRED_ONE;
+                status = NumeroConstante.CUATROCIENTOS_UNO;
             }
 
             response.setStatus(status);

@@ -5,10 +5,12 @@ import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
@@ -24,6 +26,10 @@ public class ModificarUsuarioUseCase {
     }
 
     public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea, UUID identificador){
+        MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.ACTUALIZAR);
+        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(persona.getIdentificacion(), TipoOperacion.ACTUALIZAR);
+        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
+
         validarSiNoExistePersonaConId(identificador);
         validarQueExistaUsuarioConDocumento(persona);
         validarQueExistaUsuarioConCorreo(persona);
@@ -37,7 +43,7 @@ public class ModificarUsuarioUseCase {
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
         if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExistePersonaConId(identificador));
+            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExistePersonaConId(identificador));
         }
     }
 
@@ -46,7 +52,7 @@ public class ModificarUsuarioUseCase {
 
         if (!ValidadorObjeto.esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
-            throw new ValorDuplicadoExcepcion(Mensajes.DOCUMENTO_EXISTENTE);
+            throw new ValorDuplicadoExcepcion(UtilMensaje.DOCUMENTO_EXISTENTE);
         }
     }
 
@@ -55,7 +61,7 @@ public class ModificarUsuarioUseCase {
 
         if (!ValidadorObjeto.esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
-            throw new ValorDuplicadoExcepcion(Mensajes.CORREO_EXISTENTE);
+            throw new ValorDuplicadoExcepcion(UtilMensaje.CORREO_EXISTENTE);
         }
     }
 }

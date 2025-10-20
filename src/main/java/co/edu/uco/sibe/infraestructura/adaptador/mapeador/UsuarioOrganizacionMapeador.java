@@ -1,12 +1,11 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioOrganizacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
 @AllArgsConstructor
@@ -14,7 +13,12 @@ public class UsuarioOrganizacionMapeador {
     private final UsuarioOrganizacionDAO usuarioOrganizacionDAO;
 
     public UsuarioOrganizacionEntidad construirEntidadVinculadaConDireccion(UsuarioEntidad usuario, DireccionEntidad direccion){
-        return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, direccion, null, null);
+        return new UsuarioOrganizacionEntidad(
+                generar(uuid -> !esNulo(usuarioOrganizacionDAO.findById(uuid).orElse(null))),
+                usuario, direccion,
+                null,
+                null
+        );
     }
 
     public void cambiarEntidadVinculadaConDireccion(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, DireccionEntidad direccion){
@@ -24,7 +28,12 @@ public class UsuarioOrganizacionMapeador {
     }
 
     public UsuarioOrganizacionEntidad construirEntidadVinculadaConArea(UsuarioEntidad usuario, AreaEntidad area){
-        return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, null, area, null);
+        return new UsuarioOrganizacionEntidad(generar(uuid -> !esNulo(usuarioOrganizacionDAO.findById(uuid).orElse(null))),
+                usuario,
+                null,
+                area,
+                null
+        );
     }
 
     public void cambiarEntidadVinculadaConArea(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, AreaEntidad area){
@@ -35,22 +44,18 @@ public class UsuarioOrganizacionMapeador {
 
 
     public UsuarioOrganizacionEntidad construirEntidadVinculadaConSubarea(UsuarioEntidad usuario, SubareaEntidad subarea){
-        return new UsuarioOrganizacionEntidad(generarNuevoUUIDUsuarioOrganizacion(), usuario, null, null, subarea);
+        return new UsuarioOrganizacionEntidad(
+                generar(uuid -> !esNulo(usuarioOrganizacionDAO.findById(uuid).orElse(null))),
+                usuario,
+                null,
+                null,
+                subarea
+        );
     }
 
     public void cambiarEntidadVinculadaConArea(UsuarioOrganizacionEntidad usuarioOrganizacionEntidad, SubareaEntidad subarea){
         usuarioOrganizacionEntidad.setDireccion(null);
         usuarioOrganizacionEntidad.setArea(null);
         usuarioOrganizacionEntidad.setSubarea(subarea);
-    }
-
-    public UUID generarNuevoUUIDUsuarioOrganizacion() {
-        UUID nuevoUUID;
-
-        do {
-            nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (usuarioOrganizacionDAO.findById(nuevoUUID).orElse(null) != null);
-
-        return nuevoUUID;
     }
 }

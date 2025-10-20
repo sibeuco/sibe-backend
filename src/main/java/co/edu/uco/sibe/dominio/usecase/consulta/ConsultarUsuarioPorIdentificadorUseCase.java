@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public class ConsultarUsuarioPorIdentificadorUseCase {
 
     private void validarSiNoExisteUsuarioConId(UUID identificador) {
         if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(Mensajes.obtenerNoExisteUsuarioConId(identificador));
+            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExisteUsuarioConId(identificador));
         }
     }
 }

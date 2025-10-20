@@ -9,13 +9,13 @@ import java.util.UUID;
 @Getter
 public class TipoIndicador {
     private UUID identificador;
-    private String naturalezaIndicador;
-    private String tipologiaIndicador;
+    private String naturaleza;
+    private String tipologia;
 
-    private TipoIndicador(UUID identificador, String naturalezaIndicador, String tipologiaIndicador) {
+    private TipoIndicador(UUID identificador, String naturaleza, String tipologia) {
         this.identificador = identificador;
-        this.naturalezaIndicador = naturalezaIndicador;
-        this.tipologiaIndicador = tipologiaIndicador;
+        this.naturaleza = naturaleza;
+        this.tipologia = tipologia;
     }
 
     public static TipoIndicador construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador) {

@@ -6,7 +6,6 @@ import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.infraestructura.seguridad.filter.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -74,7 +73,7 @@ public class ProjectSecurityConfig {
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(Collections.singletonList(TextoConstante.ASTERISK));
                     config.setExposedHeaders(List.of(SeguridadConstante.JWT_HEADER));
-                    config.setMaxAge(NumeroConstante.THREE_THOUSAND_SIX_HUNDRED_LONG);
+                    config.setMaxAge(NumeroConstante.TRES_MIL_SEICIENTOS_LONG);
 
                     return config;
                 }))
