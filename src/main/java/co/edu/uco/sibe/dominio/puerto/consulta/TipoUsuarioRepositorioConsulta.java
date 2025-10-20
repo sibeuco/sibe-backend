@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TipoUsuarioRepositorioConsulta {
-    List<TipoUsuarioDTO> consultarTiposUsuarioDTO();
+    List<TipoUsuarioDTO> consultarDTOs();
 
-    TipoUsuario consultarTiposUsuario(UUID identificador);
+    TipoUsuario consultarPorIdentificador(UUID identificador);
+
+    boolean hayDatos();
+
+    TipoUsuario consultarPorCodigo(String codigo);
 }

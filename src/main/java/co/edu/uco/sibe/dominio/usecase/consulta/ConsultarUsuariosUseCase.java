@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import java.util.List;
 
 public class ConsultarUsuariosUseCase {
@@ -18,7 +18,7 @@ public class ConsultarUsuariosUseCase {
         List<UsuarioDTO> usuarios = personaRepositorioConsulta.consultarUsuariosDTO();
 
         if (usuarios.isEmpty()) {
-            throw new ValorInvalidoExcepcion(Mensajes.NO_SE_ECONTRARON_USUARIOS);
+            throw new ValorInvalidoExcepcion(UtilMensaje.NO_SE_ECONTRARON_USUARIOS);
         }
 
         return usuarios;

@@ -5,8 +5,8 @@ import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorParametroRespue
 import co.edu.uco.sibe.dominio.usecase.comando.EliminarUsuarioUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 public class EliminarPersonaManejador implements ManejadorParametroRespuesta<UUID, ComandoRespuesta<UUID>> {

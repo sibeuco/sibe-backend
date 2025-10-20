@@ -3,6 +3,8 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoUsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoUsuarioMapeador;
@@ -20,15 +22,33 @@ public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuario
     TipoUsuarioMapeador tipoUsuarioMapeador;
 
     @Override
-    public List<TipoUsuarioDTO> consultarTiposUsuarioDTO() {
+    public List<TipoUsuarioDTO> consultarDTOs() {
         var entidades = this.tipoUsuarioDAO.findAll();
 
         return this.tipoUsuarioMapeador.construirDTOs(entidades);
     }
 
     @Override
-    public TipoUsuario consultarTiposUsuario(UUID identificador) {
+    public TipoUsuario consultarPorIdentificador(UUID identificador) {
         var entidad = this.tipoUsuarioDAO.findById(identificador).orElse(null);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.tipoUsuarioMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public boolean hayDatos() {
+        var cantidad = tipoUsuarioDAO.count();
+
+        return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
+    }
+
+    @Override
+    public TipoUsuario consultarPorCodigo(String codigo) {
+        var entidad = this.tipoUsuarioDAO.findByCodigo(codigo);
 
         if (ValidadorObjeto.esNulo(entidad)){
             return null;

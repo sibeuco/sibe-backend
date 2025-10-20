@@ -2,7 +2,7 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.CentroCostos;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
@@ -22,7 +22,7 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, Mensajes.IDENTIFICADOR_CENTRO_COSTOS_NULO);
+        ValidadorObjeto.validarObligatorio(identificador, UtilMensaje.IDENTIFICADOR_CENTRO_COSTOS_NULO);
     }
 
     @Override
@@ -32,14 +32,14 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
     }
 
     private void validarCodigo(String codigo) {
-        ValidadorTexto.validarObligatorio(codigo, Mensajes.CODIGO_CENTRO_COSTOS_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(codigo, Mensajes.CODIGO_CENTRO_COSTOS_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, Mensajes.LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
+        ValidadorTexto.validarObligatorio(codigo, UtilMensaje.CODIGO_CENTRO_COSTOS_OBLIGATORIO);
+        ValidadorTexto.validarTextoValido(codigo, UtilMensaje.CODIGO_CENTRO_COSTOS_INVALIDO);
+        ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, UtilMensaje.LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
     }
 
     private void validarDescripcion(String descripcion) {
-        ValidadorTexto.validarObligatorio(descripcion, Mensajes.DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(descripcion, Mensajes.DESCRIPCION_CENTRO_COSTOS_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 10, 100, Mensajes.LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        ValidadorTexto.validarObligatorio(descripcion, UtilMensaje.DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
+        ValidadorTexto.validarTextoValido(descripcion, UtilMensaje.DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 10, 100, UtilMensaje.LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
     }
 }

@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class InicioActividadComando {
     private String horaInicio;
-    private UUID ejecucionActividad;
+    private String ejecucionActividad;
 }

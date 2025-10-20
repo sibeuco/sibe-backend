@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import jakarta.servlet.*;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +39,7 @@ public class AuthoritiesLoggingAfterFilter implements Filter {
 
         // If a user is authenticated, log their username and authorities
         if (!ValidadorObjeto.esNulo(authentication)) {
-            log.info(Mensajes.getUserWasSuccessfullyAuthenticatedAndHasTheRoles(authentication.getName(), authentication.getAuthorities().toString()));
+            log.info(UtilMensaje.getUserWasSuccessfullyAuthenticatedAndHasTheRoles(authentication.getName(), authentication.getAuthorities().toString()));
         }
 
         chain.doFilter(request, response);

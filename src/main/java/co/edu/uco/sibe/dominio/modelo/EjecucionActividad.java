@@ -47,10 +47,10 @@ public class EjecucionActividad {
     ) {
         return new EjecucionActividad(
                 identificador,
-                UtilFecha.getInstance().obtenerValorFechaPorDefecto(fechaProgramada),
-                UtilFecha.getInstance().obtenerValorFechaPorDefecto(fechaRealizacion),
-                UtilFecha.getInstance().obtenerValorHoraPorDefecto(horaInicio),
-                UtilFecha.getInstance().obtenerValorHoraPorDefecto(horaFin),
+                UtilFecha.obtenerValorFechaPorDefecto(fechaProgramada),
+                UtilFecha.obtenerValorFechaPorDefecto(fechaRealizacion),
+                UtilFecha.obtenerValorHoraPorDefecto(horaInicio),
+                UtilFecha.obtenerValorHoraPorDefecto(horaFin),
                 ValidadorObjeto.obtenerValorPorDefecto(estadoActividad, EstadoActividad.construir()),
                 ValidadorObjeto.obtenerValorPorDefecto(actividad, Actividad.construir())
         );
@@ -59,10 +59,10 @@ public class EjecucionActividad {
     public static EjecucionActividad construir() {
         return new EjecucionActividad(
                 UtilUUID.obtenerValorDefecto(),
-                UtilFecha.getInstance().obtenerFechaDefecto(),
-                UtilFecha.getInstance().obtenerFechaDefecto(),
-                UtilFecha.getInstance().obtenerHoraDefecto(),
-                UtilFecha.getInstance().obtenerHoraDefecto(),
+                UtilFecha.obtenerFechaDefecto(),
+                UtilFecha.obtenerFechaDefecto(),
+                UtilFecha.obtenerHoraDefecto(),
+                UtilFecha.obtenerHoraDefecto(),
                 EstadoActividad.construir(),
                 Actividad.construir()
         );

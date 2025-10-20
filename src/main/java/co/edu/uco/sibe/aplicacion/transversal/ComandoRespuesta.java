@@ -11,5 +11,4 @@ public class ComandoRespuesta<T> {
     public ComandoRespuesta(T valor) {
         this.valor = valor;
     }
-
 }

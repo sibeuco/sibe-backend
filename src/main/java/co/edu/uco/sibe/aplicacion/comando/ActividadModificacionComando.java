@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,8 +15,8 @@ public class ActividadModificacionComando {
     private String objetivo;
     private String semestre;
     private String rutaInsumos;
-    private UUID indicador;
-    private UUID colaborador;
+    private String indicador;
+    private String colaborador;
     private List<String> fechaProgramada;
-    private UUID area;
+    private String area;
 }

@@ -3,7 +3,9 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 import java.util.Collection;
 
 public class ValidadorObjeto {
-    private ValidadorObjeto() { }
+    private ValidadorObjeto() {
+        super();
+    }
 
     public static <T> void validarObligatorio(T objeto, String mensaje) {
         if (esNulo(objeto)) {

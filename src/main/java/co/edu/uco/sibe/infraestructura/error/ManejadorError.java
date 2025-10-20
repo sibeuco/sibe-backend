@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.infraestructura.error;
 
 import co.edu.uco.sibe.dominio.transversal.excepcion.*;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.Mensajes;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
             resultado = new ResponseEntity<>(error, HttpStatus.valueOf(codigo));
         } else {
             LOGGER_ERROR.error(excepcionNombre, exception);
-            Error error = new Error(excepcionNombre, Mensajes.OCURRIO_UN_ERROR);
+            Error error = new Error(excepcionNombre, UtilMensaje.OCURRIO_UN_ERROR);
             resultado = new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
