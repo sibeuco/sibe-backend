@@ -7,4 +7,6 @@ public interface DireccionRepositorioConsulta {
     Direccion consultarPorIdentificador(UUID identificador);
 
     boolean hayDatos();
+
+    Direccion consultarPorNombre(String nombre);
 }

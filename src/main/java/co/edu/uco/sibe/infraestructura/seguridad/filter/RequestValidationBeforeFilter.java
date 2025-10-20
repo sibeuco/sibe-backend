@@ -57,7 +57,7 @@ public class RequestValidationBeforeFilter implements Filter {
             header = header.trim();
             if (StringUtils.startsWithIgnoreCase(header, SeguridadConstante.AUTHENTICATION_SCHEME_BASIC)) {
                 // Extract and decode base64 credentials from the header
-                var base64Token = header.substring(NumeroConstante.SIX).getBytes(StandardCharsets.UTF_8);
+                var base64Token = header.substring(NumeroConstante.SEIS).getBytes(StandardCharsets.UTF_8);
                 byte[] decoded;
                 try {
                     decoded = Base64.getDecoder().decode(base64Token);

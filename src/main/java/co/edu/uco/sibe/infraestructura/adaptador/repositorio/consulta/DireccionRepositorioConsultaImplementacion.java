@@ -36,4 +36,15 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
 
         return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
     }
+
+    @Override
+    public Direccion consultarPorNombre(String nombre) {
+        var entidad = this.direccionDAO.findByNombre(nombre);
+
+        if(ValidadorObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.direccionMapeador.construirModelo(entidad);
+    }
 }

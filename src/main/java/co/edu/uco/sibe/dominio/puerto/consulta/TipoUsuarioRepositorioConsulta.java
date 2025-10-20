@@ -11,4 +11,6 @@ public interface TipoUsuarioRepositorioConsulta {
     TipoUsuario consultarPorIdentificador(UUID identificador);
 
     boolean hayDatos();
+
+    TipoUsuario consultarPorCodigo(String codigo);
 }

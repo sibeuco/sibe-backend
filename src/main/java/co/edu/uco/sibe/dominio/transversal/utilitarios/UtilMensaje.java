@@ -25,7 +25,7 @@ public final class UtilMensaje {
 
     public static final String NOMBRE_AREA_OBLIGATORIO = "El nombre del área es obligatorio.";
     public static final String NOMBRE_AREA_INVALIDO = "El nombre proporcionado para el área es inválido.";
-    public static final String LONGITUD_NOMBRE_AREA_INVALIDA = "El nombre del área debe tener entre 10 y 70 caracteres.";
+    public static final String LONGITUD_NOMBRE_AREA_INVALIDA = "El nombre del área debe tener entre 8 y 70 caracteres.";
 
     public static final String CODIGO_CENTRO_COSTOS_OBLIGATORIO = "El código del centro de costos es obligatorio.";
     public static final String CODIGO_CENTRO_COSTOS_INVALIDO = "El código proporcionado para el centro de costos es inválido.";
@@ -152,7 +152,7 @@ public final class UtilMensaje {
 
     public static final String NOMBRE_SUB_AREA_OBLIGATORIO = "El nombre de la sub área es obligatorio.";
     public static final String NOMBRE_SUB_AREA_INVALIDO = "El nombre proporcionado para la sub área es inválido.";
-    public static final String LONGITUD_NOMBRE_SUB_AREA_INVALIDA = "El nombre de la sub área debe tener entre 10 y 70 caracteres.";
+    public static final String LONGITUD_NOMBRE_SUB_AREA_INVALIDA = "El nombre de la sub área debe tener entre 8 y 70 caracteres.";
 
     public static final String NOMBRE_TEMPORALIDAD_OBLIGATORIO = "El nombre de la temporalidad es obligatorio.";
     public static final String NOMBRE_TEMPORALIDAD_INVALIDO = "El nombre proporcionado para la temporalidad es inválido.";
@@ -251,5 +251,17 @@ public final class UtilMensaje {
 
     public static String getUserWasSuccessfullyAuthenticatedAndHasTheRoles(String name, String role) {
         return "Usuario " + name + " fue autenticado exitosamente y tiene el rol de: " + role;
+    }
+
+    public static String consultarPorNombre(String nombre) {
+        return "No existe direccion con el nombre: " + nombre;
+    }
+
+    public static String consultarPorSigla(String sigla) {
+        return "No existe tipo identificacion con la sigla: " + sigla;
+    }
+
+    public static String consultarPorCodigo(String codigo) {
+        return "No existe tipo usuario con el codigo: " + codigo;
     }
 }

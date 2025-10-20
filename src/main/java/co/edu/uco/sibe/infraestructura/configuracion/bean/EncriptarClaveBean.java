@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.infraestructura.configuracion;
+package co.edu.uco.sibe.infraestructura.configuracion.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

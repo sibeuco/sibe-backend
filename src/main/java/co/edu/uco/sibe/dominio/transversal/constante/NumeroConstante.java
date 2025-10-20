@@ -3,7 +3,14 @@ package co.edu.uco.sibe.dominio.transversal.constante;
 public class NumeroConstante {
     public static final int NEGATIVE_ONE = -1;
     public static final int CERO = 0;
-    public static final int SIX = 6;
+    public static final int UNO = 1;
+    public static final int DOS = 2;
+    public static final int TRES = 3;
+    public static final int CUATRO = 4;
+    public static final int CINCO = 5;
+    public static final int SEIS = 6;
+    public static final int SIETE = 7;
+    public static final int OCHO = 8;
     public static final int FOUR_HUNDRED = 400;
     public static final int FOUR_HUNDRED_ONE = 401;
     public static final int FIVE_HUNDRED = 500;

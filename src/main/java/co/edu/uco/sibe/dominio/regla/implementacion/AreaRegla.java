@@ -33,6 +33,6 @@ public final class AreaRegla implements Regla<Area> {
     private void validarNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, UtilMensaje.NOMBRE_AREA_OBLIGATORIO);
         ValidadorTexto.validarTextoValido(nombre, UtilMensaje.NOMBRE_AREA_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 70, UtilMensaje.LONGITUD_NOMBRE_AREA_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 8, 70, UtilMensaje.LONGITUD_NOMBRE_AREA_INVALIDA);
     }
 }

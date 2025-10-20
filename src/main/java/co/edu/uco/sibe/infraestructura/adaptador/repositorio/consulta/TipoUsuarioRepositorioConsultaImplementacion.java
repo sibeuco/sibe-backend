@@ -45,4 +45,15 @@ public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuario
 
         return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
     }
+
+    @Override
+    public TipoUsuario consultarPorCodigo(String codigo) {
+        var entidad = this.tipoUsuarioDAO.findByCodigo(codigo);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.tipoUsuarioMapeador.construirModelo(entidad);
+    }
 }

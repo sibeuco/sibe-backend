@@ -32,6 +32,6 @@ public final class SubareaRegla implements Regla<Subarea> {
     private void validarNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, UtilMensaje.NOMBRE_SUB_AREA_OBLIGATORIO);
         ValidadorTexto.validarTextoValido(nombre, UtilMensaje.NOMBRE_SUB_AREA_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 70, UtilMensaje.LONGITUD_NOMBRE_SUB_AREA_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(nombre.length(), 8, 70, UtilMensaje.LONGITUD_NOMBRE_SUB_AREA_INVALIDA);
     }
 }

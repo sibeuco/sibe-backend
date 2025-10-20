@@ -30,7 +30,9 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
 
     @Override
     public TipoIdentificacion consultarPorIdentificador(UUID identificador) {
+        var entidad1 = this.tipoIdentificacionDAO.count();
         var entidad = this.tipoIdentificacionDAO.findById(identificador).orElse(null);
+
 
         if (ValidadorObjeto.esNulo(entidad)){
             return null;
@@ -44,5 +46,16 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
         var cantidad = tipoIdentificacionDAO.count();
 
         return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
+    }
+
+    @Override
+    public TipoIdentificacion consultarPorSigla(String sigla) {
+        var entidad = this.tipoIdentificacionDAO.findBySigla(sigla);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.tipoIdentificacionMapeador.construirModelo(entidad);
     }
 }

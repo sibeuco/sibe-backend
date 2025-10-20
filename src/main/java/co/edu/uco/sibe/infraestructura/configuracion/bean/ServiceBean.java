@@ -1,4 +1,4 @@
-package co.edu.uco.sibe.infraestructura.configuracion;
+package co.edu.uco.sibe.infraestructura.configuracion.bean;
 
 import co.edu.uco.sibe.dominio.puerto.comando.UsuarioOrganizacionComando;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
