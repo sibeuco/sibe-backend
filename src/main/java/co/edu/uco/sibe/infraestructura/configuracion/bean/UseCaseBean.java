@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.infraestructura.configuracion.bean;
 
-import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.sibe.dominio.puerto.comando.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
@@ -68,5 +68,40 @@ public class UseCaseBean {
     @Bean
     public ConsultarTipoUsuarioPorCodigoUseCase consultarTipoUsuarioPorCodigoUseCase(TipoUsuarioRepositorioConsulta tipoUsuarioRepositorioConsulta) {
         return new ConsultarTipoUsuarioPorCodigoUseCase(tipoUsuarioRepositorioConsulta);
+    }
+
+    @Bean
+    public GuardarTipoUsuarioUseCase guardarTipoUsuarioUseCase(TipoUsuarioRepositorioComando tipoUsuarioRepositorioComando) {
+        return new GuardarTipoUsuarioUseCase(tipoUsuarioRepositorioComando);
+    }
+
+    @Bean
+    public GuardarTipoIdentificacionUseCase guardarTipoIdentificacionUseCase(TipoIdentificacionRepositorioComando tipoIdentificacionRepositorioComando) {
+        return new GuardarTipoIdentificacionUseCase(tipoIdentificacionRepositorioComando);
+    }
+
+    @Bean
+    public GuardarSubareaUseCase guardarSubareaUseCase(SubareaRepositorioComando subareaRepositorioComando) {
+        return new GuardarSubareaUseCase(subareaRepositorioComando);
+    }
+
+    @Bean
+    public GuardarAreaUseCase guardarAreaUseCase(AreaRepositorioComando areaRepositorioComando) {
+        return new GuardarAreaUseCase(areaRepositorioComando);
+    }
+
+    @Bean
+    public GuardarDireccionUseCase guardarDireccionUseCase(DireccionRepositorioComando direccionRepositorioComando) {
+        return new GuardarDireccionUseCase(direccionRepositorioComando);
+    }
+
+    @Bean
+    public GuardarEstadoActividadUseCase guardarEstadoActividadUseCase(EstadoActividadRepositorioComando estadoActividadRepositorioComando) {
+        return new GuardarEstadoActividadUseCase(estadoActividadRepositorioComando);
+    }
+
+    @Bean
+    public GuardarTemporalidadUseCase guardarTemporalidadUseCase(TemporalidadRepositorioComando temporalidadRepositorioComando) {
+        return new GuardarTemporalidadUseCase(temporalidadRepositorioComando);
     }
 }
