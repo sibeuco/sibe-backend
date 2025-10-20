@@ -1,10 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 @Getter
 public class Externo extends Miembro {
@@ -23,8 +25,8 @@ public class Externo extends Miembro {
     public static Externo construir() {
         return new Externo(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO
+                VACIO,
+                VACIO
         );
     }
 }

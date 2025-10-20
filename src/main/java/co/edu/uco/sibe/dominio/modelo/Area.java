@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
@@ -36,7 +36,7 @@ public class Area {
     public static Area construir() {
         return new Area(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
+                VACIO,
                 new ArrayList<>(),
                 new ArrayList<>()
         );

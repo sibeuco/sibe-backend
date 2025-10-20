@@ -1,13 +1,15 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 @Getter
 public class Proyecto {
@@ -39,9 +41,9 @@ public class Proyecto {
     public static Proyecto construir() {
         return new Proyecto(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
+                VACIO,
+                VACIO,
+                VACIO,
                 new ArrayList<>()
         );
     }
