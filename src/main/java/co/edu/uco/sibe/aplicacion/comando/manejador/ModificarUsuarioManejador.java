@@ -23,14 +23,7 @@ public class ModificarUsuarioManejador implements ManejadorComandoParametroRespu
     @Override
     public ComandoRespuesta<UUID> ejecutar(UsuarioModificacionComando comando, UUID parametro) {
         var usuario = this.usuarioFabrica.construirActualizar(comando, parametro);
-
-        MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.ACTUALIZAR);
-
         var persona = this.personaFabrica.construirActualizar(comando, parametro);
-
-        MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(persona.getIdentificacion(), TipoOperacion.ACTUALIZAR);
-        MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
-
         var area = UUID.fromString(comando.getArea().getArea());
         var tipoArea = TipoArea.valueOf(comando.getArea().getTipoArea());
 

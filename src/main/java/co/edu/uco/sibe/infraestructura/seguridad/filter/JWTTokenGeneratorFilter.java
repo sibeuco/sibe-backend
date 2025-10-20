@@ -53,7 +53,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
                 .claim(SeguridadConstante.ID_PARAMETER, authentication.getDetails())
                 .claim(SeguridadConstante.AUTHORITIES_PARAMETER, populateAuthorities(authentication.getAuthorities()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + NumeroConstante.THIRTY_MILLION))
+                .setExpiration(new Date((new Date()).getTime() + NumeroConstante.TREINTA_MILLONES))
                 .signWith(key).compact();
 
         // Add the JWT as a response header

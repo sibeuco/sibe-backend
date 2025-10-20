@@ -1,16 +1,12 @@
 package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.TipoIdentificacionComando;
-import co.edu.uco.sibe.aplicacion.comando.TipoUsuarioComando;
 import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
-import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
 @AllArgsConstructor
@@ -19,17 +15,9 @@ public class TipoIdentificacionFabrica {
 
     public TipoIdentificacion construir(TipoIdentificacionComando comando) {
         return TipoIdentificacion.construir(
-                generarNuevoUUID(),
+                generar(uuid -> !esNulo(tipoIdentificacionRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando.getSigla(),
                 comando.getDescripcion()
         );
-    }
-
-    public UUID generarNuevoUUID() {
-        UUID nuevoUUID;
-        do {
-            nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (tipoIdentificacionRepositorioConsulta.consultarPorIdentificador(nuevoUUID) != null);
-        return nuevoUUID;
     }
 }

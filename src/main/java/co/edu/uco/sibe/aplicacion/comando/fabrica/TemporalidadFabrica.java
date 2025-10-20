@@ -2,11 +2,10 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.dominio.modelo.Temporalidad;
 import co.edu.uco.sibe.dominio.puerto.consulta.TemporalidadRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
 @AllArgsConstructor
@@ -15,16 +14,8 @@ public class TemporalidadFabrica {
 
     public Temporalidad construir(String comando) {
         return Temporalidad.construir(
-                generarNuevoUUID(),
+                generar(uuid -> !esNulo(temporalidadRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando
         );
-    }
-
-    public UUID generarNuevoUUID() {
-        UUID nuevoUUID;
-        do {
-            nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (temporalidadRepositorioConsulta.consultarPorIdentificador(nuevoUUID) != null);
-        return nuevoUUID;
     }
 }

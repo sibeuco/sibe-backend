@@ -63,7 +63,7 @@ public class RequestValidationBeforeFilter implements Filter {
                     decoded = Base64.getDecoder().decode(base64Token);
                     var token = new String(decoded, getCredentialsCharset(req));
                     var delim = token.indexOf(TextoConstante.COLON);
-                    if (delim == NumeroConstante.NEGATIVE_ONE) {
+                    if (delim == NumeroConstante.UNO_NEGATIVO) {
                         // Credentials are not in expected format
                         throw new BadCredentialsException(UtilMensaje.TOKEN_RECIBIDO_INVALIDO);
                     }

@@ -4,17 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CierreActividadComando {
-    private List<UUID> miembros;
+    private List<String> miembros;
     private String horaFin;
     private String fechaRealizacion;
-    private UUID ejecucionActividad;
+    private String ejecucionActividad;
 }

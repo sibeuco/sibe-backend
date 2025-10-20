@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.usecase.consulta.ConsultarUsuarioPorIdentificadorUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 
 @Component

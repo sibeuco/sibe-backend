@@ -1,17 +1,13 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Accion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ProyectoAccionDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.AccionEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ProyectoAccionEntidad;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
 @AllArgsConstructor
@@ -21,7 +17,7 @@ public class ProyectoAccionMapeador {
 
     public ProyectoAccionEntidad construirEntidad(Accion accion) {
         return new ProyectoAccionEntidad(
-                generarNuevoUUID(),
+                generar(uuid -> !esNulo(proyectoAccionDAO.findById(uuid).orElse(null))),
                 this.accionMapeador.construirEntidad(accion)
         );
     }
@@ -36,15 +32,5 @@ public class ProyectoAccionMapeador {
 
     public List<Accion> construirModelos(List<ProyectoAccionEntidad> acciones){
         return acciones.stream().map(this::construirModelo).toList();
-    }
-
-    public UUID generarNuevoUUID() {
-        UUID nuevoUUID;
-
-        do {
-            nuevoUUID = UtilUUID.generarNuevoUUID();
-        } while (proyectoAccionDAO.findById(nuevoUUID).orElse(null) != null);
-
-        return nuevoUUID;
     }
 }
