@@ -2,14 +2,16 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 
 @Repository
 public class DireccionRepositorioConsultaImplementacion implements DireccionRepositorioConsulta {
@@ -34,7 +36,7 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     public boolean hayDatos() {
         var cantidad = direccionDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
+        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
     @Override

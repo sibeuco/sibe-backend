@@ -2,6 +2,8 @@ package co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.TipoUsuarioComando;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 public final class DatosTipoUsuarioFabrica {
     private DatosTipoUsuarioFabrica() {
         super();
@@ -9,24 +11,24 @@ public final class DatosTipoUsuarioFabrica {
 
     public static TipoUsuarioComando crearAdministradorDireccion() {
         return new TipoUsuarioComando(
-                "ADMINISTRADOR_DIRECCION",
-                "Administrador de dirección",
+                ADMINISTRADOR_DIRECCION,
+                DESCRIPCION_ADMINISTRADOR_DIRECCION,
                 true, true, true, true
         );
     }
 
     public static TipoUsuarioComando crearAdministradorArea() {
         return new TipoUsuarioComando(
-                "ADMINISTRADOR_AREA",
-                "Administrador de Area",
+                ADMINISTRADOR_AREA,
+                DESCRIPCION_ADMINISTRADOR_AREA,
                 true, true, true, true
         );
     }
 
     public static TipoUsuarioComando crearColaborador() {
         return new TipoUsuarioComando(
-                "COLABORADOR",
-                "Colaborador",
+                COLABORADOR,
+                DESCRIPCION_COLABORADOR,
                 true, true, false, true
         );
     }

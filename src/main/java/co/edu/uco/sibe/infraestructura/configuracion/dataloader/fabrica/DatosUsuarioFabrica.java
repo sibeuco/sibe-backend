@@ -6,12 +6,9 @@ import co.edu.uco.sibe.dominio.enums.TipoArea;
 
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 public final class DatosUsuarioFabrica {
-    private static final String NUMERO_ID_ADMIN = "1111111111";
-    private static final String NOMBRE_ADMIN = "Administrador";
-    private static final String APELLIDO_ADMIN = "UCO";
-    private static final String EMAIL_ADMIN = "administrador@uco.net.co";
-    private static final String CLAVE_ADMIN = "Administrador123";
 
     private DatosUsuarioFabrica() {
         super();

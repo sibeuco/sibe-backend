@@ -2,17 +2,19 @@ package co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.DireccionBaseComando;
 import co.edu.uco.sibe.dominio.modelo.Area;
+
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NOMBRE_DIRECCION_BIENESTAR_EVANGELIZACION;
+
 public final class DatosDireccionFabrica {
-    public static final String NOMBRE_DIRECCION_BIENESTAR = "Dirección de Bienestar y Evangelización";
 
     private DatosDireccionFabrica() {
     }
 
     public static DireccionBaseComando crearDireccionBienestar(List<Area> areas) {
         return new DireccionBaseComando(
-                NOMBRE_DIRECCION_BIENESTAR,
+                NOMBRE_DIRECCION_BIENESTAR_EVANGELIZACION,
                 areas
         );
     }
