@@ -76,6 +76,9 @@ public final class UtilMensaje {
     public static final String TIEMPO_LLEGADA_ESTUDIANTE_INVALIDO = "El tiempo de llegada del estudiante debe ser mayor o igual a un 1 minuto.";
     public static final String MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDO = "El medio de transporte proporcionado para el estudiante es inválido.";
     public static final String LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA = "El medio de transporte del estudiante debe tener entre 5 y 30 caracteres.";
+    public static final String SEMESTRE_ACTUAL_ESTUDIANTE_OBLIGATORIO = "El semestre del estudiante es obligatorio.";
+    public static final String SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDO = "El semestre proporcionado para el estudiante es inválido.";
+    public static final String LONGITUD_SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDA = "El semestre del estudiante debe tener 5 caracteres.";
 
     public static final String NOMBRE_INDICADOR_OBLIGATORIO = "El nombre del indicador es obligatorio.";
     public static final String NOMBRE_INDICADOR_INVALIDO = "El nombre proporcionado para el indicador es inválido.";
@@ -94,6 +97,7 @@ public final class UtilMensaje {
     public static final String NUMERO_IDENTIFICACION_MIEMBRO_OBLIGATORIO = "El número de identificación del miembro es obligatorio.";
     public static final String NUMERO_IDENTIFICACION_MIEMBRO_INVALIDO = "El número de identificación proporcionado para el miembro es inválido.";
     public static final String LONGITUD_NUMERO_IDENTIFICACION_MIEMBRO_INVALIDA = "El número de identificación del miembro debe tener entre 6 y 12 caracteres.";
+    public static final String LONGITUD_NUMERO_IDENTIFICACION__INVALIDA = "El número de identificación debe tener entre 6 y 12 caracteres.";
 
     public static final String ESTADO_CIVIL_PARTICIPANTE_ESTUDIANTE_OBLIGATORIO = "El estado civil del participante estudiante es obligatorio.";
     public static final String ESTADO_CIVIL_PARTICIPANTE_ESTUDIANTE_INVALIDO = "El estado civil proporcionado para el participante estudiante es inválido.";

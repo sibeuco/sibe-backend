@@ -3,9 +3,11 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.USUARIO_O_CLAVE_INCORRECTO;
 
 public class LoginUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -24,7 +26,7 @@ public class LoginUseCase {
 
     private void validarSiNoExisteUsuarioConCorreo(String email) {
         if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(email))) {
-            throw new AuthorizationException(UtilMensaje.USUARIO_O_CLAVE_INCORRECTO);
+            throw new AuthorizationException(USUARIO_O_CLAVE_INCORRECTO);
         }
     }
 }

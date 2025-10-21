@@ -6,11 +6,9 @@ import co.edu.uco.sibe.dominio.modelo.Subarea;
 import java.util.ArrayList;
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 public final class DatosAreaFabrica {
-    public static final String NOMBRE_AREA_BIENESTAR = "Bienestar";
-    public static final String NOMBRE_AREA_EVANGELIZACION = "Evangelización";
-    public static final String NOMBRE_AREA_HOGAR_JUVENIL = "Hogar Juvenil Santa María";
-    public static final String NOMBRE_AREA_SERVICIO_USUARIO = "Servicio y atención al usuario";
 
     private DatosAreaFabrica() {
         super();

@@ -9,8 +9,9 @@ import co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica.DatosUsu
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.OCHO;
-import static co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica.DatosDireccionFabrica.NOMBRE_DIRECCION_BIENESTAR;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Component
 @Order(OCHO)
@@ -29,9 +30,9 @@ public class UsuarioAdministradorDataLoader extends DataLoader {
 
     @Override
     protected void cargarDatos() {
-        var tipoUsuario = consultarTipoUsuarioPorCodigoManejador.ejecutar("ADMINISTRADOR_DIRECCION");
-        var tipoIdentificacion = consultarTipoIdentificacionPorSiglaManejador.ejecutar("CC");
-        var direccion = consultarDireccionPorNombreManejador.ejecutar(NOMBRE_DIRECCION_BIENESTAR);
+        var tipoUsuario = consultarTipoUsuarioPorCodigoManejador.ejecutar(ADMINISTRADOR_DIRECCION);
+        var tipoIdentificacion = consultarTipoIdentificacionPorSiglaManejador.ejecutar(SIGLA_CC);
+        var direccion = consultarDireccionPorNombreManejador.ejecutar(NOMBRE_DIRECCION_BIENESTAR_EVANGELIZACION);
 
         var comando = DatosUsuarioFabrica.crearAdministradorUCO(
                 tipoIdentificacion.getIdentificador(),

@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
@@ -26,7 +26,7 @@ public class CiudadResidencia {
     public static CiudadResidencia construir() {
         return new CiudadResidencia(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO
+                VACIO
         );
     }
 }

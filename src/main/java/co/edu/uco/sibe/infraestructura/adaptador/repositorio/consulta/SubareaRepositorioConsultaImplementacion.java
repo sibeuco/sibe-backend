@@ -2,7 +2,6 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.SubareaDAO;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 
 @Repository
 public class SubareaRepositorioConsultaImplementacion implements SubareaRepositorioConsulta {
@@ -43,6 +44,6 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     public boolean hayDatos() {
         var cantidad = subareaDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
+        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 }

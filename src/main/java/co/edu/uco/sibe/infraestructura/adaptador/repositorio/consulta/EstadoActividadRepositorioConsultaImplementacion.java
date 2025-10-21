@@ -2,14 +2,16 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.EstadoActividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EstadoActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EstadoActividadMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 
 @Repository
 public class EstadoActividadRepositorioConsultaImplementacion implements EstadoActividadRepositorioConsulta {
@@ -34,6 +36,6 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
     public boolean hayDatos() {
         var cantidad = this.estadoActividadDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, NumeroConstante.CERO);
+        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 }

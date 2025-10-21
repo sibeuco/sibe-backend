@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
@@ -29,8 +29,8 @@ public class Accion {
     public static Accion construir() {
         return new Accion(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO
+                VACIO,
+                VACIO
         );
     }
 }

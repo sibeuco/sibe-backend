@@ -2,6 +2,8 @@ package co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica;
 
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 public final class DatosEstadoActividadFabrica {
     private DatosEstadoActividadFabrica() {
         super();
@@ -9,9 +11,9 @@ public final class DatosEstadoActividadFabrica {
 
     public static List<String> obtenerEstadosActividad() {
         return List.of(
-                "Pendiente",
-                "En curso",
-                "Finalizada"
+                PENDIENTE,
+                EN_CURSO,
+                FINALIZADA
         );
     }
 }
