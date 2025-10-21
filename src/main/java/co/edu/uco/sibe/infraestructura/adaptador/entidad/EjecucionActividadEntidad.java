@@ -9,34 +9,36 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ejecucion_actividad")
+@Table(name = TABLA_EJECUCION_ACTIVIDAD)
 public class EjecucionActividadEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "fecha_programada", nullable = false)
+    @Column(name = CAMPO_FECHA_PROGRAMADA, nullable = false)
     private LocalDate fechaProgramada;
 
-    @Column(name = "fecha_realizacion")
+    @Column(name = CAMPO_FECHA_REALIZACION)
     private LocalDate fechaRealizacion;
 
-    @Column(name = "hora_inicio")
+    @Column(name = CAMPO_HORA_INICIO)
     private LocalTime horaInicio;
 
-    @Column(name = "hora_fin")
+    @Column(name = CAMPO_HORA_FIN)
     private LocalTime horaFin;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ejecucion_actividad", nullable = false)
+    @JoinColumn(name = CAMPO_EJECUCION_ACTIVIDAD, nullable = false)
     private EjecucionActividadEstadoActividadEntidad estadoActividad;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "actividad_id", nullable = false)
+    @JoinColumn(name = CAMPO_ACTIVIDAD_ID, nullable = false)
     private ActividadEntidad actividad;
 }

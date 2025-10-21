@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario")
+@Table(name = USUARIO)
 public class UsuarioEntidad {
     @Id
     private UUID identificador;
@@ -23,10 +25,10 @@ public class UsuarioEntidad {
     @Column(nullable = false)
     private String clave;
 
-    @Column(name = "esta_activo", nullable = false)
+    @Column(name = ESTA_ACTIVO, nullable = false)
     private boolean estaActivo;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario", nullable = false)
+    @JoinColumn(name = USUARIO, nullable = false)
     private UsuarioTipoUsuarioEntidad rol;
 }

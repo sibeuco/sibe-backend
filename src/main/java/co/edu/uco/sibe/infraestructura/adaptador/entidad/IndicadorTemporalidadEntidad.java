@@ -1,25 +1,28 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "indicador_temporalidad")
+@Table(name = INDICADOR_TEMPORALIDAD)
 public class IndicadorTemporalidadEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "temporalidad", nullable = false)
+    @JoinColumn(name = TEMPORALIDAD, nullable = false)
     private TemporalidadEntidad temporalidad;
 }
 

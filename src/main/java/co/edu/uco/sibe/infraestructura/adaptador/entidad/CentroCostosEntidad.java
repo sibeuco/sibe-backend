@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "centro_costos")
+@Table(name = TABLA_CENTRO_COSTOS)
 public class CentroCostosEntidad {
     @Id
     private UUID identificador;

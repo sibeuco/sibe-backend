@@ -1,27 +1,28 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "participante_interno")
-@PrimaryKeyJoinColumn(name = "identificador")
+@Table(name = PARTICIPANTE_INTERNO)
+@PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
 public class ParticipanteInternoEntidad extends ParticipanteEntidad {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ciudad_residencia", nullable = false)
+    @JoinColumn(name = CIUDAD_RESIDENCIA, nullable = false)
     private InternoCiudadResidenciaEntidad ciudadResidencia;
 
-    @Column(name = "id_carnet", nullable = false, length = 20)
+    @Column(name = ID_CARNET, nullable = false, length = 20)
     private String idCarnet;
 
-    @Column(name = "sexo", nullable = false, length = 1)
+    @Column(name = SEXO, nullable = false, length = 1)
     private String sexo;
 }

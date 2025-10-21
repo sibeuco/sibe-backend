@@ -8,29 +8,31 @@ import jakarta.persistence.*;
 import java.util.UUID;
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "direccion")
+@Table(name = TABLA_DIRECCION)
 public class DireccionEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "nombre", nullable = false, length = 70)
+    @Column(name = CAMPO_NOMBRE, nullable = false, length = 70)
     private String nombre;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "direccion") // Columna FK en AreaEntidad
+    @JoinColumn(name = CAMPO_DIRECCION) // Columna FK en AreaEntidad
     private List<AreaEntidad> areas;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "direccion_actividad",
-            joinColumns = @JoinColumn(name = "direccion", referencedColumnName = "identificador"),
-            inverseJoinColumns = @JoinColumn(name = "actividad", referencedColumnName = "identificador")
+            name = DIRECCION_ACTIVIDAD,
+            joinColumns = @JoinColumn(name = CAMPO_DIRECCION, referencedColumnName = CAMPO_IDENTIFICADOR),
+            inverseJoinColumns = @JoinColumn(name = CAMPO_ACTIVIDAD, referencedColumnName = CAMPO_IDENTIFICADOR)
     )
     private List<ActividadEntidad> actividades;
 }

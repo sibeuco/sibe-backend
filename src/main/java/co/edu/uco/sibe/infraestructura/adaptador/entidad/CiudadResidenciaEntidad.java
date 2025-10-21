@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ciudad_residencia")
+@Table(name = TABLA_CIUDAD_RESIDENCIA)
 public class CiudadResidenciaEntidad {
     @Id
     private UUID identificador;

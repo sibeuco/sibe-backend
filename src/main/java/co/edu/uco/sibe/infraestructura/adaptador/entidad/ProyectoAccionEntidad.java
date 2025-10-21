@@ -8,19 +8,21 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "proyecto_accion")
+@Table(name = PROYECTO_ACCION)
 public class ProyectoAccionEntidad {
     @Id
-    @Column(name = "identificador", updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, updatable = false)
     private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accion", nullable = false)
+    @JoinColumn(name = ACCION, nullable = false)
     private AccionEntidad accion;
 }
 

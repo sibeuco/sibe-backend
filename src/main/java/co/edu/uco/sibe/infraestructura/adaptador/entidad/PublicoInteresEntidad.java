@@ -1,18 +1,24 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PUBLICO_INTERES;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "publico_interes")
+@Table(name = PUBLICO_INTERES)
 public class PublicoInteresEntidad {
     @Id
     private UUID identificador;

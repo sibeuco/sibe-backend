@@ -1,25 +1,26 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "participante_empleado")
-@PrimaryKeyJoinColumn(name = "identificador")
+@Table(name = PARTICIPANTE_EMPLEADO)
+@PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
 public class ParticipanteEmpleadoEntidad extends ParticipanteInternoEntidad {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "relacion_laboral", nullable = false)
+    @JoinColumn(name = RELACION_LABORAL, nullable = false)
     private EmpleadoRelacionLaboralEntidad relacionLaboral;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "centro_costos", nullable = false)
+    @JoinColumn(name = CAMPO_CENTRO_COSTOS, nullable = false)
     private EmpleadoCentroCostosEntidad centroCostos;
 }

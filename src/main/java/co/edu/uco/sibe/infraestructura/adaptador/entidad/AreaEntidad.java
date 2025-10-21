@@ -8,29 +8,31 @@ import jakarta.persistence.*;
 import java.util.UUID;
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "area")
+@Table(name = TABLA_AREA)
 public class AreaEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "nombre", nullable = false, length = 70)
+    @Column(name = CAMPO_NOMBRE, nullable = false, length = 70)
     private String nombre;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "area")
+    @JoinColumn(name = CAMPO_AREA)
     private List<SubareaEntidad> subareas;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "area_actividad",
-            joinColumns = @JoinColumn(name = "area", referencedColumnName = "identificador"),
-            inverseJoinColumns = @JoinColumn(name = "actividad", referencedColumnName = "identificador")
+            name = AREA_ACTIVIDAD,
+            joinColumns = @JoinColumn(name = CAMPO_AREA, referencedColumnName = CAMPO_IDENTIFICADOR),
+            inverseJoinColumns = @JoinColumn(name = CAMPO_ACTIVIDAD, referencedColumnName = CAMPO_IDENTIFICADOR)
     )
     private List<ActividadEntidad> actividades;
 }

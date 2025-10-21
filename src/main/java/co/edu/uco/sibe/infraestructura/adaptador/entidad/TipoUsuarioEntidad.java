@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tipo_usuario")
+@Table(name = TIPO_USUARIO)
 public class TipoUsuarioEntidad {
     @Id
     private UUID identificador;

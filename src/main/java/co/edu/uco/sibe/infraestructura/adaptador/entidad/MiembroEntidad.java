@@ -7,21 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "miembro")
+@Table(name = MIEMBRO)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class MiembroEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "nombre_completo", nullable = false, length = 100)
+    @Column(name = NOMBRE_COMPLETO, nullable = false, length = 100)
     private String nombreCompleto;
 
-    @Column(name = "numero_identificacion", nullable = false, length = 12)
+    @Column(name = NUMERO_IDENTIFICACION, nullable = false, length = 12)
     private String numeroIdentificacion;
 }

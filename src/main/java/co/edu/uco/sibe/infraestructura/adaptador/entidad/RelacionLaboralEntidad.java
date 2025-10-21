@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.RELACION_LABORAL;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "relacion_laboral")
+@Table(name = RELACION_LABORAL)
 public class RelacionLaboralEntidad {
     @Id
     private UUID identificador;
