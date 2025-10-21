@@ -1,8 +1,8 @@
 package co.edu.uco.sibe.dominio.usecase.comando;
 
+import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
-import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
@@ -10,9 +10,11 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.CORREO_EXISTENTE;
 
 public class AgregarNuevoUsuarioUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -44,7 +46,7 @@ public class AgregarNuevoUsuarioUseCase {
 
     private void validarUsuarioExisteConCorreo(String correo) {
         if (!ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
-            throw new ValorDuplicadoExcepcion(UtilMensaje.CORREO_EXISTENTE);
+            throw new ValorDuplicadoExcepcion(CORREO_EXISTENTE);
         }
     }
 }
