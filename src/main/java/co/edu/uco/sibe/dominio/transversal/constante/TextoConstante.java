@@ -63,7 +63,7 @@ public final class TextoConstante {
     public static final String DESCRIPCION_COLABORADOR = "Colaborador";
 
     public static final String ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_CREATE";
-    public static final String ADMIN_GET_AUTHORITY = "ADMINISTRAD_DIRECCION_READ";
+    public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";
     public static final String ADMIN_UPDATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_UPDATE";
     public static final String ADMIN_DELETE_AUTHORITY = "ADMINISTRADOR_DIRECCION_DELETE";
 
