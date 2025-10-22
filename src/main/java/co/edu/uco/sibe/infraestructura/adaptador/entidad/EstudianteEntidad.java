@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 import java.time.LocalDate;
 
 @Getter
@@ -16,51 +18,51 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "estudiante")
-@PrimaryKeyJoinColumn(name = "identificador")
+@Table(name = ESTUDIANTE)
+@PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
 public class EstudianteEntidad extends InternoEntidad {
-    @Column(name = "fecha_nacimiento", nullable = false)
+    @Column(name = FECHA_NACIMIENTO, nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column(name = "nacionalidad", nullable = false, length = 50)
+    @Column(name = NACIONALIDAD, nullable = false, length = 50)
     private String nacionalidad;
 
-    @Column(name = "estado_civil", nullable = false, length = 15)
+    @Column(name = ESTADO_CIVIL, nullable = false, length = 15)
     private String estadoCivil;
 
-    @Column(name = "correo_personal", nullable = false, length = 100)
+    @Column(name = CORREO_PERSONAL, nullable = false, length = 100)
     private String correoPersonal;
 
-    @Column(name = "correo_institucional", nullable = false, length = 100)
+    @Column(name = CORREO_INSTITUCIONAL, nullable = false, length = 100)
     private String correoInstitucional;
 
-    @Column(name = "programa_academico", nullable = false, length = 100)
+    @Column(name = PROGRAMA_ACADEMICO, nullable = false, length = 100)
     private String programaAcademico;
 
-    @Column(name = "facultad", nullable = false, length = 50)
+    @Column(name = FACULTAD, nullable = false, length = 50)
     private String facultad;
 
-    @Column(name = "anno_ingreso", nullable = false)
+    @Column(name = ANNO_INGRESO, nullable = false)
     private int annoIngreso;
 
-    @Column(name = "semestre_actual", nullable = false, length = 5)
+    @Column(name = SEMESTRE_ACTUAL, nullable = false, length = 5)
     private String semestreActual;
 
-    @Column(name = "creditos_aprobados", nullable = false)
+    @Column(name = CREDITOS_APROBADOS, nullable = false)
     private int creditosAprobados;
 
-    @Column(name = "promedio_general", nullable = false)
+    @Column(name = PROMEDIO_GENERAL, nullable = false)
     private float promedioGeneral;
 
-    @Column(name = "estado_academico", nullable = false, length = 10)
+    @Column(name = ESTADO_ACADEMICO, nullable = false, length = 10)
     private String estadoAcademico;
 
-    @Column(name = "modalidad_estudio", nullable = false, length = 50)
+    @Column(name = MODALIDAD_ESTUDIO, nullable = false, length = 50)
     private String modalidadEstudio;
 
-    @Column(name = "tiempo_llegada_universidad", nullable = false)
+    @Column(name = TIEMPO_LLEGADA_UNIVERSIDAD, nullable = false)
     private int tiempoLlegadaUniversidad;
 
-    @Column(name = "medio_transporte", nullable = false, length = 30)
+    @Column(name = MEDIO_TRANSPORTE, nullable = false, length = 30)
     private String medioTransporte;
 }

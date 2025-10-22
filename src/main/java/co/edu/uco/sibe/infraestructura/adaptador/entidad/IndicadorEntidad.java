@@ -1,39 +1,42 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "indicador")
+@Table(name = CAMPO_INDICADOR)
 public class IndicadorEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Column(name = CAMPO_NOMBRE, nullable = false, length = 100)
     private String nombre;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "tipo_indicador", referencedColumnName = "identificador")
+    @JoinColumn(name = TIPO_INDICADOR, referencedColumnName = CAMPO_IDENTIFICADOR)
     private IndicadorTipoIndicadorEntidad tipoIndicador;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "temporalidad", referencedColumnName = "identificador")
+    @JoinColumn(name = TEMPORALIDAD, referencedColumnName = CAMPO_IDENTIFICADOR)
     private IndicadorTemporalidadEntidad temporalidad;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "proyecto", referencedColumnName = "identificador")
+    @JoinColumn(name = PROYECTO, referencedColumnName = CAMPO_IDENTIFICADOR)
     private IndicadorProyectoEntidad proyecto;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "publico_interes", referencedColumnName = "identificador")
+    @JoinColumn(name = PUBLICO_INTERES, referencedColumnName = CAMPO_IDENTIFICADOR)
     private IndicadorPublicoInteresEntidad publicoInteres;
 }

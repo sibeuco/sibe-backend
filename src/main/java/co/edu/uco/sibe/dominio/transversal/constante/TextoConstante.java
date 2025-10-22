@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.PublicoInteresEntidad;
+
 public final class TextoConstante {
     public static final String VACIO = "";
     public static final String UNDERSCORE = "_";
@@ -176,6 +178,12 @@ public final class TextoConstante {
     public static final String INDICADOR_PUBLICO_INTERES = "indicador_publico_interes";
     public static final String INDICADOR_PROYECTO = "indicador_proyecto";
     public static final String EXTERNO = "externo";
+    public static final String IDENTIFICACION_TIPO_IDENTIFICACION = "identificacion_tipo_identificacion";
+    public static final String ESTUDIANTE = "estudiante";
+    public static final String FECHA_NACIMIENTO = "fecha_nacimiento";
+    public static final String NACIONALIDAD = "nacionalidad";
+    public static final String CORREO_PERSONAL = "correo_personal";
+    public static final String CORREO_INSTITUCIONAL = "correo_institucional";
 
     private TextoConstante() {
         super();
