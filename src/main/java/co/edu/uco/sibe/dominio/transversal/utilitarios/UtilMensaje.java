@@ -185,6 +185,7 @@ public final class UtilMensaje {
     public static final String CORREO_EXISTENTE = "Ya existe un usuario con el correo ingresado.";
     public static final String CORREO_USUARIO_VACIO = "El correo electrónico no puede estar vacío.";
     public static final String NO_SE_ECONTRARON_USUARIOS = "No se encontraron usuarios registrados.";
+    public static final String NO_SE_ECONTRARON_DIRECCIONES = "No se encontraron direcciones.";
     public static final String PATRON_CORREO_INVALIDO = "El formato del correo electrónico no es válido.";
     public static final String CONTRASENA_VACIA = "La contraseña no puede estar vacía.";
     public static final String PATRON_CONTRASENA_INVALIDO = "La contraseña debe tener entre 8 y 20 caracteres, incluyendo al menos una letra mayúscula, una minúscula y un número.";

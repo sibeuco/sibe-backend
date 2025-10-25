@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.AreaDTO;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
 import lombok.AllArgsConstructor;
@@ -38,4 +39,13 @@ public class AreaMapeador {
     public List<Area> construirModelos(List<AreaEntidad> areas) {
         return areas.stream().map(this::construirModelo).toList();
     }
+
+    public AreaDTO construirDTO(AreaEntidad area){
+        return new AreaDTO(area.getIdentificador(), area.getNombre());
+    }
+
+    public List<AreaDTO> construirDTOs(List<AreaEntidad> areas){
+        return areas.stream().map(this::construirDTO).toList();
+    }
+
 }

@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
+import co.edu.uco.sibe.dominio.dto.AreaDTO;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
@@ -21,6 +22,13 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
 
     @Autowired
     private AreaMapeador areaMapeador;
+
+    @Override
+    public List<AreaDTO> consultarDTOs() {
+        var entidades = this.areaDAO.findAll();
+
+        return this.areaMapeador.construirDTOs(entidades);
+    }
 
     @Override
     public List<Area> consultarTodos() {

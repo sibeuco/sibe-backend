@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.DireccionDTO;
+import co.edu.uco.sibe.dominio.dto.SubareaDTO;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.SubareaEntidad;
 import lombok.AllArgsConstructor;
@@ -33,5 +35,13 @@ public class SubareaMapeador {
 
     public List<Subarea> construirModelos(List<SubareaEntidad> subareas) {
         return subareas.stream().map(this::construirModelo).toList();
+    }
+
+    public SubareaDTO construirDTO(SubareaEntidad subarea){
+        return new SubareaDTO(subarea.getIdentificador(), subarea.getNombre());
+    }
+
+    public List<SubareaDTO> construirDTOs(List<SubareaEntidad> subareas){
+        return subareas.stream().map(this::construirDTO).toList();
     }
 }
