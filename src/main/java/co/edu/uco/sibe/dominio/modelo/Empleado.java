@@ -1,11 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 @Getter
 public class Empleado extends Interno {
@@ -52,11 +54,11 @@ public class Empleado extends Interno {
     public static Empleado construir() {
         return new Empleado(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
+                VACIO,
+                VACIO,
                 CiudadResidencia.construir(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
+                VACIO,
+                VACIO,
                 RelacionLaboral.construir(),
                 CentroCostos.construir()
         );

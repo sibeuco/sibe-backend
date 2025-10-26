@@ -10,8 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClaveModificacionComando {
-    private String usuario;
+    private String identificador;
     private String claveAntigua;
     private String claveNueva;
-    private String confirmacionClaveNueva;
 }

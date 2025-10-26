@@ -1,13 +1,15 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 @Getter
 public class ParticipanteEstudiante extends ParticipanteInterno {
@@ -98,19 +100,19 @@ public class ParticipanteEstudiante extends ParticipanteInterno {
                 UtilUUID.obtenerValorDefecto(),
                 Miembro.construir(),
                 CiudadResidencia.construir(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                NumeroConstante.CERO,
-                TextoConstante.VACIO,
-                NumeroConstante.CERO,
-                NumeroConstante.CERO,
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
-                NumeroConstante.CERO,
-                TextoConstante.VACIO
+                VACIO,
+                VACIO,
+                VACIO,
+                VACIO,
+                VACIO,
+                CERO,
+                VACIO,
+                CERO,
+                CERO,
+                VACIO,
+                VACIO,
+                CERO,
+                VACIO
         );
     }
 }

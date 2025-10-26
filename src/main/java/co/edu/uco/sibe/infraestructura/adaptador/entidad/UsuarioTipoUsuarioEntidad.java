@@ -7,17 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario_tipo_usuario")
+@Table(name = TABLA_USUARIO_TIPO_USUARIO)
 public class UsuarioTipoUsuarioEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_usuario")
+    @JoinColumn(name = TIPO_USUARIO)
     private TipoUsuarioEntidad tipoUsuario;
 }

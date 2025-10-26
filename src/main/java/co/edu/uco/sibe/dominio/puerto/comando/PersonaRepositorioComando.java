@@ -2,6 +2,8 @@ package co.edu.uco.sibe.dominio.puerto.comando;
 
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface PersonaRepositorioComando {
@@ -12,4 +14,10 @@ public interface PersonaRepositorioComando {
     UUID modificarClave(String nuevaContrasena, UUID identificador);
 
     void eliminarUsuario(UUID identificador);
+
+    UUID crearPeticionRecuperacionClave(String codigoCifrado, String correo, LocalDateTime fecha);
+
+    void eliminarPeticionRecuperacionClaveConCorreo(String correo);
+
+    UUID modificarClaveConCorreo(String claveCifrada, String correo);
 }

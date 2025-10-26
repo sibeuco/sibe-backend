@@ -14,6 +14,4 @@ import java.util.UUID;
 public class DireccionDTO {
     private UUID identificador;
     private String nombre;
-    private List<AreaDTO> areas;
-    private List<ActividadDTO> actividades;
 }

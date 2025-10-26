@@ -1,24 +1,28 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.MIEMBRO;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PARTICIPANTE;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "participante")
+@Table(name = PARTICIPANTE)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class ParticipanteEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "miembro", nullable = false)
+    @JoinColumn(name = MIEMBRO, nullable = false)
     private MiembroEntidad miembro;
 }

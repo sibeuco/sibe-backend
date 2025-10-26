@@ -6,21 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "interno")
-@PrimaryKeyJoinColumn(name = "identificador")
+@Table(name = INTERNO)
+@PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
 public class InternoEntidad extends MiembroEntidad {
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ciudad_residencia", nullable = false)
+    @JoinColumn(name = CIUDAD_RESIDENCIA, nullable = false)
     private InternoCiudadResidenciaEntidad ciudadResidencia;
 
-    @Column(name = "id_carnet", nullable = false, length = 20)
+    @Column(name = ID_CARNET, nullable = false, length = 20)
     private String idCarnet;
 
-    @Column(name = "sexo", nullable = false, length = 1)
+    @Column(name = SEXO, nullable = false, length = 1)
     private String sexo;
 }

@@ -8,15 +8,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PETICION_RECUPERACION_CLAVE;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "peticion_recuperacion_clave")
+@Table(name = PETICION_RECUPERACION_CLAVE)
 public class PeticionRecuperacionClaveEntidad {
     @Id
     private UUID id;

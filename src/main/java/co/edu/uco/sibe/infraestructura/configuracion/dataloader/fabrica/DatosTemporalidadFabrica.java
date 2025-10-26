@@ -2,6 +2,8 @@ package co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica;
 
 import java.util.List;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 public final class DatosTemporalidadFabrica {
     private DatosTemporalidadFabrica() {
         super();
@@ -9,11 +11,11 @@ public final class DatosTemporalidadFabrica {
 
     public static List<String> obtenerTemporalidades() {
         return List.of(
-                "Diaria",
-                "Semanal",
-                "Mensual",
-                "Trimestral",
-                "Anual"
+                TEMPORALIDAD_DIARIA,
+                TEMPORALIDAD_SEMANAL,
+                TEMPORALIDAD_MENSUAL,
+                TEMPORALIDAD_TRIMESTRAL,
+                TEMPORALIDAD_ANUAL
         );
     }
 }

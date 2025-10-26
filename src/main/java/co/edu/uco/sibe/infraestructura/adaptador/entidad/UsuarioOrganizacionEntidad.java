@@ -7,29 +7,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuario_organizacion")
+@Table(name = USUARIO_ORGANIZACION)
 public class UsuarioOrganizacionEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "usuario", nullable = false)
+    @JoinColumn(name = USUARIO, nullable = false)
     private UsuarioEntidad usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "direccion")
+    @JoinColumn(name = CAMPO_DIRECCION)
     private DireccionEntidad direccion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "area")
+    @JoinColumn(name = CAMPO_AREA)
     private AreaEntidad area;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subarea")
+    @JoinColumn(name = SUB_AREA)
     private SubareaEntidad subarea;
 }

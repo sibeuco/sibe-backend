@@ -1,18 +1,22 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import java.util.UUID;
-import lombok.Getter;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.IDENTIFICACION;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PERSONA;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "persona")
+@Table(name = PERSONA)
 public class PersonaEntidad {
     @Id
     private UUID identificador;
@@ -27,6 +31,6 @@ public class PersonaEntidad {
     private String correo;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "identificacion", nullable = false)
+    @JoinColumn(name = IDENTIFICACION, nullable = false)
     private IdentificacionEntidad identificacion;
 }

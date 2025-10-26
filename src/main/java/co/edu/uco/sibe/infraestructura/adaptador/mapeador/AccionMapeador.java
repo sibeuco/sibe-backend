@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.AccionDTO;
 import co.edu.uco.sibe.dominio.modelo.Accion;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.AccionEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ProyectoAccionEntidad;
@@ -19,5 +20,13 @@ public class AccionMapeador {
 
     public List<Accion> construirModelos(List<AccionEntidad> acciones){
         return acciones.stream().map(this::construriModelo).toList();
+    }
+
+    public AccionDTO construirDTO(AccionEntidad accion){
+        return new AccionDTO(accion.getIdentificador(), accion.getDetalle(), accion.getObjetivo());
+    }
+
+    public List<AccionDTO> construirDTOs(List<AccionEntidad> acciones){
+        return acciones.stream().map(this::construirDTO).toList();
     }
 }

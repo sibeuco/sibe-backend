@@ -15,5 +15,5 @@ public class ProyectoDTO {
     private UUID identificador;
     private String numeroProyecto;
     private String nombre;
-    private List<AccionDTO> acciones;
+    private String objetivo;
 }

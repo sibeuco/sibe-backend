@@ -8,17 +8,19 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "interno_ciudad_residencia")
+@Table(name = INTERNO_CIUDAD_RESIDENCIA)
 public class InternoCiudadResidenciaEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne
-    @JoinColumn(name = "ciudad_residencia")
+    @JoinColumn(name = CIUDAD_RESIDENCIA)
     private CiudadResidenciaEntidad ciudadResidencia;
 }

@@ -1,11 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 @Getter
 public class Usuario {
@@ -36,10 +38,14 @@ public class Usuario {
     public static Usuario construir() {
         return new Usuario(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO,
-                TextoConstante.VACIO,
+                VACIO,
+                VACIO,
                 TipoUsuario.construir(),
                 false
         );
+    }
+
+    public void actualizarClave(String clave) {
+        this.clave = clave;
     }
 }

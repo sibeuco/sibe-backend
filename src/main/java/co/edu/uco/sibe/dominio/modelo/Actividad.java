@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
 import java.util.UUID;
@@ -60,8 +60,8 @@ public class Actividad {
     public static Actividad construir() {
         return new Actividad(
                 UtilUUID.obtenerValorDefecto(),
-                TextoConstante.VACIO, TextoConstante.VACIO,
-                TextoConstante.VACIO, TextoConstante.VACIO,
+                VACIO, VACIO,
+                VACIO, VACIO,
                 Indicador.construir(), UtilUUID.obtenerValorDefecto(),
                 UtilUUID.obtenerValorDefecto()
         );

@@ -6,19 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "empleado")
-@PrimaryKeyJoinColumn(name = "identificador")
+@Table(name = TABLA_EMPLEADO)
+@PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
 public class EmpleadoEntidad extends InternoEntidad {
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "relacion_laboral", nullable = false)
+    @JoinColumn(name = CAMPO_RELACION_LABORAL, nullable = false)
     private EmpleadoRelacionLaboralEntidad relacionLaboral;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "centro_costos", nullable = false)
+    @JoinColumn(name = CAMPO_CENTRO_COSTOS, nullable = false)
     private EmpleadoCentroCostosEntidad centroCostos;
 }

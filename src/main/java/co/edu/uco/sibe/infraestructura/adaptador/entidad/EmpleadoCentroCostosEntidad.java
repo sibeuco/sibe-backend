@@ -8,17 +8,19 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.EMPLEADO_CENTRO_COSTOS;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "empleado_centro_costos")
+@Table(name = EMPLEADO_CENTRO_COSTOS)
 public class EmpleadoCentroCostosEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne
-    @JoinColumn(name = "empleado_centro_costos")
+    @JoinColumn(name = EMPLEADO_CENTRO_COSTOS)
     private CentroCostosEntidad centroCostos;
 }

@@ -7,19 +7,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "indicador_tipo_indicador")
+@Table(name = INDICADOR_TIPO_INDICADOR)
 public class IndicadorTipoIndicadorEntidad {
     @Id
-    @Column(name = "identificador", nullable = false, updatable = false)
+    @Column(name = CAMPO_IDENTIFICADOR, nullable = false, updatable = false)
     private UUID identificador;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_indicador", nullable = false)
+    @JoinColumn(name = TIPO_INDICADOR, nullable = false)
     private TipoIndicadorEntidad tipoIndicador;
 }
 

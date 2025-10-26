@@ -2,21 +2,24 @@ package co.edu.uco.sibe.infraestructura.controlador.consulta;
 
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarTiposIdentificacionManejador;
 import co.edu.uco.sibe.dominio.dto.TipoIdentificacionDTO;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_ADMIN_GET_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TIPOS_IDENTIFICACION;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/tipos_identificacion")
+@RequestMapping(TIPOS_IDENTIFICACION)
 public class TipoIdentificacionConsultaControlador {
     private final ConsultarTiposIdentificacionManejador consultarTiposIdentificacionManejador;
 
-    @PreAuthorize(TextoConstante.HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
     @GetMapping()
     public List<TipoIdentificacionDTO> consultarTiposIdentificacion(){
         return consultarTiposIdentificacionManejador.ejecutar();

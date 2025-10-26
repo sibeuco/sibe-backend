@@ -8,17 +8,20 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.CAMPO_RELACION_LABORAL;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TABLA_EMPLEADO_RELACION_LABORAL;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "empleado_relacion_laboral")
+@Table(name = TABLA_EMPLEADO_RELACION_LABORAL)
 public class EmpleadoRelacionLaboralEntidad {
     @Id
     private UUID identificador;
 
     @ManyToOne
-    @JoinColumn(name = "relacion_laboral")
+    @JoinColumn(name = CAMPO_RELACION_LABORAL)
     private RelacionLaboralEntidad relacionLaboral;
 }

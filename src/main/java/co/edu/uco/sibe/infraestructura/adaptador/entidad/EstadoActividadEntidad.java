@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TABLA_ESTADO_ACTIVIDAD;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "estado_actividad")
+@Table(name = TABLA_ESTADO_ACTIVIDAD)
 public class EstadoActividadEntidad {
     @Id
     private UUID identificador;
