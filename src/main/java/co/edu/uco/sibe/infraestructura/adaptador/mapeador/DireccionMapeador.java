@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
@@ -32,5 +33,13 @@ public class DireccionMapeador {
                 this.areaMapeador.construirModelos(direccion.getAreas()),
                 this.actividadMapeador.construirModelos(direccion.getActividades())
         );
+    }
+
+    public DireccionDTO construirDTO(DireccionEntidad direccion){
+        return new DireccionDTO(direccion.getIdentificador(), direccion.getNombre());
+    }
+
+    public List<DireccionDTO> construirDTOs(List<DireccionEntidad> direcciones){
+        return direcciones.stream().map(this::construirDTO).toList();
     }
 }

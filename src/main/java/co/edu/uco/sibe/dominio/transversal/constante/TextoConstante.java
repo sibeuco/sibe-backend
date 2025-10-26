@@ -61,6 +61,9 @@ public final class TextoConstante {
     public static final String DESCRIPCION_ADMINISTRADOR_AREA = "Administrador de Area";
     public static final String COLABORADOR = "COLABORADOR";
     public static final String DESCRIPCION_COLABORADOR = "Colaborador";
+    public static final String DIRECCION = "/direcciones";
+    public static final String AREA = "/areas";
+    public static final String SUBAREA = "/subareas";
 
     public static final String ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_CREATE";
     public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";

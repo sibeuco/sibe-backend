@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
+import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
@@ -9,6 +10,7 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
@@ -20,6 +22,13 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
 
     @Autowired
     private DireccionMapeador direccionMapeador;
+
+    @Override
+    public List<DireccionDTO> consultarDTOs() {
+        var entidades = this.direccionDAO.findAll();
+
+        return this.direccionMapeador.construirDTOs(entidades);
+    }
 
     @Override
     public Direccion consultarPorIdentificador(UUID identificador) {
