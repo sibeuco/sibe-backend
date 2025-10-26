@@ -5,11 +5,15 @@ import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
+import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Repository
@@ -25,6 +29,12 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Autowired
     private UsuarioMapeador usuarioMapeador;
+
+    @Autowired
+    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+
+    @Autowired
+    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String claveEncriptada) {
@@ -74,5 +84,36 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         usuarioEntidad.setEstaActivo(false);
 
         this.usuarioDAO.save(usuarioEntidad);
+    }
+
+    @Override
+    public UUID crearPeticionRecuperacionClave(String codigoCifrado, String correo, LocalDateTime fecha) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        if (ValidadorObjeto.esNulo(entidad)) {
+            entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigoCifrado, correo, fecha);
+        } else {
+            this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, codigoCifrado, fecha);
+        }
+
+        return this.peticionRecuperacionClaveDAO.save(entidad).getId();
+    }
+
+    @Override
+    public void eliminarPeticionRecuperacionClaveConCorreo(String correo) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        assert !ValidadorObjeto.esNulo(entidad);
+        this.peticionRecuperacionClaveDAO.deleteById(entidad.getId());
+    }
+
+    @Override
+    public UUID modificarClaveConCorreo(String claveCifrada, String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
+
+        assert !ValidadorObjeto.esNulo(entidad);
+        this.usuarioMapeador.construirModificarContrasenaEntidad(entidad, claveCifrada);
+
+        return this.usuarioDAO.save(entidad).getIdentificador();
     }
 }

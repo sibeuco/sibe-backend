@@ -44,4 +44,8 @@ public class Usuario {
                 false
         );
     }
+
+    public void actualizarClave(String clave) {
+        this.clave = clave;
+    }
 }

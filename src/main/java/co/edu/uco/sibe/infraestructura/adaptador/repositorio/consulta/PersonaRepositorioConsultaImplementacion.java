@@ -9,13 +9,16 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
+import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +40,12 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
     @Autowired
     IdentificacionDAO identificacionDAO;
+
+    @Autowired
+    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+
+    @Autowired
+    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public Persona consultarPersonaPorIdentificador(UUID identificador) {
@@ -169,5 +178,38 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var cantidad = usuarioDAO.count();
 
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+    }
+
+    @Override
+    public String consultarCodigoConCorreo(String correo) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return entidad.getCodigo();
+    }
+
+    @Override
+    public LocalDateTime consultarFechaPeticionRecuperacionClaveConCorreo(String correo) {
+        var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return entidad.getFecha();
+    }
+
+    @Override
+    public String consultarClaveConCorreo(String correo) {
+        var entidad = this.usuarioDAO.findByCorreo(correo);
+
+        if (ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return entidad.getClave();
     }
 }
