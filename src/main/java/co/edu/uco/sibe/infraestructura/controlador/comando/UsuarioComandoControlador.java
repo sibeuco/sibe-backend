@@ -1,10 +1,7 @@
 package co.edu.uco.sibe.infraestructura.controlador.comando;
 
-import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
-import co.edu.uco.sibe.aplicacion.comando.UsuarioModificacionComando;
-import co.edu.uco.sibe.aplicacion.comando.manejador.AgregarNuevoUsuarioManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.EliminarPersonaManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarUsuarioManejador;
+import co.edu.uco.sibe.aplicacion.comando.*;
+import co.edu.uco.sibe.aplicacion.comando.manejador.*;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +18,10 @@ public class UsuarioComandoControlador {
     private final AgregarNuevoUsuarioManejador agregarNuevoUsuarioManejador;
     private final EliminarPersonaManejador eliminarPersonaManejador;
     private final ModificarUsuarioManejador modificarUsuarioManejador;
+    private final SolicitarCodigoManejador solicitarCodigoManejador;
+    private final ValidarCodigoRecuperacionClaveManejador validarCodigoRecuperacionClaveManejador;
+    private final RecuperarClaveManejador recuperarClaveManejador;
+    private final ModificarClaveManejador modificarClaveManejador;
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
@@ -34,9 +35,30 @@ public class UsuarioComandoControlador {
         return modificarUsuarioManejador.ejecutar(usuario, identificador);
     }
 
+    @PreAuthorize(HAS_USER_OR_ADMIN_UPDATE_AUTHORITY)
+    @PutMapping(MODIFICAR_CLAVE_PATH)
+    public ComandoRespuesta<UUID> modificarClave(@RequestBody ClaveModificacionComando claveModificacionComando) {
+        return this.modificarClaveManejador.ejecutar(claveModificacionComando);
+    }
+
     @PreAuthorize(HAS_ADMIN_DELETE_AUTHORITY)
     @DeleteMapping(USUARIO_IDENTIFICADOR)
     public ComandoRespuesta<UUID> eliminarUsuario(@PathVariable UUID identificador){
         return this.eliminarPersonaManejador.ejecutar(identificador);
+    }
+
+    @PostMapping(SOLICITAR_CODIGO_PATH)
+    public ComandoRespuesta<UUID> iniciarRecuperacionDeLaClave(@PathVariable String correo) {
+        return this.solicitarCodigoManejador.ejecutar(correo);
+    }
+
+    @PostMapping(VALIDAR_CODIGO_PATH)
+    public ComandoRespuesta<Boolean> validarCodigoParaRecuperarClave(@RequestBody ValidarCodigoRecuperacionClaveComando comando) {
+        return this.validarCodigoRecuperacionClaveManejador.ejecutar(comando);
+    }
+
+    @PostMapping(RECUPERAR_CLAVE_PATH)
+    public ComandoRespuesta<UUID> recuperarClave(@RequestBody RecuperarClaveComando comando) {
+        return this.recuperarClaveManejador.ejecutar(comando);
     }
 }

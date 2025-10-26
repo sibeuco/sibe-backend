@@ -6,6 +6,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
+import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
@@ -113,5 +114,25 @@ public class UseCaseBean {
     @Bean
     public GuardarTemporalidadUseCase guardarTemporalidadUseCase(TemporalidadRepositorioComando temporalidadRepositorioComando) {
         return new GuardarTemporalidadUseCase(temporalidadRepositorioComando);
+    }
+
+    @Bean
+    public SolicitarCodigoUseCase solicitarCodigoUseCase(PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, EncriptarClaveServicio encriptarClaveServicio, EnviarCorreoElectronicoService enviarCorreoElectronicoService) {
+        return new SolicitarCodigoUseCase(personaRepositorioConsulta, personaRepositorioComando, encriptarClaveServicio, enviarCorreoElectronicoService);
+    }
+
+    @Bean
+    public ValidarCodigoRecuperacionClaveUseCase validarCodigoRecuperacionClaveUseCase(PersonaRepositorioConsulta personaRepositorioConsulta, PersonaRepositorioComando personaRepositorioComando, EncriptarClaveServicio encriptarClaveServicio) {
+        return new ValidarCodigoRecuperacionClaveUseCase(personaRepositorioConsulta, personaRepositorioComando, encriptarClaveServicio);
+    }
+
+    @Bean
+    public RecuperarClaveUseCase recuperarClaveUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio) {
+        return new RecuperarClaveUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio);
+    }
+
+    @Bean
+    public ModificarClaveUseCase modificarClaveUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio) {
+        return new ModificarClaveUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio);
     }
 }

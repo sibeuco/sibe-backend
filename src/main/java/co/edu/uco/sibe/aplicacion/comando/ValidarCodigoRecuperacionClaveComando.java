@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClaveModificacionComando {
-    private String identificador;
-    private String claveAntigua;
-    private String claveNueva;
+public class ValidarCodigoRecuperacionClaveComando {
+    private String codigo;
+    private String correo;
 }
