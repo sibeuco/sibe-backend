@@ -16,6 +16,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseBean {
     @Bean
+    public AgregarNuevaAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando){
+        return new AgregarNuevaAccionUseCase(accionRepositorioComando);
+    }
+
+    @Bean
+    public AgregarNuevoProyectoUseCase agregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando){
+        return new AgregarNuevoProyectoUseCase(proyectoRepositorioComando);
+    }
+
+    @Bean
     public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
         return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio, vincularUsuarioConAreaService);
     }

@@ -50,6 +50,7 @@ public final class TextoConstante {
     public static final String LOGIN_API = "/login";
 
     public static final String USUARIO_IDENTIFICADOR = "/usuario/{identificador}";
+    public static final String ACCION_IDENTIFICADOR = "/accion/{identificador}";
     public static final String IDENTIFICADOR = "identificador";
     public static final String TIPOS_IDENTIFICACION = "/tipos_identificacion";
     public static final String TIPOS_USUARIO = "/tipos_usuario";
@@ -64,6 +65,8 @@ public final class TextoConstante {
     public static final String DIRECCION = "/direcciones";
     public static final String AREA = "/areas";
     public static final String SUBAREA = "/subareas";
+    public static final String ACCIONES = "/acciones";
+    public static final String PROYECTOS = "/proyectos";
 
     public static final String ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_CREATE";
     public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";
