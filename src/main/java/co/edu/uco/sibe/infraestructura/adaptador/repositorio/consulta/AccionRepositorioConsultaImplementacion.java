@@ -37,4 +37,11 @@ public class AccionRepositorioConsultaImplementacion implements AccionRepositori
 
         return this.accionMapeador.construriModelo(entidad);
     }
+
+    @Override
+    public List<Accion> consultarTodos() {
+        var entidades = this.accionDAO.findAll();
+
+        return this.accionMapeador.construirModelos(entidades);
+    }
 }

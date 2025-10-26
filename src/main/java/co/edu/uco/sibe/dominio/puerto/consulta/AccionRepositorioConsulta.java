@@ -11,4 +11,6 @@ public interface AccionRepositorioConsulta {
 
     Accion consultarPorIdentificador(UUID identificador);
 
+    List<Accion> consultarTodos();
+
 }
