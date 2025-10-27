@@ -89,7 +89,9 @@ public class ProjectSecurityConfig {
                 // Define endpoint authorization rules
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(TextoConstante.LOGIN_API).authenticated()
-                        .requestMatchers(TextoConstante.CARGA_MASIVA).authenticated()
+                        .requestMatchers(TextoConstante.SOLICITAR_CODIGO_PATH).authenticated()
+                        .requestMatchers(TextoConstante.VALIDAR_CODIGO_PATH).authenticated()
+                        .requestMatchers(TextoConstante.RECUPERAR_CLAVE_PATH).authenticated()
                         .anyRequest().authenticated()
                 )
                 // Enable HTTP Basic authentication for user login
