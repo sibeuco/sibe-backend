@@ -28,6 +28,13 @@ public class AccionRepositorioConsultaImplementacion implements AccionRepositori
     }
 
     @Override
+    public List<Accion> consultarTodosPorIdentificadores(List<UUID> identificadores) {
+        var entidades = this.accionDAO.findAllById(identificadores);
+
+        return this.accionMapeador.construirModelos(entidades);
+    }
+
+    @Override
     public Accion consultarPorIdentificador(UUID identificador) {
         var entidad = this.accionDAO.findById(identificador).orElse(null);
 
@@ -43,5 +50,16 @@ public class AccionRepositorioConsultaImplementacion implements AccionRepositori
         var entidades = this.accionDAO.findAll();
 
         return this.accionMapeador.construirModelos(entidades);
+    }
+
+    @Override
+    public Accion consultarPorDetalle(String detalle) {
+        var entidad = this.accionDAO.findByDetalle(detalle);
+
+        if(ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.accionMapeador.construriModelo(entidad);
     }
 }

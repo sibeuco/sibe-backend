@@ -1,10 +1,7 @@
 package co.edu.uco.sibe.infraestructura.configuracion.bean;
 
 import co.edu.uco.sibe.dominio.puerto.comando.*;
-import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
+import co.edu.uco.sibe.dominio.puerto.consulta.*;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
@@ -17,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseBean {
     @Bean
-    public AgregarNuevaAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando){
-        return new AgregarNuevaAccionUseCase(accionRepositorioComando);
+    public AgregarNuevaAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta){
+        return new AgregarNuevaAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);
     }
 
     @Bean
-    public AgregarNuevoProyectoUseCase agregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando){
-        return new AgregarNuevoProyectoUseCase(proyectoRepositorioComando);
+    public AgregarNuevoProyectoUseCase agregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta){
+        return new AgregarNuevoProyectoUseCase(proyectoRepositorioComando, proyectoRepositorioConsulta);
     }
 
     @Bean
@@ -134,5 +131,15 @@ public class UseCaseBean {
     @Bean
     public ModificarClaveUseCase modificarClaveUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio) {
         return new ModificarClaveUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio);
+    }
+
+    @Bean
+    public CargarMasivamenteEmpleadosUseCase cargarMasivamenteEmpleadosUseCase(EmpleadoRepositorioComando empleadoRepositorioComando, EmpleadoRepositorioConsulta empleadoRepositorioConsulta) {
+        return new CargarMasivamenteEmpleadosUseCase(empleadoRepositorioComando, empleadoRepositorioConsulta);
+    }
+
+    @Bean
+    public CargarMasivamenteEstudiantesUseCase cargarMasivamenteEstudiantesUseCase(EstudianteRepositorioComando estudianteRepositorioComando, EstudianteRepositorioConsulta estudianteRepositorioConsulta) {
+        return new CargarMasivamenteEstudiantesUseCase(estudianteRepositorioComando, estudianteRepositorioConsulta);
     }
 }

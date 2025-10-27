@@ -58,9 +58,12 @@ public final class TextoConstante {
     public static final String AREA = "/areas";
     public static final String SUBAREA = "/subareas";
     public static final String ACCIONES = "/acciones";
+    public static final String CARGA_MASIVA = "/carga_masiva";
     public static final String PROYECTOS = "/proyectos";
     public static final String TIPOS_IDENTIFICACION = "/tipos_identificacion";
     public static final String TIPOS_USUARIO = "/tipos_usuario";
+    public static final String EMPLEADOS = "/empleados";
+    public static final String ESTUDIANTES = "/estudiantes";
 
     public static final String USUARIO_IDENTIFICADOR = "/usuario/{identificador}";
     public static final String ACCION_IDENTIFICADOR = "/accion/{identificador}";

@@ -1,17 +1,19 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
+import co.edu.uco.sibe.dominio.modelo.CiudadResidencia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = INTERNO)
 @PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
@@ -25,4 +27,11 @@ public class InternoEntidad extends MiembroEntidad {
 
     @Column(name = SEXO, nullable = false, length = 1)
     private String sexo;
+
+    public InternoEntidad(UUID identificador, String nombreCompleto, String numeroIdentificacion, InternoCiudadResidenciaEntidad ciudadResidencia, String idCarnet, String sexo) {
+        super(identificador, nombreCompleto, numeroIdentificacion);
+        this.ciudadResidencia = ciudadResidencia;
+        this.idCarnet = idCarnet;
+        this.sexo = sexo;
+    }
 }

@@ -4,6 +4,7 @@ import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.sibe.dominio.puerto.consulta.IdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
@@ -14,7 +15,7 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 
 import java.util.UUID;
 
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.CORREO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
 
 public class AgregarNuevoUsuarioUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -35,6 +36,7 @@ public class AgregarNuevoUsuarioUseCase {
         MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.CREAR);
 
         validarUsuarioExisteConCorreo(usuario.getCorreo());
+        validarUsuarioExisteConDocumento(persona.getIdentificacion().getNumeroIdentificacion());
 
         var claveEncriptada = this.encriptarClaveServicio.ejecutar(usuario.getClave());
         var identificador = this.personaRepositorioComando.agregarNuevoUsuario(usuario, persona, claveEncriptada);
@@ -47,6 +49,12 @@ public class AgregarNuevoUsuarioUseCase {
     private void validarUsuarioExisteConCorreo(String correo) {
         if (!ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
             throw new ValorDuplicadoExcepcion(CORREO_EXISTENTE);
+        }
+    }
+
+    private void validarUsuarioExisteConDocumento(String numeroIdentificacion) {
+        if (!ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(numeroIdentificacion))){
+            throw new ValorDuplicadoExcepcion(DOCUMENTO_EXISTENTE);
         }
     }
 }

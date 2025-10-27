@@ -1,12 +1,22 @@
 package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.dominio.modelo.CentroCostos;
-import co.edu.uco.sibe.dominio.modelo.CiudadResidencia;
+import co.edu.uco.sibe.dominio.puerto.consulta.CentroCostosRepositorioConsulta;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
-import java.util.UUID;
-
+@Component
+@AllArgsConstructor
 public class CentroCostosFabrica {
+    private final CentroCostosRepositorioConsulta centroCostosRepositorioConsulta;
+
     public CentroCostos construir(String codigo, String descripcion) {
-        return CentroCostos.construir(UUID.randomUUID(), codigo, descripcion);
+        return CentroCostos.construir(
+                generar(uuid -> !esNulo(centroCostosRepositorioConsulta.consultarPorIdentificador(uuid))),
+                codigo,
+                descripcion
+        );
     }
 }

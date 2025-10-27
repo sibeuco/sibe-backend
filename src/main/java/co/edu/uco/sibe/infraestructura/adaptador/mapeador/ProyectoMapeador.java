@@ -14,15 +14,31 @@ public class ProyectoMapeador {
     private ProyectoAccionMapeador proyectoAccionMapeador;
 
     public ProyectoEntidad construirEntidad(Proyecto proyecto) {
-        return new ProyectoEntidad(proyecto.getIdentificador(), proyecto.getNumeroProyecto(), proyecto.getNombre(), proyecto.getObjetivo(), proyectoAccionMapeador.construirEntidades(proyecto.getAcciones()));
+        return new ProyectoEntidad(
+                proyecto.getIdentificador(),
+                proyecto.getNumeroProyecto(),
+                proyecto.getNombre(), proyecto.getObjetivo(),
+                proyectoAccionMapeador.construirEntidades(proyecto.getAcciones())
+        );
     }
 
     public Proyecto construriModelo(ProyectoEntidad proyecto) {
-        return Proyecto.construir(proyecto.getIdentificador(), proyecto.getNumeroProyecto(), proyecto.getNombre(), proyecto.getObjetivo(), proyectoAccionMapeador.construirModelos(proyecto.getAcciones()));
+        return Proyecto.construir(
+                proyecto.getIdentificador(),
+                proyecto.getNumeroProyecto(),
+                proyecto.getNombre(),
+                proyecto.getObjetivo(),
+                proyectoAccionMapeador.construirModelos(proyecto.getAcciones())
+        );
     }
 
-    public ProyectoDTO construirDTO(ProyectoEntidad proyecto){
-        return new ProyectoDTO(proyecto.getIdentificador(), proyecto.getNumeroProyecto(), proyecto.getNombre(), proyecto.getObjetivo());
+    public ProyectoDTO construirDTO(ProyectoEntidad proyecto) {
+        return new ProyectoDTO(
+                proyecto.getIdentificador(),
+                proyecto.getNumeroProyecto(),
+                proyecto.getNombre(),
+                proyecto.getObjetivo()
+        );
     }
 
     public List<ProyectoDTO> construirDTOs(List<ProyectoEntidad> proyectos){

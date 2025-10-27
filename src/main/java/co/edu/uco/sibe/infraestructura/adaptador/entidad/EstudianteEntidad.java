@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
+import co.edu.uco.sibe.dominio.modelo.CiudadResidencia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -12,11 +13,11 @@ import lombok.Setter;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = ESTUDIANTE)
 @PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
@@ -65,4 +66,45 @@ public class EstudianteEntidad extends InternoEntidad {
 
     @Column(name = MEDIO_TRANSPORTE, nullable = false, length = 30)
     private String medioTransporte;
+
+    public EstudianteEntidad(
+            UUID identificador,
+            String nombreCompleto,
+            String numeroIdentificacion,
+            InternoCiudadResidenciaEntidad ciudadResidencia,
+            String idCarnet,
+            String sexo,
+            LocalDate fechaNacimiento,
+            String nacionalidad,
+            String estadoCivil,
+            String correoPersonal,
+            String correoInstitucional,
+            String programaAcademico,
+            String facultad,
+            int annoIngreso,
+            String semestreActual,
+            int creditosAprobados,
+            float promedioGeneral,
+            String estadoAcademico,
+            String modalidadEstudio,
+            int tiempoLlegadaUniversidad,
+            String medioTransporte
+    ) {
+        super(identificador, nombreCompleto, numeroIdentificacion, ciudadResidencia, idCarnet, sexo);
+        this.fechaNacimiento = fechaNacimiento;
+        this.nacionalidad = nacionalidad;
+        this.estadoCivil = estadoCivil;
+        this.correoPersonal = correoPersonal;
+        this.correoInstitucional = correoInstitucional;
+        this.programaAcademico = programaAcademico;
+        this.facultad = facultad;
+        this.annoIngreso = annoIngreso;
+        this.semestreActual = semestreActual;
+        this.creditosAprobados = creditosAprobados;
+        this.promedioGeneral = promedioGeneral;
+        this.estadoAcademico = estadoAcademico;
+        this.modalidadEstudio = modalidadEstudio;
+        this.tiempoLlegadaUniversidad = tiempoLlegadaUniversidad;
+        this.medioTransporte = medioTransporte;
+    }
 }

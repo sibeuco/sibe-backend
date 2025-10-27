@@ -5,4 +5,5 @@ import java.util.UUID;
 
 public interface IdentificacionRepositorioConsulta {
     Identificacion consultarPorIdentificador(UUID identificador);
+    Identificacion consultarPorNumeroIdentificacion(String numeroIdentificacion);
 }
