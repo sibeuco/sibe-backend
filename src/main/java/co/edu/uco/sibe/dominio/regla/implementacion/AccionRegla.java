@@ -34,13 +34,13 @@ public final class AccionRegla implements Regla<Accion> {
 
     private void validarDetalle(String detalle) {
         ValidadorTexto.validarObligatorio(detalle, DETALLE_ACCION_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(detalle, DETALLE_ACCION_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(detalle, DETALLE_ACCION_INVALIDO);
         ValidadorNumero.validarNumeroEntre(detalle.length(), 10, 500, LONGITUD_DETALLE_ACCION_INVALIDA);
     }
 
     private void validarObjetivo(String objetivo) {
         ValidadorTexto.validarObligatorio(objetivo, OBJETIVO_ACCION_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(objetivo, OBJETIVO_ACCION_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(objetivo, OBJETIVO_ACCION_INVALIDO);
         ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_ACCION_INVALIDA);
     }
 }

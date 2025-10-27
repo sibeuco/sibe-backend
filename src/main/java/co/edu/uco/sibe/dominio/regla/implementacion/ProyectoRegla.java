@@ -35,7 +35,7 @@ public final class ProyectoRegla implements Regla<Proyecto> {
 
     private void validarNumeroProyecto(String numeroProyecto) {
         ValidadorTexto.validarObligatorio(numeroProyecto, NUMERO_PROYECTO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(numeroProyecto, NUMERO_PROYECTO_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(numeroProyecto, NUMERO_PROYECTO_INVALIDO);
         ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, LONGITUD_NUMERO_PROYECTO_INVALIDA);
     }
 
@@ -47,7 +47,7 @@ public final class ProyectoRegla implements Regla<Proyecto> {
 
     private void validarObjetivo(String objetivo) {
         ValidadorTexto.validarObligatorio(objetivo, OBJETIVO_PROYECTO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(objetivo, OBJETIVO_PROYECTO_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(objetivo, OBJETIVO_PROYECTO_INVALIDO);
         ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_PROYECTO_INVALIDA);
     }
 }
