@@ -48,7 +48,7 @@ public class UsuarioComandoControlador {
     }
 
     @PostMapping(SOLICITAR_CODIGO_PATH)
-    public ComandoRespuesta<UUID> iniciarRecuperacionDeLaClave(@PathVariable String correo) {
+    public ComandoRespuesta<UUID> solicitarCodigo(@PathVariable String correo) {
         return this.solicitarCodigoManejador.ejecutar(correo);
     }
 
