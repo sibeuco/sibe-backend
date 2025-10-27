@@ -36,13 +36,13 @@ public final class ActividadRegla implements Regla<Actividad> {
 
     private void validarNombre(String nombre) {
         ValidadorTexto.validarObligatorio(nombre, NOMBRE_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(nombre, NOMBRE_ACTIVIDAD_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(nombre, NOMBRE_ACTIVIDAD_INVALIDO);
         ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 200, LONGITUD_NOMBRE_ACTIVIDAD_INVALIDA);
     }
 
     private void validarObjetivo(String objetivo) {
         ValidadorTexto.validarObligatorio(objetivo, OBJETIVO_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(objetivo, OBJETIVO_ACTIVIDAD_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(objetivo, OBJETIVO_ACTIVIDAD_INVALIDO);
         ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_ACTIVIDAD_INVALIDA);
     }
 
