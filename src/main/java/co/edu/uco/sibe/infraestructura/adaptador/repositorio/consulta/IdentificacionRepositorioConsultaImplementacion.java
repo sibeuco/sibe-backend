@@ -28,4 +28,15 @@ public class IdentificacionRepositorioConsultaImplementacion implements Identifi
 
         return this.identificacionMapeador.construirModelo(entidad);
     }
+
+    @Override
+    public Identificacion consultarPorNumeroIdentificacion(String numeroIdentificacion) {
+        var entidad = identificacionDAO.findByNumeroIdentificacion(numeroIdentificacion);
+
+        if(ValidadorObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.identificacionMapeador.construirModelo(entidad);
+    }
 }

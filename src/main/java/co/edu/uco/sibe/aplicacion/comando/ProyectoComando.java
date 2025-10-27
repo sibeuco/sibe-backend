@@ -14,5 +14,5 @@ public class ProyectoComando {
     private String numeroProyecto;
     private String nombre;
     private String objetivo;
-    private List<String> accion;
+    private List<String> acciones;
 }

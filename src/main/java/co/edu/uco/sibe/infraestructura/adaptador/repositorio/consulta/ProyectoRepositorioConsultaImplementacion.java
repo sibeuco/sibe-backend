@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
-import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.dto.ProyectoDTO;
 import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.dominio.puerto.consulta.ProyectoRepositorioConsulta;
@@ -31,6 +30,17 @@ public class ProyectoRepositorioConsultaImplementacion implements ProyectoReposi
     @Override
     public Proyecto consultarPorIdentificador(UUID identificador) {
         var entidad = this.proyectoDAO.findById(identificador).orElse(null);
+
+        if(ValidadorObjeto.esNulo(entidad)){
+            return null;
+        }
+
+        return this.proyectoMapeador.construriModelo(entidad);
+    }
+
+    @Override
+    public Proyecto consultarPorNumeroProyecto(String numeroProyecto) {
+        var entidad = this.proyectoDAO.findByNumeroProyecto(numeroProyecto);
 
         if(ValidadorObjeto.esNulo(entidad)){
             return null;

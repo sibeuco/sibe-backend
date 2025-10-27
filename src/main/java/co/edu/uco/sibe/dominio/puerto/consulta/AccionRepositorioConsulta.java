@@ -9,8 +9,11 @@ import java.util.UUID;
 public interface AccionRepositorioConsulta {
     List<AccionDTO> consultarDTOs();
 
+    List<Accion> consultarTodosPorIdentificadores(List<UUID> identificadores);
+
     Accion consultarPorIdentificador(UUID identificador);
 
     List<Accion> consultarTodos();
 
+    Accion consultarPorDetalle(String detalle);
 }
