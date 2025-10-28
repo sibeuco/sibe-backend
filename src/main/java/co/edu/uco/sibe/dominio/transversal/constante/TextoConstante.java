@@ -239,7 +239,7 @@ public final class TextoConstante {
     public static final String COLUMNA_ESTUDIANTE_CORREO_PERSONAL = "CORREO_PERSONAL";
     public static final String COLUMNA_ESTUDIANTE_PROGRAMA_ACADEMICO = "PROGRAMA_ACADEMICO";
     public static final String COLUMNA_ESTUDIANTE_FACULTAD = "FACULTAD";
-    public static final String COLUMNA_ESTUDIANTE_ANNO_INGRESO = "ANNO_INGRESO";
+    public static final String COLUMNA_ESTUDIANTE_ANNO_INGRESO = "AÑO_INGRESO";
     public static final String COLUMNA_ESTUDIANTE_SEMESTRE_ACTUAL = "SEMESTRE_ACTUAL";
     public static final String COLUMNA_ESTUDIANTE_CREDITOS_APROBADOS = "CREDITOS_APROBADOS";
     public static final String COLUMNA_ESTUDIANTE_PROMEDIO_GENERAL = "PROMEDIO_GENERAL";
