@@ -6,6 +6,7 @@ import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.infraestructura.seguridad.filter.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -88,10 +89,10 @@ public class ProjectSecurityConfig {
                 .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 // Define endpoint authorization rules
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, TextoConstante.USER_API + TextoConstante.SOLICITAR_CODIGO_PATH).permitAll()
+                        .requestMatchers(HttpMethod.POST, TextoConstante.USER_API + TextoConstante.VALIDAR_CODIGO_PATH).permitAll()
+                        .requestMatchers(HttpMethod.PUT, TextoConstante.USER_API + TextoConstante.RECUPERAR_CLAVE_PATH).permitAll()
                         .requestMatchers(TextoConstante.LOGIN_API).authenticated()
-                        .requestMatchers(TextoConstante.SOLICITAR_CODIGO_PATH).authenticated()
-                        .requestMatchers(TextoConstante.VALIDAR_CODIGO_PATH).authenticated()
-                        .requestMatchers(TextoConstante.RECUPERAR_CLAVE_PATH).authenticated()
                         .anyRequest().authenticated()
                 )
                 // Enable HTTP Basic authentication for user login

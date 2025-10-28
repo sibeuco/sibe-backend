@@ -66,8 +66,7 @@ public final class TextoConstante {
     public static final String ESTUDIANTES = "/estudiantes";
 
     public static final String USUARIO_IDENTIFICADOR = "/usuario/{identificador}";
-    public static final String ACCION_IDENTIFICADOR = "/accion/{identificador}";
-    public static final String MODIFICAR_CLAVE_PATH = "/clave/{id}";
+    public static final String MODIFICAR_CLAVE_PATH = "/modificar/clave";
     public static final String USUARIO_ID_IDENTIFICADOR = "/usuario/id/{identificador}";
     public static final String USUARIO_CORREO_CORREO = "/usuario/correo/{correo}";
 
@@ -83,6 +82,9 @@ public final class TextoConstante {
     public static final String ADMIN_GET_AUTHORITY = "ADMINISTRADOR_DIRECCION_READ";
     public static final String ADMIN_UPDATE_AUTHORITY = "ADMINISTRADOR_DIRECCION_UPDATE";
     public static final String ADMIN_DELETE_AUTHORITY = "ADMINISTRADOR_DIRECCION_DELETE";
+    public static final String AREA_ADMIN_UPDATE_AUTHORITY = "ADMINISTRADOR_AREA_UPDATE";
+    public static final String AREA_ADMIN_CREATE_AUTHORITY = "ADMINISTRADOR_AREA_CREATE";
+    public static final String AREA_ADMIN_READ_AUTHORITY = "ADMINISTRADOR_AREA_READ";
     public static final String USER_GET_AUTHORITY = "COLABORADOR_READ";
     public static final String USER_UPDATE_AUTHORITY = "COLABORADOR_UPDATE";
     public static final String CREATE_AUTHORITY = "CREATE";
@@ -91,13 +93,17 @@ public final class TextoConstante {
     public static final String DELETE_AUTHORITY = "DELETE";
 
     public static final String HAS_ADMIN_CREATE_AUTHORITY = "hasAuthority('" + ADMIN_CREATE_AUTHORITY + "')";
+    public static final String HAS_AREA_ADMIN_CREATE_AUTHORITY = "hasAuthority('" + AREA_ADMIN_CREATE_AUTHORITY + "')";
     public static final String HAS_ADMIN_GET_AUTHORITY = "hasAuthority('" + ADMIN_GET_AUTHORITY + "')";
+    public static final String HAS_AREA_ADMIN_GET_AUTHORITY = "hasAuthority('" + AREA_ADMIN_READ_AUTHORITY + "')";
     public static final String HAS_ADMIN_UPDATE_AUTHORITY = "hasAuthority('" + ADMIN_UPDATE_AUTHORITY + "')";
+    public static final String HAS_AREA_ADMIN_UPDATE_AUTHORITY = "hasAuthority('" + AREA_ADMIN_UPDATE_AUTHORITY + "')";
     public static final String HAS_ADMIN_DELETE_AUTHORITY = "hasAuthority('" + ADMIN_DELETE_AUTHORITY + "')";
     public static final String HAS_USER_GET_AUTHORITY = "hasAuthority('" + USER_GET_AUTHORITY + "')";
     public static final String HAS_USER_UPDATE_AUTHORITY = "hasAuthority('" + USER_UPDATE_AUTHORITY + "')";
     public static final String HAS_USER_OR_ADMIN_GET_AUTHORITY = HAS_USER_GET_AUTHORITY + " or " + HAS_ADMIN_GET_AUTHORITY;
     public static final String HAS_USER_OR_ADMIN_UPDATE_AUTHORITY = HAS_USER_UPDATE_AUTHORITY + " or " + HAS_ADMIN_UPDATE_AUTHORITY;
+    public static final String HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY = HAS_USER_UPDATE_AUTHORITY + " or " + HAS_ADMIN_UPDATE_AUTHORITY + " or " + HAS_AREA_ADMIN_UPDATE_AUTHORITY;
 
     public static final String USERNAME = "username";
     public static final String AUTHORITIES = "authorities";
@@ -117,7 +123,6 @@ public final class TextoConstante {
     public static final String TABLA_EJECUCION_ACTIVIDAD = "ejecucion_actividad";
     public static final String TABLA_EMPLEADO = "empleado";
     public static final String TABLA_ESTADO_ACTIVIDAD = "estado_actividad";
-    public static final String TABLA_USUARIO = "usuario"; // Renombrada, 'USUARIO' ya existía
     public static final String PETICION_RECUPERACION_CLAVE = "peticion_recuperacion_clave";
     public static final String PERSONA = "persona";
     public static final String PUBLICO_INTERES = "publico_interes";

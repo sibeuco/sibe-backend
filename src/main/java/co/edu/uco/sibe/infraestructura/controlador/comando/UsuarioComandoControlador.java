@@ -35,7 +35,7 @@ public class UsuarioComandoControlador {
         return modificarUsuarioManejador.ejecutar(usuario, identificador);
     }
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_UPDATE_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
     @PutMapping(MODIFICAR_CLAVE_PATH)
     public ComandoRespuesta<UUID> modificarClave(@RequestBody ClaveModificacionComando claveModificacionComando) {
         return this.modificarClaveManejador.ejecutar(claveModificacionComando);
@@ -57,7 +57,7 @@ public class UsuarioComandoControlador {
         return this.validarCodigoRecuperacionClaveManejador.ejecutar(comando);
     }
 
-    @PostMapping(RECUPERAR_CLAVE_PATH)
+    @PutMapping(RECUPERAR_CLAVE_PATH)
     public ComandoRespuesta<UUID> recuperarClave(@RequestBody RecuperarClaveComando comando) {
         return this.recuperarClaveManejador.ejecutar(comando);
     }

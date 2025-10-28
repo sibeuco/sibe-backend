@@ -22,9 +22,9 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PETIC
 @Table(name = PETICION_RECUPERACION_CLAVE)
 public class PeticionRecuperacionClaveEntidad {
     @Id
-    private UUID id;
+    private UUID identificador;
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String codigo;
 
     @Column(length = 100, nullable = false)
