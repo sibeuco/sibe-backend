@@ -24,19 +24,19 @@ public class UsuarioConsultarControlador {
     private final ConsultarUsuarioPorIdentificadorManejador consultarUsuarioPorIdentificadorManejador;
     private final ConsultarUsuariosManejador consultarUsuariosManejador;
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping()
     public List<UsuarioDTO> consultarUsuarios(){
         return consultarUsuariosManejador.ejecutar();
     }
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(USUARIO_ID_IDENTIFICADOR)
     public UsuarioDTO consultarUsuarioPorIdentificador(@PathVariable UUID identificador){
         return consultarUsuarioPorIdentificadorManejador.ejecutar(identificador);
     }
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(USUARIO_CORREO_CORREO)
     public UsuarioDTO consultarUsuarioPorCorreo(@PathVariable String correo){
         return consultarUsuarioPorCorreoManejador.ejecutar(correo);

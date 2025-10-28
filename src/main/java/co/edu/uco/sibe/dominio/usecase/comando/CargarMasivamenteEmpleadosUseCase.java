@@ -3,10 +3,10 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.modelo.Empleado;
 import co.edu.uco.sibe.dominio.puerto.comando.EmpleadoRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.EmpleadoRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import java.util.ArrayList;
-import java.util.List;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class CargarMasivamenteEmpleadosUseCase {
     private final EmpleadoRepositorioComando empleadoRepositorioComando;
@@ -17,19 +17,18 @@ public class CargarMasivamenteEmpleadosUseCase {
         this.empleadoRepositorioConsulta = empleadoRepositorioConsulta;
     }
 
-    public List<UUID> ejecutar(List<Empleado> empleados) {
-        var identificadores = new ArrayList<UUID>();
+    public UUID ejecutar(Empleado empleado) {
+        MotoresFabrica.MOTOR_CIUDAD_RESIDENCIA.ejecutar(empleado.getCiudadResidencia(), TipoOperacion.CREAR);
+        MotoresFabrica.MOTOR_RELACION_LABORAL.ejecutar(empleado.getRelacionLaboral(), TipoOperacion.CREAR);
+        MotoresFabrica.MOTOR_CENTRO_COSTOS.ejecutar(empleado.getCentroCostos(), TipoOperacion.CREAR);
+        MotoresFabrica.MOTOR_EMPLEADO.ejecutar(empleado, TipoOperacion.CREAR);
 
-        empleados.forEach(empleado -> {
-            var empleadoActual = this.empleadoRepositorioConsulta.consultarPorIdentificacion(empleado.getNumeroIdentificacion());
+        var empleadoActual = this.empleadoRepositorioConsulta.consultarPorIdentificacion(empleado.getNumeroIdentificacion());
 
-            if (ValidadorObjeto.esNulo(empleadoActual)) {
-                identificadores.add(this.empleadoRepositorioComando.guardar(empleado));
-            } else {
-                identificadores.add(this.empleadoRepositorioComando.modificar(empleado, empleadoActual.getIdentificador()));
-            }
-        });
+        if (!esNulo(empleadoActual)) {
+            return this.empleadoRepositorioComando.modificar(empleado, empleadoActual.getIdentificador());
+        }
 
-        return identificadores;
+        return this.empleadoRepositorioComando.guardar(empleado);
     }
 }

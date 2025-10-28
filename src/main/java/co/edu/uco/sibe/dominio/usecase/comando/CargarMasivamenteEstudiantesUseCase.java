@@ -3,10 +3,14 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.modelo.Estudiante;
 import co.edu.uco.sibe.dominio.puerto.comando.EstudianteRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstudianteRepositorioConsulta;
+import co.edu.uco.sibe.dominio.regla.TipoOperacion;
+import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class CargarMasivamenteEstudiantesUseCase {
     private final EstudianteRepositorioComando estudianteRepositorioComando;
@@ -17,20 +21,16 @@ public class CargarMasivamenteEstudiantesUseCase {
         this.estudianteRepositorioConsulta = estudianteRepositorioConsulta;
     }
 
-    public List<UUID> ejecutar(List<Estudiante> estudiantes) {
-        var identificadores = new ArrayList<UUID>();
+    public UUID ejecutar(Estudiante estudiante) {
+        MotoresFabrica.MOTOR_CIUDAD_RESIDENCIA.ejecutar(estudiante.getCiudadResidencia(), TipoOperacion.CREAR);
+        MotoresFabrica.MOTOR_ESTUDIANTE.ejecutar(estudiante, TipoOperacion.CREAR);
 
-        estudiantes.forEach(estudiante -> {
-            var estudianteActual = this.estudianteRepositorioConsulta.consultarPorIdentificacion(estudiante.getNumeroIdentificacion());
+        var estudianteActual = this.estudianteRepositorioConsulta.consultarPorIdentificacion(estudiante.getNumeroIdentificacion());
 
-            if (ValidadorObjeto.esNulo(estudianteActual)) {
-                identificadores.add(this.estudianteRepositorioComando.guardar(estudiante));
-            } else {
-                identificadores.add(this.estudianteRepositorioComando.modificar(estudiante, estudianteActual.getIdentificador()));
-            }
+        if (!esNulo(estudianteActual)) {
+            return this.estudianteRepositorioComando.modificar(estudiante, estudianteActual.getIdentificador());
+        }
 
-        });
-
-        return identificadores;
+        return this.estudianteRepositorioComando.guardar(estudiante);
     }
 }

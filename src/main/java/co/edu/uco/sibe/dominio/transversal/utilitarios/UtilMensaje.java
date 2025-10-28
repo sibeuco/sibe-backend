@@ -32,7 +32,7 @@ public final class UtilMensaje {
     public static final String LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA = "El código del centro de costos debe tener entre 4 y 6 caracteres.";
     public static final String DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA = "La descripción del centro de costos es obligatoria.";
     public static final String DESCRIPCION_CENTRO_COSTOS_INVALIDA = "La descripción proporcionada para el centro de costos es inválida.";
-    public static final String LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA = "La descripción del centro de costos debe tener entre 10 y 100 caracteres.";
+    public static final String LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA = "La descripción del centro de costos debe tener entre 3 y 100 caracteres.";
 
     public static final String DESCRIPCION_CIUDAD_RESIDENCIA_OBLIGATORIA = "La descripción de la ciudad de residencia es obligatoria.";
     public static final String DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA = "La descripción proporcionada para la ciudad de residencia es inválida.";

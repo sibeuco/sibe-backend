@@ -34,13 +34,13 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
 
     private void validarCodigo(String codigo) {
         ValidadorTexto.validarObligatorio(codigo, CODIGO_CENTRO_COSTOS_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(codigo, CODIGO_CENTRO_COSTOS_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(codigo, CODIGO_CENTRO_COSTOS_INVALIDO);
         ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
     }
 
     private void validarDescripcion(String descripcion) {
         ValidadorTexto.validarObligatorio(descripcion, DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
         ValidadorTexto.validarTextoValido(descripcion, DESCRIPCION_CENTRO_COSTOS_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 10, 100, LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(descripcion.length(), 3, 100, LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
     }
 }

@@ -17,11 +17,7 @@ public class EmpleadoFabrica {
     private final CentroCostosFabrica centroCostosFabrica;
     private final EmpleadoRepositorioConsulta empleadoRepositorioConsulta;
 
-    public List<Empleado> construirTodos(List<DatosEmpleadoComando> empleadoComando) {
-        return empleadoComando.stream().map(this::construir).toList();
-    }
-
-    private Empleado construir(DatosEmpleadoComando empleadoComando) {
+    public Empleado construir(DatosEmpleadoComando empleadoComando) {
         return Empleado.construir(
                 generar(uuid -> !esNulo(empleadoRepositorioConsulta.consultarPorIdentificador(uuid))),
                 empleadoComando.getNombre(),

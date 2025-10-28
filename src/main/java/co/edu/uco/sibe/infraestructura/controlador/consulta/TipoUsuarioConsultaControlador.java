@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_ADMIN_GET_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TIPOS_USUARIO;
 
 @RestController
@@ -19,7 +19,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TIPOS
 public class TipoUsuarioConsultaControlador {
     private final ConsultarTiposUsuarioManejador consultarTiposUsuarioManejador;
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping()
     public List<TipoUsuarioDTO> consultarTiposUsuario(){
         return consultarTiposUsuarioManejador.ejecutar();

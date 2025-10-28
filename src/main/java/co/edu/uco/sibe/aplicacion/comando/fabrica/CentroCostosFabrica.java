@@ -13,10 +13,14 @@ public class CentroCostosFabrica {
     private final CentroCostosRepositorioConsulta centroCostosRepositorioConsulta;
 
     public CentroCostos construir(String codigo, String descripcion) {
-        return CentroCostos.construir(
-                generar(uuid -> !esNulo(centroCostosRepositorioConsulta.consultarPorIdentificador(uuid))),
-                codigo,
-                descripcion
-        );
+        if(esNulo(centroCostosRepositorioConsulta.consultarPorCodigo(codigo))) {
+            return CentroCostos.construir(
+                    generar(uuid -> !esNulo(centroCostosRepositorioConsulta.consultarPorIdentificador(uuid))),
+                    codigo,
+                    descripcion
+            );
+        }
+
+        return centroCostosRepositorioConsulta.consultarPorCodigo(codigo);
     }
 }
