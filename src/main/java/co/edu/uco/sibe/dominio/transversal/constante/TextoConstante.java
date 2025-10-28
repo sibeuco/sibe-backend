@@ -73,6 +73,7 @@ public final class TextoConstante {
     public static final String SOLICITAR_CODIGO_PATH = "/recuperacion/solicitar/{correo}";
     public static final String VALIDAR_CODIGO_PATH = "/recuperacion/validarCodigo";
     public static final String RECUPERAR_CLAVE_PATH = "/recuperacion/recuperarClave";
+    public static final String ARCHIVO_PARAM = "archivo";
 
     public static final String ADMINISTRADOR_DIRECCION = "ADMINISTRADOR_DIRECCION";
     public static final String ADMINISTRADOR_AREA = "ADMINISTRADOR_AREA";
@@ -101,9 +102,10 @@ public final class TextoConstante {
     public static final String HAS_ADMIN_DELETE_AUTHORITY = "hasAuthority('" + ADMIN_DELETE_AUTHORITY + "')";
     public static final String HAS_USER_GET_AUTHORITY = "hasAuthority('" + USER_GET_AUTHORITY + "')";
     public static final String HAS_USER_UPDATE_AUTHORITY = "hasAuthority('" + USER_UPDATE_AUTHORITY + "')";
-    public static final String HAS_USER_OR_ADMIN_GET_AUTHORITY = HAS_USER_GET_AUTHORITY + " or " + HAS_ADMIN_GET_AUTHORITY;
+    public static final String HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY = HAS_USER_GET_AUTHORITY + " or " + HAS_ADMIN_GET_AUTHORITY + " or " + HAS_AREA_ADMIN_GET_AUTHORITY;
     public static final String HAS_USER_OR_ADMIN_UPDATE_AUTHORITY = HAS_USER_UPDATE_AUTHORITY + " or " + HAS_ADMIN_UPDATE_AUTHORITY;
     public static final String HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY = HAS_USER_UPDATE_AUTHORITY + " or " + HAS_ADMIN_UPDATE_AUTHORITY + " or " + HAS_AREA_ADMIN_UPDATE_AUTHORITY;
+    public static final String HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY = HAS_ADMIN_CREATE_AUTHORITY + " or " + HAS_AREA_ADMIN_CREATE_AUTHORITY;
 
     public static final String USERNAME = "username";
     public static final String AUTHORITIES = "authorities";

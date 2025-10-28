@@ -34,7 +34,7 @@ public final class RelacionLaboralRegla implements Regla<RelacionLaboral> {
 
     private void validarCodigo(String codigo) {
         ValidadorTexto.validarObligatorio(codigo, CODIGO_RELACION_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(codigo, CODIGO_RELACION_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(codigo, CODIGO_RELACION_INVALIDO);
         ValidadorNumero.validarNumeroEntre(codigo.length(), 2, 4, LONGITUD_CODIGO_RELACION_INVALIDA);
     }
 

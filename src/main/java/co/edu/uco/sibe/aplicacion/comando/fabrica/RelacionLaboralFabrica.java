@@ -13,10 +13,13 @@ public class RelacionLaboralFabrica {
     private final RelacionLaboralRepositorioConsulta relacionLaboralRepositorioConsulta;
 
     public RelacionLaboral construir(String codigo, String descripcion) {
-        return RelacionLaboral.construir(
-                generar(uuid -> !esNulo(relacionLaboralRepositorioConsulta.consultarPorIdentificador(uuid))),
-                codigo,
-                descripcion
-        );
+        if (esNulo(relacionLaboralRepositorioConsulta.consultarPorCodigo(codigo))) {
+            return RelacionLaboral.construir(
+                    generar(uuid -> !esNulo(relacionLaboralRepositorioConsulta.consultarPorIdentificador(uuid))),
+                    codigo,
+                    descripcion
+            );
+        }
+        return relacionLaboralRepositorioConsulta.consultarPorCodigo(codigo);
     }
 }

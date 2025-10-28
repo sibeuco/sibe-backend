@@ -18,7 +18,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 public class ProyectoConsultaControlador {
     private final ConsultarProyectosManejador consultarProyectosManejador;
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping
     public List<ProyectoDTO> consultarProyectos(){
         return consultarProyectosManejador.ejecutar();

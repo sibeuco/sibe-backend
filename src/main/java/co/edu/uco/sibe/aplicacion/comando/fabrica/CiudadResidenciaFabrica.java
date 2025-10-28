@@ -13,9 +13,12 @@ public class CiudadResidenciaFabrica {
     private final CiudadResidenciaRepositorioConsulta ciudadResidenciaRepositorioConsulta;
 
     public CiudadResidencia construir(String municipioResidencia) {
-        return CiudadResidencia.construir(
-                generar(uuid -> !esNulo(ciudadResidenciaRepositorioConsulta.consultarPorIdentificador(uuid))),
-                municipioResidencia
-        );
+        if (esNulo(ciudadResidenciaRepositorioConsulta.consultarPorDescripcion(municipioResidencia))) {
+            return CiudadResidencia.construir(
+                    generar(uuid -> !esNulo(ciudadResidenciaRepositorioConsulta.consultarPorIdentificador(uuid))),
+                    municipioResidencia
+            );
+        }
+        return ciudadResidenciaRepositorioConsulta.consultarPorDescripcion(municipioResidencia);
     }
 }

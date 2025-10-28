@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.DIRECCION;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_ADMIN_GET_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY;
 
 @RestController
 @AllArgsConstructor
@@ -19,7 +19,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_U
 public class DireccionConsultaControlador {
     private final ConsultarDireccionesManejador consultarDireccionesManejador;
 
-    @PreAuthorize(HAS_USER_OR_ADMIN_GET_AUTHORITY)
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping
     public List<DireccionDTO> consultarDirecciones(){
         return consultarDireccionesManejador.ejecutar();

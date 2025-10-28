@@ -16,11 +16,7 @@ public class EstudianteFabrica {
     private final CiudadResidenciaFabrica ciudadResidenciaFabrica;
     private final EstudianteRepositorioConsulta estudianteRepositorioConsulta;
 
-    public List<Estudiante> construirTodos(List<DatosEstudianteComando> estudiantesComando) {
-        return estudiantesComando.stream().map(this::construir).toList();
-    }
-
-    private Estudiante construir(DatosEstudianteComando estudianteComando) {
+    public Estudiante construir(DatosEstudianteComando estudianteComando) {
         return Estudiante.construir(
                 generar(uuid -> !esNulo(estudianteRepositorioConsulta.consultarPorIdentificador(uuid))),
                 estudianteComando.getNombreCompleto(),
