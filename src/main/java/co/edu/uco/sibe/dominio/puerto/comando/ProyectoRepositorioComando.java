@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface ProyectoRepositorioComando {
     UUID guardar(Proyecto proyecto);
+
+    UUID modificar(Proyecto proyecto, UUID identificador);
 }

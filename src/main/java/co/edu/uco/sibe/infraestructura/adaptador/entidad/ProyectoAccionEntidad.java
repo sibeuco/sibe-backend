@@ -25,4 +25,3 @@ public class ProyectoAccionEntidad {
     @JoinColumn(name = ACCION, nullable = false)
     private AccionEntidad accion;
 }
-

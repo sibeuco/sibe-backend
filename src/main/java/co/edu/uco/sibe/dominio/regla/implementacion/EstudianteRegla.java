@@ -98,7 +98,7 @@ public final class EstudianteRegla implements Regla<Estudiante> {
 
     private void validarProgramaAcademico(String programaAcademico) {
         ValidadorTexto.validarObligatorio(programaAcademico, PROGRAMA_ACADEMICO_ESTUDIANTE_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(programaAcademico, PROGRAMA_ACADEMICO_ESTUDIANTE_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(programaAcademico, PROGRAMA_ACADEMICO_ESTUDIANTE_INVALIDO);
         ValidadorNumero.validarNumeroEntre(programaAcademico.length(), 5, 100, LONGITUD_PROGRAMA_ACADEMICO_ESTUDIANTE_INVALIDA);
     }
 
@@ -114,7 +114,7 @@ public final class EstudianteRegla implements Regla<Estudiante> {
 
     private void validarSemestreActual(String semestreActual) {
         ValidadorTexto.validarObligatorio(semestreActual, SEMESTRE_ACTUAL_ESTUDIANTE_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(semestreActual, SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(semestreActual, SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDO);
         ValidadorNumero.validarNumeroEntre(semestreActual.length(), 5, 5, LONGITUD_SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDA);
     }
 
@@ -144,6 +144,6 @@ public final class EstudianteRegla implements Regla<Estudiante> {
 
     private void validarMedioTransporte(String medioTransporte) {
         ValidadorTexto.validarTextoValido(medioTransporte, MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 5, 30, LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA);
+        ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 0, 30, LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA);
     }
 }

@@ -75,7 +75,7 @@ public final class UtilMensaje {
     public static final String LONGITUD_MODALIDAD_ESTUDIO_ESTUDIANTE_INVALIDA = "La modalidad de estudio del estudiante debe tener entre 5 y 50 caracteres.";
     public static final String TIEMPO_LLEGADA_ESTUDIANTE_INVALIDO = "El tiempo de llegada del estudiante debe ser mayor o igual a un 1 minuto.";
     public static final String MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDO = "El medio de transporte proporcionado para el estudiante es inválido.";
-    public static final String LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA = "El medio de transporte del estudiante debe tener entre 5 y 30 caracteres.";
+    public static final String LONGITUD_MEDIO_TRANSPORTE_ESTUDIANTE_INVALIDA = "El medio de transporte del estudiante debe tener menos de 30 caracteres.";
     public static final String SEMESTRE_ACTUAL_ESTUDIANTE_OBLIGATORIO = "El semestre del estudiante es obligatorio.";
     public static final String SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDO = "El semestre proporcionado para el estudiante es inválido.";
     public static final String LONGITUD_SEMESTRE_ACTUAL_ESTUDIANTE_INVALIDA = "El semestre del estudiante debe tener 5 caracteres.";
@@ -185,6 +185,7 @@ public final class UtilMensaje {
     public static final String CORREO_EXISTENTE = "Ya existe un usuario con el correo ingresado.";
     public static final String DETALLE_EXISTENTE = "Ya existe una accion con el detalle ingresado.";
     public static final String NUMERO_PROYECTO_EXISTENTE = "Ya existe un proyecto con el numero de proyecto ingresado.";
+    public static final String PROYECTO_NO_EXISTE_CON_IDENTIFICADOR = "No existe proyecto con identificador: ";
     public static final String CORREO_USUARIO_VACIO = "El correo electrónico no puede estar vacío.";
     public static final String NO_SE_ECONTRARON_USUARIOS = "No se encontraron usuarios registrados.";
     public static final String PATRON_CORREO_INVALIDO = "El formato del correo electrónico no es válido.";

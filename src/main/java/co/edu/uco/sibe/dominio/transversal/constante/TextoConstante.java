@@ -64,6 +64,7 @@ public final class TextoConstante {
     public static final String TIPOS_USUARIO = "/tipos_usuario";
     public static final String EMPLEADOS = "/empleados";
     public static final String ESTUDIANTES = "/estudiantes";
+    public static final String IDENTIFICADOR_PATH = "/{identificador}";
 
     public static final String USUARIO_IDENTIFICADOR = "/usuario/{identificador}";
     public static final String MODIFICAR_CLAVE_PATH = "/modificar/clave";

@@ -7,6 +7,7 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ProyectoMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class ProyectoRepositorioComandoImplementacion implements ProyectoRepositorioComando {
@@ -19,6 +20,16 @@ public class ProyectoRepositorioComandoImplementacion implements ProyectoReposit
     @Override
     public UUID guardar(Proyecto proyecto) {
         var entidad = proyectoMapeador.construirEntidad(proyecto);
+
+        return this.proyectoDAO.save(entidad).getIdentificador();
+    }
+
+    @Override
+    public UUID modificar(Proyecto proyecto, UUID identificador) {
+        var entidad = this.proyectoDAO.findById(identificador).orElse(null);
+
+        assert !esNulo(entidad);
+        proyectoMapeador.actualizarEntidad(entidad, proyecto);
 
         return this.proyectoDAO.save(entidad).getIdentificador();
     }

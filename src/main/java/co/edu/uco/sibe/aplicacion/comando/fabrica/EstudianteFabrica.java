@@ -6,6 +6,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstudianteRepositorioConsulta;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
@@ -15,6 +16,7 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class EstudianteFabrica {
     private final CiudadResidenciaFabrica ciudadResidenciaFabrica;
     private final EstudianteRepositorioConsulta estudianteRepositorioConsulta;
+    private static final DateTimeFormatter EXCEL_DATE_FORMATTER = DateTimeFormatter.ofPattern("M/d/yy");
 
     public Estudiante construir(DatosEstudianteComando estudianteComando) {
         return Estudiante.construir(
@@ -24,7 +26,7 @@ public class EstudianteFabrica {
                 ciudadResidenciaFabrica.construir(estudianteComando.getMunicipioResidencia()),
                 estudianteComando.getIdLecturaCarnetUniversitario(),
                 estudianteComando.getSexo(),
-                LocalDate.parse(estudianteComando.getFechaNacimiento()),
+                LocalDate.parse(estudianteComando.getFechaNacimiento(), EXCEL_DATE_FORMATTER),
                 estudianteComando.getNacionalidad(),
                 estudianteComando.getEstadoCivil(),
                 estudianteComando.getCorreoPersonal(),
