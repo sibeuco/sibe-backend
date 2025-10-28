@@ -64,7 +64,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
 
     @Override
     public UUID modificarClave(String nuevaContrasena, UUID identificador) {
-        var usuarioEntidad = this.usuarioDAO.findById(identificador).orElse(null);
+        var personaEntidad = this.personaDAO.findById(identificador).orElse(null);
+
+        assert !ValidadorObjeto.esNulo(personaEntidad);
+        var usuarioEntidad = this.usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
         assert !ValidadorObjeto.esNulo(usuarioEntidad);
         this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
@@ -96,7 +99,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
             this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, codigoCifrado, fecha);
         }
 
-        return this.peticionRecuperacionClaveDAO.save(entidad).getId();
+        return this.peticionRecuperacionClaveDAO.save(entidad).getIdentificador();
     }
 
     @Override
@@ -104,7 +107,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
         assert !ValidadorObjeto.esNulo(entidad);
-        this.peticionRecuperacionClaveDAO.deleteById(entidad.getId());
+        this.peticionRecuperacionClaveDAO.deleteById(entidad.getIdentificador());
     }
 
     @Override
