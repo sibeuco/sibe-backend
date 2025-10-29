@@ -25,7 +25,7 @@ public class ProyectoComandoControlador {
         return this.agregarNuevoProyectoManejador.ejecutar(proyecto);
     }
 
-    @PreAuthorize(HAS_AREA_ADMIN_UPDATE_AUTHORITY)
+    @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
     @PutMapping(IDENTIFICADOR_PATH)
     public ComandoRespuesta<UUID> modificar(@RequestBody ProyectoModificacionComando proyecto, @PathVariable String identificador){
         return this.modificarProyectoManejador.ejecutar(proyecto, textoAUUID(identificador));
