@@ -44,4 +44,11 @@ public class ProyectoMapeador {
     public List<ProyectoDTO> construirDTOs(List<ProyectoEntidad> proyectos){
         return proyectos.stream().map(this::construirDTO).toList();
     }
+
+    public void actualizarEntidad(ProyectoEntidad entidad, Proyecto proyecto) {
+        entidad.setNumeroProyecto(proyecto.getNumeroProyecto());
+        entidad.setNombre(proyecto.getNombre());
+        entidad.setObjetivo(proyecto.getObjetivo());
+        proyectoAccionMapeador.actualizarTodos(entidad.getAcciones(), proyecto.getAcciones());
+    }
 }

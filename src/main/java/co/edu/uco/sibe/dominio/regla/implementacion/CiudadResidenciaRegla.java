@@ -33,7 +33,7 @@ public final class CiudadResidenciaRegla implements Regla<CiudadResidencia> {
 
     private void validarDescripcion(String descripcion) {
         ValidadorTexto.validarObligatorio(descripcion, DESCRIPCION_CIUDAD_RESIDENCIA_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(descripcion, DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA);
+        ValidadorTexto.validarTextoAlfanumericoValido(descripcion, DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA);
         ValidadorNumero.validarNumeroEntre(descripcion.length(), 3, 30, LONGITUD_DESCRIPCION_CIUDAD_RESIDENCIA_INVALIDA);
     }
 }

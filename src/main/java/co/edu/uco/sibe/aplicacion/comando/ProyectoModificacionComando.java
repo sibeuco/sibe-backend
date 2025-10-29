@@ -13,5 +13,5 @@ import java.util.List;
 public class ProyectoModificacionComando {
     private String nombre;
     private String objetivo;
-    private List<String> accion;
+    private List<String> acciones;
 }

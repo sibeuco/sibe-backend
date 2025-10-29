@@ -6,6 +6,10 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.ProyectoAccionEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
@@ -32,5 +36,27 @@ public class ProyectoAccionMapeador {
 
     public List<Accion> construirModelos(List<ProyectoAccionEntidad> acciones){
         return acciones.stream().map(this::construirModelo).toList();
+    }
+
+    public void actualizarTodos(List<ProyectoAccionEntidad> entidades, List<Accion> acciones) {
+        Set<UUID> desiredActionIds = acciones.stream()
+                .map(Accion::getIdentificador)
+                .collect(Collectors.toSet());
+
+        Set<UUID> currentActionIds = entidades.stream()
+                .map(pae -> pae.getAccion().getIdentificador())
+                .collect(Collectors.toSet());
+
+        entidades.removeIf(proyectoAccion ->
+                !desiredActionIds.contains(proyectoAccion.getAccion().getIdentificador())
+        );
+
+        acciones.stream()
+                .filter(domainAccion -> !currentActionIds.contains(domainAccion.getIdentificador()))
+                .forEach(domainAccion -> {
+                    var nuevaEntidadUnion = this.construirEntidad(domainAccion);
+
+                    entidades.add(nuevaEntidadUnion);
+                });
     }
 }

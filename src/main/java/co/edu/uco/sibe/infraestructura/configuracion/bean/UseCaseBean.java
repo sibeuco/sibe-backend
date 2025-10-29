@@ -142,4 +142,14 @@ public class UseCaseBean {
     public CargarMasivamenteEstudiantesUseCase cargarMasivamenteEstudiantesUseCase(EstudianteRepositorioComando estudianteRepositorioComando, EstudianteRepositorioConsulta estudianteRepositorioConsulta) {
         return new CargarMasivamenteEstudiantesUseCase(estudianteRepositorioComando, estudianteRepositorioConsulta);
     }
+
+    @Bean
+    public ModificarAccionUseCase modificarAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta) {
+        return new ModificarAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);
+    }
+
+    @Bean
+    public ModificarProyectoUseCase modificarProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta) {
+        return new ModificarProyectoUseCase(proyectoRepositorioComando, proyectoRepositorioConsulta);
+    }
 }

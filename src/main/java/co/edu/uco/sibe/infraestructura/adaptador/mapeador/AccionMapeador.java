@@ -29,4 +29,9 @@ public class AccionMapeador {
     public List<AccionDTO> construirDTOs(List<AccionEntidad> acciones){
         return acciones.stream().map(this::construirDTO).toList();
     }
+
+    public void actualizarEntidad(AccionEntidad entidad, Accion accion) {
+        entidad.setDetalle(accion.getDetalle());
+        entidad.setObjetivo(accion.getObjetivo());
+    }
 }

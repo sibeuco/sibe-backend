@@ -12,25 +12,26 @@ import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DETALLE_EXISTENTE;
 
-public class AgregarNuevaAccionUseCase {
+public class ModificarAccionUseCase {
     private final AccionRepositorioComando accionRepositorioComando;
     private final AccionRepositorioConsulta accionRepositorioConsulta;
 
-    public AgregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta) {
+    public ModificarAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta) {
         this.accionRepositorioComando = accionRepositorioComando;
         this.accionRepositorioConsulta = accionRepositorioConsulta;
     }
 
-    public UUID ejecutar(Accion accion){
-        MotoresFabrica.MOTOR_ACCION.ejecutar(accion, TipoOperacion.CREAR);
+    public UUID ejecutar(Accion accion, UUID identificador){
+        MotoresFabrica.MOTOR_ACCION.ejecutar(accion, TipoOperacion.ACTUALIZAR);
 
-        validarNoExisteAccionConDetalle(accion.getDetalle());
+        validarNoExisteAccionConDetalle(accion.getDetalle(), identificador);
 
-        return this.accionRepositorioComando.guardar(accion);
+        return this.accionRepositorioComando.modificar(accion, identificador);
     }
 
-    private void validarNoExisteAccionConDetalle(String detalle) {
-        if (!ValidadorObjeto.esNulo(this.accionRepositorioConsulta.consultarPorDetalle(detalle))){
+    private void validarNoExisteAccionConDetalle(String detalle, UUID identificador) {
+        var accion = this.accionRepositorioConsulta.consultarPorDetalle(detalle);
+        if (!ValidadorObjeto.esNulo(accion) && !accion.getIdentificador().equals(identificador)){
             throw new ValorDuplicadoExcepcion(DETALLE_EXISTENTE);
         }
     }
