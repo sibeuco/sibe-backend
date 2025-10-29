@@ -39,7 +39,6 @@ public class EmpleadoMapeador {
     }
 
     public void modificarEntidad(EmpleadoEntidad entidad, Empleado empleado) {
-        entidad.setIdentificador(empleado.getIdentificador());
         entidad.setNombreCompleto(empleado.getNombreCompleto());
         entidad.setNumeroIdentificacion(empleado.getNumeroIdentificacion());
         this.internoCiudadResidenciaMapeador.modificarEntidad(entidad.getCiudadResidencia().getCiudadResidencia(), empleado.getCiudadResidencia());
