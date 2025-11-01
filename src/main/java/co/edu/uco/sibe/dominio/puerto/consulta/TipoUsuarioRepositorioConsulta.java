@@ -13,4 +13,6 @@ public interface TipoUsuarioRepositorioConsulta {
     boolean hayDatos();
 
     TipoUsuario consultarPorCodigo(String codigo);
+
+    TipoUsuario consultarPorNombre(String nombre);
 }

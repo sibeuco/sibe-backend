@@ -8,10 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.OCHO;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.SEIS;
 
 @Component
-@Order(SEIS)
+@Order(OCHO)
 @RequiredArgsConstructor
 public class AreaDataLoader extends DataLoader {
     private final HayDatosAreaManejador hayDatosAreaManejador;

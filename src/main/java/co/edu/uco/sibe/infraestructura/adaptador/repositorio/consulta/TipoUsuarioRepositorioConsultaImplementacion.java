@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuarioRepositorioConsulta {
@@ -34,7 +35,7 @@ public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuario
     public TipoUsuario consultarPorIdentificador(UUID identificador) {
         var entidad = this.tipoUsuarioDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -52,7 +53,18 @@ public class TipoUsuarioRepositorioConsultaImplementacion implements TipoUsuario
     public TipoUsuario consultarPorCodigo(String codigo) {
         var entidad = this.tipoUsuarioDAO.findByCodigo(codigo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
+            return null;
+        }
+
+        return this.tipoUsuarioMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public TipoUsuario consultarPorNombre(String nombre) {
+        var entidad = this.tipoUsuarioDAO.findByNombre(nombre);
+
+        if (esNulo(entidad)){
             return null;
         }
 

@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface TipoUsuarioDAO extends JpaRepository<TipoUsuarioEntidad, UUID> {
     TipoUsuarioEntidad findByCodigo(String codigo);
+
+    TipoUsuarioEntidad findByNombre(String nombre);
 }

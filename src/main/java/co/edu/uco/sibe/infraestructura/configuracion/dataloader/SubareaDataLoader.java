@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CINCO;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.SIETE;
 
 @Component
-@Order(CINCO)
+@Order(SIETE)
 @RequiredArgsConstructor
 public class SubareaDataLoader extends DataLoader {
     private final HayDatosSubareaManejador hayDatosSubareaManejador;

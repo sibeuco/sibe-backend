@@ -21,7 +21,7 @@ public class AccionConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_ADMIN_UPDATE_AUTHORITY)
     @GetMapping
-    public List<AccionDTO> consultarAcciones(){
+    public List<AccionDTO> consultarTodos(){
         return consultarAccionesManejador.ejecutar();
     }
 }

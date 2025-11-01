@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class TipoIdentificacionRepositorioConsultaImplementacion implements TipoIdentificacionRepositorioConsulta {
@@ -36,7 +37,7 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
         var entidad = this.tipoIdentificacionDAO.findById(identificador).orElse(null);
 
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -54,7 +55,18 @@ public class TipoIdentificacionRepositorioConsultaImplementacion implements Tipo
     public TipoIdentificacion consultarPorSigla(String sigla) {
         var entidad = this.tipoIdentificacionDAO.findBySigla(sigla);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
+            return null;
+        }
+
+        return this.tipoIdentificacionMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public TipoIdentificacion consultarPorDescripcion(String descripcion) {
+        var entidad = this.tipoIdentificacionDAO.findByDescripcion(descripcion);
+
+        if (esNulo(entidad)){
             return null;
         }
 

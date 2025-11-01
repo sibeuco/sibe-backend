@@ -1,6 +1,6 @@
 package co.edu.uco.sibe.infraestructura.configuracion.dataloader;
 
-import co.edu.uco.sibe.aplicacion.comando.manejador.AgregarNuevoUsuarioManejador;
+import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarUsuarioManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionPorNombreManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarTipoIdentificacionPorSiglaManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarTipoUsuarioPorCodigoManejador;
@@ -9,16 +9,15 @@ import co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica.DatosUsu
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.OCHO;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.DIEZ;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Component
-@Order(OCHO)
+@Order(DIEZ)
 @RequiredArgsConstructor
 public class UsuarioAdministradorDataLoader extends DataLoader {
     private final HayDatosUsuarioManejador hayDatosUsuarioManejador;
-    private final AgregarNuevoUsuarioManejador agregarNuevoUsuarioManejador;
+    private final GuardarUsuarioManejador guardarUsuarioManejador;
     private final ConsultarTipoUsuarioPorCodigoManejador consultarTipoUsuarioPorCodigoManejador;
     private final ConsultarTipoIdentificacionPorSiglaManejador consultarTipoIdentificacionPorSiglaManejador;
     private final ConsultarDireccionPorNombreManejador consultarDireccionPorNombreManejador;
@@ -40,6 +39,6 @@ public class UsuarioAdministradorDataLoader extends DataLoader {
                 direccion.getIdentificador()
         );
 
-        this.agregarNuevoUsuarioManejador.ejecutar(comando);
+        this.guardarUsuarioManejador.ejecutar(comando);
     }
 }

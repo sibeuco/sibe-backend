@@ -14,4 +14,6 @@ public interface SubareaRepositorioConsulta {
     Subarea consultarPorIdentificador(UUID identificador);
 
     boolean hayDatos();
+
+    Subarea consultarPorNombre(String nombre);
 }

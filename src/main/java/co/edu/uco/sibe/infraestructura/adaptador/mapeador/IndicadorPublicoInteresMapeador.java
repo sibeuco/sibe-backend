@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.PublicoInteresDTO;
 import co.edu.uco.sibe.dominio.modelo.PublicoInteres;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorPublicoInteresDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorPublicoInteresEntidad;
@@ -23,5 +24,13 @@ public class IndicadorPublicoInteresMapeador {
 
     public PublicoInteres construirModelo(IndicadorPublicoInteresEntidad publicoInteres) {
         return publicoInteresMapeador.construriModelo(publicoInteres.getPublicoInteres());
+    }
+
+    public void actualizarEntidad(IndicadorPublicoInteresEntidad entidad, PublicoInteres publicoInteres) {
+        entidad.setPublicoInteres(this.publicoInteresMapeador.construirEntidad(publicoInteres));
+    }
+
+    public PublicoInteresDTO construirDTO(IndicadorPublicoInteresEntidad publicoInteres) {
+        return publicoInteresMapeador.construirDTO(publicoInteres.getPublicoInteres());
     }
 }

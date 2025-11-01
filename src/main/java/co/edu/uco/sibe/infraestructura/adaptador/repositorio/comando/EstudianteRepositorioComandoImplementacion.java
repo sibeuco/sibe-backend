@@ -8,7 +8,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EstudianteMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
@@ -37,6 +36,7 @@ public class EstudianteRepositorioComandoImplementacion implements EstudianteRep
     public UUID modificar(Estudiante estudiante, UUID identificador) {
         var entidad = estudianteDAO.findById(identificador).orElse(null);
 
+        assert !esNulo(entidad);
         estudianteMapeador.modificarEntidad(entidad, estudiante);
 
         return this.estudianteDAO.save(entidad).getIdentificador();

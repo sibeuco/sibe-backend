@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.ProyectoDTO;
 import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorProyectoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorProyectoEntidad;
@@ -23,5 +24,13 @@ public class IndicadorProyectoMapeador {
 
     public Proyecto construirModelo(IndicadorProyectoEntidad proyecto) {
         return this.proyectoMapeador.construriModelo(proyecto.getProyecto());
+    }
+
+    public void actualizarEntidad(IndicadorProyectoEntidad entidad, Proyecto proyecto) {
+        entidad.setProyecto(this.proyectoMapeador.construirEntidad(proyecto));
+    }
+
+    public ProyectoDTO construirDTO(IndicadorProyectoEntidad proyecto) {
+        return this.proyectoMapeador.construirDTO(proyecto.getProyecto());
     }
 }

@@ -13,4 +13,6 @@ public interface TipoIdentificacionRepositorioConsulta {
     boolean hayDatos();
 
     TipoIdentificacion consultarPorSigla(String sigla);
+
+    TipoIdentificacion consultarPorDescripcion(String descripcion);
 }

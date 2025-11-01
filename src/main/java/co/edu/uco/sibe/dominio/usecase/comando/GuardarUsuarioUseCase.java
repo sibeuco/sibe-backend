@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.sibe.dominio.puerto.consulta.IdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
@@ -17,13 +16,13 @@ import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
 
-public class AgregarNuevoUsuarioUseCase {
+public class GuardarUsuarioUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final EncriptarClaveServicio encriptarClaveServicio;
     private final VincularUsuarioConAreaService vincularUsuarioConAreaService;
 
-    public AgregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
+    public GuardarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.encriptarClaveServicio = encriptarClaveServicio;

@@ -7,10 +7,10 @@ import co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica.DatosDir
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.SIETE;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.NUEVE;
 
 @Component
-@Order(SIETE)
+@Order(NUEVE)
 @RequiredArgsConstructor
 public class DireccionDataLoader extends DataLoader {
     private final HayDatosDireccionManejador hayDatosDireccionManejador;

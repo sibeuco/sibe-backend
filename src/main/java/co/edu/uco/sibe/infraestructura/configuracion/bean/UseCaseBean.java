@@ -14,18 +14,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseBean {
     @Bean
-    public AgregarNuevaAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta){
-        return new AgregarNuevaAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);
+    public GuardarAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta){
+        return new GuardarAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);
     }
 
     @Bean
-    public AgregarNuevoProyectoUseCase agregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta){
-        return new AgregarNuevoProyectoUseCase(proyectoRepositorioComando, proyectoRepositorioConsulta);
+    public GuardarProyectoUseCase agregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta){
+        return new GuardarProyectoUseCase(proyectoRepositorioComando, proyectoRepositorioConsulta);
     }
 
     @Bean
-    public AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
-        return new AgregarNuevoUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio, vincularUsuarioConAreaService);
+    public GuardarUsuarioUseCase agregarNuevoUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
+        return new GuardarUsuarioUseCase(personaRepositorioComando, personaRepositorioConsulta, encriptarClaveServicio, vincularUsuarioConAreaService);
     }
 
     @Bean
@@ -79,38 +79,38 @@ public class UseCaseBean {
     }
 
     @Bean
-    public GuardarTipoUsuarioUseCase guardarTipoUsuarioUseCase(TipoUsuarioRepositorioComando tipoUsuarioRepositorioComando) {
-        return new GuardarTipoUsuarioUseCase(tipoUsuarioRepositorioComando);
+    public GuardarTipoUsuarioUseCase guardarTipoUsuarioUseCase(TipoUsuarioRepositorioComando tipoUsuarioRepositorioComando, TipoUsuarioRepositorioConsulta tipoUsuarioRepositorioConsulta) {
+        return new GuardarTipoUsuarioUseCase(tipoUsuarioRepositorioComando, tipoUsuarioRepositorioConsulta);
     }
 
     @Bean
-    public GuardarTipoIdentificacionUseCase guardarTipoIdentificacionUseCase(TipoIdentificacionRepositorioComando tipoIdentificacionRepositorioComando) {
-        return new GuardarTipoIdentificacionUseCase(tipoIdentificacionRepositorioComando);
+    public GuardarTipoIdentificacionUseCase guardarTipoIdentificacionUseCase(TipoIdentificacionRepositorioComando tipoIdentificacionRepositorioComando, TipoIdentificacionRepositorioConsulta tipoIdentificacionRepositorioConsulta) {
+        return new GuardarTipoIdentificacionUseCase(tipoIdentificacionRepositorioComando, tipoIdentificacionRepositorioConsulta);
     }
 
     @Bean
-    public GuardarSubareaUseCase guardarSubareaUseCase(SubareaRepositorioComando subareaRepositorioComando) {
-        return new GuardarSubareaUseCase(subareaRepositorioComando);
+    public GuardarSubareaUseCase guardarSubareaUseCase(SubareaRepositorioComando subareaRepositorioComando, SubareaRepositorioConsulta subareaRepositorioConsulta) {
+        return new GuardarSubareaUseCase(subareaRepositorioComando, subareaRepositorioConsulta);
     }
 
     @Bean
-    public GuardarAreaUseCase guardarAreaUseCase(AreaRepositorioComando areaRepositorioComando) {
-        return new GuardarAreaUseCase(areaRepositorioComando);
+    public GuardarAreaUseCase guardarAreaUseCase(AreaRepositorioComando areaRepositorioComando, AreaRepositorioConsulta areaRepositorioConsulta) {
+        return new GuardarAreaUseCase(areaRepositorioComando, areaRepositorioConsulta);
     }
 
     @Bean
-    public GuardarDireccionUseCase guardarDireccionUseCase(DireccionRepositorioComando direccionRepositorioComando) {
-        return new GuardarDireccionUseCase(direccionRepositorioComando);
+    public GuardarDireccionUseCase guardarDireccionUseCase(DireccionRepositorioComando direccionRepositorioComando, DireccionRepositorioConsulta direccionRepositorioConsulta) {
+        return new GuardarDireccionUseCase(direccionRepositorioComando, direccionRepositorioConsulta);
     }
 
     @Bean
-    public GuardarEstadoActividadUseCase guardarEstadoActividadUseCase(EstadoActividadRepositorioComando estadoActividadRepositorioComando) {
-        return new GuardarEstadoActividadUseCase(estadoActividadRepositorioComando);
+    public GuardarEstadoActividadUseCase guardarEstadoActividadUseCase(EstadoActividadRepositorioComando estadoActividadRepositorioComando, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta) {
+        return new GuardarEstadoActividadUseCase(estadoActividadRepositorioComando, estadoActividadRepositorioConsulta);
     }
 
     @Bean
-    public GuardarTemporalidadUseCase guardarTemporalidadUseCase(TemporalidadRepositorioComando temporalidadRepositorioComando) {
-        return new GuardarTemporalidadUseCase(temporalidadRepositorioComando);
+    public GuardarTemporalidadUseCase guardarTemporalidadUseCase(TemporalidadRepositorioComando temporalidadRepositorioComando, TemporalidadRepositorioConsulta temporalidadRepositorioConsulta) {
+        return new GuardarTemporalidadUseCase(temporalidadRepositorioComando, temporalidadRepositorioConsulta);
     }
 
     @Bean
@@ -151,5 +151,25 @@ public class UseCaseBean {
     @Bean
     public ModificarProyectoUseCase modificarProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta) {
         return new ModificarProyectoUseCase(proyectoRepositorioComando, proyectoRepositorioConsulta);
+    }
+
+    @Bean
+    public GuardarIndicadorUseCase agregarNuevoIndicadorUseCase(IndicadorRepositorioComando indicadorRepositorioComando, IndicadorRepositorioConsulta indicadorRepositorioConsulta) {
+        return new GuardarIndicadorUseCase(indicadorRepositorioComando, indicadorRepositorioConsulta);
+    }
+
+    @Bean
+    public ModificarIndicadorUseCase modificarIndicadorUseCase(IndicadorRepositorioComando indicadorRepositorioComando, IndicadorRepositorioConsulta indicadorRepositorioConsulta) {
+        return new ModificarIndicadorUseCase(indicadorRepositorioComando, indicadorRepositorioConsulta);
+    }
+
+    @Bean
+    public GuardarPublicoInteresUseCase guardarPublicoInteresUseCase(PublicoInteresRepositorioComando publicoInteresRepositorioComando, PublicoInteresRepositorioConsulta publicoInteresRepositorioConsulta) {
+        return new GuardarPublicoInteresUseCase(publicoInteresRepositorioComando, publicoInteresRepositorioConsulta);
+    }
+
+    @Bean
+    public GuardarTipoIndicadorUseCase guardarTipoIndicadorUseCase(TipoIndicadorRepositorioComando tipoIndicadorRepositorioComando, TipoIndicadorRepositorioConsulta tipoIndicadorRepositorioConsulta)  {
+        return new GuardarTipoIndicadorUseCase(tipoIndicadorRepositorioComando, tipoIndicadorRepositorioConsulta);
     }
 }

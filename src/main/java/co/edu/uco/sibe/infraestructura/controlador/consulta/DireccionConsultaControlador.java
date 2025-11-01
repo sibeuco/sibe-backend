@@ -21,7 +21,7 @@ public class DireccionConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping
-    public List<DireccionDTO> consultarDirecciones(){
+    public List<DireccionDTO> consultarTodos(){
         return consultarDireccionesManejador.ejecutar();
     }
 }
