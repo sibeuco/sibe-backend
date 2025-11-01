@@ -10,11 +10,11 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NUMERO_PROYECTO_EXISTENTE;
 
-public class AgregarNuevoProyectoUseCase {
+public class GuardarProyectoUseCase {
     private final ProyectoRepositorioComando proyectoRepositorioComando;
     private final ProyectoRepositorioConsulta proyectoRepositorioConsulta;
 
-    public AgregarNuevoProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta) {
+    public GuardarProyectoUseCase(ProyectoRepositorioComando proyectoRepositorioComando, ProyectoRepositorioConsulta proyectoRepositorioConsulta) {
         this.proyectoRepositorioComando = proyectoRepositorioComando;
         this.proyectoRepositorioConsulta = proyectoRepositorioConsulta;
     }

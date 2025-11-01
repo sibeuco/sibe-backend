@@ -1,8 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.PublicoInteresDTO;
 import co.edu.uco.sibe.dominio.modelo.PublicoInteres;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.PublicoInteresEntidad;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Component
 public class PublicoInteresMapeador {
@@ -12,5 +14,13 @@ public class PublicoInteresMapeador {
 
     public PublicoInteres construriModelo(PublicoInteresEntidad publicoInteres) {
         return PublicoInteres.construir(publicoInteres.getIdentificador(), publicoInteres.getNombre());
+    }
+
+    public PublicoInteresDTO construirDTO(PublicoInteresEntidad publicoInteres) {
+        return new PublicoInteresDTO(publicoInteres.getIdentificador(), publicoInteres.getNombre());
+    }
+
+    public List<PublicoInteresDTO> construirDTOs(List<PublicoInteresEntidad> entidades) {
+        return entidades.stream().map(this::construirDTO).toList();
     }
 }

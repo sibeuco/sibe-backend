@@ -14,7 +14,6 @@ public class ConsultarUsuariosUseCase {
     }
 
     public List<UsuarioDTO> ejecutar(){
-
         List<UsuarioDTO> usuarios = personaRepositorioConsulta.consultarUsuariosDTO();
 
         if (usuarios.isEmpty()) {
@@ -22,6 +21,5 @@ public class ConsultarUsuariosUseCase {
         }
 
         return usuarios;
-
     }
 }

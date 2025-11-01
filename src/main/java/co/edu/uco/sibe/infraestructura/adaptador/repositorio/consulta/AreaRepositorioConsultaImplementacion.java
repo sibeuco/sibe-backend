@@ -9,10 +9,8 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 
 @Repository
@@ -53,5 +51,16 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
         var cantidad = areaDAO.count();
 
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+    }
+
+    @Override
+    public Area consultarPorNombre(String nombre) {
+        var entidad = this.areaDAO.findByNombre(nombre);
+
+        if(ValidadorObjeto.esNulo(entidad)) {
+            return null;
+        }
+
+        return this.areaMapeador.construirModelo(entidad);
     }
 }

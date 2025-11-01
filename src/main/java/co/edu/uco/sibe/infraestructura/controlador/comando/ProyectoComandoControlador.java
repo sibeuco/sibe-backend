@@ -2,7 +2,7 @@ package co.edu.uco.sibe.infraestructura.controlador.comando;
 
 import co.edu.uco.sibe.aplicacion.comando.ProyectoComando;
 import co.edu.uco.sibe.aplicacion.comando.ProyectoModificacionComando;
-import co.edu.uco.sibe.aplicacion.comando.manejador.AgregarNuevoProyectoManejador;
+import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarProyectoManejador;
 import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarProyectoManejador;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import lombok.AllArgsConstructor;
@@ -16,13 +16,13 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUI
 @AllArgsConstructor
 @RequestMapping(PROYECTOS)
 public class ProyectoComandoControlador {
-    private final AgregarNuevoProyectoManejador agregarNuevoProyectoManejador;
+    private final GuardarProyectoManejador guardarProyectoManejador;
     private final ModificarProyectoManejador modificarProyectoManejador;
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
-    public ComandoRespuesta<UUID> agregarNuevo(@RequestBody ProyectoComando proyecto){
-        return this.agregarNuevoProyectoManejador.ejecutar(proyecto);
+    public ComandoRespuesta<UUID> guardar(@RequestBody ProyectoComando proyecto){
+        return this.guardarProyectoManejador.ejecutar(proyecto);
     }
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)

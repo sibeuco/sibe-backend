@@ -15,6 +15,23 @@ public final class TextoConstante {
     public static final String SIGLA_CE = "CE";
     public static final String DESCRIPCION_CE = "Cédula de Extranjería";
 
+    public static final String NATURALEZA_EFICIENCIA = "Eficiencia";
+    public static final String TIPOLOGIA_EFICIENCIA = "Gestión";
+    public static final String NATURALEZA_CAPACIDAD_INSTALADA = "Capacidad instalada";
+    public static final String TIPOLOGIA_CAPACIDAD_INSTALADA = "Capacidad";
+    public static final String NATURALEZA_EFICACIA = "Eficacia";
+    public static final String TIPOLOGIA_EFICACIA = "Resultado";
+    public static final String NATURALEZA_EFECTIVIDAD = "Efectividad";
+    public static final String TIPOLOGIA_EFECTIVIDAD = "Resultado";
+    public static final String NATURALEZA_VALOR = "Valor";
+    public static final String TIPOLOGIA_VALOR = "Impacto";
+
+    public static final String PUBLICO_INTERES_REGISTROS_CALIFICADOS_PROGRAMA = "Registros calificados programa";
+    public static final String PUBLICO_INTERES_ACREDITACION_INSTITUCIONAL = "Acreditación institucional";
+    public static final String PUBLICO_INTERES_CERTIFICACIONES_ISO= "Certificaciones ISO";
+    public static final String PUBLICO_INTERES_MINISTERIO_DE_EDUCACION = "Ministerio de Educación";
+    public static final String PUBLICO_INTERES_PLAN_PASTORAL_DIOSESANO = "Plan Pastoral Diosesano";
+
     public static final String NOMBRE_AREA_BIENESTAR = "Bienestar";
     public static final String NOMBRE_AREA_EVANGELIZACION = "Evangelización";
     public static final String NOMBRE_AREA_HOGAR_JUVENIL = "Hogar Juvenil Santa María";
@@ -58,6 +75,10 @@ public final class TextoConstante {
     public static final String AREA = "/areas";
     public static final String SUBAREA = "/subareas";
     public static final String ACCIONES = "/acciones";
+    public static final String INDICADORES = "/indicadores";
+    public static final String PUBLICOS_INTERES = "/publicos_interes";
+    public static final String TEMPORALIDADES = "/temporalidades";
+    public static final String TIPOS_INDICADOR = "/tipos_indicador";
     public static final String CARGA_MASIVA = "/carga_masiva";
     public static final String PROYECTOS = "/proyectos";
     public static final String TIPOS_IDENTIFICACION = "/tipos_identificacion";

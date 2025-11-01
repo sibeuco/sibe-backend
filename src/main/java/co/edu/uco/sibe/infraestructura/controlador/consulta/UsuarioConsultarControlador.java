@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @RestController
@@ -26,19 +24,19 @@ public class UsuarioConsultarControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping()
-    public List<UsuarioDTO> consultarUsuarios(){
+    public List<UsuarioDTO> consultarTodos(){
         return consultarUsuariosManejador.ejecutar();
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(USUARIO_ID_IDENTIFICADOR)
-    public UsuarioDTO consultarUsuarioPorIdentificador(@PathVariable UUID identificador){
+    public UsuarioDTO consultarPorIdentificador(@PathVariable UUID identificador){
         return consultarUsuarioPorIdentificadorManejador.ejecutar(identificador);
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(USUARIO_CORREO_CORREO)
-    public UsuarioDTO consultarUsuarioPorCorreo(@PathVariable String correo){
+    public UsuarioDTO consultarPorCorreo(@PathVariable String correo){
         return consultarUsuarioPorCorreoManejador.ejecutar(correo);
     }
 }

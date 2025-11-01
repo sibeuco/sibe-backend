@@ -7,16 +7,14 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DETALLE_EXISTENTE;
 
-public class AgregarNuevaAccionUseCase {
+public class GuardarAccionUseCase {
     private final AccionRepositorioComando accionRepositorioComando;
     private final AccionRepositorioConsulta accionRepositorioConsulta;
 
-    public AgregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta) {
+    public GuardarAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta) {
         this.accionRepositorioComando = accionRepositorioComando;
         this.accionRepositorioConsulta = accionRepositorioConsulta;
     }

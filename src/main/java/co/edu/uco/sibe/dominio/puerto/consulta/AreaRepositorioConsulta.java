@@ -13,4 +13,6 @@ public interface AreaRepositorioConsulta {
     Area consultarPorIdentificador(UUID identificador);
 
     boolean hayDatos();
+
+    Area consultarPorNombre(String nombre);
 }

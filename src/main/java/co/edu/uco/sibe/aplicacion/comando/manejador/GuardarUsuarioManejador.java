@@ -7,17 +7,17 @@ import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuesta;
 import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.usecase.comando.AgregarNuevoUsuarioUseCase;
+import co.edu.uco.sibe.dominio.usecase.comando.GuardarUsuarioUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class AgregarNuevoUsuarioManejador implements ManejadorComandoRespuesta<UsuarioComando, ComandoRespuesta<UUID>> {
+public class GuardarUsuarioManejador implements ManejadorComandoRespuesta<UsuarioComando, ComandoRespuesta<UUID>> {
     private final UsuarioFabrica usuarioFabrica;
     private final PersonaFabrica personaFabrica;
-    private final AgregarNuevoUsuarioUseCase agregarNuevoUsuarioUseCase;
+    private final GuardarUsuarioUseCase guardarUsuarioUseCase;
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(UsuarioComando comando) {
@@ -27,7 +27,7 @@ public class AgregarNuevoUsuarioManejador implements ManejadorComandoRespuesta<U
         var tipoArea = TipoArea.valueOf(comando.getArea().getTipoArea());
 
         return new ComandoRespuesta<>(
-                this.agregarNuevoUsuarioUseCase.ejecutar(
+                this.guardarUsuarioUseCase.ejecutar(
                         usuario,
                         persona,
                         area,

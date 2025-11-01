@@ -1,7 +1,7 @@
 package co.edu.uco.sibe.infraestructura.controlador.comando;
 
 import co.edu.uco.sibe.aplicacion.comando.AccionComando;
-import co.edu.uco.sibe.aplicacion.comando.manejador.AgregarNuevaAccionManejador;
+import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarAccionManejador;
 import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarAccionManejador;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import lombok.AllArgsConstructor;
@@ -15,13 +15,13 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUI
 @AllArgsConstructor
 @RequestMapping(ACCIONES)
 public class AccionComandoControlador {
-    private final AgregarNuevaAccionManejador agregarNuevaAccionManejador;
+    private final GuardarAccionManejador guardarAccionManejador;
     private final ModificarAccionManejador modificarAccionManejador;
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
-    public ComandoRespuesta<UUID> agregarNueva(@RequestBody AccionComando accion){
-        return this.agregarNuevaAccionManejador.ejecutar(accion);
+    public ComandoRespuesta<UUID> guardar(@RequestBody AccionComando accion){
+        return this.guardarAccionManejador.ejecutar(accion);
     }
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)

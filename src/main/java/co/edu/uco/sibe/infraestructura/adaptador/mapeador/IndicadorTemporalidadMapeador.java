@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.TemporalidadDTO;
 import co.edu.uco.sibe.dominio.modelo.Temporalidad;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorTemporalidadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorTemporalidadEntidad;
@@ -23,5 +24,13 @@ public class IndicadorTemporalidadMapeador {
 
     public Temporalidad construirModelo(IndicadorTemporalidadEntidad temporalidad) {
         return this.temporalidadMapeador.construirModelo(temporalidad.getTemporalidad());
+    }
+
+    public void actualizarEntidad(IndicadorTemporalidadEntidad entidad, Temporalidad temporalidad) {
+        entidad.setTemporalidad(this.temporalidadMapeador.construirEntidad(temporalidad));
+    }
+
+    public TemporalidadDTO construirDTO(IndicadorTemporalidadEntidad temporalidad) {
+        return this.temporalidadMapeador.construirDTO(temporalidad.getTemporalidad());
     }
 }

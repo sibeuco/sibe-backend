@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class SubareaRepositorioConsultaImplementacion implements SubareaRepositorioConsulta {
@@ -41,7 +42,7 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     public Subarea consultarPorIdentificador(UUID identificador) {
         var entidad = this.subareaDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 
@@ -53,5 +54,16 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
         var cantidad = subareaDAO.count();
 
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+    }
+
+    @Override
+    public Subarea consultarPorNombre(String nombre) {
+        var entidad = this.subareaDAO.findByNombre(nombre);
+
+        if(esNulo(entidad)) {
+            return null;
+        }
+
+        return this.subareaMapeador.construirModelo(entidad);
     }
 }

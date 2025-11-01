@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface TipoIdentificacionDAO extends JpaRepository<TipoIdentificacionEntidad, UUID> {
     TipoIdentificacionEntidad findBySigla(String sigla);
+
+    TipoIdentificacionEntidad findByDescripcion(String descripcion);
 }

@@ -1,9 +1,12 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.IndicadorDTO;
 import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -33,5 +36,28 @@ public class IndicadorMapeador {
                 this.indicadorProyectoMapeador.construirModelo(indicador.getProyecto()),
                 this.indicadorPublicoInteresMapeador.construirModelo(indicador.getPublicoInteres())
         );
+    }
+
+    public void actualizarEntidad(IndicadorEntidad entidad, Indicador indicador) {
+        entidad.setNombre(indicador.getNombre());
+        this.indicadorTipoIndicadorMapeador.actualizarEntidad(entidad.getTipoIndicador(), indicador.getTipoIndicador());
+        this.indicadorTemporalidadMapeador.actualizarEntidad(entidad.getTemporalidad(), indicador.getTemporalidad());
+        this.indicadorProyectoMapeador.actualizarEntidad(entidad.getProyecto(), indicador.getProyecto());
+        this.indicadorPublicoInteresMapeador.actualizarEntidad(entidad.getPublicoInteres(), indicador.getPublicoInteres());
+    }
+
+    public IndicadorDTO construirDTO(IndicadorEntidad indicador) {
+        return new IndicadorDTO(
+                indicador.getIdentificador(),
+                indicador.getNombre(),
+                this.indicadorTipoIndicadorMapeador.construirDTO(indicador.getTipoIndicador()),
+                this.indicadorTemporalidadMapeador.construirDTO(indicador.getTemporalidad()),
+                this.indicadorProyectoMapeador.construirDTO(indicador.getProyecto()),
+                this.indicadorPublicoInteresMapeador.construirDTO(indicador.getPublicoInteres())
+        );
+    }
+
+    public List<IndicadorDTO> construirDTOs(List<IndicadorEntidad> entidades) {
+        return entidades.stream().map(this::construirDTO).toList();
     }
 }

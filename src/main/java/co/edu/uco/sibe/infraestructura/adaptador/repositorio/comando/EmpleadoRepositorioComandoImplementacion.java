@@ -53,6 +53,7 @@ public class EmpleadoRepositorioComandoImplementacion implements EmpleadoReposit
     public UUID modificar(Empleado empleado, UUID identificador) {
         var entidad = empleadoDAO.findById(identificador).orElse(null);
 
+        assert !esNulo(entidad);
         empleadoMapeador.modificarEntidad(entidad, empleado);
 
         return this.empleadoDAO.save(entidad).getIdentificador();

@@ -11,6 +11,8 @@ public final class NumeroConstante {
     public static final int SEIS = 6;
     public static final int SIETE = 7;
     public static final int OCHO = 8;
+    public static final int NUEVE = 9;
+    public static final int DIEZ = 10;
     public static final int CUATROCIENTOS = 400;
     public static final int CUATROCIENTOS_UNO = 401;
     public static final int QUINIENTOS = 500;

@@ -21,7 +21,7 @@ public class SubareaConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping
-    public List<SubareaDTO> consultarSubareas(){
+    public List<SubareaDTO> consultarTodos(){
         return consultarSubareasDTOManejador.ejecutar();
     }
 }

@@ -7,4 +7,6 @@ public interface EstadoActividadRepositorioConsulta {
     EstadoActividad consultarPorIdentificador(UUID identificador);
 
     boolean hayDatos();
+
+    EstadoActividad consultarPorNombre(String nombre);
 }

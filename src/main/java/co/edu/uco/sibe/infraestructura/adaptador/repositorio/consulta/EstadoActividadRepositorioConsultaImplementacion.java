@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class EstadoActividadRepositorioConsultaImplementacion implements EstadoActividadRepositorioConsulta {
@@ -25,7 +26,7 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
     public EstadoActividad consultarPorIdentificador(UUID identificador) {
         var entidad = this.estadoActividadDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.esNulo(entidad)) {
+        if (esNulo(entidad)) {
             return null;
         }
 
@@ -37,5 +38,16 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
         var cantidad = this.estadoActividadDAO.count();
 
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+    }
+
+    @Override
+    public EstadoActividad consultarPorNombre(String nombre) {
+        var entidad = this.estadoActividadDAO.findByNombre(nombre);
+
+        if (esNulo(entidad)) {
+            return null;
+        }
+
+        return this.estadoActividadMapeador.construriModelo(entidad);
     }
 }

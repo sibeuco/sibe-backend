@@ -21,7 +21,7 @@ public class TipoIdentificacionConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping()
-    public List<TipoIdentificacionDTO> consultarTiposIdentificacion(){
+    public List<TipoIdentificacionDTO> consultarTodos(){
         return consultarTiposIdentificacionManejador.ejecutar();
     }
 }
