@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioOrganizacionDTO {
-    private UUID identificador;
+    private String identificador;
     private UsuarioDTO usuario;
     private DireccionDTO direccion;
     private AreaDTO area;

@@ -25,7 +25,7 @@ public class UsuarioMapeador {
         var identificacionDTO = identificacionMapeador.construirDTO(personaEntidad.getIdentificacion());
         var tipoUsuarioDTO = tipoUsuarioMapeador.construirDTO(usuario.getRol().getTipoUsuario());
 
-        return new UsuarioDTO(personaEntidad.getIdentificador(), personaEntidad.getNombres(), personaEntidad.getApellidos(), personaEntidad.getCorreo(), identificacionDTO, tipoUsuarioDTO, usuario.isEstaActivo());
+        return new UsuarioDTO(personaEntidad.getIdentificador().toString(), personaEntidad.getNombres(), personaEntidad.getApellidos(), personaEntidad.getCorreo(), identificacionDTO, tipoUsuarioDTO, usuario.isEstaActivo());
     }
 
     public UsuarioEntidad construirEntidad(Usuario usuario, String clave){

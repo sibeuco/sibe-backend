@@ -194,6 +194,11 @@ public final class UtilMensaje {
     public static final String CODIGO_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el codigo ingresado.";
     public static final String NATURALEZA_TIPO_INDICADOR_EXISTENTE = "Ya existe un tipo indicador con la naturaleza ingresada.";
     public static final String NOMBRE_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el nombre ingresado.";
+    public static final String ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL = "Ya existe una actividad en el semestre actual con el nombre ingresado.";
+    public static final String ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR = "No existe una actividad ese identificador.";
+    public static final String AREA_NO_ENCONTRADA_CON_ID = "No se ha encontrado un área con el identificador: ";
+    public static final String DIRECCION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una dirección con el identificador: ";
+    public static final String SUBAREA_NO_ENCONTRADA_CON_ID = "No se ha encontrado un subárea con el identificador: ";
     public static final String NOMBRE_ESTADO_ACTIVIDAD_EXISTENTE = "Ya existe un estado actividad con el nombre ingresado.";
     public static final String PUBLICO_INTERES_EXISTENTE = "Ya existe un Publico Interes con el nombre ingresado.";
     public static final String INDICADOR_NO_EXISTENTE = "No existe un indicador con el identificador: ";

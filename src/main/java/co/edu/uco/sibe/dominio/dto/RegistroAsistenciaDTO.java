@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegistroAsistenciaDTO {
-    private UUID identificador;
+    private String identificador;
     private EjecucionActividadDTO ejecucionActividad;
     private ParticipanteDTO participante;
 }

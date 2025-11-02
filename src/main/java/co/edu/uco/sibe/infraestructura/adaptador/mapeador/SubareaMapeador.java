@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.SubareaEntidad;
@@ -38,7 +37,7 @@ public class SubareaMapeador {
     }
 
     public SubareaDTO construirDTO(SubareaEntidad subarea){
-        return new SubareaDTO(subarea.getIdentificador(), subarea.getNombre());
+        return new SubareaDTO(subarea.getIdentificador().toString(), subarea.getNombre());
     }
 
     public List<SubareaDTO> construirDTOs(List<SubareaEntidad> subareas){

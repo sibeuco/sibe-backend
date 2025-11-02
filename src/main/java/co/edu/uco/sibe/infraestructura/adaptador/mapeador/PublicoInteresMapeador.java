@@ -17,7 +17,7 @@ public class PublicoInteresMapeador {
     }
 
     public PublicoInteresDTO construirDTO(PublicoInteresEntidad publicoInteres) {
-        return new PublicoInteresDTO(publicoInteres.getIdentificador(), publicoInteres.getNombre());
+        return new PublicoInteresDTO(publicoInteres.getIdentificador().toString(), publicoInteres.getNombre());
     }
 
     public List<PublicoInteresDTO> construirDTOs(List<PublicoInteresEntidad> entidades) {

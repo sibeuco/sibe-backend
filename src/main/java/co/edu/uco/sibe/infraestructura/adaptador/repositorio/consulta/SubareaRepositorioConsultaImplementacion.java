@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
+import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
@@ -27,14 +28,12 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     @Override
     public List<SubareaDTO> consultarDTOs() {
         var entidades = this.subareaDAO.findAll();
-
         return this.subareaMapeador.construirDTOs(entidades);
     }
 
     @Override
     public List<Subarea> consultarTodos() {
         var entidades = this.subareaDAO.findAll();
-
         return this.subareaMapeador.construirModelos(entidades);
     }
 
@@ -52,7 +51,6 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     @Override
     public boolean hayDatos() {
         var cantidad = subareaDAO.count();
-
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
@@ -64,6 +62,15 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
             return null;
         }
 
+        return this.subareaMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public Subarea consultarPorActividad(Actividad actividad) {
+        var entidad = this.subareaDAO.findByActividades_Identificador(actividad.getIdentificador());
+        if(esNulo(entidad)) {
+            return null;
+        }
         return this.subareaMapeador.construirModelo(entidad);
     }
 }

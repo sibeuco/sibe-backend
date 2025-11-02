@@ -14,7 +14,7 @@ public class PersonaMapeador {
     public PersonaDTO construirDTO(PersonaEntidad persona){
         var identificacion = this.identificacionMapeador.construirDTO(persona.getIdentificacion());
 
-        return new PersonaDTO(persona.getIdentificador(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacion);
+        return new PersonaDTO(persona.getIdentificador().toString(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacion);
     }
 
     public PersonaEntidad construirEntidad(Persona persona){

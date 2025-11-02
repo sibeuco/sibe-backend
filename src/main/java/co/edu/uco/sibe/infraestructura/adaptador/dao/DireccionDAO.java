@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface DireccionDAO extends JpaRepository<DireccionEntidad, UUID> {
     DireccionEntidad findByNombre(String nombre);
+    DireccionEntidad findByActividades_Identificador(UUID actividadId);
 }

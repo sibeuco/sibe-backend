@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TipoIndicadorDTO {
-    private UUID identificador;
+    private String identificador;
     private String naturalezaIndicador;
     private String tipologiaIndicador;
 }

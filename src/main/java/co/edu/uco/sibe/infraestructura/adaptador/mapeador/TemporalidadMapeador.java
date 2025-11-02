@@ -19,7 +19,7 @@ public class TemporalidadMapeador {
     }
 
     public TemporalidadDTO construirDTO(TemporalidadEntidad temporalidad) {
-        return new TemporalidadDTO(temporalidad.getIdentificador(), temporalidad.getNombre());
+        return new TemporalidadDTO(temporalidad.getIdentificador().toString(), temporalidad.getNombre());
     }
 
     public List<TemporalidadDTO> construirDTOs(List<TemporalidadEntidad> entidades) {

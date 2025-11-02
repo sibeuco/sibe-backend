@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndicadorDTO {
-    private UUID identificador;
+    private String identificador;
     private String nombre;
     private TipoIndicadorDTO tipoIndicador;
     private TemporalidadDTO temporalidad;

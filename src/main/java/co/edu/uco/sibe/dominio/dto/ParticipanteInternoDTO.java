@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipanteInternoDTO extends ParticipanteDTO {
-    private CiudadResidenciaDTO ciudadResidencia;
+    private String ciudadResidencia;
     private String idCarnet;
     private String sexo;
 }

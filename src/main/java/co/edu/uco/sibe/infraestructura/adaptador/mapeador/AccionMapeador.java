@@ -23,7 +23,7 @@ public class AccionMapeador {
     }
 
     public AccionDTO construirDTO(AccionEntidad accion){
-        return new AccionDTO(accion.getIdentificador(), accion.getDetalle(), accion.getObjetivo());
+        return new AccionDTO(accion.getIdentificador().toString(), accion.getDetalle(), accion.getObjetivo());
     }
 
     public List<AccionDTO> construirDTOs(List<AccionEntidad> acciones){

@@ -35,7 +35,7 @@ public class ProyectoFabrica {
         var acciones = this.accionRepositorioConsulta.consultarTodosPorIdentificadores(comando.getAcciones().stream().map(UtilUUID::textoAUUID).toList());
 
         return Proyecto.construir(
-                generar(uuid -> !esNulo(proyectoRepositorioConsulta.consultarPorIdentificador(uuid))),
+                parametro,
                 VACIO,
                 comando.getNombre(),
                 comando.getObjetivo(),

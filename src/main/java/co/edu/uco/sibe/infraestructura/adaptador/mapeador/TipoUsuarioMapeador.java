@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class TipoUsuarioMapeador {
     public TipoUsuarioDTO construirDTO(TipoUsuarioEntidad tipoUsuario){
-        return new TipoUsuarioDTO(tipoUsuario.getIdentificador(), tipoUsuario.getCodigo(), tipoUsuario.getNombre(), tipoUsuario.isCrear(), tipoUsuario.isModificar(), tipoUsuario.isEliminar(), tipoUsuario.isConsultar());
+        return new TipoUsuarioDTO(tipoUsuario.getIdentificador().toString(), tipoUsuario.getCodigo(), tipoUsuario.getNombre(), tipoUsuario.isCrear(), tipoUsuario.isModificar(), tipoUsuario.isEliminar(), tipoUsuario.isConsultar());
     }
 
     public List<TipoUsuarioDTO> construirDTOs(List<TipoUsuarioEntidad> tiposUsuario){

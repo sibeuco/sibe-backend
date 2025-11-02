@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.DireccionDTO;
+import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface DireccionRepositorioConsulta {
     boolean hayDatos();
 
     Direccion consultarPorNombre(String nombre);
+
+    Direccion consultarPorActividad(Actividad actividad);
 }

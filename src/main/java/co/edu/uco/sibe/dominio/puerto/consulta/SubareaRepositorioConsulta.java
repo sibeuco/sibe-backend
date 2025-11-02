@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
+import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface SubareaRepositorioConsulta {
     boolean hayDatos();
 
     Subarea consultarPorNombre(String nombre);
+
+    Subarea consultarPorActividad(Actividad actividad);
 }

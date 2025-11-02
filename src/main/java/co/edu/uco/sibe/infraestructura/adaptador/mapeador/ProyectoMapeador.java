@@ -34,7 +34,7 @@ public class ProyectoMapeador {
 
     public ProyectoDTO construirDTO(ProyectoEntidad proyecto) {
         return new ProyectoDTO(
-                proyecto.getIdentificador(),
+                proyecto.getIdentificador().toString(),
                 proyecto.getNumeroProyecto(),
                 proyecto.getNombre(),
                 proyecto.getObjetivo()

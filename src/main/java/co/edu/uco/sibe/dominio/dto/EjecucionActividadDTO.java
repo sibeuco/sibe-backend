@@ -13,11 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EjecucionActividadDTO {
-    private UUID identificador;
-    private LocalDate fechaProgramada;
-    private LocalDate fechaRealizacion;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
+    private String identificador;
+    private String fechaProgramada;
+    private String fechaRealizacion;
+    private String horaInicio;
+    private String horaFin;
     private EstadoActividadDTO estadoActividad;
-    private ActividadDTO actividad;
 }

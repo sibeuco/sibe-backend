@@ -4,7 +4,9 @@ import co.edu.uco.sibe.dominio.puerto.comando.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.*;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
+import co.edu.uco.sibe.dominio.service.ModificarVinculacionActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
+import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
 import co.edu.uco.sibe.dominio.usecase.consulta.*;
@@ -169,7 +171,37 @@ public class UseCaseBean {
     }
 
     @Bean
-    public GuardarTipoIndicadorUseCase guardarTipoIndicadorUseCase(TipoIndicadorRepositorioComando tipoIndicadorRepositorioComando, TipoIndicadorRepositorioConsulta tipoIndicadorRepositorioConsulta)  {
+    public GuardarTipoIndicadorUseCase guardarTipoIndicadorUseCase(TipoIndicadorRepositorioComando tipoIndicadorRepositorioComando, TipoIndicadorRepositorioConsulta tipoIndicadorRepositorioConsulta) {
         return new GuardarTipoIndicadorUseCase(tipoIndicadorRepositorioComando, tipoIndicadorRepositorioConsulta);
+    }
+
+    @Bean
+    public GuardarActividadUseCase guardarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, VincularActividadConAreaService vincularActividadConAreaService) {
+        return new GuardarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, vincularActividadConAreaService);
+    }
+
+    @Bean
+    public ModificarActividadUseCase modificarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, ModificarVinculacionActividadConAreaService modificarVinculacionActividadConAreaService) {
+        return new ModificarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, modificarVinculacionActividadConAreaService);
+    }
+
+    @Bean
+    public ConsultarActividadesPorAreaUseCase consultarActividadesPorAreaUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta, AreaRepositorioConsulta areaRepositorioConsulta) {
+        return new ConsultarActividadesPorAreaUseCase(actividadRepositorioConsulta, areaRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarActividadesPorDireccionUseCase consultarActividadesPorDireccionUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta, DireccionRepositorioConsulta direccionRepositorioConsulta) {
+        return new ConsultarActividadesPorDireccionUseCase(actividadRepositorioConsulta, direccionRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarActividadesPorSubareaUseCase consultarActividadesPorSubareaUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta, SubareaRepositorioConsulta subareaRepositorioConsulta) {
+        return new ConsultarActividadesPorSubareaUseCase(actividadRepositorioConsulta, subareaRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarEjecucionesPorActividadUseCase consultarEjecucionesPorActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarEjecucionesPorActividadUseCase(actividadRepositorioConsulta);
     }
 }

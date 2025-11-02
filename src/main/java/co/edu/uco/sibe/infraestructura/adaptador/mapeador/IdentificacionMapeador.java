@@ -41,6 +41,6 @@ public class IdentificacionMapeador {
     public IdentificacionDTO construirDTO(IdentificacionEntidad identificacion) {
         var tipoIdentificacion = tipoIdentificacionMapeador.construirDTO(identificacion.getTipoIdentificacion().getTipoIdentificacion());
 
-        return new IdentificacionDTO(identificacion.getIdentificador(), identificacion.getNumeroIdentificacion(), tipoIdentificacion);
+        return new IdentificacionDTO(identificacion.getIdentificador().toString(), identificacion.getNumeroIdentificacion(), tipoIdentificacion);
     }
 }

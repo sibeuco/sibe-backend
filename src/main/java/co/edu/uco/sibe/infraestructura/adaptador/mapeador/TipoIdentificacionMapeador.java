@@ -14,7 +14,7 @@ public class TipoIdentificacionMapeador {
     }
 
     public TipoIdentificacionDTO construirDTO(TipoIdentificacionEntidad tipoIdentificacion){
-        return new TipoIdentificacionDTO(tipoIdentificacion.getIdentificador(), tipoIdentificacion.getSigla(), tipoIdentificacion.getDescripcion());
+        return new TipoIdentificacionDTO(tipoIdentificacion.getIdentificador().toString(), tipoIdentificacion.getSigla(), tipoIdentificacion.getDescripcion());
     }
 
     public TipoIdentificacion construirModelo(TipoIdentificacionEntidad tipoIdentificacionDTO) {

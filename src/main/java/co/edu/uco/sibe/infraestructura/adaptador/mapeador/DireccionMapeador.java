@@ -36,7 +36,7 @@ public class DireccionMapeador {
     }
 
     public DireccionDTO construirDTO(DireccionEntidad direccion){
-        return new DireccionDTO(direccion.getIdentificador(), direccion.getNombre());
+        return new DireccionDTO(direccion.getIdentificador().toString(), direccion.getNombre());
     }
 
     public List<DireccionDTO> construirDTOs(List<DireccionEntidad> direcciones){
