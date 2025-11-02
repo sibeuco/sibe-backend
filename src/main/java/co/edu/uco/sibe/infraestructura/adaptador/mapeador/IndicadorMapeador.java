@@ -23,7 +23,7 @@ public class IndicadorMapeador {
                 this.indicadorTipoIndicadorMapeador.construirEntidad(indicador.getTipoIndicador()),
                 this.indicadorTemporalidadMapeador.construirEntidad(indicador.getTemporalidad()),
                 this.indicadorProyectoMapeador.construirEntidad(indicador.getProyecto()),
-                this.indicadorPublicoInteresMapeador.construirEntidad(indicador.getPublicoInteres())
+                this.indicadorPublicoInteresMapeador.construirEntidades(indicador.getPublicosInteres())
         );
     }
 
@@ -34,7 +34,7 @@ public class IndicadorMapeador {
                 indicadorTipoIndicadorMapeador.construirModelo(indicador.getTipoIndicador()),
                 this.indicadorTemporalidadMapeador.construirModelo(indicador.getTemporalidad()),
                 this.indicadorProyectoMapeador.construirModelo(indicador.getProyecto()),
-                this.indicadorPublicoInteresMapeador.construirModelo(indicador.getPublicoInteres())
+                this.indicadorPublicoInteresMapeador.construirModelos(indicador.getPublicoInteres())
         );
     }
 
@@ -43,7 +43,7 @@ public class IndicadorMapeador {
         this.indicadorTipoIndicadorMapeador.actualizarEntidad(entidad.getTipoIndicador(), indicador.getTipoIndicador());
         this.indicadorTemporalidadMapeador.actualizarEntidad(entidad.getTemporalidad(), indicador.getTemporalidad());
         this.indicadorProyectoMapeador.actualizarEntidad(entidad.getProyecto(), indicador.getProyecto());
-        this.indicadorPublicoInteresMapeador.actualizarEntidad(entidad.getPublicoInteres(), indicador.getPublicoInteres());
+        this.indicadorPublicoInteresMapeador.actualizarEntidades(entidad.getPublicoInteres(), indicador.getPublicosInteres());
     }
 
     public IndicadorDTO construirDTO(IndicadorEntidad indicador) {
@@ -53,7 +53,7 @@ public class IndicadorMapeador {
                 this.indicadorTipoIndicadorMapeador.construirDTO(indicador.getTipoIndicador()),
                 this.indicadorTemporalidadMapeador.construirDTO(indicador.getTemporalidad()),
                 this.indicadorProyectoMapeador.construirDTO(indicador.getProyecto()),
-                this.indicadorPublicoInteresMapeador.construirDTO(indicador.getPublicoInteres())
+                this.indicadorPublicoInteresMapeador.construirDTOs(indicador.getPublicoInteres())
         );
     }
 

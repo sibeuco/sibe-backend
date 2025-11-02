@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
@@ -36,7 +37,7 @@ public class IndicadorEntidad {
     @JoinColumn(name = PROYECTO, referencedColumnName = CAMPO_IDENTIFICADOR)
     private IndicadorProyectoEntidad proyecto;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = PUBLICO_INTERES, referencedColumnName = CAMPO_IDENTIFICADOR)
-    private IndicadorPublicoInteresEntidad publicoInteres;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = CAMPO_INDICADOR, referencedColumnName = CAMPO_IDENTIFICADOR)
+    private List<IndicadorPublicoInteresEntidad> publicoInteres;
 }

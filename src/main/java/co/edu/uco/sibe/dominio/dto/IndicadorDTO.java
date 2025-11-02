@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,5 +18,5 @@ public class IndicadorDTO {
     private TipoIndicadorDTO tipoIndicador;
     private TemporalidadDTO temporalidad;
     private ProyectoDTO proyecto;
-    private PublicoInteresDTO publicoInteres;
+    private List<PublicoInteresDTO> publicosInteres;
 }

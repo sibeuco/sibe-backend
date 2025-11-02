@@ -13,4 +13,6 @@ public interface PublicoInteresRepositorioConsulta {
     PublicoInteres consultarPorNombre(String nombre);
 
     boolean hayDatos();
+
+    List<PublicoInteres> consultarTodosPorIdentificadores(List<UUID> identificadores);
 }

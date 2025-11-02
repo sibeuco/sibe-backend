@@ -12,7 +12,7 @@ public class PublicoInteresMapeador {
         return new PublicoInteresEntidad(publicoInteres.getIdentificador(), publicoInteres.getNombre());
     }
 
-    public PublicoInteres construriModelo(PublicoInteresEntidad publicoInteres) {
+    public PublicoInteres construirModelo(PublicoInteresEntidad publicoInteres) {
         return PublicoInteres.construir(publicoInteres.getIdentificador(), publicoInteres.getNombre());
     }
 
@@ -22,5 +22,9 @@ public class PublicoInteresMapeador {
 
     public List<PublicoInteresDTO> construirDTOs(List<PublicoInteresEntidad> entidades) {
         return entidades.stream().map(this::construirDTO).toList();
+    }
+
+    public List<PublicoInteres> construirModelos(List<PublicoInteresEntidad> entidades) {
+        return entidades.stream().map(this::construirModelo).toList();
     }
 }
