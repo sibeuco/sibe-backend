@@ -17,7 +17,7 @@ public class ModificarIndicadorManejador  implements ManejadorComandoParametroRe
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(IndicadorComando comando, UUID parametro) {
-        var indicador = this.indicadorFabrica.construir(comando);
+        var indicador = this.indicadorFabrica.construirActualizar(comando);
 
         return new ComandoRespuesta<>(
                 this.modificarIndicadorUseCase.ejecutar(
