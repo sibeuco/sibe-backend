@@ -9,7 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParticipanteExternoComando {
+public class ParticipanteComando {
+    private String identificador;
     private String nombreCompleto;
-    private String numeroIdentificacion;
+    private String documentoIdentificacion;
+    private String programaAcademico;
+    private String correoInstitucional;
+    private String tipo;
 }
