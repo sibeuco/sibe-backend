@@ -6,6 +6,7 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
+import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
 import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseBean {
+
     @Bean
     public GuardarAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta){
         return new GuardarAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);
@@ -213,5 +215,15 @@ public class UseCaseBean {
     @Bean
     public ConsultarMiembroPorIdCarnetUseCase consultarMiembroPorIdCarnetUseCase(MiembroRepositorioConsulta miembroRepositorioConsulta) {
         return new ConsultarMiembroPorIdCarnetUseCase(miembroRepositorioConsulta);
+    }
+
+    @Bean
+    public IniciarActividadUseCase iniciarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta) {
+        return new IniciarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, estadoActividadRepositorioConsulta);
+    }
+
+    @Bean
+    public FinalizarActividadUseCase finalizarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta, RegistrarParticipanteService registrarParticipanteService, RegistroAsistenciaRepositorioComando registroAsistenciaRepositorioComando, RegistroAsistenciaRepositorioConsulta registroAsistenciaRepositorioConsulta) {
+        return new FinalizarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, estadoActividadRepositorioConsulta, registrarParticipanteService, registroAsistenciaRepositorioComando, registroAsistenciaRepositorioConsulta);
     }
 }

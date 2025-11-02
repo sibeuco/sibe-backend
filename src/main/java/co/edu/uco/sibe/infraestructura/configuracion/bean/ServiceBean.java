@@ -1,14 +1,10 @@
 package co.edu.uco.sibe.infraestructura.configuracion.bean;
 
-import co.edu.uco.sibe.dominio.puerto.comando.AreaRepositorioComando;
-import co.edu.uco.sibe.dominio.puerto.comando.DireccionRepositorioComando;
-import co.edu.uco.sibe.dominio.puerto.comando.SubareaRepositorioComando;
-import co.edu.uco.sibe.dominio.puerto.comando.UsuarioOrganizacionComando;
-import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.puerto.comando.*;
+import co.edu.uco.sibe.dominio.puerto.consulta.*;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
+import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
 import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import org.springframework.context.annotation.Bean;
@@ -52,5 +48,12 @@ public class ServiceBean {
                 direccionRepositorioConsulta,
                 vincularActividadConAreaService
         );
+    }
+
+    @Bean
+    public RegistrarParticipanteService registrarParticipanteService(
+            ParticipanteRepositorioConsulta participanteRepositorioConsulta,
+            ParticipanteRepositorioComando participanteRepositorioComando) {
+        return new RegistrarParticipanteService(participanteRepositorioConsulta, participanteRepositorioComando);
     }
 }

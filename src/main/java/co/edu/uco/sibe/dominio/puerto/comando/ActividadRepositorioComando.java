@@ -14,4 +14,6 @@ public interface ActividadRepositorioComando {
     UUID modificar(Actividad actividad);
 
     void modificarEjecuciones(List<EjecucionActividad> ejecucionesActividad);
+
+    void modificarEjecucion(EjecucionActividad ejecucionActividad);
 }

@@ -108,6 +108,9 @@ public final class TextoConstante {
     public static final String MIEMBRO_IDENTIFICACION = "/identificacion/{identificacion}";
     public static final String MIEMBRO_CARNET = "/carnet/{carnet}";
 
+    public static final String ACTIVIDAD_INICIAR = "/iniciar/{identificador}";
+    public static final String ACTIVIDAD_FINALIZAR = "/finalizar/{identificador}";
+
     public static final String ADMINISTRADOR_DIRECCION = "ADMINISTRADOR_DIRECCION";
     public static final String ADMINISTRADOR_AREA = "ADMINISTRADOR_AREA";
     public static final String COLABORADOR = "COLABORADOR";
