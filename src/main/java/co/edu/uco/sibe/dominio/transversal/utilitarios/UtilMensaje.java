@@ -263,6 +263,10 @@ public final class UtilMensaje {
     public static final String MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION = "No se ha encontrado un miembro con el número de identificación: ";
     public static final String MIEMBRO_NO_ENCONTRADO_CON_ID_CARNET = "No se ha encontrado un miembro con el id de carnet: ";
 
+    public static final String EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID = "No se ha encontrado una ejecución de actividad con el identificador: ";
+    public static final String ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE = "No se ha encontrado un estado de actividad con el nombre: ";
+    public static final String MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO = "No se ha encontrado un miembro con el documento: ";
+
     private UtilMensaje() {
         super();
     }

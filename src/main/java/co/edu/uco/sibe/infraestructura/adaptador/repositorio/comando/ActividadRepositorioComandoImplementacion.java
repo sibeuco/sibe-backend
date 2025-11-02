@@ -23,9 +23,9 @@ public class ActividadRepositorioComandoImplementacion implements ActividadRepos
     @Autowired
     private ActividadMapeador actividadMapeador;
     @Autowired
-    private EjecucionActividadDAO ejecucionActividadDAO;
-    @Autowired
     private EjecucionActividadMapeador ejecucionActividadMapeador;
+    @Autowired
+    private EjecucionActividadDAO ejecucionActividadDAO;
 
     @Override
     public UUID guardar(Actividad actividad) {
@@ -36,7 +36,6 @@ public class ActividadRepositorioComandoImplementacion implements ActividadRepos
     @Override
     public UUID guardarEjecucion(EjecucionActividad ejecucionActividad) {
         var entidad = ejecucionActividadMapeador.construirEntidad(ejecucionActividad);
-
         return this.ejecucionActividadDAO.save(entidad).getIdentificador();
     }
 
@@ -55,9 +54,16 @@ public class ActividadRepositorioComandoImplementacion implements ActividadRepos
         if (ejecucionesActividad.isEmpty()) {
             return;
         }
-
-        var actividadId = ejecucionesActividad.get(0).getActividad().getIdentificador();
-
+        UUID actividadId = ejecucionesActividad.get(0).getActividad().getIdentificador();
         ejecucionActividadMapeador.actualizarTodos(actividadId, ejecucionesActividad);
+    }
+
+    @Override
+    public void modificarEjecucion(EjecucionActividad ejecucion) {
+        var entidad = ejecucionActividadDAO.findById(ejecucion.getIdentificador()).orElse(null);
+        if (!esNulo(entidad)) {
+            ejecucionActividadMapeador.actualizarEntidad(entidad, ejecucion);
+            ejecucionActividadDAO.save(entidad);
+        }
     }
 }
