@@ -28,12 +28,11 @@ public final class ProyectoRegla implements Regla<Proyecto> {
 
     @Override
     public void validarCampos(Proyecto modelo) {
-        validarNumeroProyecto(modelo.getNumeroProyecto());
         validarNombre(modelo.getNombre());
         validarObjetivo(modelo.getObjetivo());
     }
 
-    private void validarNumeroProyecto(String numeroProyecto) {
+    public void validarNumeroProyecto(String numeroProyecto) {
         ValidadorTexto.validarObligatorio(numeroProyecto, NUMERO_PROYECTO_OBLIGATORIO);
         ValidadorTexto.validarTextoAlfanumericoValido(numeroProyecto, NUMERO_PROYECTO_INVALIDO);
         ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, LONGITUD_NUMERO_PROYECTO_INVALIDA);
