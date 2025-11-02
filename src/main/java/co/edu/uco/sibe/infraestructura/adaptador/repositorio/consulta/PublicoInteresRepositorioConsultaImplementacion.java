@@ -36,7 +36,7 @@ public class PublicoInteresRepositorioConsultaImplementacion implements PublicoI
             return null;
         }
 
-        return this.publicoInteresMapeador.construriModelo(entidad);
+        return this.publicoInteresMapeador.construirModelo(entidad);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PublicoInteresRepositorioConsultaImplementacion implements PublicoI
             return null;
         }
 
-        return this.publicoInteresMapeador.construriModelo(entidad);
+        return this.publicoInteresMapeador.construirModelo(entidad);
     }
 
     @Override
@@ -55,5 +55,12 @@ public class PublicoInteresRepositorioConsultaImplementacion implements PublicoI
         var cantidad = publicoInteresDAO.count();
 
         return esNumeroMayor(cantidad, CERO);
+    }
+
+    @Override
+    public List<PublicoInteres> consultarTodosPorIdentificadores(List<UUID> identificadores) {
+        var entidades = this.publicoInteresDAO.findAllById(identificadores);
+
+        return this.publicoInteresMapeador.construirModelos(entidades);
     }
 }

@@ -33,11 +33,10 @@ public class ProyectoFabrica {
 
     public Proyecto construirActualizar(ProyectoModificacionComando comando, UUID parametro){
         var acciones = this.accionRepositorioConsulta.consultarTodosPorIdentificadores(comando.getAcciones().stream().map(UtilUUID::textoAUUID).toList());
-        var proyecto = this.proyectoRepositorioConsulta.consultarPorIdentificador(parametro);
 
         return Proyecto.construir(
-                parametro,
-                esNulo(proyecto) ? VACIO : proyecto.getNumeroProyecto(),
+                generar(uuid -> !esNulo(proyectoRepositorioConsulta.consultarPorIdentificador(uuid))),
+                VACIO,
                 comando.getNombre(),
                 comando.getObjetivo(),
                 acciones

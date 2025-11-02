@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,5 +15,5 @@ public class IndicadorComando {
     private String tipoIndicador;
     private String temporalidad;
     private String proyecto;
-    private String publicointeres;
+    private List<String> publicosinteres;
 }

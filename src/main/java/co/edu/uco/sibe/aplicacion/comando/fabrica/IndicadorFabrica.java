@@ -3,6 +3,7 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 import co.edu.uco.sibe.aplicacion.comando.IndicadorComando;
 import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.dominio.puerto.consulta.*;
+import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
@@ -17,15 +18,17 @@ public class IndicadorFabrica {
     private final TemporalidadRepositorioConsulta temporalidadRepositorioConsulta;
     private final ProyectoRepositorioConsulta proyectoRepositorioConsulta;
     private final PublicoInteresRepositorioConsulta publicoInteresRepositorioConsulta;
+    private final PublicoInteresFabrica publicoInteresFabrica;
 
     public Indicador construir(IndicadorComando comando) {
+        var publicosInteres = publicoInteresRepositorioConsulta.consultarTodosPorIdentificadores(comando.getPublicosinteres().stream().map(UtilUUID::textoAUUID).toList());
         return Indicador.construir(
                 generar(uuid -> !esNulo(indicadorRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando.getNombre(),
                 tipoIndicadorRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
                 temporalidadRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
                 proyectoRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
-                publicoInteresRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador()))
+                publicosInteres
         );
     }
 }
