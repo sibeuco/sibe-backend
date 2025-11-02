@@ -204,4 +204,14 @@ public class UseCaseBean {
     public ConsultarEjecucionesPorActividadUseCase consultarEjecucionesPorActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta) {
         return new ConsultarEjecucionesPorActividadUseCase(actividadRepositorioConsulta);
     }
+
+    @Bean
+    public ConsultarMiembroPorIdentificacionUseCase consultarMiembroPorIdentificacionUseCase(MiembroRepositorioConsulta miembroRepositorioConsulta) {
+        return new ConsultarMiembroPorIdentificacionUseCase(miembroRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarMiembroPorIdCarnetUseCase consultarMiembroPorIdCarnetUseCase(MiembroRepositorioConsulta miembroRepositorioConsulta) {
+        return new ConsultarMiembroPorIdCarnetUseCase(miembroRepositorioConsulta);
+    }
 }

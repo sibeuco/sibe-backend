@@ -260,6 +260,8 @@ public final class UtilMensaje {
     public static final String LA_CLAVE_NUEVA_NO_PUEDE_SER_IGUAL_A_LA_ANTIGUA = "La clave nueva no puede ser igual a la antigua.";
     public static final String LA_CLAVE_ANTIGUA_ES_INCORRECTA = "La clave antigua es incorrecta.";
 
+    public static final String MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION = "No se ha encontrado un miembro con el número de identificación: ";
+    public static final String MIEMBRO_NO_ENCONTRADO_CON_ID_CARNET = "No se ha encontrado un miembro con el id de carnet: ";
 
     private UtilMensaje() {
         super();
