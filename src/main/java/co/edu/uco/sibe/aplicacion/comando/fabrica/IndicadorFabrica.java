@@ -26,8 +26,8 @@ public class IndicadorFabrica {
                 generar(uuid -> !esNulo(indicadorRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando.getNombre(),
                 tipoIndicadorRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
-                temporalidadRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
-                proyectoRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTipoIndicador())),
+                temporalidadRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getTemporalidad())),
+                proyectoRepositorioConsulta.consultarPorIdentificador(textoAUUID(comando.getProyecto())),
                 publicosInteres
         );
     }
