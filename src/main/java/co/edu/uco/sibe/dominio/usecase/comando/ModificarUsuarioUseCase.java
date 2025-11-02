@@ -29,12 +29,13 @@ public class ModificarUsuarioUseCase {
         this.modificarVinculacionUsuarioConAreaService = modificarVinculacionUsuarioConAreaService;
     }
 
-    public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea, UUID identificador){
+    public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea, UUID identificador) {
+        validarSiNoExistePersonaConId(identificador);
+
         MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.ACTUALIZAR);
         MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(persona.getIdentificacion(), TipoOperacion.ACTUALIZAR);
         MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.ACTUALIZAR);
 
-        validarSiNoExistePersonaConId(identificador);
         validarQueExistaUsuarioConDocumento(persona);
         validarQueExistaUsuarioConCorreo(persona);
 

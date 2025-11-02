@@ -15,5 +15,5 @@ public class IndicadorComando {
     private String tipoIndicador;
     private String temporalidad;
     private String proyecto;
-    private List<String> publicosinteres;
+    private List<String> publicosInteres;
 }

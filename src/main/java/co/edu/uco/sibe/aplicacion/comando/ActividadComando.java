@@ -18,6 +18,6 @@ public class ActividadComando {
     private String indicador;
     private String colaborador;
     private String creador;
-    private List<String> fechaProgramada;
-    private String area;
+    private List<String> fechasProgramada;
+    private AreaComando area;
 }

@@ -12,6 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DireccionDTO {
-    private UUID identificador;
+    private String identificador;
     private String nombre;
 }

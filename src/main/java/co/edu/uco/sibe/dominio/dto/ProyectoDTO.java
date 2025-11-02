@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProyectoDTO {
-    private UUID identificador;
+    private String identificador;
     private String numeroProyecto;
     private String nombre;
     private String objetivo;

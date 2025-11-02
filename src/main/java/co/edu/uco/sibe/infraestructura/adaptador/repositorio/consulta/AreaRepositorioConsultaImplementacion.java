@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.AreaDTO;
+import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 public class AreaRepositorioConsultaImplementacion implements AreaRepositorioConsulta {
@@ -24,14 +26,12 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     @Override
     public List<AreaDTO> consultarDTOs() {
         var entidades = this.areaDAO.findAll();
-
         return this.areaMapeador.construirDTOs(entidades);
     }
 
     @Override
     public List<Area> consultarTodos() {
         var entidades = this.areaDAO.findAll();
-
         return this.areaMapeador.construirModelos(entidades);
     }
 
@@ -49,7 +49,6 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     @Override
     public boolean hayDatos() {
         var cantidad = areaDAO.count();
-
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
@@ -61,6 +60,15 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
             return null;
         }
 
+        return this.areaMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public Area consultarPorActividad(Actividad actividad) {
+        var entidad = this.areaDAO.findByActividades_Identificador(actividad.getIdentificador());
+        if(esNulo(entidad)) {
+            return null;
+        }
         return this.areaMapeador.construirModelo(entidad);
     }
 }

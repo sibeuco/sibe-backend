@@ -1,0 +1,24 @@
+package co.edu.uco.sibe.dominio.puerto.consulta;
+
+import co.edu.uco.sibe.dominio.dto.ActividadDTO;
+import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
+import co.edu.uco.sibe.dominio.modelo.*;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface ActividadRepositorioConsulta {
+    Actividad consultarPorIdentificador(UUID identificador);
+
+    Actividad consultarPorNombreYSemestre(String nombre, String semestre);
+
+    List<ActividadDTO> consultarPorSubarea(Subarea subarea);
+
+    List<ActividadDTO> consultarPorArea(Area area);
+
+    List<ActividadDTO> consultarPorDireccion(Direccion direccion);
+
+    List<EjecucionActividadDTO> consultarFechasProgramadasPorActividad(Actividad actividad);
+
+    EjecucionActividad consultarEjecucionActividadPorIdentificador(UUID identificador);
+}

@@ -48,7 +48,7 @@ public class IndicadorMapeador {
 
     public IndicadorDTO construirDTO(IndicadorEntidad indicador) {
         return new IndicadorDTO(
-                indicador.getIdentificador(),
+                indicador.getIdentificador().toString(),
                 indicador.getNombre(),
                 this.indicadorTipoIndicadorMapeador.construirDTO(indicador.getTipoIndicador()),
                 this.indicadorTemporalidadMapeador.construirDTO(indicador.getTemporalidad()),

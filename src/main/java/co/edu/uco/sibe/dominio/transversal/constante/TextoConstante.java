@@ -97,6 +97,12 @@ public final class TextoConstante {
     public static final String RECUPERAR_CLAVE_PATH = "/recuperacion/recuperarClave";
     public static final String ARCHIVO_PARAM = "archivo";
 
+    public static final String ACTIVIDADES = "/actividades";
+    public static final String ACTIVIDADES_AREA = "/area/{identificador}";
+    public static final String ACTIVIDADES_DIRECCION = "/direccion/{identificador}";
+    public static final String ACTIVIDADES_SUBAREA = "/subarea/{identificador}";
+    public static final String ACTIVIDADES_EJECUCIONES = "/ejecuciones/{identificador}";
+
     public static final String ADMINISTRADOR_DIRECCION = "ADMINISTRADOR_DIRECCION";
     public static final String ADMINISTRADOR_AREA = "ADMINISTRADOR_AREA";
     public static final String COLABORADOR = "COLABORADOR";

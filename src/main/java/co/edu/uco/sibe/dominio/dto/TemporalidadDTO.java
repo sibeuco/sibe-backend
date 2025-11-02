@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TemporalidadDTO {
-    private UUID identificador;
+    private String identificador;
     private String nombre;
 }

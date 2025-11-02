@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TipoUsuarioDTO {
-    private UUID identificador;
+    private String identificador;
     private String codigo;
     private String nombre;
     private boolean crear;

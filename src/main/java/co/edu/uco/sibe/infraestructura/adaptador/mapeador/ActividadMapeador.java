@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.ActividadDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ActividadEntidad;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class ActividadMapeador {
         return actividades.stream().map(this::construirEntidad).toList();
     }
 
-    public Actividad construriModelo(ActividadEntidad actividad) {
+    public Actividad construirModelo(ActividadEntidad actividad) {
         return Actividad.construir(
                 actividad.getIdentificador(),
                 actividad.getNombre(),
@@ -43,6 +44,33 @@ public class ActividadMapeador {
     }
 
     public List<Actividad> construirModelos(List<ActividadEntidad> actividades) {
-        return actividades.stream().map(this::construriModelo).toList();
+        return actividades.stream().map(this::construirModelo).toList();
+    }
+
+    public void actualizarEntidad(ActividadEntidad entidad, Actividad dominio) {
+        entidad.setNombre(dominio.getNombre());
+        entidad.setObjetivo(dominio.getObjetivo());
+        entidad.setSemestre(dominio.getSemestre());
+        entidad.setRutaInsumos(dominio.getRutaInsumos());
+        entidad.setIndicador(indicadorMapeador.construirEntidad(dominio.getIndicador()));
+        entidad.setColaborador(dominio.getColaborador());
+        entidad.setCreador(dominio.getCreador());
+    }
+
+    public ActividadDTO construirDTO(ActividadEntidad actividad) {
+        return new ActividadDTO(
+                actividad.getIdentificador().toString(),
+                actividad.getNombre(),
+                actividad.getObjetivo(),
+                actividad.getSemestre(),
+                actividad.getRutaInsumos(),
+                indicadorMapeador.construirDTO(actividad.getIndicador()),
+                actividad.getColaborador().toString(),
+                actividad.getCreador().toString()
+        );
+    }
+
+    public List<ActividadDTO> construirDTOs(List<ActividadEntidad> actividades) {
+        return actividades.stream().map(this::construirDTO).toList();
     }
 }

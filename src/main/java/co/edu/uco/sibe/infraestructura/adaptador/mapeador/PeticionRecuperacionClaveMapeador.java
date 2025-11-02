@@ -29,6 +29,6 @@ public class PeticionRecuperacionClaveMapeador {
     }
 
     public PeticionRecuperacionClaveDTO construirDTO(PeticionRecuperacionClaveEntidad entidad) {
-        return new PeticionRecuperacionClaveDTO(entidad.getIdentificador(), entidad.getCorreo(), entidad.getCodigo(), entidad.getFecha());
+        return new PeticionRecuperacionClaveDTO(entidad.getIdentificador().toString(), entidad.getCorreo(), entidad.getCodigo(), entidad.getFecha().toString());
     }
 }

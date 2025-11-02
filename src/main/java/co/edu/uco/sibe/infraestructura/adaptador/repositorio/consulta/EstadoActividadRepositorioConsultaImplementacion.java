@@ -30,7 +30,7 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
             return null;
         }
 
-        return this.estadoActividadMapeador.construriModelo(entidad);
+        return this.estadoActividadMapeador.construirModelo(entidad);
     }
 
     @Override
@@ -48,6 +48,6 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
             return null;
         }
 
-        return this.estadoActividadMapeador.construriModelo(entidad);
+        return this.estadoActividadMapeador.construirModelo(entidad);
     }
 }

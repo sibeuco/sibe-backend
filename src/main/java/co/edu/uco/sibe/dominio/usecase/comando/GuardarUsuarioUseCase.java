@@ -15,6 +15,7 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarUsuarioUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -46,13 +47,13 @@ public class GuardarUsuarioUseCase {
     }
 
     private void validarUsuarioExisteConCorreo(String correo) {
-        if (!ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
+        if (!esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
             throw new ValorDuplicadoExcepcion(CORREO_EXISTENTE);
         }
     }
 
     private void validarUsuarioExisteConDocumento(String numeroIdentificacion) {
-        if (!ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(numeroIdentificacion))){
+        if (!esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(numeroIdentificacion))){
             throw new ValorDuplicadoExcepcion(DOCUMENTO_EXISTENTE);
         }
     }

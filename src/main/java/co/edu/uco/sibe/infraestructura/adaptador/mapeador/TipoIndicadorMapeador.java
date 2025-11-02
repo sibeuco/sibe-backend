@@ -18,7 +18,7 @@ public class TipoIndicadorMapeador {
     }
 
     public TipoIndicadorDTO construirDTO(TipoIndicadorEntidad tipoIndicador) {
-        return new TipoIndicadorDTO(tipoIndicador.getIdentificador(), tipoIndicador.getNaturaleza(), tipoIndicador.getTipologia());
+        return new TipoIndicadorDTO(tipoIndicador.getIdentificador().toString(), tipoIndicador.getNaturaleza(), tipoIndicador.getTipologia());
     }
 
     public List<TipoIndicadorDTO> construirDTOs(List<TipoIndicadorEntidad> entidades) {

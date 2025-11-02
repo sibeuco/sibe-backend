@@ -41,7 +41,7 @@ public class AreaMapeador {
     }
 
     public AreaDTO construirDTO(AreaEntidad area){
-        return new AreaDTO(area.getIdentificador(), area.getNombre());
+        return new AreaDTO(area.getIdentificador().toString(), area.getNombre());
     }
 
     public List<AreaDTO> construirDTOs(List<AreaEntidad> areas){

@@ -21,7 +21,7 @@ public class IndicadorFabrica {
     private final PublicoInteresFabrica publicoInteresFabrica;
 
     public Indicador construir(IndicadorComando comando) {
-        var publicosInteres = publicoInteresRepositorioConsulta.consultarTodosPorIdentificadores(comando.getPublicosinteres().stream().map(UtilUUID::textoAUUID).toList());
+        var publicosInteres = publicoInteresRepositorioConsulta.consultarTodosPorIdentificadores(comando.getPublicosInteres().stream().map(UtilUUID::textoAUUID).toList());
         return Indicador.construir(
                 generar(uuid -> !esNulo(indicadorRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando.getNombre(),
