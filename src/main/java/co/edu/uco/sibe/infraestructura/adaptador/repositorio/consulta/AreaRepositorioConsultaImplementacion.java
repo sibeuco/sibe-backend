@@ -31,12 +31,14 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     @Override
     public List<AreaDTO> consultarDTOs() {
         var entidades = this.areaDAO.findAll();
+
         return this.areaMapeador.construirDTOs(entidades);
     }
 
     @Override
     public List<Area> consultarTodos() {
         var entidades = this.areaDAO.findAll();
+
         return this.areaMapeador.construirModelos(entidades);
     }
 
@@ -54,6 +56,7 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     @Override
     public boolean hayDatos() {
         var cantidad = areaDAO.count();
+
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
@@ -71,18 +74,33 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     @Override
     public Area consultarPorActividad(Actividad actividad) {
         var entidad = this.areaDAO.findByActividades_Identificador(actividad.getIdentificador());
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.areaMapeador.construirModelo(entidad);
     }
 
     @Override
     public AreaDetalladaDTO consultarDetallePorIdentificador(UUID identificador) {
         var entidad = this.areaDAO.findById(identificador).orElse(null);
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.areaDetalladaMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public AreaDTO consultarPorNombreDTO(String nombre) {
+        var entidad = this.areaDAO.findByNombre(nombre);
+
+        if(esNulo(entidad)) {
+            return null;
+        }
+
+        return this.areaMapeador.construirDTO(entidad);
     }
 }

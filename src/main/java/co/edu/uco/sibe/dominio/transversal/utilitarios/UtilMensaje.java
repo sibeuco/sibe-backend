@@ -269,6 +269,10 @@ public final class UtilMensaje {
 
     public static final String ORGANIZACION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una entidad organizacional (Dirección, Área o Subárea) con el identificador: ";
 
+    public static final String DIRECCION_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado una dirección con el nombre: ";
+    public static final String AREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un área con el nombre: ";
+    public static final String SUBAREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un subárea con el nombre: ";
+
     private UtilMensaje() {
         super();
     }

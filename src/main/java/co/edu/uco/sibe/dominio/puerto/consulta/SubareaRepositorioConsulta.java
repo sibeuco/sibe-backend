@@ -21,4 +21,6 @@ public interface SubareaRepositorioConsulta {
     Subarea consultarPorActividad(Actividad actividad);
 
     SubareaDetalladaDTO consultarDetallePorIdentificador(UUID identificador);
+
+    SubareaDTO consultarPorNombreDTO(String nombre);
 }

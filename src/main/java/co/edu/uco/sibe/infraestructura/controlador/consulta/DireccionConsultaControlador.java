@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.controlador.consulta;
 
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionDetalladaManejador;
+import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionPorNombreDTOManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionesManejador;
 import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.dto.DireccionDetalladaDTO;
@@ -19,6 +20,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 public class DireccionConsultaControlador {
     private final ConsultarDireccionesManejador consultarDireccionesManejador;
     private final ConsultarDireccionDetalladaManejador consultarDireccionDetalladaManejador;
+    private final ConsultarDireccionPorNombreDTOManejador consultarDireccionPorNombreDTOManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(RUTA_DETALLE)
@@ -30,5 +32,11 @@ public class DireccionConsultaControlador {
     @GetMapping
     public List<DireccionDTO> consultarTodos(){
         return consultarDireccionesManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(RUTA_NOMBRE)
+    public DireccionDTO consultarPorNombre(@PathVariable String nombre) {
+        return this.consultarDireccionPorNombreDTOManejador.ejecutar(nombre);
     }
 }

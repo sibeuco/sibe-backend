@@ -19,4 +19,6 @@ public interface DireccionRepositorioConsulta {
     Direccion consultarPorActividad(Actividad actividad);
 
     DireccionDetalladaDTO consultarDetallePorIdentificador(UUID identificador);
+
+    DireccionDTO consultarPorNombreDTO(String nombre);
 }

@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.controlador.consulta;
 
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarSubareaDetalladaManejador;
+import co.edu.uco.sibe.aplicacion.consulta.ConsultarSubareaPorNombreDTOManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarSubareasDTOManejador;
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
 import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
@@ -19,6 +20,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 public class SubareaConsultaControlador {
     private final ConsultarSubareasDTOManejador consultarSubareasDTOManejador;
     private final ConsultarSubareaDetalladaManejador consultarSubareaDetalladaManejador;
+    private final ConsultarSubareaPorNombreDTOManejador consultarSubareaPorNombreDTOManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(RUTA_DETALLE)
@@ -30,5 +32,11 @@ public class SubareaConsultaControlador {
     @GetMapping
     public List<SubareaDTO> consultarTodos(){
         return consultarSubareasDTOManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(RUTA_NOMBRE)
+    public SubareaDTO consultarPorNombre(@PathVariable String nombre) {
+        return this.consultarSubareaPorNombreDTOManejador.ejecutar(nombre);
     }
 }

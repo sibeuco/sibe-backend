@@ -31,6 +31,7 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     @Override
     public List<DireccionDTO> consultarDTOs() {
         var entidades = this.direccionDAO.findAll();
+
         return this.direccionMapeador.construirDTOs(entidades);
     }
 
@@ -48,6 +49,7 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     @Override
     public boolean hayDatos() {
         var cantidad = direccionDAO.count();
+
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
@@ -65,18 +67,33 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     @Override
     public Direccion consultarPorActividad(Actividad actividad) {
         var entidad = this.direccionDAO.findByActividades_Identificador(actividad.getIdentificador());
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.direccionMapeador.construirModelo(entidad);
     }
 
     @Override
     public DireccionDetalladaDTO consultarDetallePorIdentificador(UUID identificador) {
         var entidad = this.direccionDAO.findById(identificador).orElse(null);
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.direccionDetalladaMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public DireccionDTO consultarPorNombreDTO(String nombre) {
+        var entidad = this.direccionDAO.findByNombre(nombre);
+
+        if(esNulo(entidad)) {
+            return null;
+        }
+
+        return this.direccionMapeador.construirDTO(entidad);
     }
 }
