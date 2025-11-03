@@ -46,13 +46,13 @@ public final class ActividadRegla implements Regla<Actividad> {
 
     private void validarSemestre(String semestre) {
         ValidadorTexto.validarObligatorio(semestre, SEMESTRE_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
+        ValidadorTexto.validarTextoAlfanumericoValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
         ValidadorNumero.validarNumeroEntre(semestre.length(), 6, 6, LONGITUD_SEMESTRE_ACTIVIDAD_INVALIDA);
     }
 
     private void validarRutaInsumos(String rutaInsumos) {
         ValidadorTexto.validarObligatorio(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
+        ValidadorTexto.validarTextoAlfanumericoValido(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
         ValidadorNumero.validarNumeroEntre(rutaInsumos.length(), 10, 3000, LONGITUD_RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
     }
 }
