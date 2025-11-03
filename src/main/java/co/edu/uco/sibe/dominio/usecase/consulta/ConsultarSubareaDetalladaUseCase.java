@@ -1,0 +1,29 @@
+package co.edu.uco.sibe.dominio.usecase.consulta;
+
+import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
+import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
+import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.SUBAREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
+
+public class ConsultarSubareaDetalladaUseCase {
+
+    private final SubareaRepositorioConsulta subareaRepositorioConsulta;
+
+    public ConsultarSubareaDetalladaUseCase(SubareaRepositorioConsulta subareaRepositorioConsulta) {
+        this.subareaRepositorioConsulta = subareaRepositorioConsulta;
+    }
+
+    public SubareaDetalladaDTO ejecutar(UUID identificador) {
+        return validarSiExisteSubarea(identificador);
+    }
+
+    private SubareaDetalladaDTO validarSiExisteSubarea(UUID id) {
+        var subarea = subareaRepositorioConsulta.consultarDetallePorIdentificador(id);
+        if (esNulo(subarea)) {
+            throw new ValorInvalidoExcepcion(SUBAREA_NO_ENCONTRADA_CON_ID + id);
+        }
+        return subarea;
+    }
+}

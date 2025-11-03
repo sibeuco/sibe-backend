@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.AreaDTO;
+import co.edu.uco.sibe.dominio.dto.AreaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import java.util.List;
@@ -18,4 +19,6 @@ public interface AreaRepositorioConsulta {
     Area consultarPorNombre(String nombre);
 
     Area consultarPorActividad(Actividad actividad);
+
+    AreaDetalladaDTO consultarDetallePorIdentificador(UUID identificador);
 }

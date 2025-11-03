@@ -1,23 +1,32 @@
 package co.edu.uco.sibe.infraestructura.controlador.consulta;
 
+import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionDetalladaManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionesManejador;
 import co.edu.uco.sibe.dominio.dto.DireccionDTO;
+import co.edu.uco.sibe.dominio.dto.DireccionDetalladaDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.DIRECCION;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping(DIRECCION)
 public class DireccionConsultaControlador {
     private final ConsultarDireccionesManejador consultarDireccionesManejador;
+    private final ConsultarDireccionDetalladaManejador consultarDireccionDetalladaManejador;
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(RUTA_DETALLE)
+    public DireccionDetalladaDTO consultarDetalle(@PathVariable String identificador) {
+        return this.consultarDireccionDetalladaManejador.ejecutar(identificador);
+    }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping
