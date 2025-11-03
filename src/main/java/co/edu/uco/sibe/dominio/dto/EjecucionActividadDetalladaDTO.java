@@ -4,20 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EjecucionActividadDTO {
+public class EjecucionActividadDetalladaDTO {
     private String identificador;
     private String fechaProgramada;
     private String fechaRealizacion;
     private String horaInicio;
     private String horaFin;
     private EstadoActividadDTO estadoActividad;
+    private List<ParticipanteDTO> participantes;
 }
