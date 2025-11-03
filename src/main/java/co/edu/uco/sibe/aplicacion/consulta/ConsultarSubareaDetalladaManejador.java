@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class ConsultarSubareaDetalladaManejador implements ManejadorComandoRespuesta<String, SubareaDetalladaDTO> {
-
     private final ConsultarSubareaDetalladaUseCase consultarSubareaDetalladaUseCase;
 
     @Override

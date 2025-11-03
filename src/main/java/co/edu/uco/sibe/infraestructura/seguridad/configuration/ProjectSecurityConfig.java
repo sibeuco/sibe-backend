@@ -1,8 +1,5 @@
 package co.edu.uco.sibe.infraestructura.seguridad.configuration;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.infraestructura.seguridad.filter.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +14,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import java.util.Collections;
 import java.util.List;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.TRES_MIL_SEICIENTOS_LONG;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_HEADER;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.LOCAL_FRONT_URL;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 /**
  * ProjectSecurityConfig is the central security configuration class for the application.
@@ -69,12 +70,12 @@ public class ProjectSecurityConfig {
                 // Configure CORS to allow the frontend origin and expose the JWT header
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of(SeguridadConstante.LOCAL_FRONT_URL));
-                    config.setAllowedMethods(Collections.singletonList(TextoConstante.ASTERISK));
+                    config.setAllowedOrigins(List.of(LOCAL_FRONT_URL));
+                    config.setAllowedMethods(Collections.singletonList(ASTERISK));
                     config.setAllowCredentials(true);
-                    config.setAllowedHeaders(Collections.singletonList(TextoConstante.ASTERISK));
-                    config.setExposedHeaders(List.of(SeguridadConstante.JWT_HEADER));
-                    config.setMaxAge(NumeroConstante.TRES_MIL_SEICIENTOS_LONG);
+                    config.setAllowedHeaders(Collections.singletonList(ASTERISK));
+                    config.setExposedHeaders(List.of(JWT_HEADER));
+                    config.setMaxAge(TRES_MIL_SEICIENTOS_LONG);
 
                     return config;
                 }))
@@ -89,10 +90,10 @@ public class ProjectSecurityConfig {
                 .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 // Define endpoint authorization rules
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, TextoConstante.USER_API + TextoConstante.SOLICITAR_CODIGO_PATH).permitAll()
-                        .requestMatchers(HttpMethod.POST, TextoConstante.USER_API + TextoConstante.VALIDAR_CODIGO_PATH).permitAll()
-                        .requestMatchers(HttpMethod.PUT, TextoConstante.USER_API + TextoConstante.RECUPERAR_CLAVE_PATH).permitAll()
-                        .requestMatchers(TextoConstante.LOGIN_API).authenticated()
+                        .requestMatchers(HttpMethod.POST, USER_API + SOLICITAR_CODIGO_PATH).permitAll()
+                        .requestMatchers(HttpMethod.POST, USER_API + VALIDAR_CODIGO_PATH).permitAll()
+                        .requestMatchers(HttpMethod.PUT, USER_API + RECUPERAR_CLAVE_PATH).permitAll()
+                        .requestMatchers(LOGIN_API).authenticated()
                         .anyRequest().authenticated()
                 )
                 // Enable HTTP Basic authentication for user login

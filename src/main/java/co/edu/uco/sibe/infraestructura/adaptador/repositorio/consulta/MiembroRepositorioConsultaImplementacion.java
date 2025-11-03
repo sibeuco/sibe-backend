@@ -14,7 +14,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @Repository
 @AllArgsConstructor
 public class MiembroRepositorioConsultaImplementacion implements MiembroRepositorioConsulta {
-
     private final EstudianteDAO estudianteDAO;
     private final EmpleadoDAO empleadoDAO;
     private final ExternoDAO externoDAO;

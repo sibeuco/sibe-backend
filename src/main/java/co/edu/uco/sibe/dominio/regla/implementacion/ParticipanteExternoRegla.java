@@ -2,10 +2,10 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.ParticipanteExterno;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NO_HAY_CAMPOS_POR_VALIDAR;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 
 public class ParticipanteExternoRegla implements Regla<ParticipanteExterno> {
     private static final ParticipanteExternoRegla INSTANCIA = new ParticipanteExternoRegla();
@@ -20,7 +20,7 @@ public class ParticipanteExternoRegla implements Regla<ParticipanteExterno> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO);
     }
 
     @Override

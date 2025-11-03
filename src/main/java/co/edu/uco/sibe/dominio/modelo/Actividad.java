@@ -1,9 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.obtenerValorFechaPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.obtenerFechaDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -53,12 +56,12 @@ public class Actividad {
     ) {
         return new Actividad(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombre),
-                ValidadorTexto.obtenerValorPorDefecto(objetivo),
-                ValidadorTexto.obtenerValorPorDefecto(semestre),
-                ValidadorTexto.obtenerValorPorDefecto(rutaInsumos),
-                UtilFecha.obtenerValorFechaPorDefecto(fechaCreacion),
-                ValidadorObjeto.obtenerValorPorDefecto(indicador,Indicador.construir()),
+                obtenerTextoPorDefecto(nombre),
+                obtenerTextoPorDefecto(objetivo),
+                obtenerTextoPorDefecto(semestre),
+                obtenerTextoPorDefecto(rutaInsumos),
+                obtenerValorFechaPorDefecto(fechaCreacion),
+                obtenerObjetoPorDefecto(indicador,Indicador.construir()),
                 colaborador,
                 creador
         );
@@ -66,15 +69,15 @@ public class Actividad {
 
     public static Actividad construir() {
         return new Actividad(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO,
                 VACIO,
                 VACIO,
-                UtilFecha.obtenerFechaDefecto(),
+                obtenerFechaDefecto(),
                 Indicador.construir(),
-                UtilUUID.obtenerValorDefecto(),
-                UtilUUID.obtenerValorDefecto()
+                obtenerValorDefecto(),
+                obtenerValorDefecto()
         );
     }
 }

@@ -5,19 +5,17 @@ import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.dominio.puerto.consulta.IndicadorRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.IndicadorMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class IndicadorRepositorioConsultaImplementacion implements IndicadorRepositorioConsulta {
-    @Autowired
-    private IndicadorDAO indicadorDAO;
-
-    @Autowired
-    private IndicadorMapeador indicadorMapeador;
+    private final IndicadorDAO indicadorDAO;
+    private final IndicadorMapeador indicadorMapeador;
 
     @Override
     public List<IndicadorDTO> consultarDTOs() {

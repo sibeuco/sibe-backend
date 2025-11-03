@@ -1,9 +1,9 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import lombok.Getter;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class UsuarioOrganizacion {
@@ -24,16 +24,16 @@ public class UsuarioOrganizacion {
     public static UsuarioOrganizacion construir(UUID identificador, Usuario usuario, Direccion direccion, Area area, Subarea subarea) {
         return new UsuarioOrganizacion(
                 identificador,
-                ValidadorObjeto.obtenerValorPorDefecto(usuario, Usuario.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(direccion, Direccion.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(area, Area.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(subarea, Subarea.construir())
+                obtenerObjetoPorDefecto(usuario, Usuario.construir()),
+                obtenerObjetoPorDefecto(direccion, Direccion.construir()),
+                obtenerObjetoPorDefecto(area, Area.construir()),
+                obtenerObjetoPorDefecto(subarea, Subarea.construir())
         );
     }
 
     public static UsuarioOrganizacion construir() {
         return new UsuarioOrganizacion(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 Usuario.construir(),
                 Direccion.construir(),
                 Area.construir(),

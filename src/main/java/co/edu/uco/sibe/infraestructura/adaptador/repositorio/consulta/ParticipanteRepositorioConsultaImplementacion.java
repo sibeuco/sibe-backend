@@ -12,25 +12,28 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @Repository
 @AllArgsConstructor
 public class ParticipanteRepositorioConsultaImplementacion implements ParticipanteRepositorioConsulta {
-
     private final ParticipanteDAO participanteDAO;
     private final ParticipanteMapeador participanteMapeador;
 
     @Override
     public Participante consultarPorIdentificador(UUID identificador) {
         var entidad = participanteDAO.findById(identificador).orElse(null);
+
         if (esNulo(entidad)) {
             return null;
         }
+
         return participanteMapeador.construirModelo(entidad);
     }
 
     @Override
     public Participante consultarPorDocumentoMiembro(String documento) {
         var entidad = participanteDAO.findByMiembroNumeroIdentificacion(documento);
+
         if (esNulo(entidad)) {
             return null;
         }
+
         return participanteMapeador.construirModelo(entidad);
     }
 }

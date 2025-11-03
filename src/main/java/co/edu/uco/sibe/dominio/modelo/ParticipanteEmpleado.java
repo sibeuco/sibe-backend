@@ -1,11 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class ParticipanteEmpleado extends ParticipanteInterno {
@@ -37,18 +37,18 @@ public class ParticipanteEmpleado extends ParticipanteInterno {
     ) {
         return new ParticipanteEmpleado(
                 identificador,
-                ValidadorObjeto.obtenerValorPorDefecto(miembro, Miembro.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
-                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
-                ValidadorTexto.obtenerValorPorDefecto(sexo),
-                ValidadorObjeto.obtenerValorPorDefecto(relacionLaboral, RelacionLaboral.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(centroCostos, CentroCostos.construir())
+                obtenerObjetoPorDefecto(miembro, Miembro.construir()),
+                obtenerObjetoPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                obtenerTextoPorDefecto(idCarnet),
+                obtenerTextoPorDefecto(sexo),
+                obtenerObjetoPorDefecto(relacionLaboral, RelacionLaboral.construir()),
+                obtenerObjetoPorDefecto(centroCostos, CentroCostos.construir())
         );
     }
 
     public static ParticipanteEmpleado construir() {
         return new ParticipanteEmpleado(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 Miembro.construir(),
                 CiudadResidencia.construir(),
                 VACIO,

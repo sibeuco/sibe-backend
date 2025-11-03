@@ -3,23 +3,21 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.TipoIndicadorDTO;
 import co.edu.uco.sibe.dominio.modelo.TipoIndicador;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIndicadorRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoIndicadorDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoIndicadorMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class TipoIndicadorRepositorioConsultaImplementacion implements TipoIndicadorRepositorioConsulta {
-    @Autowired
-    private TipoIndicadorDAO tipoIndicadorDAO;
-
-    @Autowired
-    private TipoIndicadorMapeador tipoIndicadorMapeador;
+    private final TipoIndicadorDAO tipoIndicadorDAO;
+    private final TipoIndicadorMapeador tipoIndicadorMapeador;
 
     @Override
     public List<TipoIndicadorDTO> consultarDTOs() {
@@ -65,6 +63,6 @@ public class TipoIndicadorRepositorioConsultaImplementacion implements TipoIndic
     public Boolean hayDatos() {
         var cantidad = tipoIndicadorDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 }

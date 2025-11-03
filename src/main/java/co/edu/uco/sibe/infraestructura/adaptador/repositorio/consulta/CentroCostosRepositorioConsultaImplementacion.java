@@ -2,26 +2,24 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.CentroCostos;
 import co.edu.uco.sibe.dominio.puerto.consulta.CentroCostosRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.CentroCostosDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.CentroCostosMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class CentroCostosRepositorioConsultaImplementacion implements CentroCostosRepositorioConsulta {
-    @Autowired
-    private CentroCostosDAO centroCostosDAO;
-
-    @Autowired
-    private CentroCostosMapeador centroCostosMapeador;
+    private final CentroCostosDAO centroCostosDAO;
+    private final CentroCostosMapeador centroCostosMapeador;
 
     @Override
     public CentroCostos consultarPorIdentificador(UUID identificador) {
         var entidad = this.centroCostosDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 
@@ -32,7 +30,7 @@ public class CentroCostosRepositorioConsultaImplementacion implements CentroCost
     public CentroCostos consultarPorCodigo(String codigo) {
         var entidad = this.centroCostosDAO.findByCodigo(codigo);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 

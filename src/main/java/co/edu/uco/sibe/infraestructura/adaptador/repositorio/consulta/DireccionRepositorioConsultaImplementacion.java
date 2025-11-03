@@ -5,28 +5,23 @@ import co.edu.uco.sibe.dominio.dto.DireccionDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class DireccionRepositorioConsultaImplementacion implements DireccionRepositorioConsulta {
-    @Autowired
-    private DireccionDAO direccionDAO;
-
-    @Autowired
-    private DireccionMapeador direccionMapeador;
-
-    @Autowired
-    private DireccionDetalladaMapeador direccionDetalladaMapeador;
+    private final DireccionDAO direccionDAO;
+    private final DireccionMapeador direccionMapeador;
+    private final DireccionDetalladaMapeador direccionDetalladaMapeador;
 
     @Override
     public List<DireccionDTO> consultarDTOs() {
@@ -39,7 +34,7 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     public Direccion consultarPorIdentificador(UUID identificador) {
         var entidad = this.direccionDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 
@@ -50,14 +45,14 @@ public class DireccionRepositorioConsultaImplementacion implements DireccionRepo
     public boolean hayDatos() {
         var cantidad = direccionDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override
     public Direccion consultarPorNombre(String nombre) {
         var entidad = this.direccionDAO.findByNombre(nombre);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 

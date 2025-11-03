@@ -6,21 +6,17 @@ import co.edu.uco.sibe.dominio.puerto.comando.DireccionRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class DireccionRepositorioComandoImplementacion implements DireccionRepositorioComando {
-    @Autowired
-    private DireccionDAO direccionDAO;
-
-    @Autowired
-    private DireccionMapeador direccionMapeador;
-
-    @Autowired
-    private ActividadDAO actividadDAO;
+    private final DireccionDAO direccionDAO;
+    private final DireccionMapeador direccionMapeador;
+    private final ActividadDAO actividadDAO;
 
     @Override
     public UUID guardar(Direccion direccion) {
@@ -35,8 +31,10 @@ public class DireccionRepositorioComandoImplementacion implements DireccionRepos
 
         if (!esNulo(direccionEntidad) && !esNulo(actividadEntidad)) {
             direccionEntidad.getActividades().add(actividadEntidad);
+
             return direccionDAO.save(direccionEntidad).getIdentificador();
         }
+
         return direccionId;
     }
 

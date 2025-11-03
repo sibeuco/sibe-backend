@@ -1,11 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class Empleado extends Interno {
@@ -39,19 +39,19 @@ public class Empleado extends Interno {
     ) {
         return new Empleado(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
-                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
-                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
-                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
-                ValidadorTexto.obtenerValorPorDefecto(sexo),
-                ValidadorObjeto.obtenerValorPorDefecto(relacionLaboral, RelacionLaboral.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(centroCostos, CentroCostos.construir())
+                obtenerTextoPorDefecto(nombreCompleto),
+                obtenerTextoPorDefecto(numeroIdentificacion),
+                obtenerObjetoPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                obtenerTextoPorDefecto(idCarnet),
+                obtenerTextoPorDefecto(sexo),
+                obtenerObjetoPorDefecto(relacionLaboral, RelacionLaboral.construir()),
+                obtenerObjetoPorDefecto(centroCostos, CentroCostos.construir())
         );
     }
 
     public static Empleado construir() {
         return new Empleado(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO,
                 CiudadResidencia.construir(),

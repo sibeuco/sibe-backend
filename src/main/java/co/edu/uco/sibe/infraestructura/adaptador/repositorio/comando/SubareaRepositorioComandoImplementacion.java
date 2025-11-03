@@ -6,25 +6,22 @@ import co.edu.uco.sibe.dominio.puerto.comando.SubareaRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.SubareaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class SubareaRepositorioComandoImplementacion implements SubareaRepositorioComando {
-    @Autowired
-    private SubareaDAO subareaDAO;
-
-    @Autowired
-    private SubareaMapeador subareaMapeador;
-
-    @Autowired
-    private ActividadDAO actividadDAO;
+    private final SubareaDAO subareaDAO;
+    private final SubareaMapeador subareaMapeador;
+    private final ActividadDAO actividadDAO;
 
     @Override
     public UUID guardar(Subarea subarea) {
         var entidad = subareaMapeador.construirEntidad(subarea);
+
         return this.subareaDAO.save(entidad).getIdentificador();
     }
 
@@ -35,8 +32,10 @@ public class SubareaRepositorioComandoImplementacion implements SubareaRepositor
 
         if (!esNulo(subareaEntidad) && !esNulo(actividadEntidad)) {
             subareaEntidad.getActividades().add(actividadEntidad);
+
             return subareaDAO.save(subareaEntidad).getIdentificador();
         }
+
         return subareaId;
     }
 

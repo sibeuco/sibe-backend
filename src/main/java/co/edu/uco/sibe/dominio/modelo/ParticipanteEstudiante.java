@@ -1,13 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.obtenerNumeroPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class ParticipanteEstudiante extends ParticipanteInterno {
@@ -75,27 +75,27 @@ public class ParticipanteEstudiante extends ParticipanteInterno {
     ) {
         return new ParticipanteEstudiante(
                 identificador,
-                ValidadorObjeto.obtenerValorPorDefecto(miembro, Miembro.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
-                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
-                ValidadorTexto.obtenerValorPorDefecto(sexo),
-                ValidadorTexto.obtenerValorPorDefecto(estadoCivil),
-                ValidadorTexto.obtenerValorPorDefecto(programaAcademico),
-                ValidadorTexto.obtenerValorPorDefecto(facultad),
-                ValidadorNumero.obtenerNumeroPorDefecto(annoIngreso),
-                ValidadorTexto.obtenerValorPorDefecto(semestreActual),
-                ValidadorNumero.obtenerNumeroPorDefecto(creditosAprobados),
-                ValidadorNumero.obtenerNumeroPorDefecto(promedioGeneral),
-                ValidadorTexto.obtenerValorPorDefecto(estadoAcademico),
-                ValidadorTexto.obtenerValorPorDefecto(modalidadEstudio),
-                ValidadorNumero.obtenerNumeroPorDefecto(tiempoLlegadaUniversidad),
-                ValidadorTexto.obtenerValorPorDefecto(medioTransporte)
+                obtenerObjetoPorDefecto(miembro, Miembro.construir()),
+                obtenerObjetoPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                obtenerTextoPorDefecto(idCarnet),
+                obtenerTextoPorDefecto(sexo),
+                obtenerTextoPorDefecto(estadoCivil),
+                obtenerTextoPorDefecto(programaAcademico),
+                obtenerTextoPorDefecto(facultad),
+                obtenerNumeroPorDefecto(annoIngreso),
+                obtenerTextoPorDefecto(semestreActual),
+                obtenerNumeroPorDefecto(creditosAprobados),
+                obtenerNumeroPorDefecto(promedioGeneral),
+                obtenerTextoPorDefecto(estadoAcademico),
+                obtenerTextoPorDefecto(modalidadEstudio),
+                obtenerNumeroPorDefecto(tiempoLlegadaUniversidad),
+                obtenerTextoPorDefecto(medioTransporte)
         );
     }
 
     public static ParticipanteEstudiante construir() {
         return new ParticipanteEstudiante(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 Miembro.construir(),
                 CiudadResidencia.construir(),
                 VACIO,

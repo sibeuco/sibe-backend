@@ -5,9 +5,10 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.TiempoVencidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO;
 
 public class ValidarCodigoRecuperacionClaveUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -36,7 +37,7 @@ public class ValidarCodigoRecuperacionClaveUseCase {
         var codigoCifrado = this.personaRepositorioConsulta.consultarCodigoConCorreo(correo);
 
         if (!this.encriptarClaveServicio.existe(codigo, codigoCifrado)) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO);
+            throw new ValorInvalidoExcepcion(EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO);
         }
     }
 
@@ -46,7 +47,7 @@ public class ValidarCodigoRecuperacionClaveUseCase {
         var minutosDiferencia = ChronoUnit.MINUTES.between(fecha, ahora);
 
         if (minutosDiferencia > 5) {
-            throw new TiempoVencidoExcepcion(UtilMensaje.EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO);
+            throw new TiempoVencidoExcepcion(EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO);
         }
     }
 }

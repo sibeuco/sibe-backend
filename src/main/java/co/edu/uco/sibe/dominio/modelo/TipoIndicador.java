@@ -1,10 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class TipoIndicador {
@@ -21,14 +21,14 @@ public class TipoIndicador {
     public static TipoIndicador construir(UUID identificador, String naturalezaIndicador, String tipologiaIndicador) {
         return new TipoIndicador(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(naturalezaIndicador),
-                ValidadorTexto.obtenerValorPorDefecto(tipologiaIndicador)
+                obtenerTextoPorDefecto(naturalezaIndicador),
+                obtenerTextoPorDefecto(tipologiaIndicador)
         );
     }
 
     public static TipoIndicador construir() {
         return new TipoIndicador(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO
         );

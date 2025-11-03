@@ -1,8 +1,10 @@
 package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.PatronExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorObligatorioExcepcion;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 public final class ValidadorTexto {
     private static final String PATRON_LETRAS_Y_ESPACIOS = "^[a-zA-ZáéíóúÁÉÍÓÚÄëËïÏöÖüÜñÑ ]*$";
@@ -16,7 +18,7 @@ public final class ValidadorTexto {
     }
 
     public static String aplicarTrim(String cadena) {
-        return obtenerValorPorDefecto(cadena.trim());
+        return obtenerTextoPorDefecto(cadena.trim());
     }
 
     public static void validarObligatorio(String valor, String mensaje) {
@@ -56,19 +58,19 @@ public final class ValidadorTexto {
     }
 
     public static boolean estaCadenaVacia(String valor) {
-        return esNula(valor) || TextoConstante.VACIO.equals(quitarEspaciosBlancoInicioFin(valor));
+        return esNula(valor) || VACIO.equals(quitarEspaciosBlancoInicioFin(valor));
     }
 
     private static String quitarEspaciosBlancoInicioFin(final String valor) {
-        return obtenerValorPorDefecto(valor).trim();
+        return obtenerTextoPorDefecto(valor).trim();
     }
 
     public static boolean esNula(final String valor) {
-        return ValidadorObjeto.esNulo(valor);
+        return esNulo(valor);
     }
 
-    public static String obtenerValorPorDefecto(String cadena) {
-        return ValidadorObjeto.obtenerValorPorDefecto(cadena, TextoConstante.VACIO);
+    public static String obtenerTextoPorDefecto(String cadena) {
+        return obtenerObjetoPorDefecto(cadena, VACIO);
     }
 
     private static boolean esCadenaLetrasYEspacios(String valor) {

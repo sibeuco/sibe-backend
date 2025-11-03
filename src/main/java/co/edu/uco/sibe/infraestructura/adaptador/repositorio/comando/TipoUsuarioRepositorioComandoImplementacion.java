@@ -4,17 +4,15 @@ import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.puerto.comando.TipoUsuarioRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoUsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoUsuarioMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
+@AllArgsConstructor
 public class TipoUsuarioRepositorioComandoImplementacion implements TipoUsuarioRepositorioComando {
-    @Autowired
-    TipoUsuarioDAO tipoUsuarioDAO;
-
-    @Autowired
-    TipoUsuarioMapeador tipoUsuarioMapeador;
+    private final TipoUsuarioDAO tipoUsuarioDAO;
+    private final TipoUsuarioMapeador tipoUsuarioMapeador;
 
     @Override
     public UUID guardar(TipoUsuario tipoUsuario) {

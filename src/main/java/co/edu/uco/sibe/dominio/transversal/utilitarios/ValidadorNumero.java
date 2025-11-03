@@ -1,8 +1,10 @@
 package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.LongitudExcepcion;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_VERIFICADO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 public final class ValidadorNumero {
     private ValidadorNumero() {
@@ -10,7 +12,7 @@ public final class ValidadorNumero {
     }
 
     public static <T extends Number> void validarNumeroEntre(T numero, T minimo, T maximo, String mensaje) {
-        if (ValidadorObjeto.esNulo(numero) || !esNumeroEntre(numero, minimo, maximo)) {
+        if (esNulo(numero) || !esNumeroEntre(numero, minimo, maximo)) {
             throw new LongitudExcepcion(mensaje);
         }
     }
@@ -45,8 +47,8 @@ public final class ValidadorNumero {
         return obtenerNumeroPorDefecto(numero).doubleValue() == obtenerNumeroPorDefecto(numeroComparador).doubleValue();
     }
 
-    @SuppressWarnings(TextoConstante.NO_VERIFICADO)
+    @SuppressWarnings(NO_VERIFICADO)
     public static <T extends Number> T obtenerNumeroPorDefecto(T numero) {
-        return (T) ValidadorObjeto.obtenerValorPorDefecto(numero, NumeroConstante.CERO);
+        return (T) obtenerObjetoPorDefecto(numero, CERO);
     }
 }

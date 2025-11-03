@@ -2,11 +2,11 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;
 
 public final class ActividadRegla implements Regla<Actividad> {
     private static final ActividadRegla INSTANCIA = new ActividadRegla();
@@ -21,7 +21,7 @@ public final class ActividadRegla implements Regla<Actividad> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_ACTIVIDAD_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_ACTIVIDAD_NULO);
     }
 
     @Override
@@ -33,26 +33,26 @@ public final class ActividadRegla implements Regla<Actividad> {
     }
 
     private void validarNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, NOMBRE_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(nombre, NOMBRE_ACTIVIDAD_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 200, LONGITUD_NOMBRE_ACTIVIDAD_INVALIDA);
+        validarObligatorio(nombre, NOMBRE_ACTIVIDAD_OBLIGATORIO);
+        validarTextoAlfanumericoValido(nombre, NOMBRE_ACTIVIDAD_INVALIDO);
+        validarNumeroEntre(nombre.length(), 10, 200, LONGITUD_NOMBRE_ACTIVIDAD_INVALIDA);
     }
 
     private void validarObjetivo(String objetivo) {
-        ValidadorTexto.validarObligatorio(objetivo, OBJETIVO_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(objetivo, OBJETIVO_ACTIVIDAD_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_ACTIVIDAD_INVALIDA);
+        validarObligatorio(objetivo, OBJETIVO_ACTIVIDAD_OBLIGATORIO);
+        validarTextoAlfanumericoValido(objetivo, OBJETIVO_ACTIVIDAD_INVALIDO);
+        validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_ACTIVIDAD_INVALIDA);
     }
 
     private void validarSemestre(String semestre) {
-        ValidadorTexto.validarObligatorio(semestre, SEMESTRE_ACTIVIDAD_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(semestre.length(), 6, 6, LONGITUD_SEMESTRE_ACTIVIDAD_INVALIDA);
+        validarObligatorio(semestre, SEMESTRE_ACTIVIDAD_OBLIGATORIO);
+        validarTextoAlfanumericoValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
+        validarNumeroEntre(semestre.length(), 6, 6, LONGITUD_SEMESTRE_ACTIVIDAD_INVALIDA);
     }
 
     private void validarRutaInsumos(String rutaInsumos) {
-        ValidadorTexto.validarObligatorio(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_OBLIGATORIA);
-        ValidadorTexto.validarTextoAlfanumericoValido(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(rutaInsumos.length(), 10, 3000, LONGITUD_RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
+        validarObligatorio(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_OBLIGATORIA);
+        validarTextoAlfanumericoValido(rutaInsumos, RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
+        validarNumeroEntre(rutaInsumos.length(), 10, 3000, LONGITUD_RUTA_INSUMOS_ACTIVIDAD_INVALIDA);
     }
 }

@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_APLICA;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO;
@@ -68,13 +69,13 @@ public class ParticipanteFabrica {
                 VACIO,
                 comando.getProgramaAcademico(),
                 VACIO,
-                0,
+                CERO,
                 VACIO,
-                0,
-                0,
+                CERO,
+                CERO,
                 VACIO,
                 VACIO,
-                0,
+                CERO,
                 VACIO
         );
     }

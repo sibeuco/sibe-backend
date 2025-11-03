@@ -3,9 +3,9 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExisteUsuarioConId;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class EliminarUsuarioUseCase {
 
@@ -26,8 +26,8 @@ public class EliminarUsuarioUseCase {
     }
 
     private void validarSiNoExisteUsuarioConId(UUID identificador) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExisteUsuarioConId(identificador));
+        if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+            throw new ValorInvalidoExcepcion(obtenerNoExisteUsuarioConId(identificador));
         }
     }
 }

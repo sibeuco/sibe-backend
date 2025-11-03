@@ -1,6 +1,5 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.*;
 
 /**
  * ExceptionFilter is responsible for catching and processing exceptions that may occur during the security filter chain execution.
@@ -44,13 +44,13 @@ public class ExceptionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception ex) {
             // Default to HTTP 500 (Internal Server Error)
-            var status = NumeroConstante.QUINIENTOS;
+            var status = QUINIENTOS;
 
             // Map known exceptions to specific HTTP status codes
             if (ex instanceof BadCredentialsException) {
-                status = NumeroConstante.CUATROCIENTOS;
+                status = CUATROCIENTOS;
             } else if (ex instanceof AuthorizationException) {
-                status = NumeroConstante.CUATROCIENTOS_UNO;
+                status = CUATROCIENTOS_UNO;
             }
 
             response.setStatus(status);

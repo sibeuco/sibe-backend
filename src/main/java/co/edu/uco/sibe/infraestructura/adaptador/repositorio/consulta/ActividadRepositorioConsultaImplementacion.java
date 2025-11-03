@@ -11,30 +11,22 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EjecucionActividadMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class ActividadRepositorioConsultaImplementacion implements ActividadRepositorioConsulta {
-
-    @Autowired
-    private ActividadDAO actividadDAO;
-    @Autowired
-    private ActividadMapeador actividadMapeador;
-    @Autowired
-    private EjecucionActividadDAO ejecucionActividadDAO;
-    @Autowired
-    private EjecucionActividadMapeador ejecucionActividadMapeador;
-    @Autowired
-    private SubareaMapeador subareaMapeador;
-    @Autowired
-    private AreaMapeador areaMapeador;
-    @Autowired
-    private DireccionMapeador direccionMapeador;
-
+    private final ActividadDAO actividadDAO;
+    private final ActividadMapeador actividadMapeador;
+    private final EjecucionActividadDAO ejecucionActividadDAO;
+    private final EjecucionActividadMapeador ejecucionActividadMapeador;
+    private final SubareaMapeador subareaMapeador;
+    private final AreaMapeador areaMapeador;
+    private final DireccionMapeador direccionMapeador;
 
     @Override
     public Actividad consultarPorIdentificador(UUID identificador) {

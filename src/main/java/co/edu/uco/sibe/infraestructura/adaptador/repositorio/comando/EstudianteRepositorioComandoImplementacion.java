@@ -5,21 +5,17 @@ import co.edu.uco.sibe.dominio.puerto.comando.EstudianteRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.CiudadResidenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EstudianteDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EstudianteMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class EstudianteRepositorioComandoImplementacion implements EstudianteRepositorioComando {
-    @Autowired
-    private EstudianteDAO estudianteDAO;
-
-    @Autowired
-    private EstudianteMapeador estudianteMapeador;
-
-    @Autowired
-    private CiudadResidenciaDAO ciudadResidenciaDAO;
+    private final EstudianteDAO estudianteDAO;
+    private final EstudianteMapeador estudianteMapeador;
+    private final CiudadResidenciaDAO ciudadResidenciaDAO;
 
     @Override
     public UUID guardar(Estudiante estudiante) {

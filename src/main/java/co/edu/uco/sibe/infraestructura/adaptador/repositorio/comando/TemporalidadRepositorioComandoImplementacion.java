@@ -4,17 +4,15 @@ import co.edu.uco.sibe.dominio.modelo.Temporalidad;
 import co.edu.uco.sibe.dominio.puerto.comando.TemporalidadRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TemporalidadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TemporalidadMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
+@AllArgsConstructor
 public class TemporalidadRepositorioComandoImplementacion implements TemporalidadRepositorioComando {
-    @Autowired
-    private TemporalidadDAO temporalidadDAO;
-
-    @Autowired
-    private TemporalidadMapeador temporalidadMapeador;
+    private final TemporalidadDAO temporalidadDAO;
+    private final TemporalidadMapeador temporalidadMapeador;
 
     @Override
     public UUID guardar(Temporalidad temporalidad) {

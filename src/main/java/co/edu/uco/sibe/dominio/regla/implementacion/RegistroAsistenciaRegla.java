@@ -2,10 +2,10 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.RegistroAsistencia;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NO_HAY_CAMPOS_POR_VALIDAR;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 
 public class RegistroAsistenciaRegla implements Regla<RegistroAsistencia> {
     private static final RegistroAsistenciaRegla INSTANCIA = new RegistroAsistenciaRegla();
@@ -20,7 +20,7 @@ public class RegistroAsistenciaRegla implements Regla<RegistroAsistencia> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO);
     }
 
     @Override

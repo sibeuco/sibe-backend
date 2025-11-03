@@ -5,8 +5,6 @@ import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
@@ -15,41 +13,31 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta {
-    @Autowired
-    PersonaDAO personaDAO;
-
-    @Autowired
-    PersonaMapeador personaMapeador;
-
-    @Autowired
-    UsuarioDAO usuarioDAO;
-
-    @Autowired
-    UsuarioMapeador usuarioMapeador;
-
-    @Autowired
-    IdentificacionDAO identificacionDAO;
-
-    @Autowired
-    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
-
-    @Autowired
-    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
+    private final PersonaDAO personaDAO;
+    private final PersonaMapeador personaMapeador;
+    private final UsuarioDAO usuarioDAO;
+    private final UsuarioMapeador usuarioMapeador;
+    private final IdentificacionDAO identificacionDAO;
+    private final PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+    private final PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public Persona consultarPersonaPorIdentificador(UUID identificador) {
         var entidad = this.personaDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -66,7 +54,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public PersonaDTO consultarPersonaPorCorreoDTO(String correo) {
         var entidad = this.personaDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -83,7 +71,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public Persona consultarPersonaPorCorreo(String correo) {
         var entidad = this.personaDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -101,7 +89,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         var identificacionEntidad = this.identificacionDAO.findByNumeroIdentificacion(documento);
         var entidad = this.personaDAO.findByIdentificacion(identificacionEntidad);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -118,7 +106,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador) {
         var entidad = this.usuarioDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -135,7 +123,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public Usuario consultarUsuarioPorIdentificador(UUID identificador) {
         var entidad = this.usuarioDAO.findById(identificador).orElse(null);
 
-        if (ValidadorObjeto.esNulo(entidad) || !entidad.isEstaActivo()){
+        if (esNulo(entidad) || !entidad.isEstaActivo()){
             return null;
         }
 
@@ -146,7 +134,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public UsuarioDTO consultarUsuarioPorCorreoDTO(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad) || !entidad.isEstaActivo()){
+        if (esNulo(entidad) || !entidad.isEstaActivo()){
             return null;
         }
 
@@ -157,7 +145,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public Usuario consultarUsuarioPorCorreo(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad) || !entidad.isEstaActivo()){
+        if (esNulo(entidad) || !entidad.isEstaActivo()){
             return null;
         }
 
@@ -175,14 +163,14 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public boolean hayDatos() {
         var cantidad = usuarioDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override
     public String consultarCodigoConCorreo(String correo) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -193,7 +181,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public LocalDateTime consultarFechaPeticionRecuperacionClaveConCorreo(String correo) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 
@@ -204,7 +192,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     public String consultarClaveConCorreo(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)){
+        if (esNulo(entidad)){
             return null;
         }
 

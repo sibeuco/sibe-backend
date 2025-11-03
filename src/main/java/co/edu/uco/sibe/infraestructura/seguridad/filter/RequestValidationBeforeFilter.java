@@ -1,9 +1,5 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +10,12 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.AUTHENTICATION_SCHEME_BASIC;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.COLON;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TEST_CASE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.TOKEN_RECIBIDO_INVALIDO;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 /**
@@ -55,29 +57,33 @@ public class RequestValidationBeforeFilter implements Filter {
 
         if (header != null) {
             header = header.trim();
-            if (StringUtils.startsWithIgnoreCase(header, SeguridadConstante.AUTHENTICATION_SCHEME_BASIC)) {
+            if (StringUtils.startsWithIgnoreCase(header, AUTHENTICATION_SCHEME_BASIC)) {
                 // Extract and decode base64 credentials from the header
-                var base64Token = header.substring(NumeroConstante.SEIS).getBytes(StandardCharsets.UTF_8);
+                var base64Token = header.substring(SEIS).getBytes(StandardCharsets.UTF_8);
                 byte[] decoded;
+
                 try {
                     decoded = Base64.getDecoder().decode(base64Token);
                     var token = new String(decoded, getCredentialsCharset(req));
-                    var delim = token.indexOf(TextoConstante.COLON);
-                    if (delim == NumeroConstante.UNO_NEGATIVO) {
+                    var delim = token.indexOf(COLON);
+
+                    if (delim == UNO_NEGATIVO) {
                         // Credentials are not in expected format
-                        throw new BadCredentialsException(UtilMensaje.TOKEN_RECIBIDO_INVALIDO);
+                        throw new BadCredentialsException(TOKEN_RECIBIDO_INVALIDO);
                     }
-                    var email = token.substring(NumeroConstante.CERO, delim);
+                    var email = token.substring(CERO, delim);
                     // Custom business validation: reject test cases
-                    if (email.toLowerCase().contains(TextoConstante.TEST_CASE)) {
+                    if (email.toLowerCase().contains(TEST_CASE)) {
                         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
                         return;
                     }
                 } catch (IllegalArgumentException e) {
-                    throw new BadCredentialsException(UtilMensaje.ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA);
+                    throw new BadCredentialsException(ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA);
                 }
             }
         }
+
         chain.doFilter(request, response);
     }
 

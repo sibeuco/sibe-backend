@@ -18,6 +18,7 @@ public class GuardarProyectoManejador implements ManejadorComandoRespuesta<Proye
     @Override
     public ComandoRespuesta<UUID> ejecutar(ProyectoComando comando) {
         var proyecto = this.proyectoFabrica.construir(comando);
+
         return new ComandoRespuesta<>(
                 this.guardarProyectoUseCase.ejecutar(
                         proyecto

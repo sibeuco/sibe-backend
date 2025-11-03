@@ -3,9 +3,7 @@ package co.edu.uco.sibe.infraestructura.seguridad.configuration;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarUsuarioPorCorreoManejador;
 import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.USUARIO_O_CLAVE_INCORRECTO;
 
 /**
  * Custom AuthenticationProvider that validates username and password credentials against the application's data source.
@@ -67,10 +67,10 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
 
                 return authenticationToken;
             } else {
-                throw new AuthorizationException(UtilMensaje.USUARIO_O_CLAVE_INCORRECTO);
+                throw new AuthorizationException(USUARIO_O_CLAVE_INCORRECTO);
             }
         } else {
-            throw new AuthorizationException(UtilMensaje.USUARIO_O_CLAVE_INCORRECTO);
+            throw new AuthorizationException(USUARIO_O_CLAVE_INCORRECTO);
         }
     }
 
@@ -91,19 +91,19 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
     // Helper methods for CRUD privileges
 
     private boolean haveReadPrivilege(List<GrantedAuthority> grantedAuthorities) {
-        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.READ_AUTHORITY));
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(READ_AUTHORITY));
     }
 
     private boolean haveWritePrivilege(List<GrantedAuthority> grantedAuthorities) {
-        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.CREATE_AUTHORITY));
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(CREATE_AUTHORITY));
     }
 
     private boolean haveUpdatePrivilege(List<GrantedAuthority> grantedAuthorities) {
-        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.UPDATE_AUTHORITY));
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(UPDATE_AUTHORITY));
     }
 
     private boolean haveDeletePrivilege(List<GrantedAuthority> grantedAuthorities) {
-        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(TextoConstante.DELETE_AUTHORITY));
+        return grantedAuthorities.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(DELETE_AUTHORITY));
     }
 
     /**
@@ -114,16 +114,16 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
      */
     private void addCrudPrivilege(List<GrantedAuthority> grantedAuthorities, TipoUsuarioDTO authority) {
         if (authority.isConsultar() && !haveReadPrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.READ_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + UNDERSCORE + READ_AUTHORITY));
         }
         if (authority.isCrear() && !haveWritePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.CREATE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + UNDERSCORE + CREATE_AUTHORITY));
         }
         if (authority.isModificar() && !haveUpdatePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.UPDATE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + UNDERSCORE + UPDATE_AUTHORITY));
         }
         if (authority.isEliminar() && !haveDeletePrivilege(grantedAuthorities)) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + TextoConstante.UNDERSCORE + TextoConstante.DELETE_AUTHORITY));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getCodigo() + UNDERSCORE + DELETE_AUTHORITY));
         }
     }
 

@@ -1,10 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Accion {
@@ -21,14 +21,14 @@ public class Accion {
     public static Accion construir(UUID identificador, String detalle, String objetivo) {
         return new Accion(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(detalle),
-                ValidadorTexto.obtenerValorPorDefecto(objetivo)
+                obtenerTextoPorDefecto(detalle),
+                obtenerTextoPorDefecto(objetivo)
         );
     }
 
     public static Accion construir() {
         return new Accion(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO
         );
