@@ -1,12 +1,14 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
+import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.SubareaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,9 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
 
     @Autowired
     private SubareaMapeador subareaMapeador;
+
+    @Autowired
+    private SubareaDetalladaMapeador subareaDetalladaMapeador;
 
     @Override
     public List<SubareaDTO> consultarDTOs() {
@@ -72,5 +77,14 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
             return null;
         }
         return this.subareaMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public SubareaDetalladaDTO consultarDetallePorIdentificador(UUID identificador) {
+        var entidad = this.subareaDAO.findById(identificador).orElse(null);
+        if(esNulo(entidad)) {
+            return null;
+        }
+        return this.subareaDetalladaMapeador.construirDTO(entidad);
     }
 }

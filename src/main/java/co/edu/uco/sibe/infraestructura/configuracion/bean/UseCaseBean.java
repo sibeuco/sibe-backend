@@ -226,4 +226,19 @@ public class UseCaseBean {
     public FinalizarActividadUseCase finalizarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta, RegistrarParticipanteService registrarParticipanteService, RegistroAsistenciaRepositorioComando registroAsistenciaRepositorioComando, RegistroAsistenciaRepositorioConsulta registroAsistenciaRepositorioConsulta) {
         return new FinalizarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, estadoActividadRepositorioConsulta, registrarParticipanteService, registroAsistenciaRepositorioComando, registroAsistenciaRepositorioConsulta);
     }
+
+    @Bean
+    public ConsultarDireccionDetalladaUseCase consultarDireccionDetalladaUseCase(DireccionRepositorioConsulta direccionRepositorioConsulta) {
+        return new ConsultarDireccionDetalladaUseCase(direccionRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarAreaDetalladaUseCase consultarAreaDetalladaUseCase(AreaRepositorioConsulta areaRepositorioConsulta) {
+        return new ConsultarAreaDetalladaUseCase(areaRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarSubareaDetalladaUseCase consultarSubareaDetalladaUseCase(SubareaRepositorioConsulta subareaRepositorioConsulta) {
+        return new ConsultarSubareaDetalladaUseCase(subareaRepositorioConsulta);
+    }
 }

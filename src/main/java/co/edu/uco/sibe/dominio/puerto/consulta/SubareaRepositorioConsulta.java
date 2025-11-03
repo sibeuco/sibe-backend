@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.SubareaDTO;
+import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 
@@ -19,4 +20,6 @@ public interface SubareaRepositorioConsulta {
     Subarea consultarPorNombre(String nombre);
 
     Subarea consultarPorActividad(Actividad actividad);
+
+    SubareaDetalladaDTO consultarDetallePorIdentificador(UUID identificador);
 }
