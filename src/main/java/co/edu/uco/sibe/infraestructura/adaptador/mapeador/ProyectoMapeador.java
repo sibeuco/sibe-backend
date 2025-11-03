@@ -46,7 +46,6 @@ public class ProyectoMapeador {
     }
 
     public void actualizarEntidad(ProyectoEntidad entidad, Proyecto proyecto) {
-        entidad.setNumeroProyecto(proyecto.getNumeroProyecto());
         entidad.setNombre(proyecto.getNombre());
         entidad.setObjetivo(proyecto.getObjetivo());
         proyectoAccionMapeador.actualizarTodos(entidad.getAcciones(), proyecto.getAcciones());
