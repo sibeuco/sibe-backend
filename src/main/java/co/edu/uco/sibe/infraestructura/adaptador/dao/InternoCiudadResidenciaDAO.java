@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.InternoCiudadResidencia
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface InternoCiudadResidenciaDAO extends JpaRepository<InternoCiudadResidenciaEntidad, UUID> {
-}
+public interface InternoCiudadResidenciaDAO extends JpaRepository<InternoCiudadResidenciaEntidad, UUID> { }

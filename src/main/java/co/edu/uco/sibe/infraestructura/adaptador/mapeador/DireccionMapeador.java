@@ -1,13 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.DireccionDTO;
-import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.DireccionEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

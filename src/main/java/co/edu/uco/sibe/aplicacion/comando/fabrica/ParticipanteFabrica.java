@@ -9,10 +9,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_APLICA;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO;
@@ -22,7 +20,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @Component
 @AllArgsConstructor
 public class ParticipanteFabrica {
-
     private final MiembroRepositorioConsulta miembroRepositorioConsulta;
     private final ParticipanteRepositorioConsulta participanteRepositorioConsulta;
 
@@ -32,6 +29,7 @@ public class ParticipanteFabrica {
 
     public Participante construir(ParticipanteComando comando) {
         var miembroDto = miembroRepositorioConsulta.consultarPorIdentificacion(comando.getDocumentoIdentificacion());
+
         if (esNulo(miembroDto)) {
             throw new ValorInvalidoExcepcion(MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO + comando.getDocumentoIdentificacion());
         }
@@ -43,8 +41,6 @@ public class ParticipanteFabrica {
         );
 
         var tipo = TipoParticipante.valueOf(comando.getTipo());
-
-
         var idParticipante = generar(uuid -> !esNulo(this.participanteRepositorioConsulta.consultarPorIdentificador(uuid)));
 
         if (tipo == TipoParticipante.EXTERNO) {
@@ -62,17 +58,36 @@ public class ParticipanteFabrica {
         return Participante.construir(idParticipante, miembro);
     }
 
-    private ParticipanteEstudiante construirParticipanteEstudiante(UUID id, Miembro m, ParticipanteComando c) {
+    private ParticipanteEstudiante construirParticipanteEstudiante(UUID identificador, Miembro miembro, ParticipanteComando comando) {
         return ParticipanteEstudiante.construir(
-                id, m, CiudadResidencia.construir(), c.getCorreoInstitucional(),
-                VACIO, VACIO, c.getProgramaAcademico(), VACIO, 0, VACIO, 0, 0, VACIO, VACIO, 0, VACIO
+                identificador,
+                miembro,
+                CiudadResidencia.construir(),
+                comando.getCorreoInstitucional(),
+                VACIO,
+                VACIO,
+                comando.getProgramaAcademico(),
+                VACIO,
+                0,
+                VACIO,
+                0,
+                0,
+                VACIO,
+                VACIO,
+                0,
+                VACIO
         );
     }
 
-    private ParticipanteEmpleado construirParticipanteEmpleado(UUID id, Miembro m, ParticipanteComando c) {
+    private ParticipanteEmpleado construirParticipanteEmpleado(UUID identificador, Miembro miembro, ParticipanteComando comando) {
         return ParticipanteEmpleado.construir(
-                id, m, CiudadResidencia.construir(), c.getCorreoInstitucional(),
-                VACIO, RelacionLaboral.construir(), CentroCostos.construir()
+                identificador,
+                miembro,
+                CiudadResidencia.construir(),
+                comando.getCorreoInstitucional(),
+                VACIO,
+                RelacionLaboral.construir(),
+                CentroCostos.construir()
         );
     }
 }

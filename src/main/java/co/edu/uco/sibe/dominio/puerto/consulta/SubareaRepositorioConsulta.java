@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.dto.SubareaDTO;
 import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
-
 import java.util.List;
 import java.util.UUID;
 

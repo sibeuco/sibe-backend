@@ -2,7 +2,6 @@ package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.RelacionLaboralDTO;
 import co.edu.uco.sibe.dominio.modelo.RelacionLaboral;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.CentroCostosEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.RelacionLaboralEntidad;
 import org.springframework.stereotype.Component;
 

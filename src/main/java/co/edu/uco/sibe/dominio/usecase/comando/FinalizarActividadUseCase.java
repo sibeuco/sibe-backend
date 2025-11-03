@@ -11,13 +11,10 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsult
 import co.edu.uco.sibe.dominio.puerto.consulta.RegistroAsistenciaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.FINALIZADA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;

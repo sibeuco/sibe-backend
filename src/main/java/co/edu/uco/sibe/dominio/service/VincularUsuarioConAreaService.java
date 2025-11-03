@@ -2,7 +2,6 @@ package co.edu.uco.sibe.dominio.service;
 
 import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.puerto.comando.UsuarioOrganizacionComando;
-
 import java.util.UUID;
 
 public class VincularUsuarioConAreaService {

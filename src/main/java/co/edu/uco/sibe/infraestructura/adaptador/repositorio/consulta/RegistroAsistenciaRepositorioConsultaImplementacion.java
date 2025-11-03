@@ -6,9 +6,7 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.RegistroAsistenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.RegistroAsistenciaMapeador;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository

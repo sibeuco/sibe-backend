@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,6 +15,7 @@ public class ActividadDTO {
     private String objetivo;
     private String semestre;
     private String rutaInsumos;
+    private String fechaCreacion;
     private IndicadorDTO indicador;
     private String colaborador;
     private String creador;

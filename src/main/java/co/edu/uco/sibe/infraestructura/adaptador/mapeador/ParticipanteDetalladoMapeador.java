@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -21,7 +20,7 @@ public class ParticipanteDetalladoMapeador {
 
         MiembroEntidad miembro = entidad.getMiembro();
         ParticipanteDTO dto = new ParticipanteDTO();
-        dto.setIdentificador(entidad.getIdentificador());
+        dto.setIdentificador(entidad.getIdentificador().toString());
         dto.setNombreCompleto(miembro.getNombreCompleto());
         dto.setNumeroIdentificacion(miembro.getNumeroIdentificacion());
 

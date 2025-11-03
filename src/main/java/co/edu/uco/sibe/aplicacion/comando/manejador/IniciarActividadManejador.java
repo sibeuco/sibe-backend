@@ -5,13 +5,11 @@ import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuest
 import co.edu.uco.sibe.dominio.usecase.comando.IniciarActividadUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 
 @Component
 @AllArgsConstructor
 public class IniciarActividadManejador implements ManejadorComandoRespuesta<UUID, ComandoRespuesta<UUID>> {
-
     private final IniciarActividadUseCase iniciarActividadUseCase;
 
     @Override

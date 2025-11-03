@@ -7,7 +7,6 @@ import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuest
 import co.edu.uco.sibe.dominio.usecase.comando.GuardarProyectoUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 
 @Component

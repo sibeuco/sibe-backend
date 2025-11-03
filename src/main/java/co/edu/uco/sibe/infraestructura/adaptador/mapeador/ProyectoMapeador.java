@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ProyectoEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

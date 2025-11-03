@@ -12,7 +12,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.ExternoEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.MiembroEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_APLICA;
 
 @Component

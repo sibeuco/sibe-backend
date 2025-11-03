@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.dto.DireccionDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
-
 import java.util.List;
 import java.util.UUID;
 

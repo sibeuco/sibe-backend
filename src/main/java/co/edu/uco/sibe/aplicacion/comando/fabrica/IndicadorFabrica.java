@@ -6,9 +6,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.*;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
@@ -25,6 +23,7 @@ public class IndicadorFabrica {
 
     public Indicador construir(IndicadorComando comando) {
         var publicosInteres = publicoInteresRepositorioConsulta.consultarTodosPorIdentificadores(comando.getPublicosInteres().stream().map(UtilUUID::textoAUUID).toList());
+
         return Indicador.construir(
                 generar(uuid -> !esNulo(indicadorRepositorioConsulta.consultarPorIdentificador(uuid))),
                 comando.getNombre(),
@@ -37,6 +36,7 @@ public class IndicadorFabrica {
 
     public Indicador construirActualizar(IndicadorComando comando, UUID identificador) {
         var publicosInteres = publicoInteresRepositorioConsulta.consultarTodosPorIdentificadores(comando.getPublicosInteres().stream().map(UtilUUID::textoAUUID).toList());
+
         return Indicador.construir(
                 identificador,
                 comando.getNombre(),

@@ -4,7 +4,6 @@ import co.edu.uco.sibe.dominio.dto.TipoIndicadorDTO;
 import co.edu.uco.sibe.dominio.modelo.TipoIndicador;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.TipoIndicadorEntidad;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

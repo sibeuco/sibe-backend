@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.modelo.Empleado;
 import co.edu.uco.sibe.dominio.puerto.consulta.EmpleadoRepositorioConsulta;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.List;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 

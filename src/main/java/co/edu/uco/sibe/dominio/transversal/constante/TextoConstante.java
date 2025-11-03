@@ -196,6 +196,7 @@ public final class TextoConstante {
     public static final String CAMPO_NOMBRE = "nombre";
     public static final String CAMPO_SEMESTRE = "semestre";
     public static final String CAMPO_RUTA_INSUMOS = "ruta_insumos";
+    public static final String CAMPO_FECHA_CREACION = "fecha_creacion";
     public static final String CAMPO_INDICADOR = "indicador";
     public static final String CAMPO_COLABORADOR = "colaborador";
     public static final String CAMPO_CREADOR = "creador";
@@ -291,6 +292,7 @@ public final class TextoConstante {
 
     public static final String NO_VERIFICADO = "unchecked";
     public static final String TEST_CASE = "test";
+    public static final String CONSULTAR_PARTICIPANTE_POR_NUMERO_IDENTIFICACION = "SELECT p FROM ParticipanteEntidad p WHERE p.miembro.numeroIdentificacion = :documento";
 
     private TextoConstante() {
         super();

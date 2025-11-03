@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -47,5 +46,4 @@ public class AreaMapeador {
     public List<AreaDTO> construirDTOs(List<AreaEntidad> areas){
         return areas.stream().map(this::construirDTO).toList();
     }
-
 }

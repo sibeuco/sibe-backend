@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.IdentificacionTipoIdent
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface IdentificacionTipoIdentificacionDAO extends JpaRepository<IdentificacionTipoIdentificacionEntidad, UUID> {
-}
+public interface IdentificacionTipoIdentificacionDAO extends JpaRepository<IdentificacionTipoIdentificacionEntidad, UUID> { }

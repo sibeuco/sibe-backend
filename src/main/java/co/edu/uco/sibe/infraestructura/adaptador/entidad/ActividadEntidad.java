@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
@@ -32,6 +32,9 @@ public class ActividadEntidad {
 
     @Column(name = CAMPO_RUTA_INSUMOS, nullable = false, length = 3000)
     private String rutaInsumos;
+
+    @Column(name = CAMPO_FECHA_CREACION, nullable = false)
+    private LocalDate fechaCreacion;
 
     @ManyToOne
     @JoinColumn(name = CAMPO_INDICADOR)

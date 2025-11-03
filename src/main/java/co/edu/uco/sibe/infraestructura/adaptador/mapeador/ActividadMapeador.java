@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ActividadEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -20,6 +19,7 @@ public class ActividadMapeador {
                 actividad.getObjetivo(),
                 actividad.getSemestre(),
                 actividad.getRutaInsumos(),
+                actividad.getFechaCreacion(),
                 this.indicadorMapeador.construirEntidad(actividad.getIndicador()),
                 actividad.getColaborador(),
                 actividad.getCreador()
@@ -37,6 +37,7 @@ public class ActividadMapeador {
                 actividad.getObjetivo(),
                 actividad.getSemestre(),
                 actividad.getRutaInsumos(),
+                actividad.getFechaCreacion(),
                 this.indicadorMapeador.construriModelo(actividad.getIndicador()),
                 actividad.getColaborador(),
                 actividad.getCreador()
@@ -64,6 +65,7 @@ public class ActividadMapeador {
                 actividad.getObjetivo(),
                 actividad.getSemestre(),
                 actividad.getRutaInsumos(),
+                actividad.getFechaCreacion().toString(),
                 indicadorMapeador.construirDTO(actividad.getIndicador()),
                 actividad.getColaborador().toString(),
                 actividad.getCreador().toString()

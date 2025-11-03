@@ -9,7 +9,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.MiembroEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.MiembroMapeador;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository

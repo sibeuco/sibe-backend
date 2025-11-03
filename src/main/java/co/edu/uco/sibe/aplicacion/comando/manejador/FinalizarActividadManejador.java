@@ -7,14 +7,12 @@ import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoParametr
 import co.edu.uco.sibe.dominio.usecase.comando.FinalizarActividadUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.UUID;
 
 @Component
 @AllArgsConstructor
 public class FinalizarActividadManejador implements ManejadorComandoParametroRespuesta<List<ParticipanteComando>, UUID, ComandoRespuesta<UUID>> {
-
     private final ParticipanteFabrica participanteFabrica;
     private final FinalizarActividadUseCase finalizarActividadUseCase;
 
@@ -22,6 +20,7 @@ public class FinalizarActividadManejador implements ManejadorComandoParametroRes
     public ComandoRespuesta<UUID> ejecutar(List<ParticipanteComando> comandos, UUID ejecucionId) {
         var participantes = participanteFabrica.construirParticipantes(comandos);
         var idRespuesta = finalizarActividadUseCase.ejecutar(ejecucionId, participantes);
+
         return new ComandoRespuesta<>(idRespuesta);
     }
 }

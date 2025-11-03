@@ -2,7 +2,6 @@ package co.edu.uco.sibe.dominio.puerto.comando;
 
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 

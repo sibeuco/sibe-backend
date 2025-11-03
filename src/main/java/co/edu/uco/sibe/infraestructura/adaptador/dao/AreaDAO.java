@@ -6,5 +6,6 @@ import java.util.UUID;
 
 public interface AreaDAO extends JpaRepository<AreaEntidad, UUID> {
     AreaEntidad findByNombre(String nombre);
+
     AreaEntidad findByActividades_Identificador(UUID actividadId);
 }

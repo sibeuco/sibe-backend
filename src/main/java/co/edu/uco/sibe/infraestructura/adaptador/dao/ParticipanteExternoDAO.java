@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteExternoEnti
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface ParticipanteExternoDAO extends JpaRepository<ParticipanteExternoEntidad, UUID> {
-}
+public interface ParticipanteExternoDAO extends JpaRepository<ParticipanteExternoEntidad, UUID> { }

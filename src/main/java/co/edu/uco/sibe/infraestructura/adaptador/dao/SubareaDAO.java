@@ -6,5 +6,6 @@ import java.util.UUID;
 
 public interface SubareaDAO extends JpaRepository<SubareaEntidad, UUID> {
     SubareaEntidad findByNombre(String nombre);
+
     SubareaEntidad findByActividades_Identificador(UUID actividadId);
 }

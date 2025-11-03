@@ -14,7 +14,6 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class ModificarActividadManejador implements ManejadorComandoParametroRespuesta<ActividadModificacionComando, UUID, ComandoRespuesta<UUID>> {
-
     private final ActividadFabrica actividadFabrica;
     private final ModificarActividadUseCase modificarActividadUseCase;
 

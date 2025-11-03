@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
@@ -25,4 +23,3 @@ public class IndicadorTemporalidadEntidad {
     @JoinColumn(name = TEMPORALIDAD, nullable = false)
     private TemporalidadEntidad temporalidad;
 }
-

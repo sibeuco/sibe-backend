@@ -5,9 +5,7 @@ import co.edu.uco.sibe.dominio.regla.Regla;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
 
 public final class ParticipanteEstudianteRegla implements Regla<ParticipanteEstudiante> {
@@ -108,7 +106,6 @@ public final class ParticipanteEstudianteRegla implements Regla<ParticipanteEstu
     }
 
     private void validarMedioTransporte(String medioTransporte) {
-        //ValidadorTexto.validarObligatorio(medioTransporte, "");
         ValidadorTexto.validarTextoValido(medioTransporte, MEDIO_TRANSPORTE_PARTICIPANTE_ESTUDIANTE_INVALIDO);
         ValidadorNumero.validarNumeroEntre(medioTransporte.length(), 5, 30, LONGITUD_MEDIO_TRANSPORTE_PARTICIPANTE_ESTUDIANTE_INVALIDA);
     }

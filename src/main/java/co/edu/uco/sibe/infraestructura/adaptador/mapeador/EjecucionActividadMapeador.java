@@ -6,7 +6,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.EjecucionActividadEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;

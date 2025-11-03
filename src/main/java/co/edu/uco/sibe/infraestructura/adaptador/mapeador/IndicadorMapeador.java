@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

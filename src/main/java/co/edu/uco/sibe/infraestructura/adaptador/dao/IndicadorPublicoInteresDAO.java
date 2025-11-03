@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorPublicoInteres
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface IndicadorPublicoInteresDAO extends JpaRepository<IndicadorPublicoInteresEntidad, UUID> {
-}
+public interface IndicadorPublicoInteresDAO extends JpaRepository<IndicadorPublicoInteresEntidad, UUID> { }

@@ -24,6 +24,7 @@ public class ActividadDetalladaMapeador {
                 entidad.getNombre(),
                 entidad.getObjetivo(),
                 entidad.getSemestre(),
+                entidad.getFechaCreacion().toString(),
                 indicadorMapeador.construirDTO(entidad.getIndicador()),
                 entidad.getColaborador().toString(),
                 ejecucionesDTO

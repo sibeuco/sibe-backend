@@ -2,10 +2,8 @@ package co.edu.uco.sibe.infraestructura.configuracion.dataloader.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.AreaBaseComando;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 public final class DatosAreaFabrica {

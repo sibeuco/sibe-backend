@@ -16,6 +16,7 @@ public final class MotorRegla<T> {
 
     public void ejecutar(T objeto, TipoOperacion operacion) {
         List<Consumer<T>> reglas = mapaReglas.getOrDefault(operacion, List.of());
+
         reglas.forEach(regla -> regla.accept(objeto));
     }
 }
