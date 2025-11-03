@@ -113,6 +113,9 @@ public final class TextoConstante {
 
     public static final String RUTA_DETALLE = "/detalle/{identificador}";
 
+    public static final String ORGANIZACION = "/organizacion";
+    public static final String CONTAR_USUARIOS_PATH = "/{identificador}/usuarios/contar";
+
     public static final String ADMINISTRADOR_DIRECCION = "ADMINISTRADOR_DIRECCION";
     public static final String ADMINISTRADOR_AREA = "ADMINISTRADOR_AREA";
     public static final String COLABORADOR = "COLABORADOR";

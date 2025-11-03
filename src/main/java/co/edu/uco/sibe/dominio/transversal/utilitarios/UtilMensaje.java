@@ -267,6 +267,8 @@ public final class UtilMensaje {
     public static final String ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE = "No se ha encontrado un estado de actividad con el nombre: ";
     public static final String MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO = "No se ha encontrado un miembro con el documento: ";
 
+    public static final String ORGANIZACION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una entidad organizacional (Dirección, Área o Subárea) con el identificador: ";
+
     private UtilMensaje() {
         super();
     }
