@@ -240,4 +240,19 @@ public class UseCaseBean {
     public ConsultarSubareaDetalladaUseCase consultarSubareaDetalladaUseCase(SubareaRepositorioConsulta subareaRepositorioConsulta) {
         return new ConsultarSubareaDetalladaUseCase(subareaRepositorioConsulta);
     }
+
+    @Bean
+    public ConsultarAreaPorNombreDTOUseCase consultarAreaPorNombreDTOUseCase(AreaRepositorioConsulta areaRepositorioConsulta) {
+        return new ConsultarAreaPorNombreDTOUseCase(areaRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarDireccionPorNombreDTOUseCase consultarDireccionPorNombreDTOUseCase(DireccionRepositorioConsulta direccionRepositorioConsulta) {
+        return new ConsultarDireccionPorNombreDTOUseCase(direccionRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarSubareaPorNombreDTOUseCase consultarSubareaPorNombreDTOUseCase(SubareaRepositorioConsulta subareaRepositorioConsulta) {
+        return new ConsultarSubareaPorNombreDTOUseCase(subareaRepositorioConsulta);
+    }
 }

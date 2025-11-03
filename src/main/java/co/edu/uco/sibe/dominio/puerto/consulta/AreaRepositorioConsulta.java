@@ -21,4 +21,6 @@ public interface AreaRepositorioConsulta {
     Area consultarPorActividad(Actividad actividad);
 
     AreaDetalladaDTO consultarDetallePorIdentificador(UUID identificador);
+
+    AreaDTO consultarPorNombreDTO(String nombre);
 }

@@ -30,12 +30,14 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     @Override
     public List<SubareaDTO> consultarDTOs() {
         var entidades = this.subareaDAO.findAll();
+
         return this.subareaMapeador.construirDTOs(entidades);
     }
 
     @Override
     public List<Subarea> consultarTodos() {
         var entidades = this.subareaDAO.findAll();
+
         return this.subareaMapeador.construirModelos(entidades);
     }
 
@@ -53,6 +55,7 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     @Override
     public boolean hayDatos() {
         var cantidad = subareaDAO.count();
+
         return ValidadorNumero.esNumeroMayor(cantidad, CERO);
     }
 
@@ -70,18 +73,33 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     @Override
     public Subarea consultarPorActividad(Actividad actividad) {
         var entidad = this.subareaDAO.findByActividades_Identificador(actividad.getIdentificador());
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.subareaMapeador.construirModelo(entidad);
     }
 
     @Override
     public SubareaDetalladaDTO consultarDetallePorIdentificador(UUID identificador) {
         var entidad = this.subareaDAO.findById(identificador).orElse(null);
+
         if(esNulo(entidad)) {
             return null;
         }
+
         return this.subareaDetalladaMapeador.construirDTO(entidad);
+    }
+
+    @Override
+    public SubareaDTO consultarPorNombreDTO(String nombre) {
+        var entidad = this.subareaDAO.findByNombre(nombre);
+
+        if(esNulo(entidad)) {
+            return null;
+        }
+
+        return this.subareaMapeador.construirDTO(entidad);
     }
 }
