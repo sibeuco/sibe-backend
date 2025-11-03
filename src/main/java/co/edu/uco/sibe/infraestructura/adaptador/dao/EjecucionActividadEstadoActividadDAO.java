@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.EjecucionActividadEstad
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface EjecucionActividadEstadoActividadDAO extends JpaRepository<EjecucionActividadEstadoActividadEntidad, UUID> {
-}
+public interface EjecucionActividadEstadoActividadDAO extends JpaRepository<EjecucionActividadEstadoActividadEntidad, UUID> { }

@@ -65,5 +65,5 @@ public final class MotoresFabrica {
         MOTOR_USUARIO_ORGANIZACION = UsuarioOrganizacionMotorFabrica.obtenerInstancia().obtenerMotorReglas();
     }
 
-    private MotoresFabrica() {}
+    private MotoresFabrica() { }
 }

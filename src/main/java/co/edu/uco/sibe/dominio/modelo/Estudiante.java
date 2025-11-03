@@ -2,10 +2,8 @@ package co.edu.uco.sibe.dominio.modelo;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 

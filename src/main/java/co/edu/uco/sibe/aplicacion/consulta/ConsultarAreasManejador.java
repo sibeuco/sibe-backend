@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.dto.AreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

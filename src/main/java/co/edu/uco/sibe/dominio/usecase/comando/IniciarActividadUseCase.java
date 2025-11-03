@@ -8,7 +8,6 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsult
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalTime;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.EN_CURSO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;

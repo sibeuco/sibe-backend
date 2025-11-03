@@ -11,7 +11,6 @@ import java.util.List;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PUBLICOS_INTERES;
 
-
 @RestController
 @AllArgsConstructor
 @RequestMapping(PUBLICOS_INTERES)

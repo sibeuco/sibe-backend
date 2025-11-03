@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseBean {
-
     @Bean
     public GuardarAccionUseCase agregarNuevaAccionUseCase(AccionRepositorioComando accionRepositorioComando, AccionRepositorioConsulta accionRepositorioConsulta){
         return new GuardarAccionUseCase(accionRepositorioComando, accionRepositorioConsulta);

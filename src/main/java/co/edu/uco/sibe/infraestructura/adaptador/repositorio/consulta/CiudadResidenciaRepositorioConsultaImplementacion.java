@@ -7,7 +7,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.CiudadResidenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.CiudadResidenciaMapeador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.UUID;
 
 @Repository

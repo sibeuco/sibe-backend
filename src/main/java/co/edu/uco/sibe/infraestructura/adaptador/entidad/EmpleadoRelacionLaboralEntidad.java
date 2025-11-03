@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.CAMPO_RELACION_LABORAL;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TABLA_EMPLEADO_RELACION_LABORAL;
 

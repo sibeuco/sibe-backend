@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+
 @Component(MAPEADOR_EMPLEADO_COMPONENTE)
 public class FilaEmpleadoMapeador extends FilaExcelBaseMapeador<DatosEmpleadoComando> {
     @Override

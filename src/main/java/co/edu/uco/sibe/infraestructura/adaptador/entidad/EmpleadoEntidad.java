@@ -1,16 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.entidad;
 
-import co.edu.uco.sibe.dominio.modelo.CentroCostos;
-import co.edu.uco.sibe.dominio.modelo.CiudadResidencia;
-import co.edu.uco.sibe.dominio.modelo.RelacionLaboral;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter

@@ -5,7 +5,6 @@ import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
 import co.edu.uco.sibe.dominio.usecase.consulta.ConsultarEjecucionesPorActividadUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

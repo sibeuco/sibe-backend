@@ -3,7 +3,6 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.MiembroRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.MIEMBRO_NO_ENCONTRADO_CON_ID_CARNET;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 

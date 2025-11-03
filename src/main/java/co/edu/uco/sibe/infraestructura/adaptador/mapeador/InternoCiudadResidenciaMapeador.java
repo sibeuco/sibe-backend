@@ -6,7 +6,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.CiudadResidenciaEntidad
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.InternoCiudadResidenciaEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 

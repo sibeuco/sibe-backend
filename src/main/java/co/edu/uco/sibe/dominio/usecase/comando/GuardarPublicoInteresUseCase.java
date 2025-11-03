@@ -7,9 +7,7 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.PUBLICO_INTERES_EXISTENTE;
 
 public class GuardarPublicoInteresUseCase {

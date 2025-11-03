@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipanteDTO {
-    private UUID identificador;
+    private String identificador;
     private String nombreCompleto;
     private String numeroIdentificacion;
     private RelacionLaboralDTO relacionLaboralDTO;

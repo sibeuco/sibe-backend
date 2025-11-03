@@ -6,5 +6,6 @@ import java.util.UUID;
 
 public interface EmpleadoDAO extends JpaRepository<EmpleadoEntidad, UUID> {
     EmpleadoEntidad findByNumeroIdentificacion(String numeroIdentificacion);
+
     EmpleadoEntidad findByIdCarnet(String idCarnet);
 }

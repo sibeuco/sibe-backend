@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEmpleadoEnt
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface ParticipanteEmpleadoDAO extends JpaRepository<ParticipanteEmpleadoEntidad, UUID> {
-}
+public interface ParticipanteEmpleadoDAO extends JpaRepository<ParticipanteEmpleadoEntidad, UUID> { }

@@ -2,7 +2,6 @@ package co.edu.uco.sibe.dominio.puerto.comando;
 
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.EjecucionActividad;
-
 import java.util.List;
 import java.util.UUID;
 

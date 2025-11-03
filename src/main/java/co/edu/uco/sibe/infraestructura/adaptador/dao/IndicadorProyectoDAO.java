@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorProyectoEntida
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface IndicadorProyectoDAO extends JpaRepository<IndicadorProyectoEntidad, UUID> {
-}
+public interface IndicadorProyectoDAO extends JpaRepository<IndicadorProyectoEntidad, UUID> { }

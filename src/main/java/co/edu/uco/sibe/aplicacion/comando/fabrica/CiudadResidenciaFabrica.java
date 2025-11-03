@@ -19,6 +19,7 @@ public class CiudadResidenciaFabrica {
                     municipioResidencia
             );
         }
+
         return ciudadResidenciaRepositorioConsulta.consultarPorDescripcion(municipioResidencia);
     }
 }

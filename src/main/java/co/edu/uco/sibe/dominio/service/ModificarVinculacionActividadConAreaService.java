@@ -49,12 +49,14 @@ public class ModificarVinculacionActividadConAreaService {
 
         if (!esNulo(direccion)) {
             direccionRepositorioComando.eliminarActividad(actividad, direccion);
+
             return;
         }
 
         var area = areaRepositorioConsulta.consultarPorActividad(actividad);
         if (!esNulo(area)) {
             areaRepositorioComando.eliminarActividad(actividad, area);
+
             return;
         }
 

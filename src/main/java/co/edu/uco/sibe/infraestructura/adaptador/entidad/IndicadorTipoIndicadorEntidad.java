@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 @Getter
@@ -24,4 +23,3 @@ public class IndicadorTipoIndicadorEntidad {
     @JoinColumn(name = TIPO_INDICADOR, nullable = false)
     private TipoIndicadorEntidad tipoIndicador;
 }
-

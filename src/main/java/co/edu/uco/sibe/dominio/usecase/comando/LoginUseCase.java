@@ -4,9 +4,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.USUARIO_O_CLAVE_INCORRECTO;
 
 public class LoginUseCase {

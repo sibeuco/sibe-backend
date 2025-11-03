@@ -6,7 +6,6 @@ import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.AREA_NO_ENCONTRADA_CON_ID;

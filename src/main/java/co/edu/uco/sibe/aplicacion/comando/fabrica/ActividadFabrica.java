@@ -20,7 +20,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @Component
 @AllArgsConstructor
 public class ActividadFabrica {
-
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final IndicadorRepositorioConsulta indicadorRepositorioConsulta;
     private final EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta;
@@ -35,6 +34,7 @@ public class ActividadFabrica {
                 comando.getObjetivo(),
                 comando.getSemestre(),
                 comando.getRutaInsumos(),
+                UtilFecha.obtenerFechaActual(),
                 indicador,
                 UtilUUID.textoAUUID(comando.getColaborador()),
                 UtilUUID.textoAUUID(comando.getCreador())
@@ -52,6 +52,7 @@ public class ActividadFabrica {
                 comando.getObjetivo(),
                 comando.getSemestre(),
                 comando.getRutaInsumos(),
+                UtilFecha.obtenerFechaActual(),
                 indicador,
                 UtilUUID.textoAUUID(comando.getColaborador()),
                 actividadExistente.getCreador()
@@ -64,12 +65,12 @@ public class ActividadFabrica {
         return fechas.stream()
                 .map(fechaStr -> {
                     var fechaProgramada = UtilFecha.formatearTextoAFecha(fechaStr);
-
                     var idEjecucion = generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid)));
+
                     return EjecucionActividad.construir(
                             idEjecucion,
                             fechaProgramada,
-                            UtilFecha.obtenerFechaDefecto(),
+                            fechaProgramada,
                             UtilFecha.obtenerHoraDefecto(),
                             UtilFecha.obtenerHoraDefecto(),
                             estadoProgramada,

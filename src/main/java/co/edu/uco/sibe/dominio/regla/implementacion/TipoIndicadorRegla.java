@@ -5,9 +5,7 @@ import co.edu.uco.sibe.dominio.regla.Regla;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
 
 public final class TipoIndicadorRegla implements Regla<TipoIndicador> {

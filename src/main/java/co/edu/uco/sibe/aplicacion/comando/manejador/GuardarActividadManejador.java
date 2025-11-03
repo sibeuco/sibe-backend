@@ -14,14 +14,13 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class GuardarActividadManejador implements ManejadorComandoRespuesta<ActividadComando, ComandoRespuesta<UUID>> {
-
     private final ActividadFabrica actividadFabrica;
     private final GuardarActividadUseCase guardarActividadUseCase;
 
     @Override
     public ComandoRespuesta<UUID> ejecutar(ActividadComando comando) {
         var actividad = actividadFabrica.construir(comando);
-        var ejecuciones = actividadFabrica.construirEjecuciones(comando.getFechasProgramada(), actividad);
+        var ejecuciones = actividadFabrica.construirEjecuciones(comando.getFechasProgramadas(), actividad);
         var area = UtilUUID.textoAUUID(comando.getArea().getArea());
         var tipoArea = TipoArea.valueOf(comando.getArea().getTipoArea().toUpperCase());
 

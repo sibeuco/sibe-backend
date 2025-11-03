@@ -7,7 +7,10 @@ import java.util.UUID;
 
 public interface UsuarioOrganizacionDAO extends JpaRepository<UsuarioOrganizacionEntidad, UUID> {
     UsuarioOrganizacionEntidad findByUsuario(UsuarioEntidad usuario);
+
     long countByDireccionIdentificador(UUID direccionId);
+
     long countByAreaIdentificador(UUID areaId);
+
     long countBySubareaIdentificador(UUID subareaId);
 }

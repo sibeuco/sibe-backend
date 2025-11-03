@@ -4,5 +4,4 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.EmpleadoRelacionLaboral
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface EmpleadoRelacionLaboralDAO extends JpaRepository<EmpleadoRelacionLaboralEntidad, UUID> {
-}
+public interface EmpleadoRelacionLaboralDAO extends JpaRepository<EmpleadoRelacionLaboralEntidad, UUID> { }

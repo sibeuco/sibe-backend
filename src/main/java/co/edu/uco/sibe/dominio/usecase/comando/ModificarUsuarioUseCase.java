@@ -12,9 +12,7 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.CORREO_EXISTENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DOCUMENTO_EXISTENTE;
 

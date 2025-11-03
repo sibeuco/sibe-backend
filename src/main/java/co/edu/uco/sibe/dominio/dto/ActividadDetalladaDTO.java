@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -16,6 +15,7 @@ public class ActividadDetalladaDTO {
     private String nombre;
     private String objetivo;
     private String semestre;
+    private String fechaCreacion;
     private IndicadorDTO indicador;
     private String colaborador;
     private List<EjecucionActividadDetalladaDTO> fechasProgramadas;

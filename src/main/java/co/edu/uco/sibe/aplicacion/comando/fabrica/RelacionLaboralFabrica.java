@@ -20,6 +20,7 @@ public class RelacionLaboralFabrica {
                     descripcion
             );
         }
+
         return relacionLaboralRepositorioConsulta.consultarPorCodigo(codigo);
     }
 }

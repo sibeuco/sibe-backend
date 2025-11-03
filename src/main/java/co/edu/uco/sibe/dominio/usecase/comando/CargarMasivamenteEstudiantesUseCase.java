@@ -5,9 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.comando.EstudianteRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstudianteRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;

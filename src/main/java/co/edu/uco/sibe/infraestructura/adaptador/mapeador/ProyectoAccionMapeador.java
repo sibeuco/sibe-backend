@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
