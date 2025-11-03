@@ -1,11 +1,16 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.*;
 import lombok.Getter;
 import java.time.LocalDate;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.obtenerFechaDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.obtenerValorFechaPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.obtenerNumeroPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Estudiante extends Interno {
@@ -91,38 +96,38 @@ public class Estudiante extends Interno {
     ) {
         return new Estudiante(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
-                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
-                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
-                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
-                ValidadorTexto.obtenerValorPorDefecto(sexo),
-                UtilFecha.obtenerValorFechaPorDefecto(fechaNacimiento),
-                ValidadorTexto.obtenerValorPorDefecto(nacionalidad),
-                ValidadorTexto.obtenerValorPorDefecto(estadoCivil),
-                ValidadorTexto.obtenerValorPorDefecto(correoPersonal),
-                ValidadorTexto.obtenerValorPorDefecto(correoInstitucional),
-                ValidadorTexto.obtenerValorPorDefecto(programaAcademico),
-                ValidadorTexto.obtenerValorPorDefecto(facultad),
-                ValidadorNumero.obtenerNumeroPorDefecto(annoIngreso),
-                ValidadorTexto.obtenerValorPorDefecto(semestreActual),
-                ValidadorNumero.obtenerNumeroPorDefecto(creditosAprobados),
-                ValidadorNumero.obtenerNumeroPorDefecto(promedioGeneral),
-                ValidadorTexto.obtenerValorPorDefecto(estadoAcademico),
-                ValidadorTexto.obtenerValorPorDefecto(modalidadEstudio),
-                ValidadorNumero.obtenerNumeroPorDefecto(tiempoLlegadaUniversidad),
-                ValidadorTexto.obtenerValorPorDefecto(medioTransporte)
+                obtenerTextoPorDefecto(nombreCompleto),
+                obtenerTextoPorDefecto(numeroIdentificacion),
+                obtenerObjetoPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                obtenerTextoPorDefecto(idCarnet),
+                obtenerTextoPorDefecto(sexo),
+                obtenerValorFechaPorDefecto(fechaNacimiento),
+                obtenerTextoPorDefecto(nacionalidad),
+                obtenerTextoPorDefecto(estadoCivil),
+                obtenerTextoPorDefecto(correoPersonal),
+                obtenerTextoPorDefecto(correoInstitucional),
+                obtenerTextoPorDefecto(programaAcademico),
+                obtenerTextoPorDefecto(facultad),
+                obtenerNumeroPorDefecto(annoIngreso),
+                obtenerTextoPorDefecto(semestreActual),
+                obtenerNumeroPorDefecto(creditosAprobados),
+                obtenerNumeroPorDefecto(promedioGeneral),
+                obtenerTextoPorDefecto(estadoAcademico),
+                obtenerTextoPorDefecto(modalidadEstudio),
+                obtenerNumeroPorDefecto(tiempoLlegadaUniversidad),
+                obtenerTextoPorDefecto(medioTransporte)
         );
     }
 
     public static Estudiante construir() {
         return new Estudiante(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO,
                 CiudadResidencia.construir(),
                 VACIO,
                 VACIO,
-                UtilFecha.obtenerFechaDefecto(),
+                obtenerFechaDefecto(),
                 VACIO,
                 VACIO,
                 VACIO,

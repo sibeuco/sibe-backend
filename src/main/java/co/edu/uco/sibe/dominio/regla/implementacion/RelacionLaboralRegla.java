@@ -2,11 +2,12 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.RelacionLaboral;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;
 
 public final class RelacionLaboralRegla implements Regla<RelacionLaboral> {
     private static final RelacionLaboralRegla INSTANCIA = new RelacionLaboralRegla();
@@ -21,7 +22,7 @@ public final class RelacionLaboralRegla implements Regla<RelacionLaboral> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_RELACION_LABORAL_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_RELACION_LABORAL_NULO);
     }
 
     @Override
@@ -31,14 +32,14 @@ public final class RelacionLaboralRegla implements Regla<RelacionLaboral> {
     }
 
     private void validarCodigo(String codigo) {
-        ValidadorTexto.validarObligatorio(codigo, CODIGO_RELACION_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(codigo, CODIGO_RELACION_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(codigo.length(), 2, 4, LONGITUD_CODIGO_RELACION_INVALIDA);
+        validarObligatorio(codigo, CODIGO_RELACION_OBLIGATORIO);
+        validarTextoAlfanumericoValido(codigo, CODIGO_RELACION_INVALIDO);
+        validarNumeroEntre(codigo.length(), 2, 4, LONGITUD_CODIGO_RELACION_INVALIDA);
     }
 
     private void validarDescripcion(String descripcion) {
-        ValidadorTexto.validarObligatorio(descripcion, DESCRIPCION_RELACION_LABORAL_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(descripcion, DESCRIPCION_RELACION_LABORAL_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 5, 20, LONGITUD_DESCRIPCION_RELACION_LABORAL_INVALIDA);
+        validarObligatorio(descripcion, DESCRIPCION_RELACION_LABORAL_OBLIGATORIA);
+        validarTextoValido(descripcion, DESCRIPCION_RELACION_LABORAL_INVALIDA);
+        validarNumeroEntre(descripcion.length(), 5, 20, LONGITUD_DESCRIPCION_RELACION_LABORAL_INVALIDA);
     }
 }

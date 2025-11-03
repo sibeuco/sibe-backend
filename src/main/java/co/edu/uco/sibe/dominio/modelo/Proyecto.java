@@ -1,13 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Proyecto {
@@ -28,17 +28,16 @@ public class Proyecto {
     public static Proyecto construir(UUID identificador, String numeroProyecto, String nombre, String objetivo, List<Accion> acciones) {
         return new Proyecto(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(numeroProyecto),
-                ValidadorTexto.obtenerValorPorDefecto(nombre),
-                ValidadorTexto.obtenerValorPorDefecto(objetivo),
-                ValidadorObjeto.obtenerValorPorDefecto(acciones,
-                        new ArrayList<>())
+                obtenerTextoPorDefecto(numeroProyecto),
+                obtenerTextoPorDefecto(nombre),
+                obtenerTextoPorDefecto(objetivo),
+                obtenerObjetoPorDefecto(acciones, new ArrayList<>())
         );
     }
 
     public static Proyecto construir() {
         return new Proyecto(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO,
                 VACIO,

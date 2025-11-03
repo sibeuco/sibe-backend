@@ -6,21 +6,17 @@ import co.edu.uco.sibe.dominio.puerto.comando.AreaRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class AreaRepositorioComandoImplementacion implements AreaRepositorioComando {
-    @Autowired
-    private AreaDAO areaDAO;
-
-    @Autowired
-    private AreaMapeador areaMapeador;
-
-    @Autowired
-    private ActividadDAO actividadDAO;
+    private final AreaDAO areaDAO;
+    private final AreaMapeador areaMapeador;
+    private final ActividadDAO actividadDAO;
 
     @Override
     public UUID guardar(Area area) {
@@ -35,8 +31,10 @@ public class AreaRepositorioComandoImplementacion implements AreaRepositorioComa
 
         if (!esNulo(areaEntidad) && !esNulo(actividadEntidad)) {
             areaEntidad.getActividades().add(actividadEntidad);
+
             return areaDAO.save(areaEntidad).getIdentificador();
         }
+
         return areaId;
     }
 

@@ -5,27 +5,23 @@ import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.SubareaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class SubareaRepositorioConsultaImplementacion implements SubareaRepositorioConsulta {
-    @Autowired
-    private SubareaDAO subareaDAO;
-
-    @Autowired
-    private SubareaMapeador subareaMapeador;
-
-    @Autowired
-    private SubareaDetalladaMapeador subareaDetalladaMapeador;
+    private final SubareaDAO subareaDAO;
+    private final SubareaMapeador subareaMapeador;
+    private final SubareaDetalladaMapeador subareaDetalladaMapeador;
 
     @Override
     public List<SubareaDTO> consultarDTOs() {
@@ -56,7 +52,7 @@ public class SubareaRepositorioConsultaImplementacion implements SubareaReposito
     public boolean hayDatos() {
         var cantidad = subareaDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override

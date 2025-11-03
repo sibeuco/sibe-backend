@@ -2,11 +2,12 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.CentroCostos;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;
 
 public final class CentroCostosRegla implements Regla<CentroCostos> {
     private static final CentroCostosRegla INSTANCIA = new CentroCostosRegla();
@@ -21,7 +22,7 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_CENTRO_COSTOS_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_CENTRO_COSTOS_NULO);
     }
 
     @Override
@@ -31,14 +32,14 @@ public final class CentroCostosRegla implements Regla<CentroCostos> {
     }
 
     private void validarCodigo(String codigo) {
-        ValidadorTexto.validarObligatorio(codigo, CODIGO_CENTRO_COSTOS_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(codigo, CODIGO_CENTRO_COSTOS_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(codigo.length(), 4, 6, LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
+        validarObligatorio(codigo, CODIGO_CENTRO_COSTOS_OBLIGATORIO);
+        validarTextoAlfanumericoValido(codigo, CODIGO_CENTRO_COSTOS_INVALIDO);
+        validarNumeroEntre(codigo.length(), 4, 6, LONGITUD_CODIGO_CENTRO_COSTOS_INVALIDA);
     }
 
     private void validarDescripcion(String descripcion) {
-        ValidadorTexto.validarObligatorio(descripcion, DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
-        ValidadorTexto.validarTextoValido(descripcion, DESCRIPCION_CENTRO_COSTOS_INVALIDA);
-        ValidadorNumero.validarNumeroEntre(descripcion.length(), 3, 100, LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        validarObligatorio(descripcion, DESCRIPCION_CENTRO_COSTOS_OBLIGATORIA);
+        validarTextoValido(descripcion, DESCRIPCION_CENTRO_COSTOS_INVALIDA);
+        validarNumeroEntre(descripcion.length(), 3, 100, LONGITUD_DESCRIPCION_CENTRO_COSTOS_INVALIDA);
     }
 }

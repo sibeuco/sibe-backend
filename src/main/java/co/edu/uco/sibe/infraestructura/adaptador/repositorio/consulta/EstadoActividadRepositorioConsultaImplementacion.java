@@ -2,22 +2,20 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.EstadoActividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EstadoActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EstadoActividadMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class EstadoActividadRepositorioConsultaImplementacion implements EstadoActividadRepositorioConsulta {
-    @Autowired
-    private EstadoActividadDAO estadoActividadDAO;
-
-    @Autowired
-    private EstadoActividadMapeador estadoActividadMapeador;
+    private final EstadoActividadDAO estadoActividadDAO;
+    private final EstadoActividadMapeador estadoActividadMapeador;
 
     @Override
     public EstadoActividad consultarPorIdentificador(UUID identificador) {
@@ -34,7 +32,7 @@ public class EstadoActividadRepositorioConsultaImplementacion implements EstadoA
     public boolean hayDatos() {
         var cantidad = this.estadoActividadDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override

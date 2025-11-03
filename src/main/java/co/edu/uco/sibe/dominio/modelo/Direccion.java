@@ -1,14 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class Direccion {
@@ -27,15 +26,15 @@ public class Direccion {
     public static Direccion construir(UUID identificador, String nombre, List<Area> areas, List<Actividad> actividades) {
         return new Direccion(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombre),
-                ValidadorObjeto.obtenerValorPorDefecto(areas, new ArrayList<>()),
-                ValidadorObjeto.obtenerValorPorDefecto(actividades, new ArrayList<>())
+                obtenerTextoPorDefecto(nombre),
+                obtenerObjetoPorDefecto(areas, new ArrayList<>()),
+                obtenerObjetoPorDefecto(actividades, new ArrayList<>())
         );
     }
 
     public static Direccion construir() {
         return new Direccion(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 new ArrayList<>(),
                 new ArrayList<>()

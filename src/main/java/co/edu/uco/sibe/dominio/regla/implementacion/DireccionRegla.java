@@ -2,11 +2,12 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;
 
 public final class DireccionRegla implements Regla<Direccion> {
     private static final DireccionRegla INSTANCIA = new DireccionRegla();
@@ -21,7 +22,7 @@ public final class DireccionRegla implements Regla<Direccion> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_DIRECCION_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_DIRECCION_NULO);
     }
 
     @Override
@@ -30,8 +31,8 @@ public final class DireccionRegla implements Regla<Direccion> {
     }
 
     private void validarNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, NOMBRE_DIRECCION_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(nombre, NOMBRE_DIRECCION_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 70, LONGITUD_NOMBRE_DIRECCION_INVALIDA);
+        validarObligatorio(nombre, NOMBRE_DIRECCION_OBLIGATORIO);
+        validarTextoValido(nombre, NOMBRE_DIRECCION_INVALIDO);
+        validarNumeroEntre(nombre.length(), 10, 70, LONGITUD_NOMBRE_DIRECCION_INVALIDA);
     }
 }

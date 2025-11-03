@@ -3,9 +3,9 @@ package co.edu.uco.sibe.dominio.usecase.comando;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExistePersonaConId;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarContrasenaUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -23,8 +23,8 @@ public class ModificarContrasenaUseCase {
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExistePersonaConId(identificador));
+        if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+            throw new ValorInvalidoExcepcion(obtenerNoExistePersonaConId(identificador));
         }
     }
 }

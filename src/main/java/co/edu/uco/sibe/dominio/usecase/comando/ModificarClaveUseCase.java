@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarClaveUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -40,7 +40,7 @@ public class ModificarClaveUseCase {
     }
 
     private void validarSiNoExisteUsuarioConIdentificador(UUID identificador) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+        if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
             throw new NullPointerException(obtenerNoExisteUsuarioConId(identificador));
         }
     }

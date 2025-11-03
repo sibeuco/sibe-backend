@@ -1,13 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Subarea {
@@ -24,15 +24,14 @@ public class Subarea {
     public static Subarea construir(UUID identificador, String nombre, List<Actividad> actividades) {
         return new Subarea(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombre),
-                ValidadorObjeto.obtenerValorPorDefecto(actividades,
-                        new ArrayList<>())
+                obtenerTextoPorDefecto(nombre),
+                obtenerObjetoPorDefecto(actividades, new ArrayList<>())
         );
     }
 
     public static Subarea construir() {
         return new Subarea(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 new ArrayList<>()
         );

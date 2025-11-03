@@ -3,10 +3,13 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.dominio.regla.Regla;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;
 
 public final class ProyectoRegla implements Regla<Proyecto> {
     private static final ProyectoRegla INSTANCIA = new ProyectoRegla();
@@ -21,7 +24,7 @@ public final class ProyectoRegla implements Regla<Proyecto> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_PROYECTO_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_PROYECTO_NULO);
     }
 
     @Override
@@ -31,20 +34,20 @@ public final class ProyectoRegla implements Regla<Proyecto> {
     }
 
     public void validarNumeroProyecto(String numeroProyecto) {
-        ValidadorTexto.validarObligatorio(numeroProyecto, NUMERO_PROYECTO_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(numeroProyecto, NUMERO_PROYECTO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(numeroProyecto.length(), 1, 12, LONGITUD_NUMERO_PROYECTO_INVALIDA);
+        validarObligatorio(numeroProyecto, NUMERO_PROYECTO_OBLIGATORIO);
+        validarTextoAlfanumericoValido(numeroProyecto, NUMERO_PROYECTO_INVALIDO);
+        validarNumeroEntre(numeroProyecto.length(), 1, 12, LONGITUD_NUMERO_PROYECTO_INVALIDA);
     }
 
     private void validarNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, NOMBRE_PROYECTO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(nombre, NOMBRE_PROYECTO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 10, 100, LONGITUD_NOMBRE_PROYECTO_INVALIDA);
+        validarObligatorio(nombre, NOMBRE_PROYECTO_OBLIGATORIO);
+        validarTextoValido(nombre, NOMBRE_PROYECTO_INVALIDO);
+        validarNumeroEntre(nombre.length(), 10, 100, LONGITUD_NOMBRE_PROYECTO_INVALIDA);
     }
 
     private void validarObjetivo(String objetivo) {
-        ValidadorTexto.validarObligatorio(objetivo, OBJETIVO_PROYECTO_OBLIGATORIO);
-        ValidadorTexto.validarTextoAlfanumericoValido(objetivo, OBJETIVO_PROYECTO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_PROYECTO_INVALIDA);
+        validarObligatorio(objetivo, OBJETIVO_PROYECTO_OBLIGATORIO);
+        validarTextoAlfanumericoValido(objetivo, OBJETIVO_PROYECTO_INVALIDO);
+        validarNumeroEntre(objetivo.length(), 10, 500, LONGITUD_OBJETIVO_PROYECTO_INVALIDA);
     }
 }

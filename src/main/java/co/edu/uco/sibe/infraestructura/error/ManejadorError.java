@@ -1,8 +1,6 @@
 package co.edu.uco.sibe.infraestructura.error;
 
 import co.edu.uco.sibe.dominio.transversal.excepcion.*;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.util.concurrent.ConcurrentHashMap;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.OCURRIO_UN_ERROR;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @ControllerAdvice
 public class ManejadorError extends ResponseEntityExceptionHandler {
@@ -35,12 +35,12 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         String mensaje = exception.getMessage();
         Integer codigo = CODIGOS_ESTADO.get(excepcionNombre);
 
-        if (!ValidadorObjeto.esNulo(codigo)) {
+        if (!esNulo(codigo)) {
             Error error = new Error(excepcionNombre, mensaje);
             resultado = new ResponseEntity<>(error, HttpStatus.valueOf(codigo));
         } else {
             LOGGER_ERROR.error(excepcionNombre, exception);
-            Error error = new Error(excepcionNombre, UtilMensaje.OCURRIO_UN_ERROR);
+            Error error = new Error(excepcionNombre, OCURRIO_UN_ERROR);
             resultado = new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

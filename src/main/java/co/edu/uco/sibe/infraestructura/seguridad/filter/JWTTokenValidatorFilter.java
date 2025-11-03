@@ -1,8 +1,5 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -17,6 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_HEADER;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_KEY;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.TOKEN_RECIBIDO_INVALIDO;
 
 /**
  * JWTTokenValidatorFilter validates JWT tokens on incoming HTTP requests for protected resources.
@@ -45,11 +46,11 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
      */
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        var jwt = request.getHeader(SeguridadConstante.JWT_HEADER);
+        var jwt = request.getHeader(JWT_HEADER);
 
         if (jwt != null) {
             try {
-                var key = Keys.hmacShaKeyFor(SeguridadConstante.JWT_KEY.getBytes(StandardCharsets.UTF_8));
+                var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
 
                 // Parse claims from the JWT
                 var claims = Jwts.parserBuilder()
@@ -57,14 +58,15 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                         .build()
                         .parseClaimsJws(jwt)
                         .getBody();
-                var username = String.valueOf(claims.get(TextoConstante.USERNAME));
-                var authorities = (String) claims.get(TextoConstante.AUTHORITIES);
+                var username = String.valueOf(claims.get(USERNAME));
+                var authorities = (String) claims.get(AUTHORITIES);
                 // Set the authentication in the security context
                 var auth = new UsernamePasswordAuthenticationToken(username, null,
                         AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
+
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e) {
-                throw new BadCredentialsException(UtilMensaje.TOKEN_RECIBIDO_INVALIDO);
+                throw new BadCredentialsException(TOKEN_RECIBIDO_INVALIDO);
             }
         }
         chain.doFilter(request, response);
@@ -79,6 +81,6 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         // Do not validate JWT on the login API endpoint
-        return request.getServletPath().equals(TextoConstante.LOGIN_API);
+        return request.getServletPath().equals(LOGIN_API);
     }
 }

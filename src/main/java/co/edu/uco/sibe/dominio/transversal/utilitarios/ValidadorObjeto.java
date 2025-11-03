@@ -23,7 +23,7 @@ public class ValidadorObjeto {
         return objeto == null;
     }
 
-    public static <T> T obtenerValorPorDefecto(T objeto, T valorPorDefecto) {
+    public static <T> T obtenerObjetoPorDefecto(T objeto, T valorPorDefecto) {
         return esNulo(objeto) ? valorPorDefecto : objeto;
     }
 }

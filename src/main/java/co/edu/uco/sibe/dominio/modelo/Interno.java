@@ -1,11 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Interno extends Miembro {
@@ -23,17 +23,17 @@ public class Interno extends Miembro {
     public static Interno construir(UUID identificador, String nombreCompleto, String numeroIdentificacion, CiudadResidencia ciudadResidencia, String idCarnet, String sexo) {
         return new Interno(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombreCompleto),
-                ValidadorTexto.obtenerValorPorDefecto(numeroIdentificacion),
-                ValidadorObjeto.obtenerValorPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
-                ValidadorTexto.obtenerValorPorDefecto(idCarnet),
-                ValidadorTexto.obtenerValorPorDefecto(sexo)
+                obtenerTextoPorDefecto(nombreCompleto),
+                obtenerTextoPorDefecto(numeroIdentificacion),
+                obtenerObjetoPorDefecto(ciudadResidencia, CiudadResidencia.construir()),
+                obtenerTextoPorDefecto(idCarnet),
+                obtenerTextoPorDefecto(sexo)
         );
     }
 
     public static Interno construir() {
         return new Interno(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO,
                 VACIO,
                 CiudadResidencia.construir(),

@@ -3,8 +3,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExisteUsuarioConCorreo;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarUsuarioPorCorreoUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -21,8 +21,8 @@ public class ConsultarUsuarioPorCorreoUseCase {
     }
 
     private void validarSiNoExisteUsuarioConCorreo(String correo) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExisteUsuarioConCorreo(correo));
+        if (esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
+            throw new ValorInvalidoExcepcion(obtenerNoExisteUsuarioConCorreo(correo));
         }
     }
 }

@@ -1,11 +1,11 @@
 package co.edu.uco.sibe.dominio.modelo;
 
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class Usuario {
@@ -26,9 +26,9 @@ public class Usuario {
     public static Usuario construir(UUID identificador, String correo, String clave, TipoUsuario tipoUsuario, boolean estaActivo) {
         return new Usuario(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(correo),
-                ValidadorTexto.obtenerValorPorDefecto(clave),
-                ValidadorObjeto.obtenerValorPorDefecto(tipoUsuario, TipoUsuario.construir()),
+                obtenerTextoPorDefecto(correo),
+                obtenerTextoPorDefecto(clave),
+                obtenerObjetoPorDefecto(tipoUsuario, TipoUsuario.construir()),
                 estaActivo
         );
     }

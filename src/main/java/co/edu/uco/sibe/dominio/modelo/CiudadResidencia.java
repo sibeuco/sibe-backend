@@ -1,10 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class CiudadResidencia {
@@ -19,13 +19,13 @@ public class CiudadResidencia {
     public static CiudadResidencia construir(UUID identificador, String descripcion) {
         return new CiudadResidencia(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(descripcion)
+                obtenerTextoPorDefecto(descripcion)
         );
     }
 
     public static CiudadResidencia construir() {
         return new CiudadResidencia(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO
         );
     }

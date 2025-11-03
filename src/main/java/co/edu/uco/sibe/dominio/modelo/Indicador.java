@@ -1,13 +1,13 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Indicador {
@@ -30,11 +30,11 @@ public class Indicador {
     public static Indicador construir(UUID identificador, String nombre, TipoIndicador tipoIndicador, Temporalidad temporalidad, Proyecto proyecto, List<PublicoInteres> publicosInteres) {
         return new Indicador(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombre),
-                ValidadorObjeto.obtenerValorPorDefecto(tipoIndicador, TipoIndicador.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(temporalidad, Temporalidad.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(proyecto, Proyecto.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(publicosInteres, new ArrayList<>())
+                obtenerTextoPorDefecto(nombre),
+                obtenerObjetoPorDefecto(tipoIndicador, TipoIndicador.construir()),
+                obtenerObjetoPorDefecto(temporalidad, Temporalidad.construir()),
+                obtenerObjetoPorDefecto(proyecto, Proyecto.construir()),
+                obtenerObjetoPorDefecto(publicosInteres, new ArrayList<>())
         );
     }
 

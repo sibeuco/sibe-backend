@@ -11,13 +11,13 @@ import java.util.UUID;
 @Repository
 @AllArgsConstructor
 public class RegistroAsistenciaRepositorioComandoImplementacion implements RegistroAsistenciaRepositorioComando {
-
     private final RegistroAsistenciaDAO registroAsistenciaDAO;
     private final RegistroAsistenciaMapeador registroAsistenciaMapeador;
 
     @Override
     public UUID guardar(RegistroAsistencia registroAsistencia) {
         var entidad = registroAsistenciaMapeador.construirEntidad(registroAsistencia);
+
         return registroAsistenciaDAO.save(entidad).getIdentificador();
     }
 }

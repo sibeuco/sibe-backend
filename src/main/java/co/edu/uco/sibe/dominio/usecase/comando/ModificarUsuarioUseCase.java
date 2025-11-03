@@ -10,11 +10,9 @@ import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.CORREO_EXISTENTE;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DOCUMENTO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarUsuarioUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
@@ -45,15 +43,15 @@ public class ModificarUsuarioUseCase {
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExistePersonaConId(identificador));
+        if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
+            throw new ValorInvalidoExcepcion(obtenerNoExistePersonaConId(identificador));
         }
     }
 
     private void validarQueExistaUsuarioConDocumento(Persona persona) {
         var personaExistente = this.personaRepositorioConsulta.consultarPersonaPorDocumento(persona.getIdentificacion().getNumeroIdentificacion());
 
-        if (!ValidadorObjeto.esNulo(personaExistente) &&
+        if (!esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
             throw new ValorDuplicadoExcepcion(DOCUMENTO_EXISTENTE);
         }
@@ -62,7 +60,7 @@ public class ModificarUsuarioUseCase {
     private void validarQueExistaUsuarioConCorreo(Persona persona) {
         var personaExistente = this.personaRepositorioConsulta.consultarPersonaPorCorreo(persona.getCorreo());
 
-        if (!ValidadorObjeto.esNulo(personaExistente) &&
+        if (!esNulo(personaExistente) &&
                 !personaExistente.getIdentificador().equals(persona.getIdentificador())) {
             throw new ValorDuplicadoExcepcion(CORREO_EXISTENTE);
         }

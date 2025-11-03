@@ -7,27 +7,19 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.CiudadResidenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EmpleadoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.RelacionLaboralDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EmpleadoMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class EmpleadoRepositorioComandoImplementacion implements EmpleadoRepositorioComando {
-    @Autowired
-    private EmpleadoDAO empleadoDAO;
-
-    @Autowired
-    private CiudadResidenciaDAO ciudadResidenciaDAO;
-
-    @Autowired
-    private RelacionLaboralDAO relacionLaboralDAO;
-
-    @Autowired
-    private CentroCostosDAO centroCostosDAO;
-
-    @Autowired
-    private EmpleadoMapeador empleadoMapeador;
+    private final EmpleadoDAO empleadoDAO;
+    private final CiudadResidenciaDAO ciudadResidenciaDAO;
+    private final RelacionLaboralDAO relacionLaboralDAO;
+    private final CentroCostosDAO centroCostosDAO;
+    private final EmpleadoMapeador empleadoMapeador;
 
     @Override
     public UUID guardar(Empleado empleado) {

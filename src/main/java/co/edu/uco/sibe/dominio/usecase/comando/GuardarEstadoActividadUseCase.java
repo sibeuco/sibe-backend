@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsult
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NOMBRE_ESTADO_ACTIVIDAD_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarEstadoActividadUseCase {
     private final EstadoActividadRepositorioComando estadoActividadRepositorioComando;
@@ -28,7 +28,7 @@ public class GuardarEstadoActividadUseCase {
     }
 
     private void validarNoExisteEstadoActividadConNombre(String nombre) {
-        if (!ValidadorObjeto.esNulo(this.estadoActividadRepositorioConsulta.consultarPorNombre(nombre))){
+        if (!esNulo(this.estadoActividadRepositorioConsulta.consultarPorNombre(nombre))){
             throw new ValorDuplicadoExcepcion(NOMBRE_ESTADO_ACTIVIDAD_EXISTENTE);
         }
     }

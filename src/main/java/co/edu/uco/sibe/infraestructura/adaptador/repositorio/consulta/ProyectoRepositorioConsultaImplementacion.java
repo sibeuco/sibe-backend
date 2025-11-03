@@ -3,21 +3,19 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.ProyectoDTO;
 import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.dominio.puerto.consulta.ProyectoRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ProyectoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ProyectoMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class ProyectoRepositorioConsultaImplementacion implements ProyectoRepositorioConsulta {
-    @Autowired
-    private ProyectoDAO proyectoDAO;
-
-    @Autowired
-    private ProyectoMapeador proyectoMapeador;
+    private final ProyectoDAO proyectoDAO;
+    private final ProyectoMapeador proyectoMapeador;
 
     @Override
     public List<ProyectoDTO> consultarDTOs() {
@@ -30,7 +28,7 @@ public class ProyectoRepositorioConsultaImplementacion implements ProyectoReposi
     public Proyecto consultarPorIdentificador(UUID identificador) {
         var entidad = this.proyectoDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)){
+        if(esNulo(entidad)){
             return null;
         }
 
@@ -41,7 +39,7 @@ public class ProyectoRepositorioConsultaImplementacion implements ProyectoReposi
     public Proyecto consultarPorNumeroProyecto(String numeroProyecto) {
         var entidad = this.proyectoDAO.findByNumeroProyecto(numeroProyecto);
 
-        if(ValidadorObjeto.esNulo(entidad)){
+        if(esNulo(entidad)){
             return null;
         }
 

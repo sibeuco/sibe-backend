@@ -5,12 +5,11 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExisteUsuarioConCorreo;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class SolicitarCodigoUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
@@ -38,8 +37,8 @@ public class SolicitarCodigoUseCase {
     }
 
     private void validarSiNoExisteUsuarioConCoreo(String correo) {
-        if (ValidadorObjeto.esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
-            throw new ValorInvalidoExcepcion(UtilMensaje.obtenerNoExisteUsuarioConCorreo(correo));
+        if (esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
+            throw new ValorInvalidoExcepcion(obtenerNoExisteUsuarioConCorreo(correo));
         }
     }
 }

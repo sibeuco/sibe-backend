@@ -1,8 +1,5 @@
 package co.edu.uco.sibe.infraestructura.seguridad.filter;
 
-import co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante;
-import co.edu.uco.sibe.dominio.transversal.constante.TextoConstante;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -17,6 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.TREINTA_MILLONES;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.COMMA;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.LOGIN_API;
 
 /**
  * JWTTokenGeneratorFilter creates a JWT token and attaches it to the HTTP response after a successful authentication.
@@ -47,17 +48,17 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         // Only proceed if there is an authenticated user
         authentication.getPrincipal();
-        var key = Keys.hmacShaKeyFor(SeguridadConstante.JWT_KEY.getBytes(StandardCharsets.UTF_8));
-        var jwt = Jwts.builder().setIssuer(SeguridadConstante.APP_NAME).setSubject(SeguridadConstante.JWT_TOKEN)
-                .claim(SeguridadConstante.EMAIL_PARAMETER, authentication.getName())
-                .claim(SeguridadConstante.ID_PARAMETER, authentication.getDetails())
-                .claim(SeguridadConstante.AUTHORITIES_PARAMETER, populateAuthorities(authentication.getAuthorities()))
+        var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
+        var jwt = Jwts.builder().setIssuer(APP_NAME).setSubject(JWT_TOKEN)
+                .claim(EMAIL_PARAMETER, authentication.getName())
+                .claim(ID_PARAMETER, authentication.getDetails())
+                .claim(AUTHORITIES_PARAMETER, populateAuthorities(authentication.getAuthorities()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + NumeroConstante.TREINTA_MILLONES))
+                .setExpiration(new Date((new Date()).getTime() + TREINTA_MILLONES))
                 .signWith(key).compact();
 
         // Add the JWT as a response header
-        response.setHeader(SeguridadConstante.JWT_HEADER, jwt);
+        response.setHeader(JWT_HEADER, jwt);
 
         chain.doFilter(request, response);
     }
@@ -68,7 +69,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         // Only apply this filter on the login API endpoint
-        return !request.getServletPath().equals(TextoConstante.LOGIN_API);
+        return !request.getServletPath().equals(LOGIN_API);
     }
 
     /**
@@ -79,9 +80,11 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
      */
     private String populateAuthorities(Collection<? extends GrantedAuthority> collection) {
         var authoritiesSet = new HashSet<String>();
+
         for (GrantedAuthority authority : collection) {
             authoritiesSet.add(authority.getAuthority());
         }
-        return String.join(TextoConstante.COMMA, authoritiesSet);
+
+        return String.join(COMMA, authoritiesSet);
     }
 }

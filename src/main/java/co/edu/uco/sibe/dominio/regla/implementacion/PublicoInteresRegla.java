@@ -2,11 +2,12 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 
 import co.edu.uco.sibe.dominio.modelo.PublicoInteres;
 import co.edu.uco.sibe.dominio.regla.Regla;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;
 
 public final class PublicoInteresRegla implements Regla<PublicoInteres> {
     private static final PublicoInteresRegla INSTANCIA = new PublicoInteresRegla();
@@ -21,7 +22,7 @@ public final class PublicoInteresRegla implements Regla<PublicoInteres> {
 
     @Override
     public void validarIdentificador(UUID identificador) {
-        ValidadorObjeto.validarObligatorio(identificador, IDENTIFICADOR_PUBLICO_INTERES_NULO);
+        validarObligatorio(identificador, IDENTIFICADOR_PUBLICO_INTERES_NULO);
     }
 
     @Override
@@ -30,8 +31,8 @@ public final class PublicoInteresRegla implements Regla<PublicoInteres> {
     }
 
     private void validarNombre(String nombre) {
-        ValidadorTexto.validarObligatorio(nombre, NOMBRE_PUBLICO_OBLIGATORIO);
-        ValidadorTexto.validarTextoValido(nombre, NOMBRE_PUBLICO_INVALIDO);
-        ValidadorNumero.validarNumeroEntre(nombre.length(), 5, 50, LONGITUD_NOMBRE_PUBLICO_INVALIDA);
+        validarObligatorio(nombre, NOMBRE_PUBLICO_OBLIGATORIO);
+        validarTextoValido(nombre, NOMBRE_PUBLICO_INVALIDO);
+        validarNumeroEntre(nombre.length(), 5, 50, LONGITUD_NOMBRE_PUBLICO_INVALIDA);
     }
 }

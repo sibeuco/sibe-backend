@@ -4,17 +4,15 @@ import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.puerto.comando.TipoIdentificacionRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TipoIdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TipoIdentificacionMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
+@AllArgsConstructor
 public class TipoIdentificacionRepositorioComandoImplementacion implements TipoIdentificacionRepositorioComando {
-    @Autowired
-    TipoIdentificacionDAO tipoIdentificacionDAO;
-
-    @Autowired
-    TipoIdentificacionMapeador tipoIdentificacionMapeador;
+    private final TipoIdentificacionDAO tipoIdentificacionDAO;
+    private final TipoIdentificacionMapeador tipoIdentificacionMapeador;
 
     @Override
     public UUID guardar(TipoIdentificacion tipoIdentificacion) {

@@ -4,17 +4,15 @@ import co.edu.uco.sibe.dominio.modelo.EstadoActividad;
 import co.edu.uco.sibe.dominio.puerto.comando.EstadoActividadRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EstadoActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EstadoActividadMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
+@AllArgsConstructor
 public class EstadoActividadRepositorioComandoImplementacion implements EstadoActividadRepositorioComando {
-    @Autowired
-    private EstadoActividadDAO estadoActividadDAO;
-
-    @Autowired
-    private EstadoActividadMapeador estadoActividadMapeador;
+    private final EstadoActividadDAO estadoActividadDAO;
+    private final EstadoActividadMapeador estadoActividadMapeador;
 
     @Override
     public UUID guardar(EstadoActividad estadoActividad) {

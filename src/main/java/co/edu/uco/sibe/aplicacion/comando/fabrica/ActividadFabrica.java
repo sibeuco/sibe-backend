@@ -7,14 +7,14 @@ import co.edu.uco.sibe.dominio.modelo.EjecucionActividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.IndicadorRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PENDIENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -25,7 +25,7 @@ public class ActividadFabrica {
     private final EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta;
 
     public Actividad construir(ActividadComando comando) {
-        var indicadorUuid = UtilUUID.textoAUUID(comando.getIndicador());
+        var indicadorUuid = textoAUUID(comando.getIndicador());
         var indicador = indicadorRepositorioConsulta.consultarPorIdentificador(indicadorUuid);
 
         return Actividad.construir(
@@ -34,15 +34,15 @@ public class ActividadFabrica {
                 comando.getObjetivo(),
                 comando.getSemestre(),
                 comando.getRutaInsumos(),
-                UtilFecha.obtenerFechaActual(),
+                obtenerFechaActual(),
                 indicador,
-                UtilUUID.textoAUUID(comando.getColaborador()),
-                UtilUUID.textoAUUID(comando.getCreador())
+                textoAUUID(comando.getColaborador()),
+                textoAUUID(comando.getCreador())
         );
     }
 
     public Actividad construirActualizar(ActividadModificacionComando comando, UUID identificador) {
-        var indicadorUuid = UtilUUID.textoAUUID(comando.getIndicador());
+        var indicadorUuid = textoAUUID(comando.getIndicador());
         var indicador = indicadorRepositorioConsulta.consultarPorIdentificador(indicadorUuid);
         var actividadExistente = actividadRepositorioConsulta.consultarPorIdentificador(identificador);
 
@@ -52,9 +52,9 @@ public class ActividadFabrica {
                 comando.getObjetivo(),
                 comando.getSemestre(),
                 comando.getRutaInsumos(),
-                UtilFecha.obtenerFechaActual(),
+                obtenerFechaActual(),
                 indicador,
-                UtilUUID.textoAUUID(comando.getColaborador()),
+                textoAUUID(comando.getColaborador()),
                 actividadExistente.getCreador()
         );
     }
@@ -64,15 +64,15 @@ public class ActividadFabrica {
 
         return fechas.stream()
                 .map(fechaStr -> {
-                    var fechaProgramada = UtilFecha.formatearTextoAFecha(fechaStr);
-                    var idEjecucion = generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid)));
+                    var fechaProgramada = formatearTextoAFecha(fechaStr);
+                    var identificadorEjecucion = generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid)));
 
                     return EjecucionActividad.construir(
-                            idEjecucion,
+                            identificadorEjecucion,
                             fechaProgramada,
                             fechaProgramada,
-                            UtilFecha.obtenerHoraDefecto(),
-                            UtilFecha.obtenerHoraDefecto(),
+                            obtenerHoraDefecto(),
+                            obtenerHoraDefecto(),
                             estadoProgramada,
                             actividadPadre
                     );

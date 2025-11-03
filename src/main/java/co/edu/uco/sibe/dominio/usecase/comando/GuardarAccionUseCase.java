@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.AccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DETALLE_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarAccionUseCase {
     private final AccionRepositorioComando accionRepositorioComando;
@@ -28,7 +28,7 @@ public class GuardarAccionUseCase {
     }
 
     private void validarNoExisteAccionConDetalle(String detalle) {
-        if (!ValidadorObjeto.esNulo(this.accionRepositorioConsulta.consultarPorDetalle(detalle))){
+        if (!esNulo(this.accionRepositorioConsulta.consultarPorDetalle(detalle))){
             throw new ValorDuplicadoExcepcion(DETALLE_EXISTENTE);
         }
     }

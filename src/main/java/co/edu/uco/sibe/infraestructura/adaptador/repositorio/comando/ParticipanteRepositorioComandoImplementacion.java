@@ -11,13 +11,13 @@ import java.util.UUID;
 @Repository
 @AllArgsConstructor
 public class ParticipanteRepositorioComandoImplementacion implements ParticipanteRepositorioComando {
-
     private final ParticipanteDAO participanteDAO;
     private final ParticipanteMapeador participanteMapeador;
 
     @Override
     public UUID guardar(Participante participante) {
         var entidad = participanteMapeador.construirEntidad(participante);
+
         return participanteDAO.save(entidad).getIdentificador();
     }
 }

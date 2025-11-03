@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NOMBRE_DIRECCION_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarDireccionUseCase {
     private final DireccionRepositorioComando direccionRepositorioComando;
@@ -28,7 +28,7 @@ public class GuardarDireccionUseCase {
     }
 
     private void validarNoExisteDireccionConNombre(String nombre) {
-        if (!ValidadorObjeto.esNulo(this.direccionRepositorioConsulta.consultarPorNombre(nombre))){
+        if (!esNulo(this.direccionRepositorioConsulta.consultarPorNombre(nombre))){
             throw new ValorDuplicadoExcepcion(NOMBRE_DIRECCION_EXISTENTE);
         }
     }

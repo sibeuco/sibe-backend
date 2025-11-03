@@ -7,33 +7,31 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ActividadMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EjecucionActividadMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class ActividadRepositorioComandoImplementacion implements ActividadRepositorioComando {
-
-    @Autowired
-    private ActividadDAO actividadDAO;
-    @Autowired
-    private ActividadMapeador actividadMapeador;
-    @Autowired
-    private EjecucionActividadMapeador ejecucionActividadMapeador;
-    @Autowired
-    private EjecucionActividadDAO ejecucionActividadDAO;
+    private final ActividadDAO actividadDAO;
+    private final ActividadMapeador actividadMapeador;
+    private final EjecucionActividadMapeador ejecucionActividadMapeador;
+    private final EjecucionActividadDAO ejecucionActividadDAO;
 
     @Override
     public UUID guardar(Actividad actividad) {
         var entidad = actividadMapeador.construirEntidad(actividad);
+
         return this.actividadDAO.save(entidad).getIdentificador();
     }
 
     @Override
     public UUID guardarEjecucion(EjecucionActividad ejecucionActividad) {
         var entidad = ejecucionActividadMapeador.construirEntidad(ejecucionActividad);
+
         return this.ejecucionActividadDAO.save(entidad).getIdentificador();
     }
 
@@ -52,13 +50,16 @@ public class ActividadRepositorioComandoImplementacion implements ActividadRepos
         if (ejecucionesActividad.isEmpty()) {
             return;
         }
-        UUID actividadId = ejecucionesActividad.get(0).getActividad().getIdentificador();
-        ejecucionActividadMapeador.actualizarTodos(actividadId, ejecucionesActividad);
+
+        var identificadorActividad = ejecucionesActividad.get(0).getActividad().getIdentificador();
+
+        ejecucionActividadMapeador.actualizarTodos(identificadorActividad, ejecucionesActividad);
     }
 
     @Override
     public void modificarEjecucion(EjecucionActividad ejecucion) {
         var entidad = ejecucionActividadDAO.findById(ejecucion.getIdentificador()).orElse(null);
+
         if (!esNulo(entidad)) {
             ejecucionActividadMapeador.actualizarEntidad(entidad, ejecucion);
             ejecucionActividadDAO.save(entidad);

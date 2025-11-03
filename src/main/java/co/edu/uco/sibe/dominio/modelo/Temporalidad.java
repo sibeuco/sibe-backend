@@ -1,10 +1,10 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import lombok.Getter;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTextoPorDefecto;
 
 @Getter
 public class Temporalidad {
@@ -19,13 +19,13 @@ public class Temporalidad {
     public static Temporalidad construir(UUID identificador, String nombre) {
         return new Temporalidad(
                 identificador,
-                ValidadorTexto.obtenerValorPorDefecto(nombre)
+                obtenerTextoPorDefecto(nombre)
         );
     }
 
     public static Temporalidad construir() {
         return new Temporalidad(
-                UtilUUID.obtenerValorDefecto(),
+                obtenerValorDefecto(),
                 VACIO
         );
     }

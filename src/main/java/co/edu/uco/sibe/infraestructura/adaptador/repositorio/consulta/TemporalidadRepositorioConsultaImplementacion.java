@@ -3,23 +3,21 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.TemporalidadDTO;
 import co.edu.uco.sibe.dominio.modelo.Temporalidad;
 import co.edu.uco.sibe.dominio.puerto.consulta.TemporalidadRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.TemporalidadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.TemporalidadMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class TemporalidadRepositorioConsultaImplementacion implements TemporalidadRepositorioConsulta {
-    @Autowired
-    private TemporalidadDAO temporalidadDAO;
-
-    @Autowired
-    private TemporalidadMapeador temporalidadMapeador;
+    private final TemporalidadDAO temporalidadDAO;
+    private final TemporalidadMapeador temporalidadMapeador;
 
     @Override
     public List<TemporalidadDTO> consultarDTOs() {
@@ -43,7 +41,7 @@ public class TemporalidadRepositorioConsultaImplementacion implements Temporalid
     public boolean hayDatos() {
         var cantidad = temporalidadDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override

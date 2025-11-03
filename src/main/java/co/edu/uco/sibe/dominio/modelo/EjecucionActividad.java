@@ -1,12 +1,12 @@
 package co.edu.uco.sibe.dominio.modelo;
 
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import lombok.Getter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.*;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.obtenerValorDefecto;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 @Getter
 public class EjecucionActividad {
@@ -47,22 +47,22 @@ public class EjecucionActividad {
     ) {
         return new EjecucionActividad(
                 identificador,
-                UtilFecha.obtenerValorFechaPorDefecto(fechaProgramada),
-                UtilFecha.obtenerValorFechaPorDefecto(fechaRealizacion),
-                UtilFecha.obtenerValorHoraPorDefecto(horaInicio),
-                UtilFecha.obtenerValorHoraPorDefecto(horaFin),
-                ValidadorObjeto.obtenerValorPorDefecto(estadoActividad, EstadoActividad.construir()),
-                ValidadorObjeto.obtenerValorPorDefecto(actividad, Actividad.construir())
+                obtenerValorFechaPorDefecto(fechaProgramada),
+                obtenerValorFechaPorDefecto(fechaRealizacion),
+                obtenerValorHoraPorDefecto(horaInicio),
+                obtenerValorHoraPorDefecto(horaFin),
+                obtenerObjetoPorDefecto(estadoActividad, EstadoActividad.construir()),
+                obtenerObjetoPorDefecto(actividad, Actividad.construir())
         );
     }
 
     public static EjecucionActividad construir() {
         return new EjecucionActividad(
-                UtilUUID.obtenerValorDefecto(),
-                UtilFecha.obtenerFechaDefecto(),
-                UtilFecha.obtenerFechaDefecto(),
-                UtilFecha.obtenerHoraDefecto(),
-                UtilFecha.obtenerHoraDefecto(),
+                obtenerValorDefecto(),
+                obtenerFechaDefecto(),
+                obtenerFechaDefecto(),
+                obtenerHoraDefecto(),
+                obtenerHoraDefecto(),
                 EstadoActividad.construir(),
                 Actividad.construir()
         );

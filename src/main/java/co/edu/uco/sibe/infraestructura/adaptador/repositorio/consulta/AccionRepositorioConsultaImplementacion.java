@@ -3,21 +3,19 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.AccionDTO;
 import co.edu.uco.sibe.dominio.modelo.Accion;
 import co.edu.uco.sibe.dominio.puerto.consulta.AccionRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AccionMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class AccionRepositorioConsultaImplementacion implements AccionRepositorioConsulta {
-    @Autowired
-    private AccionDAO accionDAO;
-
-    @Autowired
-    private AccionMapeador accionMapeador;
+    private final AccionDAO accionDAO;
+    private final AccionMapeador accionMapeador;
 
     @Override
     public List<AccionDTO> consultarDTOs() {
@@ -37,7 +35,7 @@ public class AccionRepositorioConsultaImplementacion implements AccionRepositori
     public Accion consultarPorIdentificador(UUID identificador) {
         var entidad = this.accionDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)){
+        if(esNulo(entidad)){
             return null;
         }
 
@@ -55,7 +53,7 @@ public class AccionRepositorioConsultaImplementacion implements AccionRepositori
     public Accion consultarPorDetalle(String detalle) {
         var entidad = this.accionDAO.findByDetalle(detalle);
 
-        if(ValidadorObjeto.esNulo(entidad)){
+        if(esNulo(entidad)){
             return null;
         }
 

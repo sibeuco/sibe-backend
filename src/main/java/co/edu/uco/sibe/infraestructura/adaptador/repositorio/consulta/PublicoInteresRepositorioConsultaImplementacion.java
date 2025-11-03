@@ -5,7 +5,7 @@ import co.edu.uco.sibe.dominio.modelo.PublicoInteres;
 import co.edu.uco.sibe.dominio.puerto.consulta.PublicoInteresRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PublicoInteresDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PublicoInteresMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
@@ -14,12 +14,10 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.es
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class PublicoInteresRepositorioConsultaImplementacion implements PublicoInteresRepositorioConsulta {
-    @Autowired
-    private PublicoInteresDAO publicoInteresDAO;
-
-    @Autowired
-    private PublicoInteresMapeador publicoInteresMapeador;
+    private final PublicoInteresDAO publicoInteresDAO;
+    private final PublicoInteresMapeador publicoInteresMapeador;
 
     @Override
     public List<PublicoInteresDTO> consultarDTOs() {

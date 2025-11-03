@@ -9,7 +9,6 @@ import java.util.UUID;
 @Repository
 @AllArgsConstructor
 public class UsuarioOrganizacionRepositorioConsultaImplementacion implements UsuarioOrganizacionRepositorioConsulta {
-
     private final UsuarioOrganizacionDAO usuarioOrganizacionDAO;
 
     @Override

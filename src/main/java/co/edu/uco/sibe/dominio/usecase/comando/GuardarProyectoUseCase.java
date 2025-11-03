@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.ProyectoRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NUMERO_PROYECTO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarProyectoUseCase {
     private final ProyectoRepositorioComando proyectoRepositorioComando;
@@ -28,7 +28,7 @@ public class GuardarProyectoUseCase {
     }
 
     private void validarNoExisteProyectoCoNumero(String numeroProyecto) {
-        if (!ValidadorObjeto.esNulo(this.proyectoRepositorioConsulta.consultarPorNumeroProyecto(numeroProyecto))){
+        if (!esNulo(this.proyectoRepositorioConsulta.consultarPorNumeroProyecto(numeroProyecto))){
             throw new ValorDuplicadoExcepcion(NUMERO_PROYECTO_EXISTENTE);
         }
     }

@@ -4,18 +4,16 @@ import co.edu.uco.sibe.dominio.modelo.Accion;
 import co.edu.uco.sibe.dominio.puerto.comando.AccionRepositorioComando;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AccionMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class AccionRepositorioComandoImplementacion implements AccionRepositorioComando {
-    @Autowired
-    private AccionDAO accionDAO;
-
-    @Autowired
-    private AccionMapeador accionMapeador;
+    private final AccionDAO accionDAO;
+    private final AccionMapeador accionMapeador;
 
     @Override
     public UUID guardar(Accion accion) {

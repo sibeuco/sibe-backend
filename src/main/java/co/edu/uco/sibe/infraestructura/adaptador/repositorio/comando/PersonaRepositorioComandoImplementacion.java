@@ -3,37 +3,27 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.comando;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class PersonaRepositorioComandoImplementacion implements PersonaRepositorioComando {
-    @Autowired
-    private PersonaDAO personaDAO;
-
-    @Autowired
-    private PersonaMapeador personaMapeador;
-
-    @Autowired
-    private UsuarioDAO usuarioDAO;
-
-    @Autowired
-    private UsuarioMapeador usuarioMapeador;
-
-    @Autowired
-    PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
-
-    @Autowired
-    PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
+    private final PersonaDAO personaDAO;
+    private final PersonaMapeador personaMapeador;
+    private final UsuarioDAO usuarioDAO;
+    private final UsuarioMapeador usuarioMapeador;
+    private final PeticionRecuperacionClaveDAO peticionRecuperacionClaveDAO;
+    private final PeticionRecuperacionClaveMapeador peticionRecuperacionClaveMapeador;
 
     @Override
     public UUID agregarNuevoUsuario(Usuario usuario, Persona persona, String claveEncriptada) {
@@ -50,10 +40,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
         var personaEntidad = this.personaDAO.findById(persona.getIdentificador()).orElse(null);
         var usuarioEntidad = this.usuarioDAO.findById(usuario.getIdentificador()).orElse(null);
 
-        assert !ValidadorObjeto.esNulo(personaEntidad);
+        assert !esNulo(personaEntidad);
         this.personaMapeador.modificarEntidad(personaEntidad, persona);
 
-        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        assert !esNulo(usuarioEntidad);
         this.usuarioMapeador.modificarEntidad(usuarioEntidad, usuario);
 
         this.personaDAO.save(personaEntidad);
@@ -65,10 +55,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public UUID modificarClave(String nuevaContrasena, UUID identificador) {
         var personaEntidad = this.personaDAO.findById(identificador).orElse(null);
 
-        assert !ValidadorObjeto.esNulo(personaEntidad);
+        assert !esNulo(personaEntidad);
         var usuarioEntidad = this.usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
-        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        assert !esNulo(usuarioEntidad);
         this.usuarioMapeador.construirModificarContrasenaEntidad(usuarioEntidad, nuevaContrasena);
 
         return this.usuarioDAO.save(usuarioEntidad).getIdentificador();
@@ -79,10 +69,10 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public void eliminarUsuario(UUID identificador) {
         var personaEntidad = personaDAO.findById(identificador).orElse(null);
 
-        assert !ValidadorObjeto.esNulo(personaEntidad);
+        assert !esNulo(personaEntidad);
         var usuarioEntidad = usuarioDAO.findByCorreo(personaEntidad.getCorreo());
 
-        assert !ValidadorObjeto.esNulo(usuarioEntidad);
+        assert !esNulo(usuarioEntidad);
         usuarioEntidad.setEstaActivo(false);
 
         this.usuarioDAO.save(usuarioEntidad);
@@ -92,7 +82,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public UUID crearPeticionRecuperacionClave(String codigoCifrado, String correo, LocalDateTime fecha) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
-        if (ValidadorObjeto.esNulo(entidad)) {
+        if (esNulo(entidad)) {
             entidad = this.peticionRecuperacionClaveMapeador.construirEntidad(codigoCifrado, correo, fecha);
         } else {
             this.peticionRecuperacionClaveMapeador.actualizarEntidad(entidad, codigoCifrado, fecha);
@@ -105,7 +95,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public void eliminarPeticionRecuperacionClaveConCorreo(String correo) {
         var entidad = this.peticionRecuperacionClaveDAO.findByCorreo(correo);
 
-        assert !ValidadorObjeto.esNulo(entidad);
+        assert !esNulo(entidad);
         this.peticionRecuperacionClaveDAO.deleteById(entidad.getIdentificador());
     }
 
@@ -113,7 +103,7 @@ public class PersonaRepositorioComandoImplementacion implements PersonaRepositor
     public UUID modificarClaveConCorreo(String claveCifrada, String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        assert !ValidadorObjeto.esNulo(entidad);
+        assert !esNulo(entidad);
         this.usuarioMapeador.construirModificarContrasenaEntidad(entidad, claveCifrada);
 
         return this.usuarioDAO.save(entidad).getIdentificador();

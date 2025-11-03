@@ -6,9 +6,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NOMBRE_AREA_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarAreaUseCase {
     private final AreaRepositorioComando areaRepositorioComando;
@@ -28,7 +28,7 @@ public class GuardarAreaUseCase {
     }
 
     private void validarNoExisteAreaConNombre(String nombre) {
-        if (!ValidadorObjeto.esNulo(this.areaRepositorioConsulta.consultarPorNombre(nombre))){
+        if (!esNulo(this.areaRepositorioConsulta.consultarPorNombre(nombre))){
             throw new ValorDuplicadoExcepcion(NOMBRE_AREA_EXISTENTE);
         }
     }

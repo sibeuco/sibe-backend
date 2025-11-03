@@ -5,28 +5,23 @@ import co.edu.uco.sibe.dominio.dto.AreaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero;
-import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.esNumeroMayor;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
+@AllArgsConstructor
 public class AreaRepositorioConsultaImplementacion implements AreaRepositorioConsulta {
-    @Autowired
-    private AreaDAO areaDAO;
-
-    @Autowired
-    private AreaMapeador areaMapeador;
-
-    @Autowired
-    private AreaDetalladaMapeador areaDetalladaMapeador;
+    private final AreaDAO areaDAO;
+    private final AreaMapeador areaMapeador;
+    private final AreaDetalladaMapeador areaDetalladaMapeador;
 
     @Override
     public List<AreaDTO> consultarDTOs() {
@@ -46,7 +41,7 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     public Area consultarPorIdentificador(UUID identificador) {
         var entidad = this.areaDAO.findById(identificador).orElse(null);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 
@@ -57,14 +52,14 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
     public boolean hayDatos() {
         var cantidad = areaDAO.count();
 
-        return ValidadorNumero.esNumeroMayor(cantidad, CERO);
+        return esNumeroMayor(cantidad, CERO);
     }
 
     @Override
     public Area consultarPorNombre(String nombre) {
         var entidad = this.areaDAO.findByNombre(nombre);
 
-        if(ValidadorObjeto.esNulo(entidad)) {
+        if(esNulo(entidad)) {
             return null;
         }
 
