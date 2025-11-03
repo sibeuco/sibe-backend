@@ -23,9 +23,7 @@ public class EjecucionActividadMotorFabrica implements MotorFabrica<EjecucionAct
         var regla = EjecucionActividadRegla.obtenerInstancia();
 
         motor.agregarRegla(TipoOperacion.CREAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
-        motor.agregarRegla(TipoOperacion.CREAR, regla::validarCampos);
         motor.agregarRegla(TipoOperacion.ACTUALIZAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
-        motor.agregarRegla(TipoOperacion.ACTUALIZAR, regla::validarCampos);
         motor.agregarRegla(TipoOperacion.ELIMINAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
         motor.agregarRegla(TipoOperacion.CONSULTAR, modelo -> regla.validarIdentificador(modelo.getIdentificador()));
 
