@@ -1,8 +1,7 @@
 package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import java.util.Collection;
-
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 
 public final class ValidadorObjeto {
     private ValidadorObjeto() {

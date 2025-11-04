@@ -15,8 +15,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.FINALIZADA;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
@@ -57,10 +59,11 @@ public class FinalizarActividadUseCase {
         participantes.forEach(p -> {
             var participanteRegistrado = registrarParticipanteService.ejecutar(p);
             var registro = RegistroAsistencia.construir(
-                    generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarPorIdentificador(uuid))),
+                    generar(uuid -> !esNulo(registroAsistenciaRepositorioConsulta.consultarPorIdentificador(uuid))),
                     ejecucionFinalizada,
                     participanteRegistrado
             );
+
             registroAsistenciaRepositorioComando.guardar(registro);
         });
 
@@ -69,17 +72,21 @@ public class FinalizarActividadUseCase {
 
     private EjecucionActividad validarSiExisteEjecucion(UUID id) {
         var ejecucion = actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(id);
+
         if (esNulo(ejecucion)) {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID, id));
         }
+
         return ejecucion;
     }
 
     private EstadoActividad validarSiExisteEstado(String nombre) {
         var estado = estadoActividadRepositorioConsulta.consultarPorNombre(nombre);
+
         if (esNulo(estado)) {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
         }
+
         return estado;
     }
 }

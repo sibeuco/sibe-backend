@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.ArchivoConstante.ARCHIVO_PARAM;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY;
 
 @RestController
 @AllArgsConstructor

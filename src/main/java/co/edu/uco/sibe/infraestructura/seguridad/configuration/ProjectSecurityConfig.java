@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import java.util.Collections;
 import java.util.List;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.TRES_MIL_SEICIENTOS_LONG;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_HEADER;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.LOCAL_FRONT_URL;

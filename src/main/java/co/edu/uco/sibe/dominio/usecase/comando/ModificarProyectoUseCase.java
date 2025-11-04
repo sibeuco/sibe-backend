@@ -9,7 +9,9 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.NUMERO_PROYECTO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.PROYECTO_NO_EXISTE_CON_IDENTIFICADOR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 
 public class ModificarProyectoUseCase {
     private final ProyectoRepositorioComando proyectoRepositorioComando;

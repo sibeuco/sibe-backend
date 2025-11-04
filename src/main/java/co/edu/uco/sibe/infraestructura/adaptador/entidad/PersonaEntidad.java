@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.IDENTIFICACION;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PERSONA;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.IDENTIFICACION;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.PERSONA;
 
 @Getter
 @Setter

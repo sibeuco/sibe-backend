@@ -1,6 +1,9 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
-public final class MensajeConstante {
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+
+public final class MensajesValidacionConstante {
+
     public static final String DETALLE_ACCION_OBLIGATORIO = "El detalle de la acción es obligatorio.";
     public static final String DETALLE_ACCION_INVALIDO = "El detalle proporcionado para la acción es inválido.";
     public static final String LONGITUD_DETALLE_ACCION_INVALIDA = "El detalle de la acción debe tener entre 10 y 500 caracteres.";
@@ -171,7 +174,6 @@ public final class MensajeConstante {
     public static final String LONGITUD_CLAVE_USUARIO_INVALIDA = "La clave del usuario debe tener entre 8 y 20 caracteres.";
 
     public static final String CAMPO_OBLIGATORIO = "El campo no puede estar vacío.";
-    public static final String OCURRIO_UN_ERROR = "Ocurrió un error inesperado, por favor contactar al administrador del sistema.";
     public static final String DOCUMENTO_PERSONA_VACIO = "El documento no puede estar vacío.";
     public static final String PRIMER_NOMBRE_PERSONA_VACIO = "El primer nombre no puede estar vacío.";
     public static final String PRIMER_APELLIDO_PERSONA_VACIO = "El primer apellido no puede estar vacío.";
@@ -180,30 +182,8 @@ public final class MensajeConstante {
     public static final String PATRON_APELLIDO_PERSONA_INVALIDO = "El apellido solo debe contener letras y espacios.";
     public static final String LONGITUD_NOMBRE_PERSONA_INVALIDA = "El nombre debe contener entre 1 y 20 caracteres.";
     public static final String LONGITUD_APELLIDO_PERSONA_INVALIDA = "El apellido debe contener entre 1 y 20 caracteres.";
-    public static final String CORREO_EXISTENTE = "Ya existe un usuario con el correo ingresado.";
-    public static final String DETALLE_EXISTENTE = "Ya existe una accion con el detalle ingresado.";
-    public static final String NOMBRE_INDICADOR_EXISTENTE = "Ya existe un indicador con el nombre ingresado.";
-    public static final String NOMBRE_AREA_EXISTENTE = "Ya existe un area con el nombre ingresado.";
-    public static final String NOMBRE_DIRECCION_EXISTENTE = "Ya existe un direccion con el nombre ingresado.";
-    public static final String NOMBRE_SUB_AREA_EXISTENTE = "Ya existe una sub area con el nombre ingresado.";
-    public static final String NOMBRE_TEMPORALIDAD_EXISTENTE = "Ya existe una temporalidad area con el nombre ingresado.";
-    public static final String SIGLA_TIPO_IDENTIFICACION_EXISTENTE = "Ya existe un tipo identificacion con la sigla ingresada.";
-    public static final String DESCRIPCION_TIPO_IDENTIFICACION_EXISTENTE = "Ya existe un tipo identificacion con la descripcion ingresada.";
-    public static final String CODIGO_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el codigo ingresado.";
-    public static final String NATURALEZA_TIPO_INDICADOR_EXISTENTE = "Ya existe un tipo indicador con la naturaleza ingresada.";
-    public static final String NOMBRE_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el nombre ingresado.";
-    public static final String ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL = "Ya existe una actividad en el semestre actual con el nombre ingresado.";
-    public static final String ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR = "No existe una actividad ese identificador.";
-    public static final String AREA_NO_ENCONTRADA_CON_ID = "No se ha encontrado un área con el identificador: ";
-    public static final String DIRECCION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una dirección con el identificador: ";
-    public static final String SUBAREA_NO_ENCONTRADA_CON_ID = "No se ha encontrado un subárea con el identificador: ";
-    public static final String NOMBRE_ESTADO_ACTIVIDAD_EXISTENTE = "Ya existe un estado actividad con el nombre ingresado.";
-    public static final String PUBLICO_INTERES_EXISTENTE = "Ya existe un Publico Interes con el nombre ingresado.";
-    public static final String INDICADOR_NO_EXISTENTE = "No existe un indicador con el identificador: ";
-    public static final String NUMERO_PROYECTO_EXISTENTE = "Ya existe un proyecto con el numero de proyecto ingresado.";
-    public static final String PROYECTO_NO_EXISTE_CON_IDENTIFICADOR = "No existe proyecto con identificador: ";
+
     public static final String CORREO_USUARIO_VACIO = "El correo electrónico no puede estar vacío.";
-    public static final String NO_SE_ECONTRARON_USUARIOS = "No se encontraron usuarios registrados.";
     public static final String PATRON_CORREO_INVALIDO = "El formato del correo electrónico no es válido.";
     public static final String CONTRASENA_VACIA = "La contraseña no puede estar vacía.";
     public static final String PATRON_CONTRASENA_INVALIDO = "La contraseña debe tener entre 8 y 20 caracteres, incluyendo al menos una letra mayúscula, una minúscula y un número.";
@@ -213,8 +193,8 @@ public final class MensajeConstante {
     public static final String LONGITUD_SIGLA_TIPO_IDENTIFICACION_INVALIDA = "El campo sigla debe contener entre 1 y 5 caracteres.";
     public static final String PATRON_DESCIPCION_TIPO_IDENTIFICACION_INVALIDO = "La descripción del tipo identificacion solo debe contener letras y espacios.";
     public static final String LONGITUD_DESCRIPCION_TIPO_IDENTIFICACION_INVALIDA = "El campo de la descripción debe contener entre 1 y 40 caracteres.";
+
     public static final String IDENTIFICADOR_USUARIO_NULO = "El identificiador de un usuario no puede ser nulo";
-    public static final String NO_HAY_CAMPOS_POR_VALIDAR = "No hay campos por validar para este modelo de dominio";
     public static final String IDENTIFICADOR_TIPO_USUARIO_NULO = "El identificador del tipo usuario no puede ser nulo.";
     public static final String IDENTIFICADOR_TIPO_INDICADOR_NULO = "El identificador del tipo indicador no puede ser nulo.";
     public static final String IDENTIFICADOR_TIPO_IDENTIFICACION_NULO = "El identificador del tipo identificacion no puede ser nulo.";
@@ -242,56 +222,8 @@ public final class MensajeConstante {
     public static final String IDENTIFICADOR_EXTERNO_NULO = "El identificador del externo no puede ser nulo.";
     public static final String IDENTIFICADOR_REGISTRO_ASISTENCIA_NULO = "El identificador del registro de asistencia no puede ser nulo.";
     public static final String IDENTIFICADOR_USUARIO_ORGANIZACION_NULO = "El identificador del usuario organizaicón no puede ser nulo.";
-    public static final String DOCUMENTO_EXISTENTE = "Ya existe un usuario con el número de identificación suministrado.";
-    public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO = "El codigo para recuperar la clave es invalido.";
-    public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO = "El codigo para recuperar la clave es incorrecto";
-    public static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
-    public static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
-    public static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
-    public static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
-    public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
-    public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
-    public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";
-    public static final String USUARIO_O_CLAVE_INCORRECTO = "El usuario o la contraseña no son validos.";
-    public static final String ERROR_AL_ENVIAR_CORREO = "Error al enviar el correo";
-    public static final String ERROR_INESPERADO_EN_EL_SERVICIO_DE_ENVIAR_CORREO = "Error inesperado en el servicio de correo";
-    public static final String LA_CLAVE_NUEVA_NO_PUEDE_SER_IGUAL_A_LA_ANTIGUA = "La clave nueva no puede ser igual a la antigua.";
-    public static final String LA_CLAVE_ANTIGUA_ES_INCORRECTA = "La clave antigua es incorrecta.";
 
-    public static final String MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION = "No se ha encontrado un miembro con el número de identificación: ";
-    public static final String MIEMBRO_NO_ENCONTRADO_CON_ID_CARNET = "No se ha encontrado un miembro con el id de carnet: ";
-
-    public static final String EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID = "No se ha encontrado una ejecución de actividad con el identificador: ";
-    public static final String ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE = "No se ha encontrado un estado de actividad con el nombre: ";
-    public static final String MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO = "No se ha encontrado un miembro con el documento: ";
-
-    public static final String ORGANIZACION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una entidad organizacional (Dirección, Área o Subárea) con el identificador: ";
-
-    public static final String DIRECCION_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado una dirección con el nombre: ";
-    public static final String AREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un área con el nombre: ";
-    public static final String SUBAREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un subárea con el nombre: ";
-
-    public static final String ERROR_AL_PROCESAR_EL_ARCHIVO = "Error al procesar el archivo: ";
-    public static final String ERROR_INESPERADO = "Error inesperado: ";
-    public static final String EL_ARCHIVO_ESTA_VACIO = "El archivo está vacío.";
-    public static final String EL_ARCHIVO_ESTA_VACIO_O_NO_TIENE_ENCABEZADOS = "El archivo está vacío o no tiene encabezados.";
-
-    public static final String NO_EXISTE_DIRECCION_CON_NOMBRE = "No existe direccion con el nombre: ";
-    public static final String NO_EXISTE_IDENTIFICACION_CON_LA_SIGLA = "No existe tipo identificacion con la sigla: " ;
-    public static final String NO_EXISTE_TIPO_USUARIO_CON_CODIGO = "No existe tipo usuario con el codigo: ";
-    public static final String EL_USUARIO = "El Usuario ";
-    public static final String FUE_AUTENTICADO_EXITOSAMENTE_CON_LOS_ROLES = " fue autenticado exitosamente y tiene el rol de: ";
-    public static final String NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA = "No se puede instanciar una clase utilitaria";
-
-    private MensajeConstante() {
+    private MensajesValidacionConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
-    }
-
-    public static String obtenerMensajeConParametro(String mensaje, Object parametro) {
-        return  mensaje + parametro;
-    }
-
-    public static String obtenerMensajeDeConfirmacionDeInicioSesion(String correo, String roles) {
-        return EL_USUARIO + correo + FUE_AUTENTICADO_EXITOSAMENTE_CON_LOS_ROLES + roles;
     }
 }

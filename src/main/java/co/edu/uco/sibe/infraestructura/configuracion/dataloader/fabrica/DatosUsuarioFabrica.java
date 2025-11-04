@@ -4,7 +4,7 @@ import co.edu.uco.sibe.aplicacion.comando.AreaComando;
 import co.edu.uco.sibe.aplicacion.comando.UsuarioComando;
 import co.edu.uco.sibe.dominio.enums.TipoArea;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.*;
 
 public final class DatosUsuarioFabrica {
 

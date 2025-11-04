@@ -3,8 +3,8 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 import co.edu.uco.sibe.dominio.modelo.ParticipanteExterno;
 import co.edu.uco.sibe.dominio.regla.Regla;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_HAY_CAMPOS_POR_VALIDAR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesValidacionConstante.IDENTIFICADOR_PARTICIPANTE_EXTERNO_NULO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.NO_HAY_CAMPOS_POR_VALIDAR;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 
 public class ParticipanteExternoRegla implements Regla<ParticipanteExterno> {

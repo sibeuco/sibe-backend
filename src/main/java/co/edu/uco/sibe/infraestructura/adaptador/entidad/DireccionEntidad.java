@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import jakarta.persistence.*;
 import java.util.UUID;
 import java.util.List;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.*;
 
 @Getter
 @Setter

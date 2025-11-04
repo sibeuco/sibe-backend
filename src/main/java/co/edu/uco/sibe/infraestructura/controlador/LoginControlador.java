@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.LOGIN_API;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.LOGIN_API;
 
 @RestController
 @AllArgsConstructor

@@ -7,9 +7,11 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.CorreoConstante.ASUNTO_CORREO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_EXISTE_USUARIO_CON_CORREO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.NO_EXISTE_USUARIO_CON_CORREO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class SolicitarCodigoUseCase {

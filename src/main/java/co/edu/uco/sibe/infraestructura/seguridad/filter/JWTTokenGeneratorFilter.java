@@ -17,7 +17,7 @@ import java.util.HashSet;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.TREINTA_MILLONES;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.COMMA;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.LOGIN_API;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.LOGIN_API;
 
 /**
  * JWTTokenGeneratorFilter creates a JWT token and attaches it to the HTTP response after a successful authentication.

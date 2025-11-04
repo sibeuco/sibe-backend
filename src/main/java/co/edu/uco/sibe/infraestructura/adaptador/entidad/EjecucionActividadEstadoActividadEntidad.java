@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.CAMPO_ESTADO_ACTIVIDAD;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TABLA_EJECUCION_ACTIVIDAD_ESTADO_ACTIVIDAD;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.CAMPO_ESTADO_ACTIVIDAD;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.TABLA_EJECUCION_ACTIVIDAD_ESTADO_ACTIVIDAD;
 
 @Getter
 @Setter

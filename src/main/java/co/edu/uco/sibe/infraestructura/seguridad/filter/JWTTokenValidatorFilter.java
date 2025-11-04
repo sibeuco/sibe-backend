@@ -14,10 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_HEADER;
-import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.JWT_KEY;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.TOKEN_RECIBIDO_INVALIDO;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.LOGIN_API;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.TOKEN_RECIBIDO_INVALIDO;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.*;
 
 /**
  * JWTTokenValidatorFilter validates JWT tokens on incoming HTTP requests for protected resources.

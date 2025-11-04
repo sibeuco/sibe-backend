@@ -7,8 +7,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.TiempoVencidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO;
 
 public class ValidarCodigoRecuperacionClaveUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;

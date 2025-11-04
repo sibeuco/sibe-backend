@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.DIEZ;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.ADMINISTRADOR_DIRECCION;
 
 @Component
 @Order(DIEZ)

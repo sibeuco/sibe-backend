@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.ACCIONES;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.HAS_USER_OR_ADMIN_UPDATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.ACCIONES;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_USER_OR_ADMIN_UPDATE_AUTHORITY;
 
 @RestController
 @AllArgsConstructor
