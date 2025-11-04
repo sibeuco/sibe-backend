@@ -14,13 +14,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+
 @Slf4j
 @Component
 public class ProcesadorExcelMotor {
 
     public <T> List<T> procesarArchivo(MultipartFile archivo, FilaExcelMapeador<T> mapeador) {
         if (archivo.isEmpty()) {
-            throw new IllegalArgumentException("El archivo está vacío.");
+            throw new IllegalArgumentException(EL_ARCHIVO_ESTA_VACIO);
         }
 
         List<T> resultados = new ArrayList<>();
@@ -32,7 +34,7 @@ public class ProcesadorExcelMotor {
             Iterator<Row> filas = hoja.iterator();
 
             if (!filas.hasNext()) {
-                throw new IllegalStateException("El archivo está vacío o no tiene encabezados.");
+                throw new IllegalStateException(EL_ARCHIVO_ESTA_VACIO_O_NO_TIENE_ENCABEZADOS);
             }
 
             Row filaEncabezados = filas.next();
@@ -52,9 +54,9 @@ public class ProcesadorExcelMotor {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("Error al procesar el archivo: " + e.getMessage(), e);
+            throw new RuntimeException(obtenerMensajeConParametro(ERROR_AL_PROCESAR_EL_ARCHIVO, e.getMessage()), e);
         } catch (Exception e) {
-            throw new RuntimeException("Error inesperado: " + e.getMessage(), e);
+            throw new RuntimeException(obtenerMensajeConParametro(ERROR_INESPERADO, e.getMessage()), e);
         }
 
         return resultados;

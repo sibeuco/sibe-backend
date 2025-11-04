@@ -11,7 +11,7 @@ import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarUsuarioUseCase {
@@ -44,7 +44,7 @@ public class ModificarUsuarioUseCase {
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
         if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new ValorInvalidoExcepcion(obtenerNoExistePersonaConId(identificador));
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(NO_EXISTE_PERSONA_CON_IDENTIFICADOR, identificador));
         }
     }
 

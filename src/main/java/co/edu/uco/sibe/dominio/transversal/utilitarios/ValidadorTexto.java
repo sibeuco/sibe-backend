@@ -3,6 +3,7 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 import co.edu.uco.sibe.dominio.transversal.excepcion.PatronExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorObligatorioExcepcion;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
@@ -14,7 +15,7 @@ public final class ValidadorTexto {
     private static final String PATRON_NUMERO_IDENTIFICACION = "^([0-9]{5,12})";
 
     private ValidadorTexto() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
     public static String aplicarTrim(String cadena) {

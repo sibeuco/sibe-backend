@@ -2,13 +2,14 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import java.util.UUID;
 import java.util.function.Predicate;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 public final class UtilUUID {
     private static final String UUID_DEFECTO_TEXTO = "00000000-0000-0000-0000-000000000000";
 
     private UtilUUID() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
     public static UUID textoAUUID(final String texto) {

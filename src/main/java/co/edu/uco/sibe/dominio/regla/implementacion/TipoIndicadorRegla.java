@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 import co.edu.uco.sibe.dominio.modelo.TipoIndicador;
 import co.edu.uco.sibe.dominio.regla.Regla;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoValido;

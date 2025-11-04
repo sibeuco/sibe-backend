@@ -7,7 +7,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarEjecucionesPorActividadUseCase {
@@ -27,7 +28,7 @@ public class ConsultarEjecucionesPorActividadUseCase {
     private Actividad validarSiExisteActividad(UUID id, String idComando) {
         var actividad = actividadRepositorioConsulta.consultarPorIdentificador(id);
         if (esNulo(actividad)) {
-            throw new ValorInvalidoExcepcion(ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR + idComando);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR, idComando));
         }
         return actividad;
     }

@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoIdentificacionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.consultarPorSigla;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarTipoIdentificacionPorSiglaUseCase {
@@ -21,7 +21,7 @@ public class ConsultarTipoIdentificacionPorSiglaUseCase {
 
     private void validarSiNoExisteTipoIdentificacionConSigla(String sigla) {
         if (esNulo(this.tipoIdentificacionRepositorioConsulta.consultarPorSigla(sigla))) {
-            throw new ValorInvalidoExcepcion(consultarPorSigla(sigla));
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(NO_EXISTE_IDENTIFICACION_CON_LA_SIGLA, sigla));
         }
     }
 }

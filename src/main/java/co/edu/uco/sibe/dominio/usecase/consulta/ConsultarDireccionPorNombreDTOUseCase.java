@@ -3,7 +3,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.DireccionDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DIRECCION_NO_ENCONTRADA_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.DIRECCION_NO_ENCONTRADA_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarDireccionPorNombreDTOUseCase {
@@ -20,7 +21,7 @@ public class ConsultarDireccionPorNombreDTOUseCase {
     private DireccionDTO validarSiExisteDireccion(String nombre) {
         var direccion = direccionRepositorioConsulta.consultarPorNombreDTO(nombre);
         if (esNulo(direccion)) {
-            throw new ValorInvalidoExcepcion(DIRECCION_NO_ENCONTRADA_CON_NOMBRE + nombre);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(DIRECCION_NO_ENCONTRADA_CON_NOMBRE, nombre));
         }
         return direccion;
     }

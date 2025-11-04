@@ -2,6 +2,7 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 public final class UtilFecha {
@@ -9,7 +10,7 @@ public final class UtilFecha {
     private static final LocalTime HORA_DEFECTO = LocalTime.of(0, 0, 0);
 
     private UtilFecha() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
     public static LocalDate obtenerFechaActual(){

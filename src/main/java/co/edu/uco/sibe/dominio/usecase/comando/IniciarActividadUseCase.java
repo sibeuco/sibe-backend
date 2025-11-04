@@ -9,8 +9,7 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalTime;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.EN_CURSO;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class IniciarActividadUseCase {
@@ -46,7 +45,7 @@ public class IniciarActividadUseCase {
     private EjecucionActividad validarSiExisteEjecucion(UUID id) {
         var ejecucion = actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(id);
         if (esNulo(ejecucion)) {
-            throw new ValorInvalidoExcepcion(EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID + id);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID, id));
         }
         return ejecucion;
     }
@@ -54,7 +53,7 @@ public class IniciarActividadUseCase {
     private EstadoActividad validarSiExisteEstado(String nombre) {
         var estado = estadoActividadRepositorioConsulta.consultarPorNombre(nombre);
         if (esNulo(estado)) {
-            throw new ValorInvalidoExcepcion(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE + nombre);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
         }
         return estado;
     }

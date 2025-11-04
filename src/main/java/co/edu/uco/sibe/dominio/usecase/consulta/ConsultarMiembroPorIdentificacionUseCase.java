@@ -3,7 +3,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.MiembroRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarMiembroPorIdentificacionUseCase {
@@ -21,7 +22,7 @@ public class ConsultarMiembroPorIdentificacionUseCase {
     private MiembroDTO validarSiExisteMiembro(String identificacion) {
         var miembro = miembroRepositorioConsulta.consultarPorIdentificacion(identificacion);
         if (esNulo(miembro)) {
-            throw new ValorInvalidoExcepcion(MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION + identificacion);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION, identificacion));
         }
         return miembro;
     }

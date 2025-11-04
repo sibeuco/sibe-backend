@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+
 public final class SeguridadConstante {
     public static final String JWT_KEY = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
     public static final String JWT_HEADER = "Authorization";
@@ -12,6 +14,6 @@ public final class SeguridadConstante {
     public static final String LOCAL_FRONT_URL = "http://localhost:4200";
 
     private SeguridadConstante() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 }

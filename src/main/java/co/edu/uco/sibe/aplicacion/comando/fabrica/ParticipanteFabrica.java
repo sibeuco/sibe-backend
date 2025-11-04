@@ -14,7 +14,8 @@ import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_APLICA;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
@@ -32,7 +33,7 @@ public class ParticipanteFabrica {
         var miembroDto = miembroRepositorioConsulta.consultarPorIdentificacion(comando.getDocumentoIdentificacion());
 
         if (esNulo(miembroDto)) {
-            throw new ValorInvalidoExcepcion(MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO + comando.getDocumentoIdentificacion());
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO ,comando.getDocumentoIdentificacion()));
         }
 
         var miembro = Miembro.construir(

@@ -8,7 +8,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DIRECCION_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.DIRECCION_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarActividadesPorDireccionUseCase {
@@ -31,7 +32,7 @@ public class ConsultarActividadesPorDireccionUseCase {
         var direccion = direccionRepositorioConsulta.consultarPorIdentificador(id);
 
         if (esNulo(direccion)) {
-            throw new ValorInvalidoExcepcion(DIRECCION_NO_ENCONTRADA_CON_ID + idComando);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(DIRECCION_NO_ENCONTRADA_CON_ID, idComando));
         }
 
         return direccion;

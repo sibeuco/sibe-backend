@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+
 public final class TextoConstante {
     public static final String VACIO = "";
     public static final String GUION = "-";
@@ -297,6 +299,6 @@ public final class TextoConstante {
     public static final String CONSULTAR_PARTICIPANTE_POR_NUMERO_IDENTIFICACION = "SELECT p FROM ParticipanteEntidad p WHERE p.miembro.numeroIdentificacion = :documento";
 
     private TextoConstante() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 }

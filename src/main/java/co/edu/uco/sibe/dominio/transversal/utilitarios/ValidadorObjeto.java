@@ -2,9 +2,11 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import java.util.Collection;
 
-public class ValidadorObjeto {
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+
+public final class ValidadorObjeto {
     private ValidadorObjeto() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
     public static <T> void validarObligatorio(T objeto, String mensaje) {

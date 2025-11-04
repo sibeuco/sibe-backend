@@ -6,7 +6,8 @@ import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExisteUsuarioConCorreo;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_EXISTE_USUARIO_CON_CORREO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class RecuperarClaveUseCase {
@@ -36,7 +37,7 @@ public class RecuperarClaveUseCase {
 
     private void validarSiNoExisteUsuarioConCorreo(String correo) {
         if (esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
-            throw new NullPointerException(obtenerNoExisteUsuarioConCorreo(correo));
+            throw new NullPointerException(obtenerMensajeConParametro(NO_EXISTE_USUARIO_CON_CORREO, correo));
         }
     }
 }

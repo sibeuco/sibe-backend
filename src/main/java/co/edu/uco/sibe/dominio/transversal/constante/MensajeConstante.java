@@ -1,8 +1,6 @@
-package co.edu.uco.sibe.dominio.transversal.utilitarios;
+package co.edu.uco.sibe.dominio.transversal.constante;
 
-import java.util.UUID;
-
-public final class UtilMensaje {
+public final class MensajeConstante {
     public static final String DETALLE_ACCION_OBLIGATORIO = "El detalle de la acción es obligatorio.";
     public static final String DETALLE_ACCION_INVALIDO = "El detalle proporcionado para la acción es inválido.";
     public static final String LONGITUD_DETALLE_ACCION_INVALIDA = "El detalle de la acción debe tener entre 10 y 500 caracteres.";
@@ -247,10 +245,10 @@ public final class UtilMensaje {
     public static final String DOCUMENTO_EXISTENTE = "Ya existe un usuario con el número de identificación suministrado.";
     public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_YA_NO_ES_VALIDO = "El codigo para recuperar la clave es invalido.";
     public static final String EL_CODIGO_PARA_RECUPERAR_CLAVE_ES_INCORRECTO = "El codigo para recuperar la clave es incorrecto";
-    private static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
-    private static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
-    private static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
-    private static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
+    public static final String NO_EXISTE_USUARIO_CON_IDENTIFICADOR = "No existe un usuario con el identificador ";
+    public static final String NO_EXISTE_USUARIO_CON_CORREO = "No existe un usuario con el correo ";
+    public static final String NO_EXISTE_PERSONA_CON_CORREO = "No existe un persona con el correo ";
+    public static final String NO_EXISTE_PERSONA_CON_IDENTIFICADOR = "No existe un persona con el identificador ";
     public static final String VALIDANDO_AUTENTICACION = "La autenticación está siendo validada.";
     public static final String TOKEN_RECIBIDO_INVALIDO = "El token recibido es inválido.";
     public static final String ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA = "Error al decodificar el token de autenticación básica.";
@@ -273,39 +271,27 @@ public final class UtilMensaje {
     public static final String AREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un área con el nombre: ";
     public static final String SUBAREA_NO_ENCONTRADA_CON_NOMBRE = "No se ha encontrado un subárea con el nombre: ";
 
-    private UtilMensaje() {
-        super();
+    public static final String ERROR_AL_PROCESAR_EL_ARCHIVO = "Error al procesar el archivo: ";
+    public static final String ERROR_INESPERADO = "Error inesperado: ";
+    public static final String EL_ARCHIVO_ESTA_VACIO = "El archivo está vacío.";
+    public static final String EL_ARCHIVO_ESTA_VACIO_O_NO_TIENE_ENCABEZADOS = "El archivo está vacío o no tiene encabezados.";
+
+    public static final String NO_EXISTE_DIRECCION_CON_NOMBRE = "No existe direccion con el nombre: ";
+    public static final String NO_EXISTE_IDENTIFICACION_CON_LA_SIGLA = "No existe tipo identificacion con la sigla: " ;
+    public static final String NO_EXISTE_TIPO_USUARIO_CON_CODIGO = "No existe tipo usuario con el codigo: ";
+    public static final String EL_USUARIO = "El Usuario ";
+    public static final String FUE_AUTENTICADO_EXITOSAMENTE_CON_LOS_ROLES = " fue autenticado exitosamente y tiene el rol de: ";
+    public static final String NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA = "No se puede instanciar una clase utilitaria";
+
+    private MensajeConstante() {
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
-    public static String obtenerNoExisteUsuarioConId(UUID identificador) {
-        return NO_EXISTE_USUARIO_CON_IDENTIFICADOR + identificador;
+    public static String obtenerMensajeConParametro(String mensaje, Object parametro) {
+        return  mensaje + parametro;
     }
 
-    public static String obtenerNoExistePersonaConCorreo(String correo) {
-        return NO_EXISTE_PERSONA_CON_CORREO + correo;
-    }
-
-    public static String obtenerNoExisteUsuarioConCorreo(String correo) {
-        return NO_EXISTE_USUARIO_CON_CORREO + correo;
-    }
-
-    public static String obtenerNoExistePersonaConId(UUID identificador) {
-        return NO_EXISTE_PERSONA_CON_IDENTIFICADOR + identificador;
-    }
-
-    public static String getUserWasSuccessfullyAuthenticatedAndHasTheRoles(String name, String role) {
-        return "Usuario " + name + " fue autenticado exitosamente y tiene el rol de: " + role;
-    }
-
-    public static String consultarPorNombre(String nombre) {
-        return "No existe direccion con el nombre: " + nombre;
-    }
-
-    public static String consultarPorSigla(String sigla) {
-        return "No existe tipo identificacion con la sigla: " + sigla;
-    }
-
-    public static String consultarPorCodigo(String codigo) {
-        return "No existe tipo usuario con el codigo: " + codigo;
+    public static String obtenerMensajeDeConfirmacionDeInicioSesion(String correo, String roles) {
+        return EL_USUARIO + correo + FUE_AUTENTICADO_EXITOSAMENTE_CON_LOS_ROLES + roles;
     }
 }

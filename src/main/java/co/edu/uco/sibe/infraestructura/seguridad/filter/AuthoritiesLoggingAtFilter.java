@@ -3,7 +3,7 @@ package co.edu.uco.sibe.infraestructura.seguridad.filter;
 import jakarta.servlet.*;
 import java.io.IOException;
 import java.util.logging.Logger;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.VALIDANDO_AUTENTICACION;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.VALIDANDO_AUTENTICACION;
 
 /**
  * This filter logs an informational message indicating that the authentication process is being initiated.

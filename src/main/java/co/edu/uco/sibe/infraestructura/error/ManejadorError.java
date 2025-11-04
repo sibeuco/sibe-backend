@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.util.concurrent.ConcurrentHashMap;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.OCURRIO_UN_ERROR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.OCURRIO_UN_ERROR;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @ControllerAdvice
@@ -25,6 +25,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(ValorInvalidoExcepcion.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(NullPointerException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(TecnicoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        CODIGOS_ESTADO.put(UnsupportedOperationException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     @ExceptionHandler(Exception.class)
