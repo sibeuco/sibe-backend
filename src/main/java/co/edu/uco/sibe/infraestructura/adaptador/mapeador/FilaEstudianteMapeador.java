@@ -4,7 +4,8 @@ import co.edu.uco.sibe.aplicacion.comando.DatosEstudianteComando;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Component;
 import java.util.Map;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.ArchivoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.MAPEADOR_ESTUDIANTE_COMPONENTE;
 
 @Component(MAPEADOR_ESTUDIANTE_COMPONENTE)
 public class FilaEstudianteMapeador extends FilaExcelBaseMapeador<DatosEstudianteComando> {

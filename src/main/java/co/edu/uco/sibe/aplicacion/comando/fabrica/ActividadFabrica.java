@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PENDIENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.PENDIENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;

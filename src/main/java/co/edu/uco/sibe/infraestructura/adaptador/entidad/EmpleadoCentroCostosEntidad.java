@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.EMPLEADO_CENTRO_COSTOS;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.EMPLEADO_CENTRO_COSTOS;
 
 @Getter
 @Setter

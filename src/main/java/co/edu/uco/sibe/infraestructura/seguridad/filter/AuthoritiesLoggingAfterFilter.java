@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import java.io.IOException;
 import java.util.logging.Logger;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeDeConfirmacionDeInicioSesion;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeDeConfirmacionDeInicioSesion;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 /**

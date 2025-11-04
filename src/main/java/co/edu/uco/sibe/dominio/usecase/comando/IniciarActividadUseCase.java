@@ -8,8 +8,9 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsult
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalTime;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.EN_CURSO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.EN_CURSO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class IniciarActividadUseCase {

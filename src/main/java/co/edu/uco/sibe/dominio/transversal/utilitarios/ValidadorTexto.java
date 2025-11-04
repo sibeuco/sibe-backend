@@ -2,8 +2,8 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 
 import co.edu.uco.sibe.dominio.transversal.excepcion.PatronExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorObligatorioExcepcion;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 

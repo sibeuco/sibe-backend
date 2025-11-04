@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.util.concurrent.ConcurrentHashMap;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.OCURRIO_UN_ERROR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.OCURRIO_UN_ERROR;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @ControllerAdvice

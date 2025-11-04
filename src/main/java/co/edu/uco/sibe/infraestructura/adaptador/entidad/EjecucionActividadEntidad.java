@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.*;
 
 @Getter
 @Setter

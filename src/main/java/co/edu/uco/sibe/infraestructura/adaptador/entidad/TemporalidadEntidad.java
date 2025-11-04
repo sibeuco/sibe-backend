@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TEMPORALIDAD;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.TEMPORALIDAD;
 
 @Getter
 @Setter

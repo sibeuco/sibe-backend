@@ -7,7 +7,7 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NATURALEZA_TIPO_INDICADOR_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.NATURALEZA_TIPO_INDICADOR_EXISTENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarTipoIndicadorUseCase {

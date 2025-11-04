@@ -16,9 +16,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.USUARIO_O_CLAVE_INCORRECTO;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.USUARIO_O_CLAVE_INCORRECTO;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 /**
  * Custom AuthenticationProvider that validates username and password credentials against the application's data source.
  *

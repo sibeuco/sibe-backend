@@ -13,7 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_ADMIN_CREATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 
 @RestController

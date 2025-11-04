@@ -11,7 +11,7 @@ import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarActividadUseCase {

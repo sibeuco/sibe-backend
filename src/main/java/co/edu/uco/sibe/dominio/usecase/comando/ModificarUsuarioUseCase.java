@@ -11,7 +11,9 @@ import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarUsuarioUseCase {

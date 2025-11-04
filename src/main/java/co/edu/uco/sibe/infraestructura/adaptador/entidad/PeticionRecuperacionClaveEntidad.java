@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PETICION_RECUPERACION_CLAVE;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.PETICION_RECUPERACION_CLAVE;
 
 @Getter
 @Setter

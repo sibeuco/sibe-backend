@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.dominio.regla.Regla;
 
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesValidacionConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;

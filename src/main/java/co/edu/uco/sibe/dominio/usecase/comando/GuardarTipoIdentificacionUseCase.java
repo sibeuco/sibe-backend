@@ -7,8 +7,8 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.DESCRIPCION_TIPO_IDENTIFICACION_EXISTENTE;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.SIGLA_TIPO_IDENTIFICACION_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.DESCRIPCION_TIPO_IDENTIFICACION_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.SIGLA_TIPO_IDENTIFICACION_EXISTENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarTipoIdentificacionUseCase {

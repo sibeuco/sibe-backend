@@ -9,9 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ERROR_AL_ENVIAR_CORREO;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ERROR_INESPERADO_EN_EL_SERVICIO_DE_ENVIAR_CORREO;
+import static co.edu.uco.sibe.dominio.transversal.constante.CorreoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.ERROR_AL_ENVIAR_CORREO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.ERROR_INESPERADO_EN_EL_SERVICIO_DE_ENVIAR_CORREO;
 
 @Service
 public class EnviarCorreoElectronicoServiceMailSender implements EnviarCorreoElectronicoService {
