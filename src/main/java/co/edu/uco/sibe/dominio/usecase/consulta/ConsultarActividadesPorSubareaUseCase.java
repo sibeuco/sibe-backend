@@ -8,7 +8,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.SUBAREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.SUBAREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarActividadesPorSubareaUseCase {
@@ -29,7 +30,7 @@ public class ConsultarActividadesPorSubareaUseCase {
     private Subarea validarSiExisteSubarea(UUID id, String idComando) {
         var subarea = subareaRepositorioConsulta.consultarPorIdentificador(id);
         if (esNulo(subarea)) {
-            throw new ValorInvalidoExcepcion(SUBAREA_NO_ENCONTRADA_CON_ID + idComando);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(SUBAREA_NO_ENCONTRADA_CON_ID, idComando));
         }
         return subarea;
     }

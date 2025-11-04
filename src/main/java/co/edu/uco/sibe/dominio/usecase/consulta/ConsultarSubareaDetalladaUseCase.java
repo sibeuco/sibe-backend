@@ -4,7 +4,8 @@ import co.edu.uco.sibe.dominio.dto.SubareaDetalladaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.SUBAREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.SUBAREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarSubareaDetalladaUseCase {
@@ -22,7 +23,7 @@ public class ConsultarSubareaDetalladaUseCase {
     private SubareaDetalladaDTO validarSiExisteSubarea(UUID id) {
         var subarea = subareaRepositorioConsulta.consultarDetallePorIdentificador(id);
         if (esNulo(subarea)) {
-            throw new ValorInvalidoExcepcion(SUBAREA_NO_ENCONTRADA_CON_ID + id);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(SUBAREA_NO_ENCONTRADA_CON_ID, id));
         }
         return subarea;
     }

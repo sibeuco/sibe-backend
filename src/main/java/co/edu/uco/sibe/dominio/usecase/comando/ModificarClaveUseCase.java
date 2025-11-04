@@ -7,7 +7,7 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ModificarClaveUseCase {
@@ -41,7 +41,7 @@ public class ModificarClaveUseCase {
 
     private void validarSiNoExisteUsuarioConIdentificador(UUID identificador) {
         if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new NullPointerException(obtenerNoExisteUsuarioConId(identificador));
+            throw new NullPointerException(obtenerMensajeConParametro(NO_EXISTE_USUARIO_CON_IDENTIFICADOR, identificador));
         }
     }
 

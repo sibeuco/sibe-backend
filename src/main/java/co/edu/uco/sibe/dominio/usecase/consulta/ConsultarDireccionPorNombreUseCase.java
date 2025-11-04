@@ -3,7 +3,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.consultarPorNombre;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_EXISTE_DIRECCION_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarDireccionPorNombreUseCase {
@@ -21,7 +22,7 @@ public class ConsultarDireccionPorNombreUseCase {
 
     private void validarSiNoExisteDireccionConNombre(String nombre) {
         if (esNulo(this.direccionRepositorioConsulta.consultarPorNombre(nombre))) {
-            throw new ValorInvalidoExcepcion(consultarPorNombre(nombre));
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(NO_EXISTE_DIRECCION_CON_NOMBRE, nombre));
         }
     }
 }

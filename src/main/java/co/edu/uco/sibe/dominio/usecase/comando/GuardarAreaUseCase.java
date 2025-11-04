@@ -7,7 +7,7 @@ import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NOMBRE_AREA_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NOMBRE_AREA_EXISTENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarAreaUseCase {

@@ -3,7 +3,7 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
 import co.edu.uco.sibe.dominio.puerto.consulta.TipoUsuarioRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.consultarPorCodigo;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarTipoUsuarioPorCodigoUseCase {
@@ -21,7 +21,7 @@ public class ConsultarTipoUsuarioPorCodigoUseCase {
 
     private void validarSiNoExisteTipoUsuarioConCodigo(String codigo) {
         if (esNulo(this.tipoUsuarioRepositorioConsulta.consultarPorCodigo(codigo))) {
-            throw new ValorInvalidoExcepcion(consultarPorCodigo(codigo));
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(NO_EXISTE_TIPO_USUARIO_CON_CODIGO, codigo));
         }
     }
 }

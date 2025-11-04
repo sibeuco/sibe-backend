@@ -14,8 +14,8 @@ import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.AUTHENTICATION_SCHEME_BASIC;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.COLON;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.TEST_CASE;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.TOKEN_RECIBIDO_INVALIDO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ERROR_DECODIFICANDO_TOKEN_AUTENTICACION_BASICA;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.TOKEN_RECIBIDO_INVALIDO;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 /**

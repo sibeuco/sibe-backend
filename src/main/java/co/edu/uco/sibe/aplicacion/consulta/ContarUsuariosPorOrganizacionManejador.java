@@ -10,7 +10,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.ORGANIZACION_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.ORGANIZACION_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -43,6 +44,6 @@ public class ContarUsuariosPorOrganizacionManejador implements ManejadorComandoR
             return new ComandoRespuesta<>(contarUsuariosPorOrganizacionService.contarUsuariosPorSubarea(subarea));
         }
 
-        throw new ValorInvalidoExcepcion(ORGANIZACION_NO_ENCONTRADA_CON_ID + comando);
+        throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ORGANIZACION_NO_ENCONTRADA_CON_ID, comando));
     }
 }

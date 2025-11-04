@@ -4,7 +4,7 @@ import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.List;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NO_SE_ECONTRARON_USUARIOS;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_ECONTRARON_USUARIOS;
 
 public class ConsultarUsuariosUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;

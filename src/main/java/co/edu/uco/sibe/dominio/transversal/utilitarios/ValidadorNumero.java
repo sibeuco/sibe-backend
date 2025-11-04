@@ -3,12 +3,13 @@ package co.edu.uco.sibe.dominio.transversal.utilitarios;
 import co.edu.uco.sibe.dominio.transversal.excepcion.LongitudExcepcion;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_VERIFICADO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.obtenerObjetoPorDefecto;
 
 public final class ValidadorNumero {
     private ValidadorNumero() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 
     public static <T extends Number> void validarNumeroEntre(T numero, T minimo, T maximo, String mensaje) {

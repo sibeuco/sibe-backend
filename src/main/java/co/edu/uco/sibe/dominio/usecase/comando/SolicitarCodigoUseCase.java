@@ -8,7 +8,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.obtenerNoExisteUsuarioConCorreo;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_EXISTE_USUARIO_CON_CORREO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class SolicitarCodigoUseCase {
@@ -38,7 +39,7 @@ public class SolicitarCodigoUseCase {
 
     private void validarSiNoExisteUsuarioConCoreo(String correo) {
         if (esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
-            throw new ValorInvalidoExcepcion(obtenerNoExisteUsuarioConCorreo(correo));
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(NO_EXISTE_USUARIO_CON_CORREO, correo));
         }
     }
 }

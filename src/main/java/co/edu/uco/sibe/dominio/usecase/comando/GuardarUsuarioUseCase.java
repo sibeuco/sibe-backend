@@ -11,8 +11,8 @@ import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.CORREO_EXISTENTE;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.DOCUMENTO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.CORREO_EXISTENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.DOCUMENTO_EXISTENTE;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarUsuarioUseCase {

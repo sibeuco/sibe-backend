@@ -3,8 +3,8 @@ package co.edu.uco.sibe.dominio.regla.implementacion;
 import co.edu.uco.sibe.dominio.modelo.UsuarioOrganizacion;
 import co.edu.uco.sibe.dominio.regla.Regla;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.IDENTIFICADOR_USUARIO_ORGANIZACION_NULO;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.NO_HAY_CAMPOS_POR_VALIDAR;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.IDENTIFICADOR_USUARIO_ORGANIZACION_NULO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_HAY_CAMPOS_POR_VALIDAR;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
 
 public class UsuarioOrganizacionRegla implements Regla<UsuarioOrganizacion> {

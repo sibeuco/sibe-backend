@@ -8,7 +8,8 @@ import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
 import java.util.UUID;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.AREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.AREA_NO_ENCONTRADA_CON_ID;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarActividadesPorAreaUseCase {
@@ -31,7 +32,7 @@ public class ConsultarActividadesPorAreaUseCase {
         var area = areaRepositorioConsulta.consultarPorIdentificador(id);
 
         if (esNulo(area)) {
-            throw new ValorInvalidoExcepcion(AREA_NO_ENCONTRADA_CON_ID + idComando);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(AREA_NO_ENCONTRADA_CON_ID, idComando));
         }
 
         return area;

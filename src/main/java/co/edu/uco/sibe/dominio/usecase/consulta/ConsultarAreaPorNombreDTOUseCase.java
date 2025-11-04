@@ -3,7 +3,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.AreaDTO;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilMensaje.AREA_NO_ENCONTRADA_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.AREA_NO_ENCONTRADA_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class ConsultarAreaPorNombreDTOUseCase {
@@ -20,7 +21,7 @@ public class ConsultarAreaPorNombreDTOUseCase {
     private AreaDTO validarSiExisteArea(String nombre) {
         var area = areaRepositorioConsulta.consultarPorNombreDTO(nombre);
         if (esNulo(area)) {
-            throw new ValorInvalidoExcepcion(AREA_NO_ENCONTRADA_CON_NOMBRE + nombre);
+            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(AREA_NO_ENCONTRADA_CON_NOMBRE, nombre));
         }
         return area;
     }

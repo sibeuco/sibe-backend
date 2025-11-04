@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajeConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
+
 public final class NumeroConstante {
     public static final int UNO_NEGATIVO = -1;
     public static final int CERO = 0;
@@ -22,6 +24,6 @@ public final class NumeroConstante {
     public static final Long TRES_MIL_SEICIENTOS_LONG = 3600L;
 
     private NumeroConstante() {
-        super();
+        throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
 }
