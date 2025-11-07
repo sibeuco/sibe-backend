@@ -2,14 +2,17 @@ package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ActividadEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
 @AllArgsConstructor
 public class ActividadMapeador {
+    private final PersonaDAO personaDAO;
     private final IndicadorMapeador indicadorMapeador;
 
     public ActividadEntidad construirEntidad(Actividad actividad) {
@@ -59,6 +62,9 @@ public class ActividadMapeador {
     }
 
     public ActividadDTO construirDTO(ActividadEntidad actividad) {
+        var persona = personaDAO.findById(actividad.getColaborador()).orElse(null);
+
+        assert !esNulo(persona);
         return new ActividadDTO(
                 actividad.getIdentificador().toString(),
                 actividad.getNombre(),
@@ -68,6 +74,7 @@ public class ActividadMapeador {
                 actividad.getFechaCreacion().toString(),
                 indicadorMapeador.construirDTO(actividad.getIndicador()),
                 actividad.getColaborador().toString(),
+                persona.getNombres() + persona.getApellidos(),
                 actividad.getCreador().toString()
         );
     }

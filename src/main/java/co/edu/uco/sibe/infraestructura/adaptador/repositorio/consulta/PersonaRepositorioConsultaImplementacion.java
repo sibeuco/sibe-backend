@@ -9,7 +9,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
@@ -104,7 +103,7 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
     @Override
     public UsuarioDTO consultarUsuarioPorIdentificadorDTO(UUID identificador) {
-        var entidad = this.usuarioDAO.findById(identificador).orElse(null);
+        var entidad = this.personaDAO.findById(identificador).orElse(null);
 
         if (esNulo(entidad)){
             return null;
@@ -133,19 +132,20 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Override
     public UsuarioDTO consultarUsuarioPorCorreoDTO(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
+        var personaEntidad = this.personaDAO.findByCorreo(correo);
 
         if (esNulo(entidad) || !entidad.isEstaActivo()){
             return null;
         }
 
-        return this.usuarioMapeador.construirDTO(entidad);
+        return this.usuarioMapeador.construirDTO(personaEntidad);
     }
 
     @Override
     public Usuario consultarUsuarioPorCorreo(String correo) {
         var entidad = this.usuarioDAO.findByCorreo(correo);
 
-        if (esNulo(entidad) || !entidad.isEstaActivo()){
+        if (esNulo(entidad) || !entidad.isEstaActivo()) {
             return null;
         }
 
@@ -154,9 +154,9 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
 
     @Override
     public List<UsuarioDTO> consultarUsuariosDTO() {
-        var entidades = this.usuarioDAO.findAll().stream().filter(UsuarioEntidad::isEstaActivo).toList();
+        var entidades = this.personaDAO.findAll();
 
-        return this.usuarioMapeador.construirDTOs(entidades);
+        return this.usuarioMapeador.construirDTOs(entidades).stream().filter(UsuarioDTO::getEstaActivo).toList();
     }
 
     @Override
