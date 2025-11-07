@@ -4,6 +4,7 @@ import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConst
 
 public final class TextoConstante {
     public static final String VACIO = "";
+    public static final String ESPACIO = " ";
     public static final String GUION = "-";
     public static final String UNDERSCORE = "_";
     public static final String COLON = ":";
