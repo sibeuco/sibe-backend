@@ -7,6 +7,7 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.ActividadEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.ESPACIO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -74,7 +75,7 @@ public class ActividadMapeador {
                 actividad.getFechaCreacion().toString(),
                 indicadorMapeador.construirDTO(actividad.getIndicador()),
                 actividad.getColaborador().toString(),
-                persona.getNombres() + persona.getApellidos(),
+                persona.getNombres() + ESPACIO + persona.getApellidos(),
                 actividad.getCreador().toString()
         );
     }
