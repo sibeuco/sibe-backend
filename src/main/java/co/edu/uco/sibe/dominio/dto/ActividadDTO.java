@@ -18,5 +18,6 @@ public class ActividadDTO {
     private String fechaCreacion;
     private IndicadorDTO indicador;
     private String colaborador;
+    private String nombreColaborador;
     private String creador;
 }
