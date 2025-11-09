@@ -9,6 +9,7 @@ public final class TextoConstante {
     public static final String UNDERSCORE = "_";
     public static final String COLON = ":";
     public static final String COMMA = ",";
+    public static final String PUNTO = ".";
     public static final String ASTERISK = "*";
     public static final String IDENTIFICADOR = "identificador";
     public static final String NO_APLICA = "No Aplica";
