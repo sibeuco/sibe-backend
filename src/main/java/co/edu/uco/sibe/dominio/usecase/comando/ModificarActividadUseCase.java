@@ -38,7 +38,7 @@ public class ModificarActividadUseCase {
         this.modificarVinculacionActividadConAreaService.ejecutar(actividad, area, tipoArea);
 
         ejecucionesActividad.forEach(ejecucionActividad -> {
-            MotoresFabrica.MOTOR_ESTADO_ACTIVIDAD.ejecutar(ejecucionActividad.getEstadoActividad(), TipoOperacion.CREAR);
+            MotoresFabrica.MOTOR_ESTADO_ACTIVIDAD.ejecutar(ejecucionActividad.getEstado(), TipoOperacion.CREAR);
             MotoresFabrica.MOTOR_EJECUCION_ACTIVIDAD.ejecutar(ejecucionActividad, TipoOperacion.CREAR);
         });
 

@@ -14,7 +14,6 @@ import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConst
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class IniciarActividadUseCase {
-
     private final ActividadRepositorioComando actividadRepositorioComando;
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta;
@@ -29,17 +28,10 @@ public class IniciarActividadUseCase {
         var ejecucion = validarSiExisteEjecucion(identificadorEjecucion);
         var estado = validarSiExisteEstado(EN_CURSO);
 
-        var ejecucionActualizada = EjecucionActividad.construir(
-                ejecucion.getIdentificador(),
-                ejecucion.getFechaProgramada(),
-                ejecucion.getFechaRealizacion(),
-                LocalTime.now(),
-                ejecucion.getHoraFin(),
-                estado,
-                ejecucion.getActividad()
-        );
+        ejecucion.actualizarHoraInicio(LocalTime.now());
+        ejecucion.actualizarEstado(estado);
 
-        actividadRepositorioComando.modificarEjecucion(ejecucionActualizada);
+        actividadRepositorioComando.modificarEjecucion(ejecucion);
         return identificadorEjecucion;
     }
 

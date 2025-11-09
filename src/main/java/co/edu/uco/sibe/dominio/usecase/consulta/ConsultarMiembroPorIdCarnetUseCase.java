@@ -19,7 +19,7 @@ public class ConsultarMiembroPorIdCarnetUseCase {
     }
 
     private MiembroDTO validarSiExisteMiembro(String idCarnet) {
-        var miembro = miembroRepositorioConsulta.consultarPorIdCarnet(idCarnet);
+        var miembro = miembroRepositorioConsulta.consultarPorIdCarnetDTO(idCarnet);
         if (esNulo(miembro)) {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(MIEMBRO_NO_ENCONTRADO_CON_ID_CARNET,idCarnet));
         }

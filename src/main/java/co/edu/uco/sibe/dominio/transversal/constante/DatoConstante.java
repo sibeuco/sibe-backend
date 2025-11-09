@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.dominio.transversal.constante;
 
+import java.util.Set;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA;
 
 public final class DatoConstante {
@@ -61,6 +62,14 @@ public final class DatoConstante {
     public static final String APELLIDO_ADMIN = "UCO";
     public static final String EMAIL_ADMIN = "administrador@uco.net.co";
     public static final String CLAVE_ADMIN = "Administrador123";
+
+    public static final String ESTUDIANTE = "Estudiante";
+    public static final String EMPLEADO = "Empleado";
+
+    public static final String PREGRADO = "Pregrado";
+    public static final String POSTGRADO = "Postgrado";
+
+    public static final Set<String> PALABRAS_POSTRGRADO = Set.of("ESPECIALIZACION", "MAESTRIA", "DOCTORADO");
 
     private DatoConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);

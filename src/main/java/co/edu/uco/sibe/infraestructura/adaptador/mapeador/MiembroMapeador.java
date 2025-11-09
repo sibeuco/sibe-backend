@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
+import co.edu.uco.sibe.dominio.enums.TipoInterno;
 import co.edu.uco.sibe.dominio.enums.TipoParticipante;
 import co.edu.uco.sibe.dominio.modelo.Empleado;
 import co.edu.uco.sibe.dominio.modelo.Estudiante;
@@ -13,6 +14,7 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.MiembroEntidad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NO_APLICA;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTipoPrograma;
 
 @Component
 @AllArgsConstructor
@@ -84,8 +86,10 @@ public class MiembroMapeador {
                     e.getNombreCompleto(),
                     e.getNumeroIdentificacion(),
                     e.getProgramaAcademico(),
+                    obtenerTipoPrograma(e.getProgramaAcademico()),
                     e.getCorreoInstitucional(),
-                    TipoParticipante.INTERNO.name()
+                    TipoParticipante.INTERNO.name(),
+                    TipoInterno.ESTUDIANTE.name()
             );
         }
 
@@ -96,7 +100,9 @@ public class MiembroMapeador {
                     e.getNumeroIdentificacion(),
                     NO_APLICA,
                     NO_APLICA,
-                    TipoParticipante.INTERNO.name()
+                    NO_APLICA,
+                    TipoParticipante.INTERNO.name(),
+                    TipoInterno.EMPLEADO.name()
             );
         }
 
@@ -107,7 +113,9 @@ public class MiembroMapeador {
                     e.getNumeroIdentificacion(),
                     NO_APLICA,
                     NO_APLICA,
-                    TipoParticipante.EXTERNO.name()
+                    NO_APLICA,
+                    TipoParticipante.EXTERNO.name(),
+                    NO_APLICA
             );
         }
 

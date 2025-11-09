@@ -29,7 +29,7 @@ public class EjecucionActividadMapeador {
                 dominio.getFechaRealizacion(),
                 dominio.getHoraInicio(),
                 dominio.getHoraFin(),
-                ejecucionActividadEstadoActividadMapeador.construirEntidad(dominio.getEstadoActividad()),
+                ejecucionActividadEstadoActividadMapeador.construirEntidad(dominio.getEstado()),
                 actividadMapeador.construirEntidad(dominio.getActividad())
         );
     }
@@ -66,7 +66,7 @@ public class EjecucionActividadMapeador {
         entidad.setFechaRealizacion(dominio.getFechaRealizacion());
         entidad.setHoraInicio(dominio.getHoraInicio());
         entidad.setHoraFin(dominio.getHoraFin());
-        ejecucionActividadEstadoActividadMapeador.actualizarEntidad(entidad.getEstadoActividad(), dominio.getEstadoActividad());
+        ejecucionActividadEstadoActividadMapeador.actualizarEntidad(entidad.getEstadoActividad(), dominio.getEstado());
     }
 
     public void actualizarTodos(UUID actividadId, List<EjecucionActividad> ejecucionesNuevas) {

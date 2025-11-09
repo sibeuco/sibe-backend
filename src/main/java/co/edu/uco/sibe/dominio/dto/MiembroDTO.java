@@ -14,6 +14,8 @@ public class MiembroDTO {
     private String nombreCompleto;
     private String documentoIdentificacion;
     private String programaAcademico;
+    private String tipoProgramaAcademico;
     private String correoInstitucional;
     private String tipo;
+    private String tipoInterno;
 }

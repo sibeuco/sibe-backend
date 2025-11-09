@@ -2,7 +2,10 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.modelo.Participante;
 import co.edu.uco.sibe.dominio.puerto.consulta.ParticipanteRepositorioConsulta;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ParticipanteDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ActividadEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.EjecucionActividadEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ParticipanteMapeador;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,6 +17,7 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class ParticipanteRepositorioConsultaImplementacion implements ParticipanteRepositorioConsulta {
     private final ParticipanteDAO participanteDAO;
     private final ParticipanteMapeador participanteMapeador;
+    private final EjecucionActividadDAO ejecucionActividadDAO;
 
     @Override
     public Participante consultarPorIdentificador(UUID identificador) {
@@ -29,6 +33,26 @@ public class ParticipanteRepositorioConsultaImplementacion implements Participan
     @Override
     public Participante consultarPorDocumentoMiembro(String documento) {
         var entidad = participanteDAO.findByMiembroNumeroIdentificacion(documento);
+
+        if (esNulo(entidad)) {
+            return null;
+        }
+
+        return participanteMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public Participante consultarPorIdentificadorYSemestre(UUID identificador, UUID ejecucionActividadId) {
+        var semestre = ejecucionActividadDAO.findById(ejecucionActividadId)
+                .map(EjecucionActividadEntidad::getActividad)
+                .map(ActividadEntidad::getSemestre)
+                .orElse(null);
+
+        if (esNulo(semestre)) {
+            return null;
+        }
+
+        var entidad = participanteDAO.findByIdentificadorAndSemestre(identificador, semestre).orElse(null);
 
         if (esNulo(entidad)) {
             return null;

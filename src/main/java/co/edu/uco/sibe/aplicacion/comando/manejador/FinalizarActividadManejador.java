@@ -17,10 +17,14 @@ public class FinalizarActividadManejador implements ManejadorComandoParametroRes
     private final FinalizarActividadUseCase finalizarActividadUseCase;
 
     @Override
-    public ComandoRespuesta<UUID> ejecutar(List<ParticipanteComando> comandos, UUID ejecucionId) {
-        var participantes = participanteFabrica.construirParticipantes(comandos);
-        var idRespuesta = finalizarActividadUseCase.ejecutar(ejecucionId, participantes);
+    public ComandoRespuesta<UUID> ejecutar(List<ParticipanteComando> comando, UUID parametro) {
+        var participantes = participanteFabrica.construirParticipantes(comando, parametro);
 
-        return new ComandoRespuesta<>(idRespuesta);
+        return new ComandoRespuesta<>(
+                finalizarActividadUseCase.ejecutar(
+                        parametro,
+                        participantes
+                )
+        );
     }
 }
