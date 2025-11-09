@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 import static co.edu.uco.sibe.dominio.transversal.constante.ArchivoConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.MAPEADOR_ESTUDIANTE_COMPONENTE;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.COMMA;
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.PUNTO;
 
 @Component(MAPEADOR_ESTUDIANTE_COMPONENTE)
 public class FilaEstudianteMapeador extends FilaExcelBaseMapeador<DatosEstudianteComando> {
@@ -31,7 +33,7 @@ public class FilaEstudianteMapeador extends FilaExcelBaseMapeador<DatosEstudiant
         estudiante.setAnnoIngreso(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_ANNO_INGRESO)));
         estudiante.setSemestreActual(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_SEMESTRE_ACTUAL)));
         estudiante.setCreditosAprobados(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_CREDITOS_APROBADOS)));
-        estudiante.setPromedioGeneral(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_PROMEDIO_GENERAL)));
+        estudiante.setPromedioGeneral(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_PROMEDIO_GENERAL)).replace(COMMA, PUNTO));
         estudiante.setEstadoAcademico(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_ESTADO_ACADEMICO)));
         estudiante.setModalidad(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_MODALIDAD)));
         estudiante.setTiempoLlegadaUniversidad(obtenerValorCelda(fila, mapaColumnas.get(COLUMNA_ESTUDIANTE_TIEMPO_LLEGADA)));
