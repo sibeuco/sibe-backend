@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
+import co.edu.uco.sibe.dominio.modelo.Miembro;
 import co.edu.uco.sibe.dominio.puerto.consulta.MiembroRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EmpleadoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EstudianteDAO;
@@ -20,7 +21,26 @@ public class MiembroRepositorioConsultaImplementacion implements MiembroReposito
     private final MiembroMapeador miembroMapeador;
 
     @Override
-    public MiembroDTO consultarPorIdentificacion(String identificacion) {
+    public Miembro consultarPorIdentificacion(String identificacion) {
+        MiembroEntidad miembro = estudianteDAO.findByNumeroIdentificacion(identificacion);
+
+        if (esNulo(miembro)) {
+            miembro = empleadoDAO.findByNumeroIdentificacion(identificacion);
+        }
+
+        if (esNulo(miembro)) {
+            miembro = externoDAO.findByNumeroIdentificacion(identificacion);
+        }
+
+        if (esNulo(miembro)) {
+            return null;
+        }
+
+        return miembroMapeador.construirModelo(miembro);
+    }
+
+    @Override
+    public MiembroDTO consultarPorIdentificacionDTO(String identificacion) {
         MiembroEntidad miembro = estudianteDAO.findByNumeroIdentificacion(identificacion);
 
         if (esNulo(miembro)) {
@@ -39,7 +59,7 @@ public class MiembroRepositorioConsultaImplementacion implements MiembroReposito
     }
 
     @Override
-    public MiembroDTO consultarPorIdCarnet(String idCarnet) {
+    public MiembroDTO consultarPorIdCarnetDTO(String idCarnet) {
         MiembroEntidad miembro = estudianteDAO.findByIdCarnet(idCarnet);
 
         if (esNulo(miembro)) {

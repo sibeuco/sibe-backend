@@ -47,6 +47,7 @@ public final class ApiEndpointConstante {
 
     public static final String ACTIVIDAD_INICIAR = "/iniciar/{identificador}";
     public static final String ACTIVIDAD_FINALIZAR = "/finalizar/{identificador}";
+    public static final String ACTIVIDAD_CANCELAR = "/cancelar/{identificador}";
 
     public static final String CONTAR_USUARIOS_PATH = "/{identificador}/usuarios/contar";
 

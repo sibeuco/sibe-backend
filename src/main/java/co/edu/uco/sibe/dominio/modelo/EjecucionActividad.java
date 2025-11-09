@@ -15,7 +15,7 @@ public class EjecucionActividad {
     private LocalDate fechaRealizacion;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private EstadoActividad estadoActividad;
+    private EstadoActividad estado;
     private Actividad actividad;
 
     private EjecucionActividad(
@@ -24,7 +24,7 @@ public class EjecucionActividad {
             LocalDate fechaRealizacion,
             LocalTime horaInicio,
             LocalTime horaFin,
-            EstadoActividad estadoActividad,
+            EstadoActividad estado,
             Actividad actividad
     ) {
         this.fechaProgramada = fechaProgramada;
@@ -32,7 +32,7 @@ public class EjecucionActividad {
         this.fechaRealizacion = fechaRealizacion;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.estadoActividad = estadoActividad;
+        this.estado = estado;
         this.actividad = actividad;
     }
 
@@ -42,7 +42,7 @@ public class EjecucionActividad {
             LocalDate fechaRealizacion,
             LocalTime horaInicio,
             LocalTime horaFin,
-            EstadoActividad estadoActividad,
+            EstadoActividad estado,
             Actividad actividad
     ) {
         return new EjecucionActividad(
@@ -51,7 +51,7 @@ public class EjecucionActividad {
                 obtenerValorFechaPorDefecto(fechaRealizacion),
                 obtenerValorHoraPorDefecto(horaInicio),
                 obtenerValorHoraPorDefecto(horaFin),
-                obtenerObjetoPorDefecto(estadoActividad, EstadoActividad.construir()),
+                obtenerObjetoPorDefecto(estado, EstadoActividad.construir()),
                 obtenerObjetoPorDefecto(actividad, Actividad.construir())
         );
     }
@@ -66,5 +66,21 @@ public class EjecucionActividad {
                 EstadoActividad.construir(),
                 Actividad.construir()
         );
+    }
+
+    public void actualizarHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public void actualizarHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public void actualizarFechaRealizacion(LocalDate fechaRealizacion) {
+        this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public void actualizarEstado(EstadoActividad estado) {
+        this.estado = estado;
     }
 }

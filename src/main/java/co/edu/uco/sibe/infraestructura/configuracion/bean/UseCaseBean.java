@@ -4,11 +4,7 @@ import co.edu.uco.sibe.dominio.puerto.comando.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.*;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.puerto.servicio.EnviarCorreoElectronicoService;
-import co.edu.uco.sibe.dominio.service.ModificarVinculacionActividadConAreaService;
-import co.edu.uco.sibe.dominio.service.ModificarVinculacionUsuarioConAreaService;
-import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
-import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
-import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
+import co.edu.uco.sibe.dominio.service.*;
 import co.edu.uco.sibe.dominio.usecase.comando.*;
 import co.edu.uco.sibe.dominio.usecase.consulta.*;
 import org.springframework.context.annotation.Bean;
@@ -219,6 +215,11 @@ public class UseCaseBean {
     @Bean
     public IniciarActividadUseCase iniciarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta) {
         return new IniciarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, estadoActividadRepositorioConsulta);
+    }
+
+    @Bean
+    public CancelarActividadUseCase cancelarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta) {
+        return new CancelarActividadUseCase(actividadRepositorioComando, actividadRepositorioConsulta, estadoActividadRepositorioConsulta);
     }
 
     @Bean

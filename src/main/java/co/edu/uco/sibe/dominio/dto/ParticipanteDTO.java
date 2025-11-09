@@ -15,12 +15,14 @@ public class ParticipanteDTO {
     private String numeroIdentificacion;
     private RelacionLaboralDTO relacionLaboralDTO;
     private CentroCostosDTO centroCostosDTO;
+    private String tipoInterno;
     private String fechaNacimiento;
     private String nacionalidad;
     private String estadoCivil;
     private String correoPersonal;
     private String correoInstitucional;
     private String programaAcademico;
+    private String tipoProgramaAcademico;
     private String facultad;
     private int annoIngreso;
     private String semestreActual;

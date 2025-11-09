@@ -13,7 +13,5 @@ public class ParticipanteComando {
     private String identificador;
     private String nombreCompleto;
     private String documentoIdentificacion;
-    private String programaAcademico;
-    private String correoInstitucional;
-    private String tipo;
+    private String identificadorEjecucionActividad;
 }

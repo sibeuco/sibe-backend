@@ -3,10 +3,7 @@ package co.edu.uco.sibe.infraestructura.controlador.comando;
 import co.edu.uco.sibe.aplicacion.comando.ActividadComando;
 import co.edu.uco.sibe.aplicacion.comando.ActividadModificacionComando;
 import co.edu.uco.sibe.aplicacion.comando.ParticipanteComando;
-import co.edu.uco.sibe.aplicacion.comando.manejador.FinalizarActividadManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarActividadManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.IniciarActividadManejador;
-import co.edu.uco.sibe.aplicacion.comando.manejador.ModificarActividadManejador;
+import co.edu.uco.sibe.aplicacion.comando.manejador.*;
 import co.edu.uco.sibe.aplicacion.transversal.ComandoRespuesta;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +24,7 @@ public class ActividadComandoControlador {
     private final ModificarActividadManejador modificarActividadManejador;
     private final IniciarActividadManejador iniciarActividadManejador;
     private final FinalizarActividadManejador finalizarActividadManejador;
+    private final CancelarActividadManejador cancelarActividadManejador;
 
     @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
     @PostMapping
@@ -50,5 +48,11 @@ public class ActividadComandoControlador {
     @PostMapping(ACTIVIDAD_FINALIZAR)
     public ComandoRespuesta<UUID> finalizar(@RequestBody List<ParticipanteComando> comandos, @PathVariable String identificador) {
         return this.finalizarActividadManejador.ejecutar(comandos, textoAUUID(identificador));
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
+    @PostMapping(ACTIVIDAD_CANCELAR)
+    public ComandoRespuesta<UUID> cancelar(@PathVariable String identificador) {
+        return this.cancelarActividadManejador.ejecutar(textoAUUID(identificador));
     }
 }

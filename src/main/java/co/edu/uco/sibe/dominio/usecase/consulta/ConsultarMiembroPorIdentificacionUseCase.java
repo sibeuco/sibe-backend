@@ -20,7 +20,7 @@ public class ConsultarMiembroPorIdentificacionUseCase {
     }
 
     private MiembroDTO validarSiExisteMiembro(String identificacion) {
-        var miembro = miembroRepositorioConsulta.consultarPorIdentificacion(identificacion);
+        var miembro = miembroRepositorioConsulta.consultarPorIdentificacionDTO(identificacion);
         if (esNulo(miembro)) {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(MIEMBRO_NO_ENCONTRADO_CON_IDENTIFICACION, identificacion));
         }
