@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.modelo.CiudadResidencia;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.CiudadResidenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.InternoCiudadResidenciaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.CiudadResidenciaEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.InternoCiudadResidenciaEntidad;
@@ -14,11 +15,14 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class InternoCiudadResidenciaMapeador {
     private final CiudadResidenciaMapeador ciudadResidenciaMapeador;
     private final InternoCiudadResidenciaDAO internoCiudadResidenciaDAO;
+    private final CiudadResidenciaDAO ciudadResidenciaDAO;
 
     public InternoCiudadResidenciaEntidad construirEntidad(CiudadResidencia ciudadResidencia) {
+        var ciudadResidenciaEncontrada = this.ciudadResidenciaDAO.findByDescripcion(ciudadResidencia.getDescripcion());
+
         return new InternoCiudadResidenciaEntidad(
                 generar(uuid -> !esNulo(internoCiudadResidenciaDAO.findById(uuid).orElse(null))),
-                this.ciudadResidenciaMapeador.construirEntidad(ciudadResidencia)
+                esNulo(ciudadResidenciaEncontrada) ? ciudadResidenciaDAO.save(this.ciudadResidenciaMapeador.construirEntidad(ciudadResidencia)) : ciudadResidenciaEncontrada
         );
     }
 

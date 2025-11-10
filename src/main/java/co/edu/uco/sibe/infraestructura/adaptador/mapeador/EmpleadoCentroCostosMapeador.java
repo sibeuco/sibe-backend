@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.modelo.CentroCostos;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.CentroCostosDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EmpleadoCentroCostosDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.CentroCostosEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.EmpleadoCentroCostosEntidad;
@@ -14,11 +15,14 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class EmpleadoCentroCostosMapeador {
     private final CentroCostosMapeador centroCostosMapeador;
     private final EmpleadoCentroCostosDAO empleadoCentroCostosDAO;
+    private final CentroCostosDAO centroCostosDAO;
 
     public EmpleadoCentroCostosEntidad construirEntidad(CentroCostos centroCostos) {
+        var centroCostosEncontrado = centroCostosDAO.findByCodigo(centroCostos.getCodigo());
+
         return new EmpleadoCentroCostosEntidad(
                 generar(uuid -> !esNulo(empleadoCentroCostosDAO.findById(uuid).orElse(null))),
-                this.centroCostosMapeador.construirEntidad(centroCostos)
+                esNulo(centroCostosEncontrado) ? centroCostosDAO.save(this.centroCostosMapeador.construirEntidad(centroCostos)) : centroCostosEncontrado
         );
     }
 
