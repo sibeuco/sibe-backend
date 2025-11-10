@@ -13,5 +13,4 @@ public class ParticipanteComando {
     private String identificador;
     private String nombreCompleto;
     private String documentoIdentificacion;
-    private String identificadorEjecucionActividad;
 }
