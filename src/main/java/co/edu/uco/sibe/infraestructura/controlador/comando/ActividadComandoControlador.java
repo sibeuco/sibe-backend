@@ -45,13 +45,13 @@ public class ActividadComandoControlador {
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
-    @PostMapping(ACTIVIDAD_FINALIZAR)
+    @PutMapping(ACTIVIDAD_FINALIZAR)
     public ComandoRespuesta<UUID> finalizar(@RequestBody List<ParticipanteComando> comandos, @PathVariable String identificador) {
         return this.finalizarActividadManejador.ejecutar(comandos, textoAUUID(identificador));
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
-    @PostMapping(ACTIVIDAD_CANCELAR)
+    @PutMapping(ACTIVIDAD_CANCELAR)
     public ComandoRespuesta<UUID> cancelar(@PathVariable String identificador) {
         return this.cancelarActividadManejador.ejecutar(textoAUUID(identificador));
     }
