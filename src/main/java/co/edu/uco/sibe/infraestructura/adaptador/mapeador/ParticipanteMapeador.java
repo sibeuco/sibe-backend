@@ -20,10 +20,10 @@ public class ParticipanteMapeador {
             return null;
         }
 
-            var miembroEntidad = miembroMapeador.construirEntidad(dominio.getMiembro());
+        var miembroEntidad = miembroMapeador.construirEntidad(dominio.getMiembro());
 
         if (dominio instanceof ParticipanteEstudiante e) {
-            return new ParticipanteEstudianteEntidad(
+            var entidad = new ParticipanteEstudianteEntidad(
                     e.getEstadoCivil(),
                     e.getProgramaAcademico(),
                     e.getFacultad(),
@@ -36,20 +36,30 @@ public class ParticipanteMapeador {
                     e.getTiempoLlegadaUniversidad(),
                     e.getMedioTransporte()
             );
+
+            entidad.setIdentificador(dominio.getIdentificador());
+            entidad.setMiembro(miembroEntidad);
+            return entidad;
         }
 
         if (dominio instanceof ParticipanteEmpleado e) {
-            return new ParticipanteEmpleadoEntidad(
+            var entidad = new ParticipanteEmpleadoEntidad(
                     empleadoRelacionLaboralMapeador.construirEntidad(e.getRelacionLaboral()),
                     empleadoCentroCostosMapeador.construirEntidad(e.getCentroCostos())
             );
+
+            entidad.setIdentificador(dominio.getIdentificador());
+            entidad.setMiembro(miembroEntidad);
+            return entidad;
         }
 
         if (dominio instanceof ParticipanteExterno) {
-            return new ParticipanteExternoEntidad();
-        }
+            var entidad = new ParticipanteExternoEntidad();
 
-        var entidad = new ParticipanteEntidad(dominio.getIdentificador(), miembroEntidad);
+            entidad.setIdentificador(dominio.getIdentificador());
+            entidad.setMiembro(miembroEntidad);
+            return entidad;
+        }
 
         if (dominio instanceof ParticipanteInterno i) {
             var interno = new ParticipanteInternoEntidad(
@@ -62,7 +72,7 @@ public class ParticipanteMapeador {
             return interno;
         }
 
-        return entidad;
+        return new ParticipanteEntidad(dominio.getIdentificador(), miembroEntidad);
     }
 
     public Participante construirModelo(ParticipanteEntidad entidad) {
