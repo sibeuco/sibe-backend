@@ -9,7 +9,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @Component
 @AllArgsConstructor
 public class ParticipanteMapeador {
-
     private final MiembroMapeador miembroMapeador;
     private final InternoCiudadResidenciaMapeador internoCiudadResidenciaMapeador;
     private final EmpleadoRelacionLaboralMapeador empleadoRelacionLaboralMapeador;
@@ -39,6 +38,11 @@ public class ParticipanteMapeador {
 
             entidad.setIdentificador(dominio.getIdentificador());
             entidad.setMiembro(miembroEntidad);
+
+            entidad.setCiudadResidencia(internoCiudadResidenciaMapeador.construirEntidad(e.getCiudadResidencia()));
+            entidad.setIdCarnet(e.getIdCarnet());
+            entidad.setSexo(e.getSexo());
+
             return entidad;
         }
 
@@ -50,6 +54,11 @@ public class ParticipanteMapeador {
 
             entidad.setIdentificador(dominio.getIdentificador());
             entidad.setMiembro(miembroEntidad);
+
+            entidad.setCiudadResidencia(internoCiudadResidenciaMapeador.construirEntidad(e.getCiudadResidencia()));
+            entidad.setIdCarnet(e.getIdCarnet());
+            entidad.setSexo(e.getSexo());
+
             return entidad;
         }
 

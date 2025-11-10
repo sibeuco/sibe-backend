@@ -19,7 +19,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obt
 @Component
 @AllArgsConstructor
 public class MiembroMapeador {
-
     private final EstudianteMapeador estudianteMapeador;
     private final EmpleadoMapeador empleadoMapeador;
 
