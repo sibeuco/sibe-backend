@@ -41,6 +41,7 @@ public final class ApiEndpointConstante {
     public static final String ACTIVIDADES_DIRECCION = "/direccion/{identificador}";
     public static final String ACTIVIDADES_SUBAREA = "/subarea/{identificador}";
     public static final String ACTIVIDADES_EJECUCIONES = "/ejecuciones/{identificador}";
+    public static final String PARTICIPANTES_EJECUCION_ACTIVIDAD = "/ejecuciones/ejecucion/participantes/{identificador}";
 
     public static final String MIEMBRO_IDENTIFICACION = "/identificacion/{identificacion}";
     public static final String MIEMBRO_CARNET = "/carnet/{carnet}";

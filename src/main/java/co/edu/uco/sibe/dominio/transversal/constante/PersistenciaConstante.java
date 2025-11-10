@@ -104,9 +104,11 @@ public final class PersistenciaConstante {
 
     public static final String CONSULTAR_PARTICIPANTE_POR_NUMERO_IDENTIFICACION = "SELECT p FROM ParticipanteEntidad p WHERE p.miembro.numeroIdentificacion = :documento";
     public static final String CONSULTAR_PARTICIPANTE_POR_IDENTIFICADOR_Y_SEMESTRE = "SELECT DISTINCT ra.participante FROM RegistroAsistenciaEntidad ra WHERE ra.participante.identificador = :identificador AND ra.ejecucionActividad.actividad.semestre = :semestre";
+    public static final String CONSULTAR_PARTICIPANTES_POR_EJECUCION_ACTIVIDAD = "SELECT DISTINCT ra.participante FROM RegistroAsistenciaEntidad ra WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId";
     public static final String DOCUMENTO_PARAMETRO = "documento";
     public static final String IDENTIFICADOR_PARAMETRO = "identificador";
     public static final String SEMESTRE_PARAMETRO = "semestre";
+    public static final String EJECUCION_ACTIVIDAD_PARAMETRO = "ejecucionActividadId";
 
     private PersistenciaConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
