@@ -2,15 +2,13 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
 import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
+import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
 import co.edu.uco.sibe.dominio.modelo.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ActividadMapeador;
-import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
-import co.edu.uco.sibe.infraestructura.adaptador.mapeador.DireccionMapeador;
-import co.edu.uco.sibe.infraestructura.adaptador.mapeador.EjecucionActividadMapeador;
-import co.edu.uco.sibe.infraestructura.adaptador.mapeador.SubareaMapeador;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.mapeador.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -27,6 +25,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     private final SubareaMapeador subareaMapeador;
     private final AreaMapeador areaMapeador;
     private final DireccionMapeador direccionMapeador;
+    private final ParticipanteDetalladoMapeador participanteDetalladoMapeador;
 
     @Override
     public Actividad consultarPorIdentificador(UUID identificador) {
@@ -87,5 +86,15 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         }
 
         return this.ejecucionActividadMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad) {
+        List<ParticipanteEntidad> participantes = this.ejecucionActividadDAO.findParticipantesByEjecucionActividadId(ejecucionActividad);
+
+        return participantes
+                .stream()
+                .map(this.participanteDetalladoMapeador::construirDTO)
+                .toList();
     }
 }

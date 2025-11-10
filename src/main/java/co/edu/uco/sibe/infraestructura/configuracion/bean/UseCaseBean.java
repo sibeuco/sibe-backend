@@ -256,4 +256,9 @@ public class UseCaseBean {
     public ConsultarSubareaPorNombreDTOUseCase consultarSubareaPorNombreDTOUseCase(SubareaRepositorioConsulta subareaRepositorioConsulta) {
         return new ConsultarSubareaPorNombreDTOUseCase(subareaRepositorioConsulta);
     }
+
+    @Bean
+    public ConsultarParticipantesPorEjecucionActividadUseCase consultarParticipantesPorEjecucionActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarParticipantesPorEjecucionActividadUseCase(actividadRepositorioConsulta);
+    }
 }
