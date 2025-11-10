@@ -45,21 +45,21 @@ public class ParticipanteFabrica {
         }
 
         if (miembro instanceof Estudiante) {
-            return construirParticipanteEstudiante(identificadorParticipante, (Estudiante) miembro, comando);
+            return construirParticipanteEstudiante(identificadorParticipante, (Estudiante) miembro);
         }
 
         if (miembro instanceof Empleado) {
-            return construirParticipanteEmpleado(identificadorParticipante, (Empleado) miembro, comando);
+            return construirParticipanteEmpleado(identificadorParticipante, (Empleado) miembro);
         }
 
         return Participante.construir(identificadorParticipante, miembro);
     }
 
-    private ParticipanteEstudiante construirParticipanteEstudiante(UUID identificador, Estudiante estudiante, ParticipanteComando comando) {
+    private ParticipanteEstudiante construirParticipanteEstudiante(UUID identificador, Estudiante estudiante) {
         return ParticipanteEstudiante.construir(
                 identificador,
                 estudiante,
-                CiudadResidencia.construir(),
+                CiudadResidencia.construir(estudiante.getCiudadResidencia().getIdentificador(), estudiante.getCiudadResidencia().getDescripcion()),
                 estudiante.getIdCarnet(),
                 estudiante.getSexo(),
                 estudiante.getEstadoCivil(),
@@ -76,11 +76,11 @@ public class ParticipanteFabrica {
         );
     }
 
-    private ParticipanteEmpleado construirParticipanteEmpleado(UUID identificador, Empleado empleado, ParticipanteComando comando) {
+    private ParticipanteEmpleado construirParticipanteEmpleado(UUID identificador, Empleado empleado) {
         return ParticipanteEmpleado.construir(
                 identificador,
                 empleado,
-                CiudadResidencia.construir(),
+                CiudadResidencia.construir(empleado.getCiudadResidencia().getIdentificador(), empleado.getCiudadResidencia().getDescripcion()),
                 empleado.getIdCarnet(),
                 empleado.getSexo(),
                 RelacionLaboral.construir(),
