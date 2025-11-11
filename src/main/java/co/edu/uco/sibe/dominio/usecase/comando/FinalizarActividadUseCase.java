@@ -51,6 +51,7 @@ public class FinalizarActividadUseCase {
 
         participantes.forEach(participante -> {
             var participanteRegistrado = registrarParticipanteService.ejecutar(participante);
+
             var registro = RegistroAsistencia.construir(
                     generar(uuid -> !esNulo(registroAsistenciaRepositorioConsulta.consultarPorIdentificador(uuid))),
                     ejecucion,

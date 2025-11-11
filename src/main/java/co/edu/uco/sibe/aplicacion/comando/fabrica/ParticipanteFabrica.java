@@ -12,7 +12,6 @@ import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -26,22 +25,26 @@ public class ParticipanteFabrica {
     }
 
     public Participante construir(ParticipanteComando comando, UUID ejecucionActividad) {
-        var participanteExistente = participanteRepositorioConsulta.consultarPorIdentificadorYSemestre(textoAUUID(comando.getIdentificador()), ejecucionActividad);
+        var participanteExistente = participanteRepositorioConsulta.consultarPorDocumentoYSemestre(comando.getDocumentoIdentificacion(), ejecucionActividad);
 
         if(!esNulo(participanteExistente)) {
             return participanteExistente;
+        }
+
+        var identificadorParticipante = generar(uuid -> !esNulo(this.participanteRepositorioConsulta.consultarPorIdentificador(uuid)));
+
+        if(esNulo(comando.getIdentificador())) {
+            var identificadorExterno = generar(uuid -> !esNulo(this.miembroRepositorioConsulta.consultarPorIdentificador(uuid)));
+
+            var externo = Externo.construir(identificadorExterno, comando.getNombreCompleto(), comando.getDocumentoIdentificacion());
+
+            return ParticipanteExterno.construir(identificadorParticipante, externo);
         }
 
         var miembro = miembroRepositorioConsulta.consultarPorIdentificacion(comando.getDocumentoIdentificacion());
 
         if (esNulo(miembro)) {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO, comando.getDocumentoIdentificacion()));
-        }
-
-        var identificadorParticipante = generar(uuid -> !esNulo(this.participanteRepositorioConsulta.consultarPorIdentificador(uuid)));
-
-        if (miembro instanceof Externo) {
-            return ParticipanteExterno.construir(identificadorParticipante, miembro);
         }
 
         if (miembro instanceof Estudiante) {
@@ -59,7 +62,7 @@ public class ParticipanteFabrica {
         return ParticipanteEstudiante.construir(
                 identificador,
                 estudiante,
-                CiudadResidencia.construir(estudiante.getCiudadResidencia().getIdentificador(), estudiante.getCiudadResidencia().getDescripcion()),
+                estudiante.getCiudadResidencia(),
                 estudiante.getIdCarnet(),
                 estudiante.getSexo(),
                 estudiante.getEstadoCivil(),
@@ -80,11 +83,11 @@ public class ParticipanteFabrica {
         return ParticipanteEmpleado.construir(
                 identificador,
                 empleado,
-                CiudadResidencia.construir(empleado.getCiudadResidencia().getIdentificador(), empleado.getCiudadResidencia().getDescripcion()),
+                empleado.getCiudadResidencia(),
                 empleado.getIdCarnet(),
                 empleado.getSexo(),
-                RelacionLaboral.construir(),
-                CentroCostos.construir()
+                empleado.getRelacionLaboral(),
+                empleado.getCentroCostos()
         );
     }
 }

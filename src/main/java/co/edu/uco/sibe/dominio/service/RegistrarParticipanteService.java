@@ -20,6 +20,7 @@ public class RegistrarParticipanteService {
 
         if (esNulo(participanteExistente)) {
             var identificador = participanteRepositorioComando.guardar(participante);
+
             return obtenerParticipanteConId(participante, identificador);
         }
 

@@ -42,8 +42,8 @@ public class ParticipanteRepositorioConsultaImplementacion implements Participan
     }
 
     @Override
-    public Participante consultarPorIdentificadorYSemestre(UUID identificador, UUID ejecucionActividadId) {
-        var semestre = ejecucionActividadDAO.findById(ejecucionActividadId)
+    public Participante consultarPorDocumentoYSemestre(String documento, UUID ejecucionActividad) {
+        var semestre = ejecucionActividadDAO.findById(ejecucionActividad)
                 .map(EjecucionActividadEntidad::getActividad)
                 .map(ActividadEntidad::getSemestre)
                 .orElse(null);
@@ -52,7 +52,7 @@ public class ParticipanteRepositorioConsultaImplementacion implements Participan
             return null;
         }
 
-        var entidad = participanteDAO.findByIdentificadorAndSemestre(identificador, semestre).orElse(null);
+        var entidad = participanteDAO.findByDocumentoAndSemestre(documento, semestre).orElse(null);
 
         if (esNulo(entidad)) {
             return null;

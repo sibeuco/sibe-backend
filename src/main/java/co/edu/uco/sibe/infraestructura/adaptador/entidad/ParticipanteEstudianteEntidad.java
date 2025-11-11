@@ -4,16 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = PARTICIPANTE_ESTUDIANTE)
 @PrimaryKeyJoinColumn(name = CAMPO_IDENTIFICADOR)
@@ -50,4 +49,36 @@ public class ParticipanteEstudianteEntidad extends ParticipanteInternoEntidad {
 
     @Column(name = MEDIO_TRANSPORTE, nullable = false, length = 30)
     private String medioTransporte;
+
+    public ParticipanteEstudianteEntidad(
+            UUID identificador,
+            MiembroEntidad miembro,
+            InternoCiudadResidenciaEntidad ciudadResidencia,
+            String idCarnet,
+            String sexo,
+            String estadoCivil,
+            String programaAcademico,
+            String facultad,
+            int annoIngreso,
+            String semestreActual,
+            int creditosAprobados,
+            float promedioGeneral,
+            String estadoAcademico,
+            String modalidadEstudio,
+            int tiempoLlegadaUniversidad,
+            String medioTransporte
+    ) {
+        super(identificador, miembro, ciudadResidencia, idCarnet, sexo);
+        this.estadoCivil = estadoCivil;
+        this.programaAcademico = programaAcademico;
+        this.facultad = facultad;
+        this.annoIngreso = annoIngreso;
+        this.semestreActual = semestreActual;
+        this.creditosAprobados = creditosAprobados;
+        this.promedioGeneral = promedioGeneral;
+        this.estadoAcademico = estadoAcademico;
+        this.modalidadEstudio = modalidadEstudio;
+        this.tiempoLlegadaUniversidad = tiempoLlegadaUniversidad;
+        this.medioTransporte = medioTransporte;
+    }
 }

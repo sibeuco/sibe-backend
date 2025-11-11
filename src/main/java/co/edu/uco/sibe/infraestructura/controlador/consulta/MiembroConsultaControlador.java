@@ -16,7 +16,6 @@ import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.H
 @AllArgsConstructor
 @RequestMapping(MIEMBROS)
 public class MiembroConsultaControlador {
-
     private final ConsultarMiembroPorIdentificacionManejador consultarMiembroPorIdentificacionManejador;
     private final ConsultarMiembroPorIdCarnetManejador consultarMiembroPorIdCarnetManejador;
 

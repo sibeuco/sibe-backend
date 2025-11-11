@@ -1,6 +1,8 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.modelo.*;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.InternoCiudadResidenciaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.MiembroDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,16 +15,48 @@ public class ParticipanteMapeador {
     private final InternoCiudadResidenciaMapeador internoCiudadResidenciaMapeador;
     private final EmpleadoRelacionLaboralMapeador empleadoRelacionLaboralMapeador;
     private final EmpleadoCentroCostosMapeador empleadoCentroCostosMapeador;
+    private final MiembroDAO miembroDAO;
+    private final InternoCiudadResidenciaDAO internoCiudadResidenciaDAO;
 
     public ParticipanteEntidad construirEntidad(Participante dominio) {
         if (esNulo(dominio)) {
             return null;
         }
 
-        var miembroEntidad = miembroMapeador.construirEntidad(dominio.getMiembro());
+        var miembroDominio = dominio.getMiembro();
+
+        if (dominio instanceof ParticipanteExterno e) {
+
+            var miembroEntidadOpt = miembroDAO.findById(miembroDominio.getIdentificador());
+
+            MiembroEntidad miembroEntidad;
+            if (miembroEntidadOpt.isEmpty()) {
+                miembroEntidad = new ExternoEntidad(
+                        miembroDominio.getIdentificador(),
+                        miembroDominio.getNombreCompleto(),
+                        miembroDominio.getNumeroIdentificacion()
+                );
+                miembroEntidad = miembroDAO.save(miembroEntidad);
+            } else {
+                miembroEntidad = miembroEntidadOpt.get();
+            }
+
+            return new ParticipanteExternoEntidad(
+                    dominio.getIdentificador(),
+                    miembroEntidad
+            );
+        }
+
+        var miembroEntidad = miembroDAO.getReferenceById(miembroDominio.getIdentificador());
+        var internoEntidad = (InternoEntidad) miembroEntidad;
 
         if (dominio instanceof ParticipanteEstudiante e) {
-            var entidad = new ParticipanteEstudianteEntidad(
+            return new ParticipanteEstudianteEntidad(
+                    dominio.getIdentificador(),
+                    miembroEntidad,
+                    internoEntidad.getCiudadResidencia(),
+                    e.getIdCarnet(),
+                    e.getSexo(),
                     e.getEstadoCivil(),
                     e.getProgramaAcademico(),
                     e.getFacultad(),
@@ -35,50 +69,20 @@ public class ParticipanteMapeador {
                     e.getTiempoLlegadaUniversidad(),
                     e.getMedioTransporte()
             );
-
-            entidad.setIdentificador(dominio.getIdentificador());
-            entidad.setMiembro(miembroEntidad);
-
-            entidad.setCiudadResidencia(internoCiudadResidenciaMapeador.construirEntidad(e.getCiudadResidencia()));
-            entidad.setIdCarnet(e.getIdCarnet());
-            entidad.setSexo(e.getSexo());
-
-            return entidad;
         }
 
         if (dominio instanceof ParticipanteEmpleado e) {
-            var entidad = new ParticipanteEmpleadoEntidad(
-                    empleadoRelacionLaboralMapeador.construirEntidad(e.getRelacionLaboral()),
-                    empleadoCentroCostosMapeador.construirEntidad(e.getCentroCostos())
+            var empleadoEntidad = (EmpleadoEntidad) miembroEntidad;
+
+            return new ParticipanteEmpleadoEntidad(
+                    dominio.getIdentificador(),
+                    miembroEntidad,
+                    internoEntidad.getCiudadResidencia(),
+                    e.getIdCarnet(),
+                    e.getSexo(),
+                    empleadoEntidad.getRelacionLaboral(),
+                    empleadoEntidad.getCentroCostos()
             );
-
-            entidad.setIdentificador(dominio.getIdentificador());
-            entidad.setMiembro(miembroEntidad);
-
-            entidad.setCiudadResidencia(internoCiudadResidenciaMapeador.construirEntidad(e.getCiudadResidencia()));
-            entidad.setIdCarnet(e.getIdCarnet());
-            entidad.setSexo(e.getSexo());
-
-            return entidad;
-        }
-
-        if (dominio instanceof ParticipanteExterno) {
-            var entidad = new ParticipanteExternoEntidad();
-
-            entidad.setIdentificador(dominio.getIdentificador());
-            entidad.setMiembro(miembroEntidad);
-            return entidad;
-        }
-
-        if (dominio instanceof ParticipanteInterno i) {
-            var interno = new ParticipanteInternoEntidad(
-                    internoCiudadResidenciaMapeador.construirEntidad(i.getCiudadResidencia()),
-                    i.getIdCarnet(),
-                    i.getSexo()
-            );
-            interno.setIdentificador(i.getIdentificador());
-            interno.setMiembro(miembroEntidad);
-            return interno;
         }
 
         return new ParticipanteEntidad(dominio.getIdentificador(), miembroEntidad);

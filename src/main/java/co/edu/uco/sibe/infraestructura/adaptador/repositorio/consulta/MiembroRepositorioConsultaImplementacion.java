@@ -3,53 +3,49 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
 import co.edu.uco.sibe.dominio.modelo.Miembro;
 import co.edu.uco.sibe.dominio.puerto.consulta.MiembroRepositorioConsulta;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.EmpleadoDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.EstudianteDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.ExternoDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.*;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.MiembroEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.MiembroMapeador;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 @AllArgsConstructor
 public class MiembroRepositorioConsultaImplementacion implements MiembroRepositorioConsulta {
-    private final EstudianteDAO estudianteDAO;
-    private final EmpleadoDAO empleadoDAO;
-    private final ExternoDAO externoDAO;
+    private final MiembroDAO miembroDAO;
+    private final InternoDAO internoDAO;
     private final MiembroMapeador miembroMapeador;
 
     @Override
-    public Miembro consultarPorIdentificacion(String identificacion) {
-        MiembroEntidad miembro = estudianteDAO.findByNumeroIdentificacion(identificacion);
+    public Miembro consultarPorIdentificador(UUID identificador) {
+        var entidad = miembroDAO.findById(identificador).orElse(null);
 
-        if (esNulo(miembro)) {
-            miembro = empleadoDAO.findByNumeroIdentificacion(identificacion);
-        }
-
-        if (esNulo(miembro)) {
-            miembro = externoDAO.findByNumeroIdentificacion(identificacion);
-        }
-
-        if (esNulo(miembro)) {
+        if (esNulo(entidad)) {
             return null;
         }
 
-        return miembroMapeador.construirModelo(miembro);
+        return miembroMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public Miembro consultarPorIdentificacion(String identificacion) {
+        var entidad = miembroDAO.findByNumeroIdentificacion(identificacion).orElse(null);
+
+        if (esNulo(entidad)) {
+            return null;
+        }
+
+        return miembroMapeador.construirModelo(entidad);
     }
 
     @Override
     public MiembroDTO consultarPorIdentificacionDTO(String identificacion) {
-        MiembroEntidad miembro = estudianteDAO.findByNumeroIdentificacion(identificacion);
-
-        if (esNulo(miembro)) {
-            miembro = empleadoDAO.findByNumeroIdentificacion(identificacion);
-        }
-
-        if (esNulo(miembro)) {
-            miembro = externoDAO.findByNumeroIdentificacion(identificacion);
-        }
+        MiembroEntidad miembro = miembroDAO.findByNumeroIdentificacion(identificacion)
+                .orElse(null);
 
         if (esNulo(miembro)) {
             return null;
@@ -60,11 +56,8 @@ public class MiembroRepositorioConsultaImplementacion implements MiembroReposito
 
     @Override
     public MiembroDTO consultarPorIdCarnetDTO(String idCarnet) {
-        MiembroEntidad miembro = estudianteDAO.findByIdCarnet(idCarnet);
-
-        if (esNulo(miembro)) {
-            miembro = empleadoDAO.findByIdCarnet(idCarnet);
-        }
+        MiembroEntidad miembro = internoDAO.findByIdCarnet(idCarnet)
+                .orElse(null);
 
         if (esNulo(miembro)) {
             return null;

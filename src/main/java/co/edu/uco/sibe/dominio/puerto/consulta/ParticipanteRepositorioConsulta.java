@@ -6,5 +6,5 @@ import java.util.UUID;
 public interface ParticipanteRepositorioConsulta {
     Participante consultarPorIdentificador(UUID identificador);
     Participante consultarPorDocumentoMiembro(String documento);
-    Participante consultarPorIdentificadorYSemestre(UUID identificador, UUID ejecucionActividad);
+    Participante consultarPorDocumentoYSemestre(String documento, UUID ejecucionActividad);
 }
