@@ -10,6 +10,7 @@ public final class MensajesSistemaConstante {
     private static final String EL_USUARIO = "El Usuario ";
     private static final String FUE_AUTENTICADO_EXITOSAMENTE_CON_LOS_ROLES = " fue autenticado exitosamente y tiene el rol de: ";
     public static final String NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA = "No se puede instanciar una clase utilitaria";
+    public static final String ERROR_DE_INTEGRIDAD_CON_CONSULTA_DEL_MIEMBRO = "Error de integridad: No se encontró el Miembro Interno con ID ";
 
     private MensajesSistemaConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);

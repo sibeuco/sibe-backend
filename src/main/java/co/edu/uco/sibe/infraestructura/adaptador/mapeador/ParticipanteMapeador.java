@@ -1,11 +1,17 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
-import co.edu.uco.sibe.dominio.modelo.*;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.InternoCiudadResidenciaDAO;
+import co.edu.uco.sibe.dominio.modelo.Participante;
+import co.edu.uco.sibe.dominio.modelo.ParticipanteEmpleado;
+import co.edu.uco.sibe.dominio.modelo.ParticipanteEstudiante;
+import co.edu.uco.sibe.dominio.modelo.ParticipanteExterno;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.InternoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.MiembroDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.ERROR_DE_INTEGRIDAD_CON_CONSULTA_DEL_MIEMBRO;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Component
@@ -16,7 +22,7 @@ public class ParticipanteMapeador {
     private final EmpleadoRelacionLaboralMapeador empleadoRelacionLaboralMapeador;
     private final EmpleadoCentroCostosMapeador empleadoCentroCostosMapeador;
     private final MiembroDAO miembroDAO;
-    private final InternoCiudadResidenciaDAO internoCiudadResidenciaDAO;
+    private final InternoDAO internoDAO;
 
     public ParticipanteEntidad construirEntidad(Participante dominio) {
         if (esNulo(dominio)) {
@@ -26,7 +32,6 @@ public class ParticipanteMapeador {
         var miembroDominio = dominio.getMiembro();
 
         if (dominio instanceof ParticipanteExterno e) {
-
             var miembroEntidadOpt = miembroDAO.findById(miembroDominio.getIdentificador());
 
             MiembroEntidad miembroEntidad;
@@ -47,8 +52,10 @@ public class ParticipanteMapeador {
             );
         }
 
-        var miembroEntidad = miembroDAO.getReferenceById(miembroDominio.getIdentificador());
-        var internoEntidad = (InternoEntidad) miembroEntidad;
+        var internoEntidad = internoDAO.findById(miembroDominio.getIdentificador())
+                .orElseThrow(() -> new EntityNotFoundException(obtenerMensajeConParametro(ERROR_DE_INTEGRIDAD_CON_CONSULTA_DEL_MIEMBRO, miembroDominio.getIdentificador())));
+
+        var miembroEntidad = (MiembroEntidad) internoEntidad;
 
         if (dominio instanceof ParticipanteEstudiante e) {
             return new ParticipanteEstudianteEntidad(
