@@ -4,7 +4,11 @@ import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
 import co.edu.uco.sibe.dominio.enums.TipoInterno;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTipoPrograma;
 
@@ -14,12 +18,19 @@ public class ParticipanteDetalladoMapeador {
     private final RelacionLaboralMapeador relacionLaboralMapeador;
     private final CentroCostosMapeador centroCostosMapeador;
 
+    public List<ParticipanteDTO> construirDTOs(List<ParticipanteEntidad> participantes) {
+        return participantes
+                .stream()
+                .map(this::construirDTO)
+                .toList();
+    }
+
     public ParticipanteDTO construirDTO(ParticipanteEntidad entidad) {
         if (esNulo(entidad) || esNulo(entidad.getMiembro())) {
             return null;
         }
-
-        MiembroEntidad miembro = entidad.getMiembro();
+        MiembroEntidad miembroProxy = entidad.getMiembro();
+        MiembroEntidad miembro = (MiembroEntidad) Hibernate.unproxy(miembroProxy);
         ParticipanteDTO dto = new ParticipanteDTO();
         dto.setIdentificador(entidad.getIdentificador().toString());
         dto.setNombreCompleto(miembro.getNombreCompleto());

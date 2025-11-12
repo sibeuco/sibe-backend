@@ -92,9 +92,6 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     public List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad) {
         List<ParticipanteEntidad> participantes = this.ejecucionActividadDAO.findParticipantesByEjecucionActividadId(ejecucionActividad);
 
-        return participantes
-                .stream()
-                .map(this.participanteDetalladoMapeador::construirDTO)
-                .toList();
+        return this.participanteDetalladoMapeador.construirDTOs(participantes);
     }
 }

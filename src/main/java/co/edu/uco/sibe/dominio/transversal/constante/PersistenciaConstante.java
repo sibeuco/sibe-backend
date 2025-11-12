@@ -104,7 +104,7 @@ public final class PersistenciaConstante {
 
     public static final String CONSULTAR_PARTICIPANTE_POR_NUMERO_IDENTIFICACION = "SELECT p FROM ParticipanteEntidad p WHERE p.miembro.numeroIdentificacion = :documento";
     public static final String CONSULTAR_PARTICIPANTE_POR_DOCUMENTO_Y_SEMESTRE = "SELECT DISTINCT ra.participante FROM RegistroAsistenciaEntidad ra WHERE ra.participante.miembro.numeroIdentificacion = :documento AND ra.ejecucionActividad.actividad.semestre = :semestre";
-    public static final String CONSULTAR_PARTICIPANTES_POR_EJECUCION_ACTIVIDAD = "SELECT DISTINCT ra.participante FROM RegistroAsistenciaEntidad ra WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId";
+    public static final String CONSULTAR_PARTICIPANTES_POR_EJECUCION_ACTIVIDAD = "SELECT DISTINCT p FROM RegistroAsistenciaEntidad ra JOIN ra.participante p JOIN FETCH p.miembro m WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId";
     public static final String DOCUMENTO_PARAMETRO = "documento";
     public static final String SEMESTRE_PARAMETRO = "semestre";
     public static final String EJECUCION_ACTIVIDAD_PARAMETRO = "ejecucionActividadId";
