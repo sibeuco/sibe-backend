@@ -46,7 +46,7 @@ public class ParticipanteDetalladoMapeador {
         if (entidad instanceof ParticipanteEstudianteEntidad e) {
             var estudiante = (EstudianteEntidad) miembro;
 
-            dto.setTipoInterno(TipoInterno.ESTUDIANTE.name());
+            dto.setTipo(TipoInterno.ESTUDIANTE.name());
             dto.setFechaNacimiento(estudiante.getFechaNacimiento().toString());
             dto.setNacionalidad(estudiante.getNacionalidad());
             dto.setEstadoCivil(e.getEstadoCivil());
@@ -64,9 +64,9 @@ public class ParticipanteDetalladoMapeador {
             dto.setTiempoLlegadaUniversidad(e.getTiempoLlegadaUniversidad());
             dto.setMedioTransporte(e.getMedioTransporte());
         } else if (entidad instanceof ParticipanteEmpleadoEntidad e) {
-            dto.setRelacionLaboralDTO(relacionLaboralMapeador.construirDTO(e.getRelacionLaboral().getRelacionLaboral()));
-            dto.setCentroCostosDTO(centroCostosMapeador.construirDTO(e.getCentroCostos().getCentroCostos()));
-            dto.setTipoInterno(TipoInterno.EMPLEADO.name());
+            dto.setRelacionLaboral(relacionLaboralMapeador.construirDTO(e.getRelacionLaboral().getRelacionLaboral()));
+            dto.setCentroCostos(centroCostosMapeador.construirDTO(e.getCentroCostos().getCentroCostos()));
+            dto.setTipo(TipoInterno.EMPLEADO.name());
         }
 
         return dto;
@@ -75,7 +75,7 @@ public class ParticipanteDetalladoMapeador {
     private ParticipanteDTO inicializarDtoConDefaults() {
         var dto = new ParticipanteDTO();
 
-        dto.setTipoInterno(TipoParticipante.EXTERNO.name());
+        dto.setTipo(TipoParticipante.EXTERNO.name());
         dto.setFechaNacimiento(VACIO);
         dto.setNacionalidad(VACIO);
         dto.setEstadoCivil(VACIO);

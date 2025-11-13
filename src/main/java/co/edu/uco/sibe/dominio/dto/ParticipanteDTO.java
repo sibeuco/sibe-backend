@@ -13,9 +13,9 @@ public class ParticipanteDTO {
     private String identificador;
     private String nombreCompleto;
     private String numeroIdentificacion;
-    private RelacionLaboralDTO relacionLaboralDTO;
-    private CentroCostosDTO centroCostosDTO;
-    private String tipoInterno;
+    private RelacionLaboralDTO relacionLaboral;
+    private CentroCostosDTO centroCostos;
+    private String tipo;
     private String fechaNacimiento;
     private String nacionalidad;
     private String estadoCivil;
