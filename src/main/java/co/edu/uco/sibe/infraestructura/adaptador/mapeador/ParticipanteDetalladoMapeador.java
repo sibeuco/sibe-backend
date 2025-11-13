@@ -2,13 +2,13 @@ package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
 import co.edu.uco.sibe.dominio.enums.TipoInterno;
+import co.edu.uco.sibe.dominio.enums.TipoParticipante;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-
+import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.obtenerTipoPrograma;
 
@@ -26,18 +26,26 @@ public class ParticipanteDetalladoMapeador {
     }
 
     public ParticipanteDTO construirDTO(ParticipanteEntidad entidad) {
-        if (esNulo(entidad) || esNulo(entidad.getMiembro())) {
+        if (esNulo(entidad)) {
             return null;
         }
-        MiembroEntidad miembroProxy = entidad.getMiembro();
-        MiembroEntidad miembro = (MiembroEntidad) Hibernate.unproxy(miembroProxy);
-        ParticipanteDTO dto = new ParticipanteDTO();
+
+        var miembroProxy = entidad.getMiembro();
+
+        if (esNulo(miembroProxy)) {
+            return null;
+        }
+
+        var miembro = (MiembroEntidad) Hibernate.unproxy(miembroProxy);
+        var dto = inicializarDtoConDefaults();
+
         dto.setIdentificador(entidad.getIdentificador().toString());
         dto.setNombreCompleto(miembro.getNombreCompleto());
         dto.setNumeroIdentificacion(miembro.getNumeroIdentificacion());
 
         if (entidad instanceof ParticipanteEstudianteEntidad e) {
-            EstudianteEntidad estudiante = (EstudianteEntidad) miembro;
+            var estudiante = (EstudianteEntidad) miembro;
+
             dto.setTipoInterno(TipoInterno.ESTUDIANTE.name());
             dto.setFechaNacimiento(estudiante.getFechaNacimiento().toString());
             dto.setNacionalidad(estudiante.getNacionalidad());
@@ -55,13 +63,31 @@ public class ParticipanteDetalladoMapeador {
             dto.setModalidadEstudio(e.getModalidadEstudio());
             dto.setTiempoLlegadaUniversidad(e.getTiempoLlegadaUniversidad());
             dto.setMedioTransporte(e.getMedioTransporte());
-        }
-
-        if (entidad instanceof ParticipanteEmpleadoEntidad e) {
+        } else if (entidad instanceof ParticipanteEmpleadoEntidad e) {
             dto.setRelacionLaboralDTO(relacionLaboralMapeador.construirDTO(e.getRelacionLaboral().getRelacionLaboral()));
             dto.setCentroCostosDTO(centroCostosMapeador.construirDTO(e.getCentroCostos().getCentroCostos()));
             dto.setTipoInterno(TipoInterno.EMPLEADO.name());
         }
+
+        return dto;
+    }
+
+    private ParticipanteDTO inicializarDtoConDefaults() {
+        var dto = new ParticipanteDTO();
+
+        dto.setTipoInterno(TipoParticipante.EXTERNO.name());
+        dto.setFechaNacimiento(VACIO);
+        dto.setNacionalidad(VACIO);
+        dto.setEstadoCivil(VACIO);
+        dto.setCorreoPersonal(VACIO);
+        dto.setCorreoInstitucional(VACIO);
+        dto.setProgramaAcademico(VACIO);
+        dto.setTipoProgramaAcademico(VACIO);
+        dto.setFacultad(VACIO);
+        dto.setSemestreActual(VACIO);
+        dto.setEstadoAcademico(VACIO);
+        dto.setModalidadEstudio(VACIO);
+        dto.setMedioTransporte(VACIO);
 
         return dto;
     }
