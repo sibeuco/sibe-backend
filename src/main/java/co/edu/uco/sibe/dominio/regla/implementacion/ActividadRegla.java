@@ -6,6 +6,7 @@ import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesValidacionConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorNumero.validarNumeroEntre;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.validarObligatorio;
+import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarSemestreValido;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.validarTextoAlfanumericoValido;
 
 public final class ActividadRegla implements Regla<Actividad> {
@@ -46,7 +47,7 @@ public final class ActividadRegla implements Regla<Actividad> {
 
     private void validarSemestre(String semestre) {
         validarObligatorio(semestre, SEMESTRE_ACTIVIDAD_OBLIGATORIO);
-        validarTextoAlfanumericoValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
+        validarSemestreValido(semestre, SEMESTRE_ACTIVIDAD_INVALIDO);
         validarNumeroEntre(semestre.length(), 6, 6, LONGITUD_SEMESTRE_ACTIVIDAD_INVALIDA);
     }
 

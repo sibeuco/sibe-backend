@@ -15,6 +15,8 @@ public final class TextoConstante {
     public static final String NO_APLICA = "No Aplica";
     public static final String NO_VERIFICADO = "unchecked";
     public static final String TEST_CASE = "test";
+    public static final String NUMERO_CERO_UNO = "01";
+    public static final String NUMERO_CERO_DOS = "02";
 
     private TextoConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);

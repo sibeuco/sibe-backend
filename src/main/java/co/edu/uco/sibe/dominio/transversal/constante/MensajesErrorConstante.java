@@ -17,6 +17,8 @@ public final class MensajesErrorConstante {
     public static final String NATURALEZA_TIPO_INDICADOR_EXISTENTE = "Ya existe un tipo indicador con la naturaleza ingresada.";
     public static final String NOMBRE_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el nombre ingresado.";
     public static final String ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL = "Ya existe una actividad en el semestre actual con el nombre ingresado.";
+    public static final String FECHA_PROGRAMADA_NO_PUEDE_SER_ANTERIOR_A_FECHA_ACTUAL = "La fecha programada no puede ser anterior a la fecha actual";
+    public static final String FECHA_PROGRAMADA_NO_PERTENECE_AL_SEMESTRE_DE_LA_ACTIVIDAD = "La fecha programada no pertenece al semestre de la actividad";
     public static final String ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR = "No existe una actividad ese identificador.";
     public static final String AREA_NO_ENCONTRADA_CON_ID = "No se ha encontrado un área con el identificador: ";
     public static final String DIRECCION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una dirección con el identificador: ";
@@ -45,6 +47,9 @@ public final class MensajesErrorConstante {
 
     public static final String EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID = "No se ha encontrado una ejecución de actividad con el identificador: ";
     public static final String ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE = "No se ha encontrado un estado de actividad con el nombre: ";
+    public static final String INICIAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_PENDIENTE = "Solo se puede iniciar una actividad en estado pendiente.";
+    public static final String CANCELAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_EN_CURSO = "Solo se puede cancelar una actividad en estado en curso.";
+    public static final String FINALIZAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_EN_CURSO = "Solo se puede finalizar una actividad en estado en curso.";
     public static final String MIEMBRO_NO_ENCONTRADO_CON_DOCUMENTO = "No se ha encontrado un miembro con el documento: ";
 
     public static final String ORGANIZACION_NO_ENCONTRADA_CON_ID = "No se ha encontrado una entidad organizacional (Dirección, Área o Subárea) con el identificador: ";

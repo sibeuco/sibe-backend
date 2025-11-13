@@ -11,13 +11,16 @@ import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsult
 import co.edu.uco.sibe.dominio.puerto.consulta.RegistroAsistenciaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.EN_CURSO;
 import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.generar;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
@@ -41,6 +44,9 @@ public class FinalizarActividadUseCase {
 
     public UUID ejecutar(UUID identificadorEjecucion, List<Participante> participantes) {
         var ejecucion = validarSiExisteEjecucion(identificadorEjecucion);
+
+        validarSiEjecucionActividadEstaEnCurso(ejecucion.getEstado());
+
         var estado = validarSiExisteEstado(FINALIZADA);
 
         ejecucion.actualizarFechaRealizacion(LocalDate.now());
@@ -82,5 +88,11 @@ public class FinalizarActividadUseCase {
         }
 
         return estado;
+    }
+
+    private void validarSiEjecucionActividadEstaEnCurso(EstadoActividad estado) {
+        if(!estado.getNombre().equals(EN_CURSO)) {
+            throw new InvalidOperationException(FINALIZAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_EN_CURSO);
+        }
     }
 }

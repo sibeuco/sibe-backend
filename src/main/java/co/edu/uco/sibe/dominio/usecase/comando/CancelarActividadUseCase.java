@@ -6,10 +6,13 @@ import co.edu.uco.sibe.dominio.puerto.comando.ActividadRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
+
 import java.util.UUID;
+
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.EN_CURSO;
 import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.PENDIENTE;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.EJECUCION_ACTIVIDAD_NO_ENCONTRADA_CON_ID;
-import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE;
+import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesSistemaConstante.obtenerMensajeConParametro;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
@@ -26,6 +29,9 @@ public class CancelarActividadUseCase {
 
     public UUID ejecutar(UUID identificadorEjecucion) {
         var ejecucion = validarSiExisteEjecucion(identificadorEjecucion);
+
+        validarSiEjecucionActividadEstaEnCurso(ejecucion.getEstado());
+
         var estado = validarSiExisteEstado(PENDIENTE);
 
         ejecucion.actualizarEstado(estado);
@@ -49,5 +55,11 @@ public class CancelarActividadUseCase {
             throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
         }
         return estado;
+    }
+
+    private void validarSiEjecucionActividadEstaEnCurso(EstadoActividad estado) {
+        if(!estado.getNombre().equals(EN_CURSO)) {
+            throw new InvalidOperationException(CANCELAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_EN_CURSO);
+        }
     }
 }
