@@ -4,7 +4,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.CellType;
 import java.time.format.DateTimeFormatter;
+
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.VACIO;
 
 public abstract class FilaExcelBaseMapeador<T> implements FilaExcelMapeador<T> {
@@ -22,15 +24,21 @@ public abstract class FilaExcelBaseMapeador<T> implements FilaExcelMapeador<T> {
             return VACIO;
         }
 
-        if (DateUtil.isCellDateFormatted(celda)) {
-            try {
-                var localDateTime = celda.getLocalDateTimeCellValue();
-
-                return localDateTime.format(customDateFormatter);
-
-            } catch (Exception e) {
-                return dataFormatter.formatCellValue(celda).trim();
+        if (celda.getCellType() == CellType.NUMERIC) {
+            if (DateUtil.isCellDateFormatted(celda)) {
+                try {
+                    var localDateTime = celda.getLocalDateTimeCellValue();
+                    return localDateTime.format(customDateFormatter);
+                } catch (Exception e) {
+                    return dataFormatter.formatCellValue(celda).trim();
+                }
             }
+
+            return dataFormatter.formatCellValue(celda).trim();
+        }
+
+        if (celda.getCellType() == CellType.STRING) {
+            return celda.getStringCellValue().trim();
         }
 
         return dataFormatter.formatCellValue(celda).trim();
