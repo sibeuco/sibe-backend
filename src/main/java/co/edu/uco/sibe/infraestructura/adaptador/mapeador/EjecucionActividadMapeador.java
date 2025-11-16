@@ -65,6 +65,7 @@ public class EjecucionActividadMapeador {
         entidad.setFechaRealizacion(dominio.getFechaRealizacion());
         entidad.setHoraInicio(dominio.getHoraInicio());
         entidad.setHoraFin(dominio.getHoraFin());
+        entidad.setEstadoActividad(ejecucionActividadEstadoActividadMapeador.construirEntidad(dominio.getEstado()));
     }
 
     public void actualizarTodos(UUID actividadId, List<EjecucionActividad> ejecucionesNuevas) {
