@@ -15,8 +15,8 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class EstudianteFabrica {
     private final CiudadResidenciaFabrica ciudadResidenciaFabrica;
     private final EstudianteRepositorioConsulta estudianteRepositorioConsulta;
-    private static final DateTimeFormatter EXCEL_DATE_FORMATTER = DateTimeFormatter.ofPattern("M/d/yy");
-
+    private static final DateTimeFormatter EXCEL_DATE_FORMATTER = DateTimeFormatter.ofPattern("M/d/yyyy");
+    
     public Estudiante construir(DatosEstudianteComando estudianteComando) {
         return Estudiante.construir(
                 generar(uuid -> !esNulo(estudianteRepositorioConsulta.consultarPorIdentificador(uuid))),
