@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class EjecucionActividadMapeador {
-
     private final EjecucionActividadEstadoActividadMapeador ejecucionActividadEstadoActividadMapeador;
     private final ActividadMapeador actividadMapeador;
     private final EstadoActividadMapeador estadoActividadMapeador;
@@ -66,7 +65,6 @@ public class EjecucionActividadMapeador {
         entidad.setFechaRealizacion(dominio.getFechaRealizacion());
         entidad.setHoraInicio(dominio.getHoraInicio());
         entidad.setHoraFin(dominio.getHoraFin());
-        ejecucionActividadEstadoActividadMapeador.actualizarEntidad(entidad.getEstadoActividad(), dominio.getEstado());
     }
 
     public void actualizarTodos(UUID actividadId, List<EjecucionActividad> ejecucionesNuevas) {
