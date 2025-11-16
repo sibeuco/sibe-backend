@@ -20,7 +20,7 @@ public class ModificarActividadManejador implements ManejadorComandoParametroRes
     @Override
     public ComandoRespuesta<UUID> ejecutar(ActividadModificacionComando comando, UUID identificador) {
         var actividad = actividadFabrica.construirActualizar(comando, identificador);
-        var ejecuciones = actividadFabrica.construirEjecuciones(comando.getFechasProgramada(), actividad);
+        var ejecuciones = actividadFabrica.construirActualizarEjecuciones(comando.getFechasProgramada(), actividad);
         var area = UtilUUID.textoAUUID(comando.getArea().getArea());
         var tipoArea = TipoArea.valueOf(comando.getArea().getTipoArea().toUpperCase());
 

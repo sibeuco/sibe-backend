@@ -2,6 +2,7 @@ package co.edu.uco.sibe.aplicacion.comando.fabrica;
 
 import co.edu.uco.sibe.aplicacion.comando.ActividadComando;
 import co.edu.uco.sibe.aplicacion.comando.ActividadModificacionComando;
+import co.edu.uco.sibe.aplicacion.comando.FechaProgramadaModificacionComando;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.EjecucionActividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
@@ -63,9 +64,30 @@ public class ActividadFabrica {
         var estadoProgramada = estadoActividadRepositorioConsulta.consultarPorNombre(PENDIENTE);
 
         return fechas.stream()
-                .map(fechaStr -> {
-                    var fechaProgramada = formatearTextoAFecha(fechaStr);
+                .map(fecha -> {
+                    var fechaProgramada = formatearTextoAFecha(fecha);
                     var identificadorEjecucion = generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid)));
+
+                    return EjecucionActividad.construir(
+                            identificadorEjecucion,
+                            fechaProgramada,
+                            fechaProgramada,
+                            obtenerHoraDefecto(),
+                            obtenerHoraDefecto(),
+                            estadoProgramada,
+                            actividadPadre
+                    );
+                })
+                .toList();
+    }
+
+    public List<EjecucionActividad> construirActualizarEjecuciones(List<FechaProgramadaModificacionComando> fechas, Actividad actividadPadre) {
+        var estadoProgramada = estadoActividadRepositorioConsulta.consultarPorNombre(PENDIENTE);
+
+        return fechas.stream()
+                .map(fecha -> {
+                    var fechaProgramada = formatearTextoAFecha(fecha.getFechaProgramada());
+                    var identificadorEjecucion = esNulo(fecha.getIdentificador()) ? generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid))) : textoAUUID(fecha.getIdentificador());
 
                     return EjecucionActividad.construir(
                             identificadorEjecucion,

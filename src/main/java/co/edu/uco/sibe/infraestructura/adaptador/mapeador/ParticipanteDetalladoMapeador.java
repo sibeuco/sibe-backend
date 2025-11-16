@@ -25,11 +25,12 @@ public class ParticipanteDetalladoMapeador {
                 .toList();
     }
 
-    public ParticipanteDTO construirDTO(ParticipanteEntidad entidad) {
-        if (esNulo(entidad)) {
+    public ParticipanteDTO construirDTO(ParticipanteEntidad entidadProxy) {
+        if (esNulo(entidadProxy)) {
             return null;
         }
 
+        var entidad = (ParticipanteEntidad) Hibernate.unproxy(entidadProxy);
         var miembroProxy = entidad.getMiembro();
 
         if (esNulo(miembroProxy)) {

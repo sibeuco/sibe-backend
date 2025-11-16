@@ -17,6 +17,6 @@ public class ActividadModificacionComando {
     private String rutaInsumos;
     private String indicador;
     private String colaborador;
-    private List<String> fechasProgramada;
+    private List<FechaProgramadaModificacionComando> fechasProgramada;
     private AreaComando area;
 }
