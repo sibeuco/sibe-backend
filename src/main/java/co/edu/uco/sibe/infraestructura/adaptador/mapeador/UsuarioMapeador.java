@@ -2,8 +2,8 @@ package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioOrganizacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioTipoUsuarioDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.PersonaEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.UsuarioEntidad;
@@ -19,15 +19,27 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class UsuarioMapeador {
     private final TipoUsuarioMapeador tipoUsuarioMapeador;
     private final IdentificacionMapeador identificacionMapeador;
+    private final UsuarioOrganizacionMapeador usuarioOrganizacionMapeador;
     private final UsuarioDAO usuarioDAO;
     private final UsuarioTipoUsuarioDAO usuarioTipoUsuarioDAO;
+    private final UsuarioOrganizacionDAO usuarioOrganizacionDAO;
 
     public UsuarioDTO construirDTO(PersonaEntidad persona) {
         var usuario = usuarioDAO.findByCorreo(persona.getCorreo());
         var identificacionDTO = identificacionMapeador.construirDTO(persona.getIdentificacion());
         var tipoUsuarioDTO = tipoUsuarioMapeador.construirDTO(usuario.getRol().getTipoUsuario());
+        var usuarioAreaDTO = usuarioOrganizacionMapeador.construirDTO(usuarioOrganizacionDAO.findByUsuario(usuario));
 
-        return new UsuarioDTO(persona.getIdentificador().toString(), persona.getNombres(), persona.getApellidos(), persona.getCorreo(), identificacionDTO, tipoUsuarioDTO, usuario.isEstaActivo());
+        return new UsuarioDTO(
+                persona.getIdentificador().toString(),
+                persona.getNombres(),
+                persona.getApellidos(),
+                persona.getCorreo(),
+                identificacionDTO,
+                tipoUsuarioDTO,
+                usuarioAreaDTO,
+                usuario.isEstaActivo()
+        );
     }
 
     public UsuarioEntidad construirEntidad(Usuario usuario, String clave){

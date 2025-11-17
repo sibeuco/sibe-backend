@@ -1,5 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.mapeador;
 
+import co.edu.uco.sibe.dominio.dto.UsuarioAreaDTO;
+import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioOrganizacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import lombok.AllArgsConstructor;
@@ -57,5 +59,29 @@ public class UsuarioOrganizacionMapeador {
         usuarioOrganizacionEntidad.setDireccion(null);
         usuarioOrganizacionEntidad.setArea(null);
         usuarioOrganizacionEntidad.setSubarea(subarea);
+    }
+
+    public UsuarioAreaDTO construirDTO(UsuarioOrganizacionEntidad usuarioOrganizacion) {
+        if(!esNulo(usuarioOrganizacion.getDireccion())) {
+            return new UsuarioAreaDTO(
+                    usuarioOrganizacion.getDireccion().getIdentificador().toString(),
+                    usuarioOrganizacion.getDireccion().getNombre(),
+                    TipoArea.DIRECCION.name()
+            );
+        }
+
+        if(!esNulo(usuarioOrganizacion.getArea())) {
+            return new UsuarioAreaDTO(
+                    usuarioOrganizacion.getArea().getIdentificador().toString(),
+                    usuarioOrganizacion.getArea().getNombre(),
+                    TipoArea.AREA.name()
+            );
+        }
+
+        return new UsuarioAreaDTO(
+                usuarioOrganizacion.getSubarea().getIdentificador().toString(),
+                usuarioOrganizacion.getSubarea().getNombre(),
+                TipoArea.SUBAREA.name()
+        );
     }
 }

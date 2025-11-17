@@ -16,5 +16,6 @@ public class UsuarioDTO {
     private String correo;
     private IdentificacionDTO identificacion;
     private TipoUsuarioDTO tipoUsuario;
+    private UsuarioAreaDTO area;
     private Boolean estaActivo;
 }
