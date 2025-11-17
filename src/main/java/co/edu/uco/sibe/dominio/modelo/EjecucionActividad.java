@@ -68,6 +68,10 @@ public class EjecucionActividad {
         );
     }
 
+    public void actualizarFechaProgramada(LocalDate fechaProgramada) {
+        this.fechaProgramada = fechaProgramada;
+    }
+
     public void actualizarHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }

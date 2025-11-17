@@ -82,22 +82,30 @@ public class ActividadFabrica {
     }
 
     public List<EjecucionActividad> construirActualizarEjecuciones(List<FechaProgramadaModificacionComando> fechas, Actividad actividadPadre) {
-        var estadoProgramada = estadoActividadRepositorioConsulta.consultarPorNombre(PENDIENTE);
+        var estadoPendiente = estadoActividadRepositorioConsulta.consultarPorNombre(PENDIENTE);
 
         return fechas.stream()
                 .map(fecha -> {
-                    var fechaProgramada = formatearTextoAFecha(fecha.getFechaProgramada());
-                    var identificadorEjecucion = esNulo(fecha.getIdentificador()) ? generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid))) : textoAUUID(fecha.getIdentificador());
+                    if (esNulo(fecha.getIdentificador())) {
+                        var fechaProgramada = formatearTextoAFecha(fecha.getFechaProgramada());
+                        var identificadorEjecucion = generar(uuid -> !esNulo(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(uuid)));
 
-                    return EjecucionActividad.construir(
-                            identificadorEjecucion,
-                            fechaProgramada,
-                            fechaProgramada,
-                            obtenerHoraDefecto(),
-                            obtenerHoraDefecto(),
-                            estadoProgramada,
-                            actividadPadre
-                    );
+                        return EjecucionActividad.construir(
+                                identificadorEjecucion,
+                                fechaProgramada,
+                                fechaProgramada,
+                                obtenerHoraDefecto(),
+                                obtenerHoraDefecto(),
+                                estadoPendiente,
+                                actividadPadre
+                        );
+                    }
+
+                    var ejecucionActividad = actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(textoAUUID(fecha.getIdentificador()));
+
+                    ejecucionActividad.actualizarFechaProgramada(formatearTextoAFecha(fecha.getFechaProgramada()));
+
+                    return ejecucionActividad;
                 })
                 .toList();
     }

@@ -43,12 +43,6 @@ public class ModificarActividadUseCase {
         this.modificarVinculacionActividadConAreaService.ejecutar(actividad, area, tipoArea);
 
         ejecucionesActividad.forEach(ejecucionActividad -> {
-            var ejecucionActividadActual = actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(ejecucionActividad.getIdentificador());
-
-            if(!esNulo(ejecucionActividadActual)) {
-                ejecucionActividad.actualizarEstado(ejecucionActividadActual.getEstado());
-            }
-
             MotoresFabrica.MOTOR_ESTADO_ACTIVIDAD.ejecutar(ejecucionActividad.getEstado(), TipoOperacion.CREAR);
             MotoresFabrica.MOTOR_EJECUCION_ACTIVIDAD.ejecutar(ejecucionActividad, TipoOperacion.CREAR);
 
