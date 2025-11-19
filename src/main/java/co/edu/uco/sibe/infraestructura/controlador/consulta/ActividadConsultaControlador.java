@@ -1,16 +1,10 @@
 package co.edu.uco.sibe.infraestructura.controlador.consulta;
 
 import co.edu.uco.sibe.aplicacion.consulta.*;
-import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
-import co.edu.uco.sibe.dominio.dto.MiembroDTO;
-import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
+import co.edu.uco.sibe.dominio.dto.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY;
@@ -33,6 +27,7 @@ public class ActividadConsultaControlador {
     private final ConsultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador;
     private final ConsultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador;
     private final ConsultarIndicadoresEnEjecucionesFinalizadasManejador consultarIndicadoresEnEjecucionesFinalizadasManejador;
+    private final ContarParticipantesTotalesManejador contarParticipantesTotalesManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_AREA)
@@ -110,5 +105,11 @@ public class ActividadConsultaControlador {
     @GetMapping(INDICADORES_EJECUCIONES_FINALIZADAS)
     public List<String> consultarIndicadoresEnEjecucionesFinalizadas() {
         return this.consultarIndicadoresEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @PostMapping(CONTAR_PARTICIPANTES_EJECUCIONES_FINALIZADAS)
+    public Long contarParticipantesTotales(@RequestBody FiltroEstadisticaDTO filtro) {
+        return this.contarParticipantesTotalesManejador.ejecutar(filtro);
     }
 }

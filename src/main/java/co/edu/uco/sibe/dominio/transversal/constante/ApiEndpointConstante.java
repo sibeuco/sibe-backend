@@ -50,6 +50,7 @@ public final class ApiEndpointConstante {
     public static final String PROGRAMAS_ACADEMICOS_ESTUDIANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/programas-academicos";
     public static final String NIVELES_FORMACION_ESTUDIANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/niveles-formacion";
     public static final String INDICADORES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/indicadores";
+    public static final String CONTAR_PARTICIPANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/participantes/conteo";
 
     public static final String MIEMBRO_IDENTIFICACION = "/identificacion/{identificacion}";
     public static final String MIEMBRO_CARNET = "/carnet/{carnet}";

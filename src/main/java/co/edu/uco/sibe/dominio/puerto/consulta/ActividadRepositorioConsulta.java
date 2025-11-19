@@ -1,9 +1,6 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
-import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
-import co.edu.uco.sibe.dominio.dto.MiembroDTO;
-import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
+import co.edu.uco.sibe.dominio.dto.*;
 import co.edu.uco.sibe.dominio.modelo.*;
 import java.util.List;
 import java.util.UUID;
@@ -40,4 +37,6 @@ public interface ActividadRepositorioConsulta {
     List<String> consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadas();
 
     List<String> consultarIndicadoresEnEjecucionesFinalizadas();
+
+    Long contarParticipantesTotales(FiltroEstadisticaDTO filtro);
 }

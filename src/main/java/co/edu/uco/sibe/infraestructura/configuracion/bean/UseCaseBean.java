@@ -309,4 +309,10 @@ public class UseCaseBean {
             ActividadRepositorioConsulta actividadRepositorioConsulta) {
         return new ConsultarIndicadoresEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
     }
+
+    @Bean
+    public ContarParticipantesTotalesUseCase contarParticipantesTotalesUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ContarParticipantesTotalesUseCase(actividadRepositorioConsulta);
+    }
 }
