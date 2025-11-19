@@ -261,4 +261,52 @@ public class UseCaseBean {
     public ConsultarParticipantesPorEjecucionActividadUseCase consultarParticipantesPorEjecucionActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta) {
         return new ConsultarParticipantesPorEjecucionActividadUseCase(actividadRepositorioConsulta);
     }
+
+    @Bean
+    public ConsultarMesesEjecucionesFinalizadasUseCase consultarMesesEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarMesesEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarAnnosEjecucionesFinalizadasUseCase consultarAnnosEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarAnnosEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase consultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarCentrosCostosEmpleadosEnEjecucionesFinalizadasUseCase consultarCentrosCostosEmpleadosEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarCentrosCostosEmpleadosEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarTiposParticipantesEnEjecucionesFinalizadasUseCase consultarTiposParticipantesEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarTiposParticipantesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasUseCase consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasUseCase consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
+
+    @Bean
+    public ConsultarIndicadoresEnEjecucionesFinalizadasUseCase consultarIndicadoresEnEjecucionesFinalizadasUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ConsultarIndicadoresEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+    }
 }

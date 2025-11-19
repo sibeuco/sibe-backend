@@ -24,4 +24,20 @@ public interface ActividadRepositorioConsulta {
     EjecucionActividad consultarEjecucionActividadPorIdentificador(UUID identificador);
 
     List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad);
+
+    List<String> consultarMesesEjecucionesFinalizadas();
+
+    List<String> consultarAnnosEjecucionesFinalizadas();
+
+    List<String> consultarSemestresEstudiantesEnEjecucionesFinalizadas();
+
+    List<String> consultarCentrosCostosEmpleadosEnEjecucionesFinalizadas();
+
+    List<String> consultarTiposParticipantesEnEjecucionesFinalizadas();
+
+    List<String> consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadas();
+
+    List<String> consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadas();
+
+    List<String> consultarIndicadoresEnEjecucionesFinalizadas();
 }

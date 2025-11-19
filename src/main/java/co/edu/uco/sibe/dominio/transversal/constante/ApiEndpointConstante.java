@@ -42,6 +42,14 @@ public final class ApiEndpointConstante {
     public static final String ACTIVIDADES_SUBAREA = "/subarea/{identificador}";
     public static final String ACTIVIDADES_EJECUCIONES = "/ejecuciones/{identificador}";
     public static final String PARTICIPANTES_EJECUCION_ACTIVIDAD = "/ejecuciones/ejecucion/participantes/{identificador}";
+    public static final String MESES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/meses";
+    public static final String ANNOS_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/annos";
+    public static final String SEMESTRES_ESTUDIANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/semestres";
+    public static final String CENTROS_COSTOS_EMPLEADOS_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/centros-costos";
+    public static final String TIPOS_PARTICIPANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/tipos-participantes";
+    public static final String PROGRAMAS_ACADEMICOS_ESTUDIANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/programas-academicos";
+    public static final String NIVELES_FORMACION_ESTUDIANTES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/niveles-formacion";
+    public static final String INDICADORES_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/indicadores";
 
     public static final String MIEMBRO_IDENTIFICACION = "/identificacion/{identificacion}";
     public static final String MIEMBRO_CARNET = "/carnet/{carnet}";

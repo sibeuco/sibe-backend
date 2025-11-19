@@ -25,6 +25,14 @@ public class ActividadConsultaControlador {
     private final ConsultarActividadesPorSubareaManejador consultarActividadesPorSubareaManejador;
     private final ConsultarEjecucionesPorActividadManejador consultarEjecucionesPorActividadManejador;
     private final ConsultarParticipantesPorEjecucionActividadManejador consultarParticipantesPorEjecucionActividadManejador;
+    private final ConsultarMesesEjecucionesFinalizadasManejador consultarMesesEjecucionesFinalizadasManejador;
+    private final ConsultarAnnosEjecucionesFinalizadasManejador consultarAnnosEjecucionesFinalizadasManejador;
+    private final ConsultarSemestresEstudiantesEnEjecucionesFinalizadasManejador consultarSemestresEstudiantesEnEjecucionesFinalizadasManejador;
+    private final ConsultarCentrosCostosEmpleadosEnEjecucionesFinalizadasManejador consultarCentrosCostosEmpleadosEnEjecucionesFinalizadasManejador;
+    private final ConsultarTiposParticipantesEnEjecucionesFinalizadasManejador consultarTiposParticipantesEnEjecucionesFinalizadasManejador;
+    private final ConsultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador;
+    private final ConsultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador;
+    private final ConsultarIndicadoresEnEjecucionesFinalizadasManejador consultarIndicadoresEnEjecucionesFinalizadasManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_AREA)
@@ -54,5 +62,53 @@ public class ActividadConsultaControlador {
     @GetMapping(PARTICIPANTES_EJECUCION_ACTIVIDAD)
     public List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(@PathVariable String identificador) {
         return this.consultarParticipantesPorEjecucionActividadManejador.ejecutar(textoAUUID(identificador));
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(MESES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarMesesEjecucionesFinalizadas() {
+        return this.consultarMesesEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(ANNOS_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarAnnosEjecucionesFinalizadas() {
+        return this.consultarAnnosEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(SEMESTRES_ESTUDIANTES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarSemestresEstudiantesEnEjecucionesFinalizadas() {
+        return this.consultarSemestresEstudiantesEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(CENTROS_COSTOS_EMPLEADOS_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarCentrosCostosEmpleadosEnEjecucionesFinalizadas() {
+        return this.consultarCentrosCostosEmpleadosEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(TIPOS_PARTICIPANTES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarTiposParticipantesEnEjecucionesFinalizadas() {
+        return this.consultarTiposParticipantesEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(PROGRAMAS_ACADEMICOS_ESTUDIANTES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadas() {
+        return this.consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(NIVELES_FORMACION_ESTUDIANTES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadas() {
+        return this.consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador.ejecutar();
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @GetMapping(INDICADORES_EJECUCIONES_FINALIZADAS)
+    public List<String> consultarIndicadoresEnEjecucionesFinalizadas() {
+        return this.consultarIndicadoresEnEjecucionesFinalizadasManejador.ejecutar();
     }
 }
