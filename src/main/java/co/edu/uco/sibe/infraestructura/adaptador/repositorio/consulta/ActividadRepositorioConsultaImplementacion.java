@@ -10,18 +10,19 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ParticipanteDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEmpleadoEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEstudianteEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteExternoEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.estaCadenaVacia;
@@ -209,7 +210,6 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
                 parametros.put("mesValor", yearMonth.getMonthValue());
                 parametros.put("mesAnioValor", yearMonth.getYear());
             } catch (Exception ignored) {
-
             }
         }
 
@@ -262,12 +262,13 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         if (filtro.getIdArea() != null && !estaCadenaVacia(filtro.getTipoArea())) {
             String tipoArea = filtro.getTipoArea().toUpperCase();
 
-            if ("AREA".equals(tipoArea)) {
-                jpql.append("AND EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) ");
-            } else if ("SUBAREA".equals(tipoArea)) {
-                jpql.append("AND EXISTS (SELECT 1 FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :idArea AND act.identificador = a.identificador) ");
-            } else if ("DIRECCION".equals(tipoArea)) {
-                jpql.append("AND EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ");
+            switch (tipoArea) {
+                case "AREA" ->
+                        jpql.append("AND EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) ");
+                case "SUBAREA" ->
+                        jpql.append("AND EXISTS (SELECT 1 FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :idArea AND act.identificador = a.identificador) ");
+                case "DIRECCION" ->
+                        jpql.append("AND EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ");
             }
             parametros.put("idArea", filtro.getIdArea());
         }
