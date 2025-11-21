@@ -116,12 +116,13 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         var fechas = ejecucionActividadDAO.findFechasRealizacionByEstadoNombre(FINALIZADA);
 
         return fechas.stream()
-                .map(YearMonth::from)
+                .map(java.time.LocalDate::getMonth)
                 .distinct()
-                .sorted((a, b) -> b.compareTo(a))
-                .map(yearMonth -> {
-                    String fechaTexto = yearMonth.format(FORMATO_MES_ANIO);
-                    return fechaTexto.substring(0, 1).toUpperCase() + fechaTexto.substring(1);
+                .sorted(java.util.Comparator.reverseOrder())
+                .map(month -> {
+                    String nombreMes = month.getDisplayName(java.time.format.TextStyle.FULL, new java.util.Locale("es", "CO"));
+
+                    return nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
                 })
                 .toList();
     }
