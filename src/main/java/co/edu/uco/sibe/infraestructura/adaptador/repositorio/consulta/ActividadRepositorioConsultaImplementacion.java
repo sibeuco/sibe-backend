@@ -1,6 +1,10 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.*;
+import co.edu.uco.sibe.dominio.enums.TipoArea;
+import co.edu.uco.sibe.dominio.enums.TipoInterno;
+import co.edu.uco.sibe.dominio.enums.TipoParticipante;
+import co.edu.uco.sibe.dominio.enums.TipoPrograma;
 import co.edu.uco.sibe.dominio.modelo.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
@@ -12,13 +16,14 @@ import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoField;
 import java.util.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.*;
+import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.estaCadenaVacia;
 
@@ -26,7 +31,7 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.est
 @AllArgsConstructor
 @Transactional(readOnly = true)
 public class ActividadRepositorioConsultaImplementacion implements ActividadRepositorioConsulta {
-    private static final DateTimeFormatter FORMATO_MES_ANIO = DateTimeFormatter.ofPattern("MMMM yyyy", new Locale("es", "CO"));
+    private static final Locale LOCALE_CO = new Locale(IDIOMA_ES, PAIS_CO);
 
     private final EntityManager entityManager;
     private final ActividadDAO actividadDAO;
@@ -111,26 +116,11 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     }
 
     @Override
-    public List<String> consultarMesesEjecucionesFinalizadas() {
-        var fechas = ejecucionActividadDAO.findFechasRealizacionByEstadoNombre(FINALIZADA);
-
-        return fechas.stream()
-                .map(java.time.LocalDate::getMonth)
-                .distinct()
-                .sorted(java.util.Comparator.reverseOrder())
-                .map(month -> {
-                    String nombreMes = month.getDisplayName(java.time.format.TextStyle.FULL, new java.util.Locale("es", "CO"));
-
-                    return nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
-                })
-                .toList();
-    }
-
-    @Override
     public List<String> consultarAnnosEjecucionesFinalizadas() {
         var fechas = ejecucionActividadDAO.findFechasRealizacionByEstadoNombre(FINALIZADA);
 
-        return fechas.stream()
+        return fechas
+                .stream()
                 .map(fecha -> Year.from(fecha).getValue())
                 .distinct()
                 .sorted(Comparator.reverseOrder())
@@ -162,7 +152,8 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     public List<String> consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadas() {
         List<String> programas = participanteDAO.findProgramasAcademicosEstudiantesByEstadoEjecucion(FINALIZADA);
 
-        return programas.stream()
+        return programas
+                .stream()
                 .map(ValidadorTexto::obtenerTipoPrograma)
                 .distinct()
                 .sorted(Comparator.reverseOrder())
@@ -175,23 +166,33 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     }
 
     @Override
-    public Long contarParticipantesTotales(FiltroEstadisticaDTO filtro) {
-        String selectClause = "SELECT COUNT(DISTINCT p.identificador) ";
+    public List<String> consultarMesesEjecucionesFinalizadas() {
+        var fechas = ejecucionActividadDAO.findFechasRealizacionByEstadoNombre(FINALIZADA);
 
-        return ejecutarConsultaDinamica(selectClause, filtro);
+        return fechas.stream()
+                .map(java.time.LocalDate::getMonth)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .map(month -> {
+                    String nombreMes = month.getDisplayName(TextStyle.FULL, LOCALE_CO);
+                    return nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
+                })
+                .toList();
+    }
+
+    @Override
+    public Long contarParticipantesTotales(FiltroEstadisticaDTO filtro) {
+        return ejecutarConsultaDinamica(SELECT_COUNT_DISTINCT_PARTICIPANTE, filtro);
     }
 
     @Override
     public Long contarAsistenciasTotales(FiltroEstadisticaDTO filtro) {
-        String selectClause = "SELECT COUNT(ra) ";
-
-        return ejecutarConsultaDinamica(selectClause, filtro);
+        return ejecutarConsultaDinamica(SELECT_COUNT_ASISTENCIA, filtro);
     }
 
     @Override
     public Long contarEjecucionesTotales(FiltroEstadisticaDTO filtro) {
-        String selectClause = "SELECT COUNT(DISTINCT ea.identificador) ";
-        return ejecutarConsultaDinamica(selectClause, filtro);
+        return ejecutarConsultaDinamica(SELECT_COUNT_DISTINCT_EJECUCION, filtro);
     }
 
     @Override
@@ -208,7 +209,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
             String tipo = filtroOriginal.getTipoArea().toUpperCase();
             UUID id = filtroOriginal.getIdArea();
 
-            if ("DIRECCION".equals(tipo)) {
+            if (TipoArea.DIRECCION.name().equals(tipo)) {
                 direccionDAO.findById(id).ifPresent(dir -> {
                     direccionesPermitidas.add(dir.getIdentificador());
                     if (dir.getAreas() != null) {
@@ -220,14 +221,14 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
                         }
                     }
                 });
-            } else if ("AREA".equals(tipo)) {
+            } else if (TipoArea.AREA.name().equals(tipo)) {
                 areaDAO.findById(id).ifPresent(area -> {
                     areasPermitidas.add(area.getIdentificador());
                     if (area.getSubareas() != null) {
                         area.getSubareas().forEach(sub -> subareasPermitidas.add(sub.getIdentificador()));
                     }
                 });
-            } else if ("SUBAREA".equals(tipo)) {
+            } else if (TipoArea.SUBAREA.name().equals(tipo)) {
                 subareasPermitidas.add(id);
             }
         }
@@ -235,19 +236,19 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         var direcciones = direccionDAO.findAll();
         for (var direccion : direcciones) {
             boolean permitido = !hayFiltroEstructura || direccionesPermitidas.contains(direccion.getIdentificador());
-            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, direccion.getIdentificador(), "DIRECCION", direccion.getNombre(), permitido));
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, direccion.getIdentificador(), TipoArea.DIRECCION.name(), direccion.getNombre(), permitido));
         }
 
         var areas = areaDAO.findAll();
         for (var area : areas) {
             boolean permitido = !hayFiltroEstructura || areasPermitidas.contains(area.getIdentificador());
-            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, area.getIdentificador(), "AREA", area.getNombre(), permitido));
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, area.getIdentificador(), TipoArea.AREA.name(), area.getNombre(), permitido));
         }
 
         var subareas = subareaDAO.findAll();
         for (var subarea : subareas) {
             boolean permitido = !hayFiltroEstructura || subareasPermitidas.contains(subarea.getIdentificador());
-            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, subarea.getIdentificador(), "SUBAREA", subarea.getNombre(), permitido));
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, subarea.getIdentificador(), TipoArea.SUBAREA.name(), subarea.getNombre(), permitido));
         }
 
         return estadisticas;
@@ -256,10 +257,9 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     @Override
     public List<EstadisticaMesDTO> consultarEstadisticasParticipantesPorMes(FiltroEstadisticaDTO filtroOriginal) {
         List<EstadisticaMesDTO> estadisticas = new ArrayList<>();
-        Locale localeColombia = new Locale("es", "CO");
 
         for (Month mes : Month.values()) {
-            String nombreMes = mes.getDisplayName(TextStyle.FULL, localeColombia);
+            String nombreMes = mes.getDisplayName(TextStyle.FULL, LOCALE_CO);
             nombreMes = nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
 
             FiltroEstadisticaDTO filtroMes = new FiltroEstadisticaDTO(
@@ -313,104 +313,84 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         Map<String, Object> parametros = new HashMap<>();
 
         jpql.append(selectClause);
-        jpql.append("FROM RegistroAsistenciaEntidad ra ");
-        jpql.append("JOIN ra.participante p ");
-        jpql.append("JOIN ra.ejecucionActividad ea ");
-        jpql.append("JOIN ea.actividad a ");
-        jpql.append("LEFT JOIN ParticipanteEstudianteEntidad pe ON pe.identificador = p.identificador ");
-        jpql.append("LEFT JOIN ParticipanteEmpleadoEntidad pem ON pem.identificador = p.identificador ");
-
-        jpql.append("WHERE ea.estadoActividad.estadoActividad.nombre = :estado ");
-        parametros.put("estado", FINALIZADA);
+        jpql.append(FROM_JOIN_BASE_ESTADISTICAS);
+        jpql.append(WHERE_ESTADO_ACTIVIDAD);
+        parametros.put(ESTADO_PARAMETRO, FINALIZADA);
 
         if (filtro.getAnno() != null && filtro.getAnno() > 0) {
-            jpql.append("AND YEAR(ea.fechaRealizacion) = :anno ");
-            parametros.put("anno", filtro.getAnno());
+            jpql.append(AND_ANNO);
+            parametros.put(PARAM_ANNO, filtro.getAnno());
         }
 
         if (!estaCadenaVacia(filtro.getMes())) {
             try {
                 java.time.format.DateTimeFormatter parser = new java.time.format.DateTimeFormatterBuilder()
                         .parseCaseInsensitive()
-                        .appendPattern("MMMM")
-                        .toFormatter(new java.util.Locale("es", "CO"));
+                        .appendPattern(FORMATO_MES_PATTERN)
+                        .toFormatter(LOCALE_CO);
 
                 java.time.temporal.TemporalAccessor accessor = parser.parse(filtro.getMes());
-                int numeroMes = accessor.get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
+                int numeroMes = accessor.get(ChronoField.MONTH_OF_YEAR);
 
-                jpql.append("AND MONTH(ea.fechaRealizacion) = :mesValor ");
-                parametros.put("mesValor", numeroMes);
+                jpql.append(AND_MES_VALOR);
+                parametros.put(PARAM_MES_VALOR, numeroMes);
             } catch (Exception ignored) {
             }
         }
 
         if (!estaCadenaVacia(filtro.getIndicador())) {
-            jpql.append("AND a.indicador.nombre = :indicador ");
-            parametros.put("indicador", filtro.getIndicador());
+            jpql.append(AND_INDICADOR);
+            parametros.put(PARAM_INDICADOR, filtro.getIndicador());
         }
 
         if (!estaCadenaVacia(filtro.getTipoParticipante())) {
-            jpql.append("AND TYPE(p) = :tipoEntidad ");
+            jpql.append(AND_TYPE_PARTICIPANTE);
 
-            if ("ESTUDIANTE".equalsIgnoreCase(filtro.getTipoParticipante())) {
-                parametros.put("tipoEntidad", ParticipanteEstudianteEntidad.class);
-            } else if ("EMPLEADO".equalsIgnoreCase(filtro.getTipoParticipante())) {
-                parametros.put("tipoEntidad", ParticipanteEmpleadoEntidad.class);
-            } else if ("EXTERNO".equalsIgnoreCase(filtro.getTipoParticipante())) {
-                parametros.put("tipoEntidad", ParticipanteExternoEntidad.class);
+            if (TipoInterno.ESTUDIANTE.name().equalsIgnoreCase(filtro.getTipoParticipante())) {
+                parametros.put(PARAM_TIPO_ENTIDAD, ParticipanteEstudianteEntidad.class);
+            } else if (TipoInterno.EMPLEADO.name().equalsIgnoreCase(filtro.getTipoParticipante())) {
+                parametros.put(PARAM_TIPO_ENTIDAD, ParticipanteEmpleadoEntidad.class);
+            } else if (TipoParticipante.EXTERNO.name().equalsIgnoreCase(filtro.getTipoParticipante())) {
+                parametros.put(PARAM_TIPO_ENTIDAD, ParticipanteExternoEntidad.class);
             }
         }
 
         if (!estaCadenaVacia(filtro.getSemestre())) {
-            jpql.append("AND a.semestre = :semestre ");
-            parametros.put("semestre", filtro.getSemestre());
+            jpql.append(AND_SEMESTRE);
+            parametros.put(PARAM_SEMESTRE, filtro.getSemestre());
         }
 
         if (!estaCadenaVacia(filtro.getProgramaAcademico())) {
-            jpql.append("AND pe.programaAcademico = :programa ");
-            parametros.put("programa", filtro.getProgramaAcademico());
+            jpql.append(AND_PROGRAMA);
+            parametros.put(PARAM_PROGRAMA, filtro.getProgramaAcademico());
         }
 
         if (!estaCadenaVacia(filtro.getTipoProgramaAcademico())) {
             String tipo = filtro.getTipoProgramaAcademico().toUpperCase();
 
-            if ("POSTGRADO".equals(tipo)) {
-                jpql.append("AND (UPPER(pe.programaAcademico) LIKE '%ESPECIALIZACION%' " +
-                        "OR UPPER(pe.programaAcademico) LIKE '%MAESTRIA%' " +
-                        "OR UPPER(pe.programaAcademico) LIKE '%DOCTORADO%') ");
-            } else if ("PREGRADO".equals(tipo)) {
-                jpql.append("AND (UPPER(pe.programaAcademico) NOT LIKE '%ESPECIALIZACION%' " +
-                        "AND UPPER(pe.programaAcademico) NOT LIKE '%MAESTRIA%' " +
-                        "AND UPPER(pe.programaAcademico) NOT LIKE '%DOCTORADO%') ");
+            if (TipoPrograma.POSTGRADO.name().equals(tipo)) {
+                jpql.append(AND_POSTGRADO);
+            } else if (TipoPrograma.PREGRADO.name().equals(tipo)) {
+                jpql.append(AND_PREGRADO);
             }
         }
 
         if (!estaCadenaVacia(filtro.getCentroCostos())) {
-            jpql.append("AND pem.centroCostos.centroCostos.descripcion = :centroCostos ");
-            parametros.put("centroCostos", filtro.getCentroCostos());
+            jpql.append(AND_CENTRO_COSTOS);
+            parametros.put(PARAM_CENTRO_COSTOS, filtro.getCentroCostos());
         }
 
         if (filtro.getIdArea() != null && !estaCadenaVacia(filtro.getTipoArea())) {
             String tipoArea = filtro.getTipoArea().toUpperCase();
 
-            switch (tipoArea) {
-                case "SUBAREA" ->
-                        jpql.append("AND EXISTS (SELECT 1 FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :idArea AND act.identificador = a.identificador) ");
-
-                case "AREA" ->
-                        jpql.append("AND (")
-                                .append("EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) ")
-                                .append("OR EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.subareas sub JOIN sub.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador)")
-                                .append(") ");
-
-                case "DIRECCION" ->
-                        jpql.append("AND (")
-                                .append("EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ")
-                                .append("OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ")
-                                .append("OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.subareas sub JOIN sub.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador)")
-                                .append(") ");
+            if (TipoArea.AREA.name().equals(tipoArea)) {
+                jpql.append(AND_EXISTS_AREA);
+            } else if (TipoArea.SUBAREA.name().equals(tipoArea)) {
+                jpql.append(AND_EXISTS_SUBAREA);
+            } else if (TipoArea.DIRECCION.name().equals(tipoArea)) {
+                jpql.append(AND_EXISTS_DIRECCION);
             }
-            parametros.put("idArea", filtro.getIdArea());
+            parametros.put(PARAM_ID_AREA, filtro.getIdArea());
         }
 
         Query query = entityManager.createQuery(jpql.toString());

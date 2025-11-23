@@ -110,6 +110,34 @@ public final class PersistenciaConstante {
     public static final String CONSULTAR_TIPOS_PARTICIPANTES_FINALIZADOS = "SELECT DISTINCT CASE WHEN TYPE(p) = ParticipanteEstudianteEntidad THEN 'ESTUDIANTE' WHEN TYPE(p) = ParticipanteEmpleadoEntidad THEN 'EMPLEADO' WHEN TYPE(p) = ParticipanteExternoEntidad THEN 'EXTERNO' END FROM RegistroAsistenciaEntidad ra JOIN ra.ejecucionActividad ea JOIN ra.participante p WHERE ea.estadoActividad.estadoActividad.nombre = :estado ORDER BY 1 ASC";
     public static final String CONSULTAR_PROGRAMAS_ESTUDIANTES_FINALIZADOS = "SELECT DISTINCT pe.programaAcademico FROM RegistroAsistenciaEntidad ra JOIN ra.ejecucionActividad ea JOIN ParticipanteEstudianteEntidad pe ON pe.identificador = ra.participante.identificador WHERE ea.estadoActividad.estadoActividad.nombre = :estado ORDER BY pe.programaAcademico ASC";
     public static final String CONSULTAR_INDICADORES_EJECUCIONES_FINALIZADAS = "SELECT DISTINCT i.nombre FROM EjecucionActividadEntidad ea JOIN ea.actividad a JOIN a.indicador i WHERE ea.estadoActividad.estadoActividad.nombre = :estado ORDER BY i.nombre ASC";
+    public static final String SELECT_COUNT_DISTINCT_PARTICIPANTE = "SELECT COUNT(DISTINCT p.identificador) ";
+    public static final String SELECT_COUNT_ASISTENCIA = "SELECT COUNT(ra) ";
+    public static final String SELECT_COUNT_DISTINCT_EJECUCION = "SELECT COUNT(DISTINCT ea.identificador) ";
+    public static final String FROM_JOIN_BASE_ESTADISTICAS = "FROM RegistroAsistenciaEntidad ra JOIN ra.participante p JOIN ra.ejecucionActividad ea JOIN ea.actividad a LEFT JOIN ParticipanteEstudianteEntidad pe ON pe.identificador = p.identificador LEFT JOIN ParticipanteEmpleadoEntidad pem ON pem.identificador = p.identificador ";
+
+    public static final String WHERE_ESTADO_ACTIVIDAD = "WHERE ea.estadoActividad.estadoActividad.nombre = :estado ";
+    public static final String AND_ANNO = "AND YEAR(ea.fechaRealizacion) = :anno ";
+    public static final String AND_MES_VALOR = "AND MONTH(ea.fechaRealizacion) = :mesValor ";
+    public static final String AND_INDICADOR = "AND a.indicador.nombre = :indicador ";
+    public static final String AND_TYPE_PARTICIPANTE = "AND TYPE(p) = :tipoEntidad ";
+    public static final String AND_SEMESTRE = "AND a.semestre = :semestre ";
+    public static final String AND_PROGRAMA = "AND pe.programaAcademico = :programa ";
+    public static final String AND_CENTRO_COSTOS = "AND pem.centroCostos.centroCostos.descripcion = :centroCostos ";
+
+    public static final String PARAM_ANNO = "anno";
+    public static final String PARAM_MES_VALOR = "mesValor";
+    public static final String PARAM_INDICADOR = "indicador";
+    public static final String PARAM_TIPO_ENTIDAD = "tipoEntidad";
+    public static final String PARAM_SEMESTRE = "semestre";
+    public static final String PARAM_PROGRAMA = "programa";
+    public static final String PARAM_CENTRO_COSTOS = "centroCostos";
+    public static final String PARAM_ID_AREA = "idArea";
+
+    public static final String AND_POSTGRADO = "AND (UPPER(pe.programaAcademico) LIKE '%ESPECIALIZACION%' OR UPPER(pe.programaAcademico) LIKE '%MAESTRIA%' OR UPPER(pe.programaAcademico) LIKE '%DOCTORADO%') ";
+    public static final String AND_PREGRADO = "AND (UPPER(pe.programaAcademico) NOT LIKE '%ESPECIALIZACION%' AND UPPER(pe.programaAcademico) NOT LIKE '%MAESTRIA%' AND UPPER(pe.programaAcademico) NOT LIKE '%DOCTORADO%') ";
+    public static final String AND_EXISTS_SUBAREA = "AND EXISTS (SELECT 1 FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :idArea AND act.identificador = a.identificador) ";
+    public static final String AND_EXISTS_AREA = "AND (EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) OR EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.subareas sub JOIN sub.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador)) ";
+    public static final String AND_EXISTS_DIRECCION = "AND (EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.subareas sub JOIN sub.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador)) ";
 
     public static final String DOCUMENTO_PARAMETRO = "documento";
     public static final String SEMESTRE_PARAMETRO = "semestre";

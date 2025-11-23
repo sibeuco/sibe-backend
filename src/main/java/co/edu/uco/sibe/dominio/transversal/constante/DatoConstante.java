@@ -71,6 +71,11 @@ public final class DatoConstante {
 
     public static final Set<String> PALABRAS_POSTRGRADO = Set.of("ESPECIALIZACION", "MAESTRIA", "DOCTORADO");
 
+    public static final String FORMATO_MES_ANIO_PATTERN = "MMMM yyyy";
+    public static final String FORMATO_MES_PATTERN = "MMMM";
+    public static final String IDIOMA_ES = "es";
+    public static final String PAIS_CO = "CO";
+
     private DatoConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }
