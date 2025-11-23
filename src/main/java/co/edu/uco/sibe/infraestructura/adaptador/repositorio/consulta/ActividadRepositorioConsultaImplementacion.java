@@ -199,16 +199,14 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
             try {
                 java.time.format.DateTimeFormatter parser = new java.time.format.DateTimeFormatterBuilder()
                         .parseCaseInsensitive()
-                        .appendPattern("MMMM yyyy")
+                        .appendPattern("MMMM")
                         .toFormatter(new java.util.Locale("es", "CO"));
 
-                java.time.YearMonth yearMonth = java.time.YearMonth.parse(filtro.getMes(), parser);
+                java.time.temporal.TemporalAccessor accessor = parser.parse(filtro.getMes());
+                int numeroMes = accessor.get(java.time.temporal.ChronoField.MONTH_OF_YEAR);
 
                 jpql.append("AND MONTH(ea.fechaRealizacion) = :mesValor ");
-                jpql.append("AND YEAR(ea.fechaRealizacion) = :mesAnioValor ");
-
-                parametros.put("mesValor", yearMonth.getMonthValue());
-                parametros.put("mesAnioValor", yearMonth.getYear());
+                parametros.put("mesValor", numeroMes);
             } catch (Exception ignored) {
             }
         }
@@ -231,7 +229,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         }
 
         if (!estaCadenaVacia(filtro.getSemestre())) {
-            jpql.append("AND pe.semestreActual = :semestre ");
+            jpql.append("AND a.semestre = :semestre ");
             parametros.put("semestre", filtro.getSemestre());
         }
 
