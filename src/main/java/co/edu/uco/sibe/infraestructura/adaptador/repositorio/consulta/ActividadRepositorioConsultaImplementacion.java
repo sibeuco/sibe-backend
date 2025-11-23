@@ -1,24 +1,18 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
-import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
-import co.edu.uco.sibe.dominio.dto.FiltroEstadisticaDTO;
-import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
+import co.edu.uco.sibe.dominio.dto.*;
 import co.edu.uco.sibe.dominio.modelo.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.ActividadDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.EjecucionActividadDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.dao.ParticipanteDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEmpleadoEntidad;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEntidad;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEstudianteEntidad;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteExternoEntidad;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.*;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -28,6 +22,7 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto.est
 
 @Repository
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class ActividadRepositorioConsultaImplementacion implements ActividadRepositorioConsulta {
     private static final DateTimeFormatter FORMATO_MES_ANIO = DateTimeFormatter.ofPattern("MMMM yyyy", new Locale("es", "CO"));
 
@@ -41,6 +36,9 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     private final AreaMapeador areaMapeador;
     private final DireccionMapeador direccionMapeador;
     private final ParticipanteDetalladoMapeador participanteDetalladoMapeador;
+    private final DireccionDAO direccionDAO;
+    private final AreaDAO areaDAO;
+    private final SubareaDAO subareaDAO;
 
     @Override
     public Actividad consultarPorIdentificador(UUID identificador) {
@@ -192,6 +190,92 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     public Long contarEjecucionesTotales(FiltroEstadisticaDTO filtro) {
         String selectClause = "SELECT COUNT(DISTINCT ea.identificador) ";
         return ejecutarConsultaDinamica(selectClause, filtro);
+    }
+
+    @Override
+    public List<EstadisticaDTO> consultarEstadisticasParticipantesPorEstructura(FiltroEstadisticaDTO filtroOriginal) {
+        List<EstadisticaDTO> estadisticas = new ArrayList<>();
+
+        Set<UUID> direccionesPermitidas = new HashSet<>();
+        Set<UUID> areasPermitidas = new HashSet<>();
+        Set<UUID> subareasPermitidas = new HashSet<>();
+
+        boolean hayFiltroEstructura = filtroOriginal.getIdArea() != null && !estaCadenaVacia(filtroOriginal.getTipoArea());
+
+        if (hayFiltroEstructura) {
+            String tipo = filtroOriginal.getTipoArea().toUpperCase();
+            UUID id = filtroOriginal.getIdArea();
+
+            if ("DIRECCION".equals(tipo)) {
+                direccionDAO.findById(id).ifPresent(dir -> {
+                    direccionesPermitidas.add(dir.getIdentificador());
+
+                    if (dir.getAreas() != null) {
+                        for (AreaEntidad area : dir.getAreas()) {
+                            areasPermitidas.add(area.getIdentificador());
+                            if (area.getSubareas() != null) {
+                                area.getSubareas().forEach(sub -> subareasPermitidas.add(sub.getIdentificador()));
+                            }
+                        }
+                    }
+                });
+            } else if ("AREA".equals(tipo)) {
+                areaDAO.findById(id).ifPresent(area -> {
+                    areasPermitidas.add(area.getIdentificador());
+                    if (area.getSubareas() != null) {
+                        area.getSubareas().forEach(sub -> subareasPermitidas.add(sub.getIdentificador()));
+                    }
+                });
+            } else if ("SUBAREA".equals(tipo)) {
+                subareasPermitidas.add(id);
+            }
+        }
+
+        var direcciones = direccionDAO.findAll();
+        for (var direccion : direcciones) {
+            long cantidad = 0;
+            if (!hayFiltroEstructura || direccionesPermitidas.contains(direccion.getIdentificador())) {
+                cantidad = ejecutarConteoParaNodo(filtroOriginal, direccion.getIdentificador(), "DIRECCION");
+            }
+            estadisticas.add(new EstadisticaDTO(direccion.getNombre(), cantidad));
+        }
+
+        var areas = areaDAO.findAll();
+        for (var area : areas) {
+            long cantidad = 0;
+            if (!hayFiltroEstructura || areasPermitidas.contains(area.getIdentificador())) {
+                cantidad = ejecutarConteoParaNodo(filtroOriginal, area.getIdentificador(), "AREA");
+            }
+            estadisticas.add(new EstadisticaDTO(area.getNombre(), cantidad));
+        }
+
+        var subareas = subareaDAO.findAll();
+        for (var subarea : subareas) {
+            long cantidad = 0;
+            if (!hayFiltroEstructura || subareasPermitidas.contains(subarea.getIdentificador())) {
+                cantidad = ejecutarConteoParaNodo(filtroOriginal, subarea.getIdentificador(), "SUBAREA");
+            }
+            estadisticas.add(new EstadisticaDTO(subarea.getNombre(), cantidad));
+        }
+
+        return estadisticas;
+    }
+
+    private Long ejecutarConteoParaNodo(FiltroEstadisticaDTO filtroBase, UUID idNodo, String tipoNodo) {
+        FiltroEstadisticaDTO filtroNodo = new FiltroEstadisticaDTO(
+                filtroBase.getMes(),
+                filtroBase.getAnno(),
+                filtroBase.getSemestre(),
+                filtroBase.getProgramaAcademico(),
+                filtroBase.getTipoProgramaAcademico(),
+                filtroBase.getCentroCostos(),
+                filtroBase.getTipoParticipante(),
+                filtroBase.getIndicador(),
+                tipoNodo,
+                idNodo
+        );
+
+        return contarParticipantesTotales(filtroNodo);
     }
 
     private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {
