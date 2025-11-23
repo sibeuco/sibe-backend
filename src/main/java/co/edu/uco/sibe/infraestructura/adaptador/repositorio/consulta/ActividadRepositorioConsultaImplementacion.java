@@ -209,7 +209,6 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
             if ("DIRECCION".equals(tipo)) {
                 direccionDAO.findById(id).ifPresent(dir -> {
                     direccionesPermitidas.add(dir.getIdentificador());
-
                     if (dir.getAreas() != null) {
                         for (AreaEntidad area : dir.getAreas()) {
                             areasPermitidas.add(area.getIdentificador());
@@ -233,35 +232,30 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
 
         var direcciones = direccionDAO.findAll();
         for (var direccion : direcciones) {
-            long cantidad = 0;
-            if (!hayFiltroEstructura || direccionesPermitidas.contains(direccion.getIdentificador())) {
-                cantidad = ejecutarConteoParaNodo(filtroOriginal, direccion.getIdentificador(), "DIRECCION");
-            }
-            estadisticas.add(new EstadisticaDTO(direccion.getNombre(), cantidad));
+            boolean permitido = !hayFiltroEstructura || direccionesPermitidas.contains(direccion.getIdentificador());
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, direccion.getIdentificador(), "DIRECCION", direccion.getNombre(), permitido));
         }
 
         var areas = areaDAO.findAll();
         for (var area : areas) {
-            long cantidad = 0;
-            if (!hayFiltroEstructura || areasPermitidas.contains(area.getIdentificador())) {
-                cantidad = ejecutarConteoParaNodo(filtroOriginal, area.getIdentificador(), "AREA");
-            }
-            estadisticas.add(new EstadisticaDTO(area.getNombre(), cantidad));
+            boolean permitido = !hayFiltroEstructura || areasPermitidas.contains(area.getIdentificador());
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, area.getIdentificador(), "AREA", area.getNombre(), permitido));
         }
 
         var subareas = subareaDAO.findAll();
         for (var subarea : subareas) {
-            long cantidad = 0;
-            if (!hayFiltroEstructura || subareasPermitidas.contains(subarea.getIdentificador())) {
-                cantidad = ejecutarConteoParaNodo(filtroOriginal, subarea.getIdentificador(), "SUBAREA");
-            }
-            estadisticas.add(new EstadisticaDTO(subarea.getNombre(), cantidad));
+            boolean permitido = !hayFiltroEstructura || subareasPermitidas.contains(subarea.getIdentificador());
+            estadisticas.add(calcularEstadisticasNodo(filtroOriginal, subarea.getIdentificador(), "SUBAREA", subarea.getNombre(), permitido));
         }
 
         return estadisticas;
     }
 
-    private Long ejecutarConteoParaNodo(FiltroEstadisticaDTO filtroBase, UUID idNodo, String tipoNodo) {
+    private EstadisticaDTO calcularEstadisticasNodo(FiltroEstadisticaDTO filtroBase, UUID idNodo, String tipoNodo, String nombreNodo, boolean esPermitido) {
+        if (!esPermitido) {
+            return new EstadisticaDTO(nombreNodo, 0L, 0L);
+        }
+
         FiltroEstadisticaDTO filtroNodo = new FiltroEstadisticaDTO(
                 filtroBase.getMes(),
                 filtroBase.getAnno(),
@@ -275,7 +269,10 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
                 idNodo
         );
 
-        return contarParticipantesTotales(filtroNodo);
+        Long totalParticipantes = contarParticipantesTotales(filtroNodo);
+        Long totalAsistencias = contarAsistenciasTotales(filtroNodo);
+
+        return new EstadisticaDTO(nombreNodo, totalParticipantes, totalAsistencias);
     }
 
     private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {
