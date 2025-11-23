@@ -13,8 +13,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
@@ -246,6 +248,37 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         for (var subarea : subareas) {
             boolean permitido = !hayFiltroEstructura || subareasPermitidas.contains(subarea.getIdentificador());
             estadisticas.add(calcularEstadisticasNodo(filtroOriginal, subarea.getIdentificador(), "SUBAREA", subarea.getNombre(), permitido));
+        }
+
+        return estadisticas;
+    }
+
+    @Override
+    public List<EstadisticaMesDTO> consultarEstadisticasParticipantesPorMes(FiltroEstadisticaDTO filtroOriginal) {
+        List<EstadisticaMesDTO> estadisticas = new ArrayList<>();
+        Locale localeColombia = new Locale("es", "CO");
+
+        for (Month mes : Month.values()) {
+            String nombreMes = mes.getDisplayName(TextStyle.FULL, localeColombia);
+            nombreMes = nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
+
+            FiltroEstadisticaDTO filtroMes = new FiltroEstadisticaDTO(
+                    nombreMes,
+                    filtroOriginal.getAnno(),
+                    filtroOriginal.getSemestre(),
+                    filtroOriginal.getProgramaAcademico(),
+                    filtroOriginal.getTipoProgramaAcademico(),
+                    filtroOriginal.getCentroCostos(),
+                    filtroOriginal.getTipoParticipante(),
+                    filtroOriginal.getIndicador(),
+                    filtroOriginal.getTipoArea(),
+                    filtroOriginal.getIdArea()
+            );
+
+            Long totalParticipantes = contarParticipantesTotales(filtroMes);
+            Long totalAsistencias = contarAsistenciasTotales(filtroMes);
+
+            estadisticas.add(new EstadisticaMesDTO(nombreMes, totalParticipantes, totalAsistencias));
         }
 
         return estadisticas;

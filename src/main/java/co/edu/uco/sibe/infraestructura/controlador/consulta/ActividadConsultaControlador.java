@@ -30,7 +30,8 @@ public class ActividadConsultaControlador {
     private final ContarParticipantesTotalesManejador contarParticipantesTotalesManejador;
     private final ContarAsistenciasTotalesManejador contarAsistenciasTotalesManejador;
     private final ContarEjecucionesTotalesManejador contarEjecucionesTotalesManejador;
-    private final ConsultarEstadisticasParticipantesPorEstructuraManejador consultarEstadisticasParticipantesPorEstructuraManejador; // <-- Nuevo
+    private final ConsultarEstadisticasParticipantesPorEstructuraManejador consultarEstadisticasParticipantesPorEstructuraManejador;
+    private final ConsultarEstadisticasParticipantesPorMesManejador consultarEstadisticasParticipantesPorMesManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_AREA)
@@ -132,5 +133,11 @@ public class ActividadConsultaControlador {
     @PostMapping(ESTADISTICAS_PARTICIPANTES_POR_ESTRUCTURA)
     public List<EstadisticaDTO> consultarEstadisticasParticipantesPorEstructura(@RequestBody FiltroEstadisticaDTO filtro) {
         return this.consultarEstadisticasParticipantesPorEstructuraManejador.ejecutar(filtro);
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @PostMapping(ESTADISTICAS_PARTICIPANTES_POR_MES)
+    public List<EstadisticaMesDTO> consultarEstadisticasParticipantesPorMes(@RequestBody FiltroEstadisticaDTO filtro) {
+        return this.consultarEstadisticasParticipantesPorMesManejador.ejecutar(filtro);
     }
 }

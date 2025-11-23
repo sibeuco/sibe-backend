@@ -63,6 +63,7 @@ public final class ApiEndpointConstante {
     public static final String CONTAR_ASISTENCIAS_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/asistencias/conteo";
     public static final String CONTAR_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/conteo";
     public static final String ESTADISTICAS_PARTICIPANTES_POR_ESTRUCTURA = "/ejecuciones/finalizadas/participantes/estadisticas-estructura";
+    public static final String ESTADISTICAS_PARTICIPANTES_POR_MES = "/ejecuciones/finalizadas/participantes/estadisticas-mes";
 
     private ApiEndpointConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
