@@ -176,10 +176,23 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
 
     @Override
     public Long contarParticipantesTotales(FiltroEstadisticaDTO filtro) {
+        String selectClause = "SELECT COUNT(DISTINCT p.identificador) ";
+
+        return ejecutarConsultaDinamica(selectClause, filtro);
+    }
+
+    @Override
+    public Long contarAsistenciasTotales(FiltroEstadisticaDTO filtro) {
+        String selectClause = "SELECT COUNT(ra) ";
+
+        return ejecutarConsultaDinamica(selectClause, filtro);
+    }
+
+    private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {
         StringBuilder jpql = new StringBuilder();
         Map<String, Object> parametros = new HashMap<>();
 
-        jpql.append("SELECT COUNT(DISTINCT p.identificador) ");
+        jpql.append(selectClause);
         jpql.append("FROM RegistroAsistenciaEntidad ra ");
         jpql.append("JOIN ra.participante p ");
         jpql.append("JOIN ra.ejecucionActividad ea ");
@@ -281,7 +294,6 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         }
 
         Query query = entityManager.createQuery(jpql.toString());
-
         parametros.forEach(query::setParameter);
 
         return (Long) query.getSingleResult();

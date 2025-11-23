@@ -60,6 +60,7 @@ public final class ApiEndpointConstante {
     public static final String ACTIVIDAD_CANCELAR = "/cancelar/{identificador}";
 
     public static final String CONTAR_USUARIOS_PATH = "/{identificador}/usuarios/contar";
+    public static final String CONTAR_ASISTENCIAS_EJECUCIONES_FINALIZADAS = "/ejecuciones/finalizadas/asistencias/conteo";
 
     private ApiEndpointConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);

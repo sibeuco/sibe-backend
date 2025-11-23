@@ -39,4 +39,6 @@ public interface ActividadRepositorioConsulta {
     List<String> consultarIndicadoresEnEjecucionesFinalizadas();
 
     Long contarParticipantesTotales(FiltroEstadisticaDTO filtro);
+
+    Long contarAsistenciasTotales(FiltroEstadisticaDTO filtro);
 }

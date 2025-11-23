@@ -315,4 +315,10 @@ public class UseCaseBean {
             ActividadRepositorioConsulta actividadRepositorioConsulta) {
         return new ContarParticipantesTotalesUseCase(actividadRepositorioConsulta);
     }
+
+    @Bean
+    public ContarAsistenciasTotalesUseCase contarAsistenciasTotalesUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta) {
+        return new ContarAsistenciasTotalesUseCase(actividadRepositorioConsulta);
+    }
 }
