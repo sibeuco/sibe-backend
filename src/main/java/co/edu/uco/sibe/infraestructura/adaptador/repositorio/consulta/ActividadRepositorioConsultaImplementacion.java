@@ -188,6 +188,12 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         return ejecutarConsultaDinamica(selectClause, filtro);
     }
 
+    @Override
+    public Long contarEjecucionesTotales(FiltroEstadisticaDTO filtro) {
+        String selectClause = "SELECT COUNT(DISTINCT ea.identificador) ";
+        return ejecutarConsultaDinamica(selectClause, filtro);
+    }
+
     private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {
         StringBuilder jpql = new StringBuilder();
         Map<String, Object> parametros = new HashMap<>();

@@ -41,4 +41,6 @@ public interface ActividadRepositorioConsulta {
     Long contarParticipantesTotales(FiltroEstadisticaDTO filtro);
 
     Long contarAsistenciasTotales(FiltroEstadisticaDTO filtro);
+
+    Long contarEjecucionesTotales(FiltroEstadisticaDTO filtro);
 }

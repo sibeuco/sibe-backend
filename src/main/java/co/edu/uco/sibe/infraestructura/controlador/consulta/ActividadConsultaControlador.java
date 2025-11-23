@@ -28,7 +28,8 @@ public class ActividadConsultaControlador {
     private final ConsultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador consultarNivelesFormacionEstudiantesEnEjecucionesFinalizadasManejador;
     private final ConsultarIndicadoresEnEjecucionesFinalizadasManejador consultarIndicadoresEnEjecucionesFinalizadasManejador;
     private final ContarParticipantesTotalesManejador contarParticipantesTotalesManejador;
-    private final ContarAsistenciasTotalesManejador contarAsistenciasTotalesManejador; // <-- Nuevo
+    private final ContarAsistenciasTotalesManejador contarAsistenciasTotalesManejador;
+    private final ContarEjecucionesTotalesManejador contarEjecucionesTotalesManejador;
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_AREA)
@@ -118,5 +119,11 @@ public class ActividadConsultaControlador {
     @PostMapping(CONTAR_ASISTENCIAS_EJECUCIONES_FINALIZADAS)
     public Long contarAsistenciasTotales(@RequestBody FiltroEstadisticaDTO filtro) {
         return this.contarAsistenciasTotalesManejador.ejecutar(filtro);
+    }
+
+    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
+    @PostMapping(CONTAR_EJECUCIONES_FINALIZADAS)
+    public Long contarEjecucionesTotales(@RequestBody FiltroEstadisticaDTO filtro) {
+        return this.contarEjecucionesTotalesManejador.ejecutar(filtro);
     }
 }
