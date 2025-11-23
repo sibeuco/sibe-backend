@@ -26,7 +26,7 @@ public interface ActividadRepositorioConsulta {
 
     List<String> consultarAnnosEjecucionesFinalizadas();
 
-    List<String> consultarSemestresEstudiantesEnEjecucionesFinalizadas();
+    List<String> consultarSemestresActividadesEnEjecucionesFinalizadas();
 
     List<String> consultarCentrosCostosEmpleadosEnEjecucionesFinalizadas();
 

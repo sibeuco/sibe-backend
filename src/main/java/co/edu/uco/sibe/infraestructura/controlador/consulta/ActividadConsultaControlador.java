@@ -21,7 +21,7 @@ public class ActividadConsultaControlador {
     private final ConsultarParticipantesPorEjecucionActividadManejador consultarParticipantesPorEjecucionActividadManejador;
     private final ConsultarMesesEjecucionesFinalizadasManejador consultarMesesEjecucionesFinalizadasManejador;
     private final ConsultarAnnosEjecucionesFinalizadasManejador consultarAnnosEjecucionesFinalizadasManejador;
-    private final ConsultarSemestresEstudiantesEnEjecucionesFinalizadasManejador consultarSemestresEstudiantesEnEjecucionesFinalizadasManejador;
+    private final ConsultarSemestresActividadesEnEjecucionesFinalizadasManejador consultarSemestresActividadesEnEjecucionesFinalizadasManejador;
     private final ConsultarCentrosCostosEmpleadosEnEjecucionesFinalizadasManejador consultarCentrosCostosEmpleadosEnEjecucionesFinalizadasManejador;
     private final ConsultarTiposParticipantesEnEjecucionesFinalizadasManejador consultarTiposParticipantesEnEjecucionesFinalizadasManejador;
     private final ConsultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador consultarProgramasAcademicosEstudiantesEnEjecucionesFinalizadasManejador;
@@ -73,8 +73,8 @@ public class ActividadConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(SEMESTRES_ESTUDIANTES_EJECUCIONES_FINALIZADAS)
-    public List<String> consultarSemestresEstudiantesEnEjecucionesFinalizadas() {
-        return this.consultarSemestresEstudiantesEnEjecucionesFinalizadasManejador.ejecutar();
+    public List<String> consultarSemestresActividadesEnEjecucionesFinalizadas() {
+        return this.consultarSemestresActividadesEnEjecucionesFinalizadasManejador.ejecutar();
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)

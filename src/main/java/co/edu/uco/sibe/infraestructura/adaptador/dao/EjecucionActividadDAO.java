@@ -23,4 +23,7 @@ public interface EjecucionActividadDAO extends JpaRepository<EjecucionActividadE
 
     @Query(CONSULTAR_INDICADORES_EJECUCIONES_FINALIZADAS)
     List<String> findNombresIndicadoresByEstadoEjecucion(@Param(ESTADO_PARAMETRO) String estado);
+
+    @Query(CONSULTAR_SEMESTRES_ACTIVIDADES_FINALIZADAS)
+    List<String> findSemestresActividadesByEstadoEjecucion(@Param(ESTADO_PARAMETRO) String estado);
 }

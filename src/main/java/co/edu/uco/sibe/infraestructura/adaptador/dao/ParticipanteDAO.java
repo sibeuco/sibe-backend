@@ -21,9 +21,6 @@ public interface ParticipanteDAO extends JpaRepository<ParticipanteEntidad, UUID
             @Param(SEMESTRE_PARAMETRO) String semestre
     );
 
-    @Query(CONSULTAR_SEMESTRES_ESTUDIANTES_FINALIZADOS)
-    List<String> findSemestresEstudiantesByEstadoEjecucion(@Param(ESTADO_PARAMETRO) String estado);
-
     @Query(CONSULTAR_CENTROS_COSTOS_EMPLEADOS_FINALIZADOS)
     List<String> findCentrosCostosEmpleadosByEstadoEjecucion(@Param(ESTADO_PARAMETRO) String estado);
 

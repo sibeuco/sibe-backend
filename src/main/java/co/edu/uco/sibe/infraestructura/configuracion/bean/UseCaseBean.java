@@ -275,9 +275,9 @@ public class UseCaseBean {
     }
 
     @Bean
-    public ConsultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase consultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase(
+    public ConsultarSemestresActividadesEnEjecucionesFinalizadasUseCase consultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase(
             ActividadRepositorioConsulta actividadRepositorioConsulta) {
-        return new ConsultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
+        return new ConsultarSemestresActividadesEnEjecucionesFinalizadasUseCase(actividadRepositorioConsulta);
     }
 
     @Bean

@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-public class ConsultarSemestresEstudiantesEnEjecucionesFinalizadasUseCase {
+public class ConsultarSemestresActividadesEnEjecucionesFinalizadasUseCase {
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
 
     public List<String> ejecutar() {
-        return actividadRepositorioConsulta.consultarSemestresEstudiantesEnEjecucionesFinalizadas();
+        return actividadRepositorioConsulta.consultarSemestresActividadesEnEjecucionesFinalizadas();
     }
 }

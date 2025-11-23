@@ -20,7 +20,6 @@ import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.time.Year;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.FINALIZADA;
@@ -140,8 +139,8 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     }
 
     @Override
-    public List<String> consultarSemestresEstudiantesEnEjecucionesFinalizadas() {
-        return participanteDAO.findSemestresEstudiantesByEstadoEjecucion(FINALIZADA);
+    public List<String> consultarSemestresActividadesEnEjecucionesFinalizadas() {
+        return ejecucionActividadDAO.findSemestresActividadesByEstadoEjecucion(FINALIZADA);
     }
 
     @Override
