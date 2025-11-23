@@ -261,12 +261,21 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
             String tipoArea = filtro.getTipoArea().toUpperCase();
 
             switch (tipoArea) {
-                case "AREA" ->
-                        jpql.append("AND EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) ");
                 case "SUBAREA" ->
                         jpql.append("AND EXISTS (SELECT 1 FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :idArea AND act.identificador = a.identificador) ");
+
+                case "AREA" ->
+                        jpql.append("AND (")
+                                .append("EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador) ")
+                                .append("OR EXISTS (SELECT 1 FROM AreaEntidad ar JOIN ar.subareas sub JOIN sub.actividades act WHERE ar.identificador = :idArea AND act.identificador = a.identificador)")
+                                .append(") ");
+
                 case "DIRECCION" ->
-                        jpql.append("AND EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ");
+                        jpql.append("AND (")
+                                .append("EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ")
+                                .append("OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador) ")
+                                .append("OR EXISTS (SELECT 1 FROM DireccionEntidad dir JOIN dir.areas ar JOIN ar.subareas sub JOIN sub.actividades act WHERE dir.identificador = :idArea AND act.identificador = a.identificador)")
+                                .append(") ");
             }
             parametros.put("idArea", filtro.getIdArea());
         }
