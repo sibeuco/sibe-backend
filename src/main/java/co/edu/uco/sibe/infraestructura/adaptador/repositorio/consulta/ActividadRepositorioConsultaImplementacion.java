@@ -253,7 +253,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
 
     private EstadisticaDTO calcularEstadisticasNodo(FiltroEstadisticaDTO filtroBase, UUID idNodo, String tipoNodo, String nombreNodo, boolean esPermitido) {
         if (!esPermitido) {
-            return new EstadisticaDTO(nombreNodo, 0L, 0L);
+            return new EstadisticaDTO(nombreNodo, tipoNodo, 0L, 0L);
         }
 
         FiltroEstadisticaDTO filtroNodo = new FiltroEstadisticaDTO(
@@ -272,7 +272,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         Long totalParticipantes = contarParticipantesTotales(filtroNodo);
         Long totalAsistencias = contarAsistenciasTotales(filtroNodo);
 
-        return new EstadisticaDTO(nombreNodo, totalParticipantes, totalAsistencias);
+        return new EstadisticaDTO(nombreNodo, tipoNodo, totalParticipantes, totalAsistencias);
     }
 
     private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {

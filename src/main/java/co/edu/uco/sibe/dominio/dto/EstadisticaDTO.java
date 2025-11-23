@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class EstadisticaDTO {
     private String nombre;
+    private String tipoArea;
     private Long cantidadParticipantes;
     private Long cantidadAsistencias;
 }
