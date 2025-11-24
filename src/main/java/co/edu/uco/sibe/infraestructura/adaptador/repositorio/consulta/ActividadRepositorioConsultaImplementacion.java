@@ -257,27 +257,37 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     public List<EstadisticaMesDTO> consultarEstadisticasParticipantesPorMes(FiltroEstadisticaDTO filtroOriginal) {
         List<EstadisticaMesDTO> estadisticas = new ArrayList<>();
 
+        String mesSolicitado = filtroOriginal.getMes();
+        boolean filtrarPorMes = !estaCadenaVacia(mesSolicitado);
+
         for (Month mes : Month.values()) {
-            String nombreMes = mes.getDisplayName(TextStyle.FULL, LOCALE_CO);
-            nombreMes = nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1);
+            String nombreMesIteracion = mes.getDisplayName(TextStyle.FULL, LOCALE_CO);
+            nombreMesIteracion = nombreMesIteracion.substring(0, 1).toUpperCase() + nombreMesIteracion.substring(1);
 
-            FiltroEstadisticaDTO filtroMes = new FiltroEstadisticaDTO(
-                    nombreMes,
-                    filtroOriginal.getAnno(),
-                    filtroOriginal.getSemestre(),
-                    filtroOriginal.getProgramaAcademico(),
-                    filtroOriginal.getTipoProgramaAcademico(),
-                    filtroOriginal.getCentroCostos(),
-                    filtroOriginal.getTipoParticipante(),
-                    filtroOriginal.getIndicador(),
-                    filtroOriginal.getTipoArea(),
-                    filtroOriginal.getIdArea()
-            );
+            long totalParticipantes = 0;
+            long totalAsistencias = 0;
 
-            Long totalParticipantes = contarParticipantesTotales(filtroMes);
-            Long totalAsistencias = contarAsistenciasTotales(filtroMes);
+            boolean debeConsultar = !filtrarPorMes || nombreMesIteracion.equalsIgnoreCase(mesSolicitado);
 
-            estadisticas.add(new EstadisticaMesDTO(nombreMes, totalParticipantes, totalAsistencias));
+            if (debeConsultar) {
+                FiltroEstadisticaDTO filtroMes = new FiltroEstadisticaDTO(
+                        nombreMesIteracion,
+                        filtroOriginal.getAnno(),
+                        filtroOriginal.getSemestre(),
+                        filtroOriginal.getProgramaAcademico(),
+                        filtroOriginal.getTipoProgramaAcademico(),
+                        filtroOriginal.getCentroCostos(),
+                        filtroOriginal.getTipoParticipante(),
+                        filtroOriginal.getIndicador(),
+                        filtroOriginal.getTipoArea(),
+                        filtroOriginal.getIdArea()
+                );
+
+                totalParticipantes = contarParticipantesTotales(filtroMes);
+                totalAsistencias = contarAsistenciasTotales(filtroMes);
+            }
+
+            estadisticas.add(new EstadisticaMesDTO(nombreMesIteracion, totalParticipantes, totalAsistencias));
         }
 
         return estadisticas;
