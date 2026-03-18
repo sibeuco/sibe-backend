@@ -7,6 +7,7 @@ import co.edu.uco.sibe.dominio.puerto.comando.ActividadRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.service.VincularActividadConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
@@ -18,23 +19,29 @@ import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstan
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NUMERO_CERO_DOS;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NUMERO_CERO_UNO;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilFecha.obtenerFechaActual;
-import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 public class GuardarActividadUseCase {
     private final ActividadRepositorioComando actividadRepositorioComando;
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final VincularActividadConAreaService vincularActividadConAreaService;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public GuardarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, VincularActividadConAreaService vincularActividadConAreaService) {
+    public GuardarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando,
+            ActividadRepositorioConsulta actividadRepositorioConsulta,
+            VincularActividadConAreaService vincularActividadConAreaService,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioComando = actividadRepositorioComando;
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.vincularActividadConAreaService = vincularActividadConAreaService;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
-    public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area, TipoArea tipoArea) {
+    public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area,
+            TipoArea tipoArea) {
+        autorizacionServicio.validarAccesoAArea(area);
         MotoresFabrica.MOTOR_ACTIVIDAD.ejecutar(actividad, TipoOperacion.CREAR);
 
-        validarSiExisteActividadConNombreEnElSemestre(actividad.getNombre(), actividad.getSemestre());
+        validarSiExisteActividadConNombreEnElSemestre(actividad.getNombre(), actividad.getSemestre(), area, tipoArea);
 
         var identificador = this.actividadRepositorioComando.guardar(actividad);
 
@@ -45,7 +52,8 @@ public class GuardarActividadUseCase {
             MotoresFabrica.MOTOR_EJECUCION_ACTIVIDAD.ejecutar(ejecucionActividad, TipoOperacion.CREAR);
 
             validarSiFechaProgramadaEsAnteriorAFechaActual(ejecucionActividad.getFechaProgramada());
-            validarSiFechaProgramadaPerteneceASemestreDeLaActividad(ejecucionActividad.getFechaProgramada(), actividad.getSemestre());
+            validarSiFechaProgramadaPerteneceASemestreDeLaActividad(ejecucionActividad.getFechaProgramada(),
+                    actividad.getSemestre());
 
             actividadRepositorioComando.guardarEjecucion(ejecucionActividad);
         });
@@ -53,14 +61,14 @@ public class GuardarActividadUseCase {
         return identificador;
     }
 
-    private void validarSiExisteActividadConNombreEnElSemestre(String nombre, String semestre) {
-        if (!esNulo(this.actividadRepositorioConsulta.consultarPorNombreYSemestre(nombre, semestre))){
+    private void validarSiExisteActividadConNombreEnElSemestre(String nombre, String semestre, UUID area, TipoArea tipoArea) {
+        if (this.actividadRepositorioConsulta.existeActividadConNombreEnSemestreYArea(nombre, semestre, area, tipoArea, null)) {
             throw new ValorDuplicadoExcepcion(ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL);
         }
     }
 
     private void validarSiFechaProgramadaEsAnteriorAFechaActual(LocalDate fechaProgramada) {
-        if(fechaProgramada.isBefore(obtenerFechaActual())) {
+        if (fechaProgramada.isBefore(obtenerFechaActual())) {
             throw new ValorInvalidoExcepcion(FECHA_PROGRAMADA_NO_PUEDE_SER_ANTERIOR_A_FECHA_ACTUAL);
         }
     }

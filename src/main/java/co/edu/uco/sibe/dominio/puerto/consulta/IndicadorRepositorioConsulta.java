@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface IndicadorRepositorioConsulta {
     List<IndicadorDTO> consultarDTOs();
 
+    List<IndicadorDTO> consultarDTOsParaActividades();
+
     Indicador consultarPorIdentificador(UUID identificador);
 
     Indicador consultarPorNombre(String nombre);

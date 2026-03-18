@@ -4,6 +4,7 @@ import co.edu.uco.sibe.dominio.dto.ActividadDTO;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
@@ -15,14 +16,19 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class ConsultarActividadesPorSubareaUseCase {
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final SubareaRepositorioConsulta subareaRepositorioConsulta;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public ConsultarActividadesPorSubareaUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta, SubareaRepositorioConsulta subareaRepositorioConsulta) {
+    public ConsultarActividadesPorSubareaUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta,
+            SubareaRepositorioConsulta subareaRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.subareaRepositorioConsulta = subareaRepositorioConsulta;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public List<ActividadDTO> ejecutar(String identificadorSubarea) {
         var id = UtilUUID.textoAUUID(identificadorSubarea);
+        autorizacionServicio.validarAccesoASubarea(id);
         var subarea = validarSiExisteSubarea(id, identificadorSubarea);
         return actividadRepositorioConsulta.consultarPorSubarea(subarea);
     }

@@ -9,6 +9,7 @@ import co.edu.uco.sibe.dominio.puerto.comando.RegistroAsistenciaRepositorioComan
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.RegistroAsistenciaRepositorioConsulta;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.service.RegistrarParticipanteService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
@@ -32,17 +33,26 @@ public class FinalizarActividadUseCase {
     private final RegistrarParticipanteService registrarParticipanteService;
     private final RegistroAsistenciaRepositorioComando registroAsistenciaRepositorioComando;
     private final RegistroAsistenciaRepositorioConsulta registroAsistenciaRepositorioConsulta;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public FinalizarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta, RegistrarParticipanteService registrarParticipanteService, RegistroAsistenciaRepositorioComando registroAsistenciaRepositorioComando, RegistroAsistenciaRepositorioConsulta registroAsistenciaRepositorioConsulta) {
+    public FinalizarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando,
+            ActividadRepositorioConsulta actividadRepositorioConsulta,
+            EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta,
+            RegistrarParticipanteService registrarParticipanteService,
+            RegistroAsistenciaRepositorioComando registroAsistenciaRepositorioComando,
+            RegistroAsistenciaRepositorioConsulta registroAsistenciaRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioComando = actividadRepositorioComando;
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.estadoActividadRepositorioConsulta = estadoActividadRepositorioConsulta;
         this.registrarParticipanteService = registrarParticipanteService;
         this.registroAsistenciaRepositorioComando = registroAsistenciaRepositorioComando;
         this.registroAsistenciaRepositorioConsulta = registroAsistenciaRepositorioConsulta;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public UUID ejecutar(UUID identificadorEjecucion, List<Participante> participantes) {
+        autorizacionServicio.validarAccesoAEjecucionActividad(identificadorEjecucion);
         var ejecucion = validarSiExisteEjecucion(identificadorEjecucion);
 
         validarSiEjecucionActividadEstaEnCurso(ejecucion.getEstado());
@@ -61,8 +71,7 @@ public class FinalizarActividadUseCase {
             var registro = RegistroAsistencia.construir(
                     generar(uuid -> !esNulo(registroAsistenciaRepositorioConsulta.consultarPorIdentificador(uuid))),
                     ejecucion,
-                    participanteRegistrado
-            );
+                    participanteRegistrado);
 
             registroAsistenciaRepositorioComando.guardar(registro);
         });
@@ -84,14 +93,15 @@ public class FinalizarActividadUseCase {
         var estado = estadoActividadRepositorioConsulta.consultarPorNombre(nombre);
 
         if (esNulo(estado)) {
-            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
+            throw new ValorInvalidoExcepcion(
+                    obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
         }
 
         return estado;
     }
 
     private void validarSiEjecucionActividadEstaEnCurso(EstadoActividad estado) {
-        if(!estado.getNombre().equals(EN_CURSO)) {
+        if (!estado.getNombre().equals(EN_CURSO)) {
             throw new InvalidOperationException(FINALIZAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_EN_CURSO);
         }
     }

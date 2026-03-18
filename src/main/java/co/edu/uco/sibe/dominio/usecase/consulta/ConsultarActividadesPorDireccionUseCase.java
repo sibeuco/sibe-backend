@@ -4,6 +4,7 @@ import co.edu.uco.sibe.dominio.dto.ActividadDTO;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
@@ -15,14 +16,19 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 public class ConsultarActividadesPorDireccionUseCase {
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final DireccionRepositorioConsulta direccionRepositorioConsulta;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public ConsultarActividadesPorDireccionUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta, DireccionRepositorioConsulta direccionRepositorioConsulta) {
+    public ConsultarActividadesPorDireccionUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta,
+            DireccionRepositorioConsulta direccionRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.direccionRepositorioConsulta = direccionRepositorioConsulta;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public List<ActividadDTO> ejecutar(String identificadorDireccion) {
         var id = UtilUUID.textoAUUID(identificadorDireccion);
+        autorizacionServicio.validarAccesoADireccion(id);
         var direccion = validarSiExisteDireccion(id, identificadorDireccion);
 
         return actividadRepositorioConsulta.consultarPorDireccion(direccion);

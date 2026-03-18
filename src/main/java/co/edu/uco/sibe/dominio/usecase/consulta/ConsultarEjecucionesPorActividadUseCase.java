@@ -3,6 +3,7 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID;
 import java.util.List;
@@ -13,13 +14,17 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 
 public class ConsultarEjecucionesPorActividadUseCase {
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public ConsultarEjecucionesPorActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta) {
+    public ConsultarEjecucionesPorActividadUseCase(ActividadRepositorioConsulta actividadRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public List<EjecucionActividadDTO> ejecutar(String identificadorActvidad) {
         var id = UtilUUID.textoAUUID(identificadorActvidad);
+        autorizacionServicio.validarAccesoAActividad(id);
         var actividad = validarSiExisteActividad(id, identificadorActvidad);
 
         return actividadRepositorioConsulta.consultarFechasProgramadasPorActividad(actividad);
@@ -28,7 +33,8 @@ public class ConsultarEjecucionesPorActividadUseCase {
     private Actividad validarSiExisteActividad(UUID id, String idComando) {
         var actividad = actividadRepositorioConsulta.consultarPorIdentificador(id);
         if (esNulo(actividad)) {
-            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR, idComando));
+            throw new ValorInvalidoExcepcion(
+                    obtenerMensajeConParametro(ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR, idComando));
         }
         return actividad;
     }

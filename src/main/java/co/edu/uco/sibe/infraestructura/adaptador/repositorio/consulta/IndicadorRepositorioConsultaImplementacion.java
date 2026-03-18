@@ -3,6 +3,7 @@ package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 import co.edu.uco.sibe.dominio.dto.IndicadorDTO;
 import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.dominio.puerto.consulta.IndicadorRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.constante.IndicadorConstante;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.IndicadorMapeador;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,13 @@ public class IndicadorRepositorioConsultaImplementacion implements IndicadorRepo
         var entidades = indicadorDAO.findAll();
 
         return this.indicadorMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public List<IndicadorDTO> consultarDTOsParaActividades() {
+        return consultarDTOs().stream()
+                .filter(dto -> !IndicadorConstante.esIndicadorGlobal(dto.getNombre()))
+                .toList();
     }
 
     @Override

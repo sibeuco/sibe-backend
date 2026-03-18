@@ -1,6 +1,7 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.*;
+import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.modelo.*;
 import java.util.List;
 import java.util.UUID;
@@ -9,6 +10,8 @@ public interface ActividadRepositorioConsulta {
     Actividad consultarPorIdentificador(UUID identificador);
 
     Actividad consultarPorNombreYSemestre(String nombre, String semestre);
+
+    boolean existeActividadConNombreEnSemestreYArea(String nombre, String semestre, UUID areaId, TipoArea tipoArea, UUID identificadorExcluir);
 
     List<ActividadDTO> consultarPorSubarea(Subarea subarea);
 

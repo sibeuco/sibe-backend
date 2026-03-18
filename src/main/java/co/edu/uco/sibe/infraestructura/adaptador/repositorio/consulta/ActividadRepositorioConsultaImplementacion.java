@@ -7,6 +7,7 @@ import co.edu.uco.sibe.dominio.enums.TipoParticipante;
 import co.edu.uco.sibe.dominio.enums.TipoPrograma;
 import co.edu.uco.sibe.dominio.modelo.*;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
+import co.edu.uco.sibe.dominio.transversal.constante.IndicadorConstante;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.*;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
@@ -66,6 +67,30 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         }
 
         return this.actividadMapeador.construirModelo(entidad);
+    }
+
+    @Override
+    public boolean existeActividadConNombreEnSemestreYArea(String nombre, String semestre, UUID areaId, TipoArea tipoArea, UUID identificadorExcluir) {
+        String jpql = switch (tipoArea) {
+            case SUBAREA -> "SELECT COUNT(act) FROM SubareaEntidad sub JOIN sub.actividades act WHERE sub.identificador = :areaId AND act.nombre = :nombre AND act.semestre = :semestre";
+            case AREA -> "SELECT COUNT(act) FROM AreaEntidad ar JOIN ar.actividades act WHERE ar.identificador = :areaId AND act.nombre = :nombre AND act.semestre = :semestre";
+            case DIRECCION -> "SELECT COUNT(act) FROM DireccionEntidad dir JOIN dir.actividades act WHERE dir.identificador = :areaId AND act.nombre = :nombre AND act.semestre = :semestre";
+        };
+
+        if (!esNulo(identificadorExcluir)) {
+            jpql += " AND act.identificador != :idExcluir";
+        }
+
+        var query = entityManager.createQuery(jpql);
+        query.setParameter("areaId", areaId);
+        query.setParameter("nombre", nombre);
+        query.setParameter("semestre", semestre);
+
+        if (!esNulo(identificadorExcluir)) {
+            query.setParameter("idExcluir", identificadorExcluir);
+        }
+
+        return (Long) query.getSingleResult() > 0;
     }
 
     @Override
@@ -347,7 +372,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
             }
         }
 
-        if (!estaCadenaVacia(filtro.getIndicador())) {
+        if (!estaCadenaVacia(filtro.getIndicador()) && !IndicadorConstante.esIndicadorGlobal(filtro.getIndicador())) {
             jpql.append(AND_INDICADOR);
             parametros.put(PARAM_INDICADOR, filtro.getIndicador());
         }

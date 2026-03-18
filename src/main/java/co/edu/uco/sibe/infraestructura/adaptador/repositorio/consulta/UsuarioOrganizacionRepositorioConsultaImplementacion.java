@@ -25,4 +25,13 @@ public class UsuarioOrganizacionRepositorioConsultaImplementacion implements Usu
     public long contarPorSubarea(UUID subareaId) {
         return usuarioOrganizacionDAO.countBySubareaIdentificador(subareaId);
     }
+
+    @Override
+    public UUID consultarAreaIdPorUsuarioId(UUID usuarioId) {
+        var usuarioOrg = usuarioOrganizacionDAO.findByUsuarioIdentificador(usuarioId);
+        if (usuarioOrg != null && usuarioOrg.getArea() != null) {
+            return usuarioOrg.getArea().getIdentificador();
+        }
+        return null;
+    }
 }

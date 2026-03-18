@@ -1,6 +1,9 @@
 package co.edu.uco.sibe.infraestructura.seguridad.configuration;
 
+import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioOrganizacionDAO;
 import co.edu.uco.sibe.infraestructura.seguridad.filter.*;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,43 +24,59 @@ import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.L
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.*;
 
 /**
- * ProjectSecurityConfig is the central security configuration class for the application.
+ * ProjectSecurityConfig is the central security configuration class for the
+ * application.
  *
  * <p>
- * It defines the global security policies, including session management (stateless), CORS policies,
- * CSRF protection, endpoint authorization rules, and the arrangement of custom security filters.
+ * It defines the global security policies, including session management
+ * (stateless), CORS policies,
+ * CSRF protection, endpoint authorization rules, and the arrangement of custom
+ * security filters.
  * </p>
  *
  * <p>
- * This class depends on all custom filters and the custom AuthenticationProvider.
- * It provides a SecurityFilterChain bean that Spring Security uses to secure HTTP requests.
+ * This class depends on all custom filters and the custom
+ * AuthenticationProvider.
+ * It provides a SecurityFilterChain bean that Spring Security uses to secure
+ * HTTP requests.
  * </p>
  */
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@AllArgsConstructor
 public class ProjectSecurityConfig {
+    private final UsuarioOrganizacionDAO usuarioOrganizacionDAO;
+    private final UsuarioDAO usuarioDAO;
+
     /**
-     * Configures the application's SecurityFilterChain, which defines all the security settings and filter order.
+     * Configures the application's SecurityFilterChain, which defines all the
+     * security settings and filter order.
      *
      * <ul>
-     *   <li>Session management is set to stateless for RESTful APIs.</li>
-     *   <li>CORS is configured to allow requests from the frontend origin, with all methods and headers allowed.</li>
-     *   <li>CSRF protection is disabled for stateless APIs.</li>
-     *   <li>Custom filters are added in a specific order to the security filter chain.</li>
-     *   <li>Authorization rules specify which endpoints require authentication and which are public.</li>
-     *   <li>HTTP Basic authentication is enabled for initial login.</li>
+     * <li>Session management is set to stateless for RESTful APIs.</li>
+     * <li>CORS is configured to allow requests from the frontend origin, with all
+     * methods and headers allowed.</li>
+     * <li>CSRF protection is disabled for stateless APIs.</li>
+     * <li>Custom filters are added in a specific order to the security filter
+     * chain.</li>
+     * <li>Authorization rules specify which endpoints require authentication and
+     * which are public.</li>
+     * <li>HTTP Basic authentication is enabled for initial login.</li>
      * </ul>
      *
      * <p>
      * The custom filters are ordered as follows:
      * <ol>
-     *   <li>ExceptionFilter: Handles exceptions for all subsequent filters.</li>
-     *   <li>RequestValidationBeforeFilter: Validates request headers before authentication.</li>
-     *   <li>AuthoritiesLoggingAtFilter: Logs authentication attempts.</li>
-     *   <li>JWTTokenValidatorFilter: Validates JWTs on protected requests.</li>
-     *   <li>BasicAuthenticationFilter (built-in): Handles username/password login.</li>
-     *   <li>AuthoritiesLoggingAfterFilter: Logs user roles after authentication.</li>
-     *   <li>JWTTokenGeneratorFilter: Generates and attaches JWT on successful login.</li>
+     * <li>ExceptionFilter: Handles exceptions for all subsequent filters.</li>
+     * <li>RequestValidationBeforeFilter: Validates request headers before
+     * authentication.</li>
+     * <li>AuthoritiesLoggingAtFilter: Logs authentication attempts.</li>
+     * <li>JWTTokenValidatorFilter: Validates JWTs on protected requests.</li>
+     * <li>BasicAuthenticationFilter (built-in): Handles username/password
+     * login.</li>
+     * <li>AuthoritiesLoggingAfterFilter: Logs user roles after authentication.</li>
+     * <li>JWTTokenGeneratorFilter: Generates and attaches JWT on successful
+     * login.</li>
      * </ol>
      * </p>
      *
@@ -87,7 +106,8 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(usuarioOrganizacionDAO, usuarioDAO),
+                        BasicAuthenticationFilter.class)
                 .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 // Define endpoint authorization rules
                 .authorizeHttpRequests(auth -> auth
@@ -95,8 +115,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers(HttpMethod.POST, USER_API + VALIDAR_CODIGO_PATH).permitAll()
                         .requestMatchers(HttpMethod.PUT, USER_API + RECUPERAR_CLAVE_PATH).permitAll()
                         .requestMatchers(LOGIN_API).authenticated()
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 // Enable HTTP Basic authentication for user login
                 .httpBasic(Customizer.withDefaults());
 

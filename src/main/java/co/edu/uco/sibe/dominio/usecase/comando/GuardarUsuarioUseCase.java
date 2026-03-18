@@ -8,6 +8,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import java.util.UUID;
@@ -20,15 +21,21 @@ public class GuardarUsuarioUseCase {
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final EncriptarClaveServicio encriptarClaveServicio;
     private final VincularUsuarioConAreaService vincularUsuarioConAreaService;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public GuardarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio, VincularUsuarioConAreaService vincularUsuarioConAreaService) {
+    public GuardarUsuarioUseCase(PersonaRepositorioComando personaRepositorioComando,
+            PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio,
+            VincularUsuarioConAreaService vincularUsuarioConAreaService,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.encriptarClaveServicio = encriptarClaveServicio;
         this.vincularUsuarioConAreaService = vincularUsuarioConAreaService;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
-    public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea){
+    public UUID ejecutar(Usuario usuario, Persona persona, UUID area, TipoArea tipoArea) {
+        autorizacionServicio.validarAccesoAArea(area);
         MotoresFabrica.MOTOR_USUARIO.ejecutar(usuario, TipoOperacion.CREAR);
         MotoresFabrica.MOTOR_IDENTIFICACION.ejecutar(persona.getIdentificacion(), TipoOperacion.CREAR);
         MotoresFabrica.MOTOR_PERSONA.ejecutar(persona, TipoOperacion.CREAR);
@@ -45,13 +52,13 @@ public class GuardarUsuarioUseCase {
     }
 
     private void validarUsuarioExisteConCorreo(String correo) {
-        if (!esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))){
+        if (!esNulo(this.personaRepositorioConsulta.consultarUsuarioPorCorreo(correo))) {
             throw new ValorDuplicadoExcepcion(CORREO_EXISTENTE);
         }
     }
 
     private void validarUsuarioExisteConDocumento(String numeroIdentificacion) {
-        if (!esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(numeroIdentificacion))){
+        if (!esNulo(this.personaRepositorioConsulta.consultarPersonaPorDocumento(numeroIdentificacion))) {
             throw new ValorDuplicadoExcepcion(DOCUMENTO_EXISTENTE);
         }
     }

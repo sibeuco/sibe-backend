@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.modelo.EstadoActividad;
 import co.edu.uco.sibe.dominio.puerto.comando.ActividadRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.EstadoActividadRepositorioConsulta;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
@@ -20,14 +21,20 @@ public class IniciarActividadUseCase {
     private final ActividadRepositorioComando actividadRepositorioComando;
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public IniciarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta) {
+    public IniciarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando,
+            ActividadRepositorioConsulta actividadRepositorioConsulta,
+            EstadoActividadRepositorioConsulta estadoActividadRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioComando = actividadRepositorioComando;
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.estadoActividadRepositorioConsulta = estadoActividadRepositorioConsulta;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public UUID ejecutar(UUID identificadorEjecucion) {
+        autorizacionServicio.validarAccesoAEjecucionActividad(identificadorEjecucion);
         var ejecucion = validarSiExisteEjecucion(identificadorEjecucion);
 
         validarSiEjecucionActividadEstaPendiente(ejecucion.getEstado());
@@ -52,13 +59,14 @@ public class IniciarActividadUseCase {
     private EstadoActividad validarSiExisteEstado(String nombre) {
         var estado = estadoActividadRepositorioConsulta.consultarPorNombre(nombre);
         if (esNulo(estado)) {
-            throw new ValorInvalidoExcepcion(obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
+            throw new ValorInvalidoExcepcion(
+                    obtenerMensajeConParametro(ESTADO_ACTIVIDAD_NO_ENCONTRADO_CON_NOMBRE, nombre));
         }
         return estado;
     }
 
     private void validarSiEjecucionActividadEstaPendiente(EstadoActividad estado) {
-        if(!estado.getNombre().equals(PENDIENTE)) {
+        if (!estado.getNombre().equals(PENDIENTE)) {
             throw new InvalidOperationException(INICIAR_ACTIVIDAD_EN_ESTADO_DIFERENTE_A_PENDIENTE);
         }
     }

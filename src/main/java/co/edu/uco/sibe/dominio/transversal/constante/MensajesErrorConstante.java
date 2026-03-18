@@ -16,7 +16,7 @@ public final class MensajesErrorConstante {
     public static final String CODIGO_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el codigo ingresado.";
     public static final String NATURALEZA_TIPO_INDICADOR_EXISTENTE = "Ya existe un tipo indicador con la naturaleza ingresada.";
     public static final String NOMBRE_TIPO_USUARIO_EXISTENTE = "Ya existe un tipo usuario con el nombre ingresado.";
-    public static final String ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL = "Ya existe una actividad en el semestre actual con el nombre ingresado.";
+    public static final String ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL = "Ya existe una actividad con el mismo nombre en el semestre actual para esta unidad organizacional.";
     public static final String FECHA_PROGRAMADA_NO_PUEDE_SER_ANTERIOR_A_FECHA_ACTUAL = "La fecha programada no puede ser anterior a la fecha actual";
     public static final String FECHA_PROGRAMADA_NO_PERTENECE_AL_SEMESTRE_DE_LA_ACTIVIDAD = "La fecha programada no pertenece al semestre de la actividad";
     public static final String ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR = "No existe una actividad ese identificador.";

@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
@@ -15,14 +16,19 @@ public class ModificarClaveUseCase {
     private final PersonaRepositorioComando personaRepositorioComando;
     private final PersonaRepositorioConsulta personaRepositorioConsulta;
     private final EncriptarClaveServicio encriptarClaveServicio;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public ModificarClaveUseCase(PersonaRepositorioComando personaRepositorioComando, PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio) {
+    public ModificarClaveUseCase(PersonaRepositorioComando personaRepositorioComando,
+            PersonaRepositorioConsulta personaRepositorioConsulta, EncriptarClaveServicio encriptarClaveServicio,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.personaRepositorioComando = personaRepositorioComando;
         this.personaRepositorioConsulta = personaRepositorioConsulta;
         this.encriptarClaveServicio = encriptarClaveServicio;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
     public UUID ejecutar(String claveAntigua, String claveNueva, UUID identificador) {
+        autorizacionServicio.validarAccesoAUsuario(identificador);
         validarSiNoExisteUsuarioConIdentificador(identificador);
         validarSiClaveNuevaNoEsLaAntigua(claveAntigua, claveNueva);
 
@@ -42,7 +48,8 @@ public class ModificarClaveUseCase {
 
     private void validarSiNoExisteUsuarioConIdentificador(UUID identificador) {
         if (esNulo(this.personaRepositorioConsulta.consultarPersonaPorIdentificador(identificador))) {
-            throw new NullPointerException(obtenerMensajeConParametro(NO_EXISTE_USUARIO_CON_IDENTIFICADOR, identificador));
+            throw new NullPointerException(
+                    obtenerMensajeConParametro(NO_EXISTE_USUARIO_CON_IDENTIFICADOR, identificador));
         }
     }
 

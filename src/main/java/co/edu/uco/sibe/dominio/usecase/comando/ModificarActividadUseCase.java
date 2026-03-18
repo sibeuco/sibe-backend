@@ -7,12 +7,14 @@ import co.edu.uco.sibe.dominio.puerto.comando.ActividadRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.regla.TipoOperacion;
 import co.edu.uco.sibe.dominio.regla.fabrica.MotoresFabrica;
+import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.service.ModificarVinculacionActividadConAreaService;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorDuplicadoExcepcion;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import static co.edu.uco.sibe.dominio.transversal.constante.DatoConstante.PENDIENTE;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.*;
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.FECHA_PROGRAMADA_NO_PERTENECE_AL_SEMESTRE_DE_LA_ACTIVIDAD;
 import static co.edu.uco.sibe.dominio.transversal.constante.TextoConstante.NUMERO_CERO_DOS;
@@ -24,19 +26,26 @@ public class ModificarActividadUseCase {
     private final ActividadRepositorioComando actividadRepositorioComando;
     private final ActividadRepositorioConsulta actividadRepositorioConsulta;
     private final ModificarVinculacionActividadConAreaService modificarVinculacionActividadConAreaService;
+    private final AutorizacionContextoOrganizacionalServicio autorizacionServicio;
 
-    public ModificarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando, ActividadRepositorioConsulta actividadRepositorioConsulta, ModificarVinculacionActividadConAreaService modificarVinculacionActividadConAreaService) {
+    public ModificarActividadUseCase(ActividadRepositorioComando actividadRepositorioComando,
+            ActividadRepositorioConsulta actividadRepositorioConsulta,
+            ModificarVinculacionActividadConAreaService modificarVinculacionActividadConAreaService,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
         this.actividadRepositorioComando = actividadRepositorioComando;
         this.actividadRepositorioConsulta = actividadRepositorioConsulta;
         this.modificarVinculacionActividadConAreaService = modificarVinculacionActividadConAreaService;
+        this.autorizacionServicio = autorizacionServicio;
     }
 
-    public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area, TipoArea tipoArea, UUID identificador) {
+    public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area,
+            TipoArea tipoArea, UUID identificador) {
+        autorizacionServicio.validarAccesoAActividad(identificador);
         validarSiNoExistePersonaConId(identificador);
 
         MotoresFabrica.MOTOR_ACTIVIDAD.ejecutar(actividad, TipoOperacion.CREAR);
 
-        validarSiExisteActividadConNombreEnElSemestre(actividad.getNombre(), actividad.getSemestre(), identificador);
+        validarSiExisteActividadConNombreEnElSemestre(actividad.getNombre(), actividad.getSemestre(), area, tipoArea, identificador);
 
         this.actividadRepositorioComando.modificar(actividad);
 
@@ -46,8 +55,11 @@ public class ModificarActividadUseCase {
             MotoresFabrica.MOTOR_ESTADO_ACTIVIDAD.ejecutar(ejecucionActividad.getEstado(), TipoOperacion.CREAR);
             MotoresFabrica.MOTOR_EJECUCION_ACTIVIDAD.ejecutar(ejecucionActividad, TipoOperacion.CREAR);
 
-            validarSiFechaProgramadaEsAnteriorAFechaActual(ejecucionActividad.getFechaProgramada());
-            validarSiFechaProgramadaPerteneceASemestreDeLaActividad(ejecucionActividad.getFechaProgramada(), actividad.getSemestre());
+            if (PENDIENTE.equals(ejecucionActividad.getEstado().getNombre())) {
+                validarSiFechaProgramadaEsAnteriorAFechaActual(ejecucionActividad.getFechaProgramada());
+            }
+            validarSiFechaProgramadaPerteneceASemestreDeLaActividad(ejecucionActividad.getFechaProgramada(),
+                    actividad.getSemestre());
         });
 
         actividadRepositorioComando.modificarEjecuciones(ejecucionesActividad);
@@ -56,20 +68,19 @@ public class ModificarActividadUseCase {
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {
-        if (esNulo(this.actividadRepositorioConsulta.consultarPorIdentificador(identificador))){
+        if (esNulo(this.actividadRepositorioConsulta.consultarPorIdentificador(identificador))) {
             throw new ValorDuplicadoExcepcion(ACTIVIDAD_NO_EXISTE_CON_IDENTIFICADOR);
         }
     }
 
-    private void validarSiExisteActividadConNombreEnElSemestre(String nombre, String semestre, UUID identificador) {
-        var actividad = this.actividadRepositorioConsulta.consultarPorNombreYSemestre(nombre, semestre);
-        if (!esNulo(actividad) && !actividad.getIdentificador().equals(identificador)){
+    private void validarSiExisteActividadConNombreEnElSemestre(String nombre, String semestre, UUID area, TipoArea tipoArea, UUID identificador) {
+        if (this.actividadRepositorioConsulta.existeActividadConNombreEnSemestreYArea(nombre, semestre, area, tipoArea, identificador)) {
             throw new ValorDuplicadoExcepcion(ACTIVIDAD_EXISTENTE_DURANTE_SEMESTRE_ACTUAL);
         }
     }
 
     private void validarSiFechaProgramadaEsAnteriorAFechaActual(LocalDate fechaProgramada) {
-        if(fechaProgramada.isBefore(obtenerFechaActual())) {
+        if (fechaProgramada.isBefore(obtenerFechaActual())) {
             throw new ValorInvalidoExcepcion(FECHA_PROGRAMADA_NO_PUEDE_SER_ANTERIOR_A_FECHA_ACTUAL);
         }
     }
