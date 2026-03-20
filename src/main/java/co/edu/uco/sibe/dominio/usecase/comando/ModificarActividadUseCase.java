@@ -41,6 +41,7 @@ public class ModificarActividadUseCase {
     public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area,
             TipoArea tipoArea, UUID identificador) {
         autorizacionServicio.validarAccesoAActividad(identificador);
+        validarAccesoPorTipoArea(area, tipoArea);
         validarSiNoExistePersonaConId(identificador);
 
         MotoresFabrica.MOTOR_ACTIVIDAD.ejecutar(actividad, TipoOperacion.CREAR);
@@ -65,6 +66,14 @@ public class ModificarActividadUseCase {
         actividadRepositorioComando.modificarEjecuciones(ejecucionesActividad);
 
         return identificador;
+    }
+
+    private void validarAccesoPorTipoArea(UUID area, TipoArea tipoArea) {
+        switch (tipoArea) {
+            case DIRECCION -> autorizacionServicio.validarAccesoADireccion(area);
+            case AREA -> autorizacionServicio.validarAccesoAArea(area);
+            case SUBAREA -> autorizacionServicio.validarAccesoASubarea(area);
+        }
     }
 
     private void validarSiNoExistePersonaConId(UUID identificador) {

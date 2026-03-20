@@ -38,7 +38,7 @@ public class GuardarActividadUseCase {
 
     public UUID ejecutar(Actividad actividad, List<EjecucionActividad> ejecucionesActividad, UUID area,
             TipoArea tipoArea) {
-        autorizacionServicio.validarAccesoAArea(area);
+        validarAccesoPorTipoArea(area, tipoArea);
         MotoresFabrica.MOTOR_ACTIVIDAD.ejecutar(actividad, TipoOperacion.CREAR);
 
         validarSiExisteActividadConNombreEnElSemestre(actividad.getNombre(), actividad.getSemestre(), area, tipoArea);
@@ -59,6 +59,14 @@ public class GuardarActividadUseCase {
         });
 
         return identificador;
+    }
+
+    private void validarAccesoPorTipoArea(UUID area, TipoArea tipoArea) {
+        switch (tipoArea) {
+            case DIRECCION -> autorizacionServicio.validarAccesoADireccion(area);
+            case AREA -> autorizacionServicio.validarAccesoAArea(area);
+            case SUBAREA -> autorizacionServicio.validarAccesoASubarea(area);
+        }
     }
 
     private void validarSiExisteActividadConNombreEnElSemestre(String nombre, String semestre, UUID area, TipoArea tipoArea) {

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_ADMIN_CREATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_USER_OR_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 
@@ -26,13 +27,13 @@ public class ActividadComandoControlador {
     private final FinalizarActividadManejador finalizarActividadManejador;
     private final CancelarActividadManejador cancelarActividadManejador;
 
-    @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
+    @PreAuthorize(HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY)
     @PostMapping
     public ComandoRespuesta<UUID> guardar(@RequestBody ActividadComando comando) {
         return this.guardarActividadManejador.ejecutar(comando);
     }
 
-    @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
+    @PreAuthorize(HAS_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
     @PutMapping(IDENTIFICADOR_PATH)
     public ComandoRespuesta<UUID> modificar(@RequestBody ActividadModificacionComando comando, @PathVariable String identificador) {
         return this.modificarActividadManejador.ejecutar(comando, textoAUUID(identificador));

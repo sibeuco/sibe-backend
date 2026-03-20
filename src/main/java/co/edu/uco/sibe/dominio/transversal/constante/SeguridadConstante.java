@@ -48,6 +48,8 @@ public final class SeguridadConstante {
             + HAS_ADMIN_UPDATE_AUTHORITY + " or " + HAS_AREA_ADMIN_UPDATE_AUTHORITY;
     public static final String HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY = HAS_ADMIN_CREATE_AUTHORITY + " or "
             + HAS_AREA_ADMIN_CREATE_AUTHORITY;
+    public static final String HAS_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY = HAS_ADMIN_UPDATE_AUTHORITY + " or "
+            + HAS_AREA_ADMIN_UPDATE_AUTHORITY;
 
     public static final String USERNAME = "username";
     public static final String AUTHORITIES = "authorities";

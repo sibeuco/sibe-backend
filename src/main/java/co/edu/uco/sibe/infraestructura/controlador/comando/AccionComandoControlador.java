@@ -9,7 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.ApiEndpointConstante.*;
-import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_ADMIN_CREATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY;
+import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.HAS_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.UtilUUID.textoAUUID;
 
 @RestController
@@ -19,13 +20,13 @@ public class AccionComandoControlador {
     private final GuardarAccionManejador guardarAccionManejador;
     private final ModificarAccionManejador modificarAccionManejador;
 
-    @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
+    @PreAuthorize(HAS_AREA_ADMIN_OR_ADMIN_CREATE_AUTHORITY)
     @PostMapping
     public ComandoRespuesta<UUID> guardar(@RequestBody AccionComando accion){
         return this.guardarAccionManejador.ejecutar(accion);
     }
 
-    @PreAuthorize(HAS_ADMIN_CREATE_AUTHORITY)
+    @PreAuthorize(HAS_AREA_ADMIN_OR_ADMIN_UPDATE_AUTHORITY)
     @PutMapping(IDENTIFICADOR_PATH)
     public ComandoRespuesta<UUID> modificar(@RequestBody AccionComando accion, @PathVariable String identificador){
         return this.modificarAccionManejador.ejecutar(accion, textoAUUID(identificador));
