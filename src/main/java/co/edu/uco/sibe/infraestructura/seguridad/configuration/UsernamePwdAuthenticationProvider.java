@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static co.edu.uco.sibe.dominio.transversal.constante.MensajesErrorConstante.USUARIO_O_CLAVE_INCORRECTO;
 import static co.edu.uco.sibe.dominio.transversal.constante.SeguridadConstante.*;
@@ -64,7 +65,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
             if (this.encriptarClaveServicio.existe(pwd, user.getClave())) {
                 // Build the Authentication object with authorities
                 var authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(userDTO.getTipoUsuario()));
-                authenticationToken.setDetails(userDTO.getIdentificador());
+                authenticationToken.setDetails(user.getIdentificador());
 
                 return authenticationToken;
             } else {

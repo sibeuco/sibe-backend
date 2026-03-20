@@ -70,9 +70,8 @@ public class UseCaseBean {
 
     @Bean
     public ConsultarUsuarioPorCorreoUseCase consultarUsuarioPorCorreoUseCase(
-            PersonaRepositorioConsulta personaRepositorioConsulta,
-            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
-        return new ConsultarUsuarioPorCorreoUseCase(personaRepositorioConsulta, autorizacionServicio);
+            PersonaRepositorioConsulta personaRepositorioConsulta) {
+        return new ConsultarUsuarioPorCorreoUseCase(personaRepositorioConsulta);
     }
 
     @Bean

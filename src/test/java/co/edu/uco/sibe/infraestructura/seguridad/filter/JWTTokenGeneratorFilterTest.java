@@ -89,17 +89,31 @@ class JWTTokenGeneratorFilterTest {
     }
 
     @Test
-    void deberiaLanzarExcepcionCuandoUsuarioNoTieneContextoOrganizacional() {
+    void deberiaGenerarJWTSinClaimsOrganizacionalesCuandoUsuarioNoTieneContexto() throws Exception {
         var auth = new UsernamePasswordAuthenticationToken("test@test.com", "pwd",
                 List.of(new SimpleGrantedAuthority(ADMIN_GET_AUTHORITY)));
         auth.setDetails(usuarioId);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        var usuarioEntidad = crearUsuarioEntidad(COLABORADOR);
+        var usuarioEntidad = crearUsuarioEntidad(ADMINISTRADOR_DIRECCION);
         when(usuarioDAO.findById(usuarioId)).thenReturn(Optional.of(usuarioEntidad));
         when(usuarioOrganizacionDAO.findByUsuario(usuarioEntidad)).thenReturn(null);
 
-        assertThrows(AuthorizationException.class, () -> filtro.doFilterInternal(request, response, filterChain));
+        var headerCaptor = ArgumentCaptor.forClass(String.class);
+        filtro.doFilterInternal(request, response, filterChain);
+
+        verify(response).setHeader(eq(JWT_HEADER), headerCaptor.capture());
+        var jwtToken = headerCaptor.getValue();
+        assertNotNull(jwtToken);
+
+        var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwtToken).getBody();
+
+        assertNull(claims.get(DIRECCION_ID_PARAMETER));
+        assertNull(claims.get(AREA_ID_PARAMETER));
+        assertNull(claims.get(SUBAREA_ID_PARAMETER));
+        assertEquals(ADMINISTRADOR_DIRECCION, claims.get(ROL_PARAMETER));
+        verify(filterChain).doFilter(request, response);
     }
 
     @Test

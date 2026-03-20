@@ -66,9 +66,6 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         var usuarioEntidad = usuarioDAO.findById(usuarioId)
                 .orElseThrow(() -> new AuthorizationException("Usuario no encontrado"));
         var usuarioOrganizacion = usuarioOrganizacionDAO.findByUsuario(usuarioEntidad);
-        if (usuarioOrganizacion == null) {
-            throw new AuthorizationException("El usuario no tiene contexto organizacional asignado");
-        }
 
         var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
         var jwtBuilder = Jwts.builder().setIssuer(APP_NAME).setSubject(JWT_TOKEN)
@@ -77,14 +74,16 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
                 .claim(AUTHORITIES_PARAMETER, populateAuthorities(authentication.getAuthorities()))
                 .claim(ROL_PARAMETER, usuarioEntidad.getRol().getTipoUsuario().getCodigo());
 
-        if (usuarioOrganizacion.getDireccion() != null) {
-            jwtBuilder.claim(DIRECCION_ID_PARAMETER, usuarioOrganizacion.getDireccion().getIdentificador().toString());
-        }
-        if (usuarioOrganizacion.getArea() != null) {
-            jwtBuilder.claim(AREA_ID_PARAMETER, usuarioOrganizacion.getArea().getIdentificador().toString());
-        }
-        if (usuarioOrganizacion.getSubarea() != null) {
-            jwtBuilder.claim(SUBAREA_ID_PARAMETER, usuarioOrganizacion.getSubarea().getIdentificador().toString());
+        if (usuarioOrganizacion != null) {
+            if (usuarioOrganizacion.getDireccion() != null) {
+                jwtBuilder.claim(DIRECCION_ID_PARAMETER, usuarioOrganizacion.getDireccion().getIdentificador().toString());
+            }
+            if (usuarioOrganizacion.getArea() != null) {
+                jwtBuilder.claim(AREA_ID_PARAMETER, usuarioOrganizacion.getArea().getIdentificador().toString());
+            }
+            if (usuarioOrganizacion.getSubarea() != null) {
+                jwtBuilder.claim(SUBAREA_ID_PARAMETER, usuarioOrganizacion.getSubarea().getIdentificador().toString());
+            }
         }
 
         var jwt = jwtBuilder
