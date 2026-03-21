@@ -86,6 +86,16 @@ public class AutorizacionContextoOrganizacionalServicio {
             var areaDeActividad = areaRepositorioConsulta.consultarPorActividad(actividad);
             if (areaDeActividad != null && areaDeActividad.getIdentificador().equals(contexto.getAreaId()))
                 return;
+            var subareaDeActividad = subareaRepositorioConsulta.consultarPorActividad(actividad);
+            if (subareaDeActividad != null) {
+                var areaDelAdmin = areaRepositorioConsulta.consultarPorIdentificador(contexto.getAreaId());
+                if (areaDelAdmin != null && areaDelAdmin.getSubareas() != null) {
+                    boolean perteneceASuArea = areaDelAdmin.getSubareas().stream()
+                            .anyMatch(s -> s.getIdentificador().equals(subareaDeActividad.getIdentificador()));
+                    if (perteneceASuArea)
+                        return;
+                }
+            }
             throw new AuthorizationException("No tiene permisos para acceder a esta actividad");
         }
 
