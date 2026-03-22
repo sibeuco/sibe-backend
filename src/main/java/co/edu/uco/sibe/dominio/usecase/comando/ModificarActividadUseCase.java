@@ -57,7 +57,13 @@ public class ModificarActividadUseCase {
             MotoresFabrica.MOTOR_EJECUCION_ACTIVIDAD.ejecutar(ejecucionActividad, TipoOperacion.CREAR);
 
             if (PENDIENTE.equals(ejecucionActividad.getEstado().getNombre())) {
-                validarSiFechaProgramadaEsAnteriorAFechaActual(ejecucionActividad.getFechaProgramada());
+                var ejecucionOriginal = actividadRepositorioConsulta
+                        .consultarEjecucionActividadPorIdentificador(ejecucionActividad.getIdentificador());
+                boolean esNuevaOFechaCambio = esNulo(ejecucionOriginal)
+                        || !ejecucionActividad.getFechaProgramada().equals(ejecucionOriginal.getFechaProgramada());
+                if (esNuevaOFechaCambio) {
+                    validarSiFechaProgramadaEsAnteriorAFechaActual(ejecucionActividad.getFechaProgramada());
+                }
             }
             validarSiFechaProgramadaPerteneceASemestreDeLaActividad(ejecucionActividad.getFechaProgramada(),
                     actividad.getSemestre());
