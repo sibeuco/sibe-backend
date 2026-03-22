@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.dto.TipoUsuarioDTO;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -40,6 +41,8 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
     @Autowired
     private UsuarioDAO usuarioDAO;
     @Autowired
+    private PersonaDAO personaDAO;
+    @Autowired
     private ConsultarUsuarioPorCorreoManejador consultarUsuarioPorCorreoManejador;
     @Autowired
     private EncriptarClaveServicio encriptarClaveServicio;
@@ -64,8 +67,9 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
             // Validate the password using the encryption service
             if (this.encriptarClaveServicio.existe(pwd, user.getClave())) {
                 // Build the Authentication object with authorities
+                var persona = personaDAO.findByCorreo(username);
                 var authenticationToken = new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(userDTO.getTipoUsuario()));
-                authenticationToken.setDetails(user.getIdentificador());
+                authenticationToken.setDetails(persona.getIdentificador());
 
                 return authenticationToken;
             } else {

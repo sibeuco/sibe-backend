@@ -67,7 +67,7 @@ class JWTTokenGeneratorFilterTest {
         var usuarioEntidad = crearUsuarioEntidad(ADMINISTRADOR_DIRECCION);
         var orgEntidad = crearUsuarioOrganizacionEntidad(usuarioEntidad);
 
-        when(usuarioDAO.findById(usuarioId)).thenReturn(Optional.of(usuarioEntidad));
+        when(usuarioDAO.findByCorreo("test@test.com")).thenReturn(usuarioEntidad);
         when(usuarioOrganizacionDAO.findByUsuario(usuarioEntidad)).thenReturn(orgEntidad);
 
         var headerCaptor = ArgumentCaptor.forClass(String.class);
@@ -96,7 +96,7 @@ class JWTTokenGeneratorFilterTest {
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         var usuarioEntidad = crearUsuarioEntidad(ADMINISTRADOR_DIRECCION);
-        when(usuarioDAO.findById(usuarioId)).thenReturn(Optional.of(usuarioEntidad));
+        when(usuarioDAO.findByCorreo("test@test.com")).thenReturn(usuarioEntidad);
         when(usuarioOrganizacionDAO.findByUsuario(usuarioEntidad)).thenReturn(null);
 
         var headerCaptor = ArgumentCaptor.forClass(String.class);
@@ -123,7 +123,7 @@ class JWTTokenGeneratorFilterTest {
         auth.setDetails(usuarioId);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        when(usuarioDAO.findById(usuarioId)).thenReturn(Optional.empty());
+        when(usuarioDAO.findByCorreo("test@test.com")).thenReturn(null);
 
         assertThrows(AuthorizationException.class, () -> filtro.doFilterInternal(request, response, filterChain));
     }

@@ -62,9 +62,10 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getPrincipal();
 
-        var usuarioId = (UUID) authentication.getDetails();
-        var usuarioEntidad = usuarioDAO.findById(usuarioId)
-                .orElseThrow(() -> new AuthorizationException("Usuario no encontrado"));
+        var usuarioEntidad = usuarioDAO.findByCorreo(authentication.getName());
+        if (usuarioEntidad == null) {
+            throw new AuthorizationException("Usuario no encontrado");
+        }
         var usuarioOrganizacion = usuarioOrganizacionDAO.findByUsuario(usuarioEntidad);
 
         var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
