@@ -26,6 +26,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(NullPointerException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(TecnicoExcepcion.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         CODIGOS_ESTADO.put(UnsupportedOperationException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        CODIGOS_ESTADO.put(AuthorizationException.class.getSimpleName(), HttpStatus.FORBIDDEN.value());
     }
 
     @ExceptionHandler(Exception.class)
