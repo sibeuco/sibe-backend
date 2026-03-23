@@ -376,8 +376,39 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
                 jpql.append("WHERE e.centroCostos.centroCostos.descripcion = :centroCostos ");
                 parametros.put(PARAM_CENTRO_COSTOS, filtro.getCentroCostos());
             }
+        } else if (!estaCadenaVacia(tipoParticipante) && TipoParticipante.EXTERNO.name().equalsIgnoreCase(tipoParticipante)) {
+            jpql.append("SELECT COUNT(e) FROM ExternoEntidad e ");
         } else {
-            jpql.append("SELECT COUNT(m) FROM MiembroEntidad m ");
+            boolean tieneEstudiante = !estaCadenaVacia(filtro.getProgramaAcademico()) || !estaCadenaVacia(filtro.getTipoProgramaAcademico());
+            boolean tieneEmpleado = !estaCadenaVacia(filtro.getCentroCostos());
+
+            if (tieneEstudiante) {
+                jpql.append("SELECT COUNT(e) FROM EstudianteEntidad e ");
+                boolean tieneWhere = false;
+
+                if (!estaCadenaVacia(filtro.getProgramaAcademico())) {
+                    jpql.append("WHERE e.programaAcademico = :programa ");
+                    parametros.put(PARAM_PROGRAMA, filtro.getProgramaAcademico());
+                    tieneWhere = true;
+                }
+
+                if (!estaCadenaVacia(filtro.getTipoProgramaAcademico())) {
+                    jpql.append(tieneWhere ? "AND " : "WHERE ");
+                    String tipo = filtro.getTipoProgramaAcademico().toUpperCase();
+
+                    if (TipoPrograma.POSTGRADO.name().equals(tipo)) {
+                        jpql.append("(UPPER(e.programaAcademico) LIKE '%ESPECIALIZACION%' OR UPPER(e.programaAcademico) LIKE '%MAESTRIA%' OR UPPER(e.programaAcademico) LIKE '%DOCTORADO%') ");
+                    } else if (TipoPrograma.PREGRADO.name().equals(tipo)) {
+                        jpql.append("(UPPER(e.programaAcademico) NOT LIKE '%ESPECIALIZACION%' AND UPPER(e.programaAcademico) NOT LIKE '%MAESTRIA%' AND UPPER(e.programaAcademico) NOT LIKE '%DOCTORADO%') ");
+                    }
+                }
+            } else if (tieneEmpleado) {
+                jpql.append("SELECT COUNT(e) FROM EmpleadoEntidad e ");
+                jpql.append("WHERE e.centroCostos.centroCostos.descripcion = :centroCostos ");
+                parametros.put(PARAM_CENTRO_COSTOS, filtro.getCentroCostos());
+            } else {
+                jpql.append("SELECT COUNT(m) FROM MiembroEntidad m ");
+            }
         }
 
         Query query = entityManager.createQuery(jpql.toString());
