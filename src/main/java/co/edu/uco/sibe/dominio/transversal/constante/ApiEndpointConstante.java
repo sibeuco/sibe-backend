@@ -65,6 +65,8 @@ public final class ApiEndpointConstante {
     public static final String ESTADISTICAS_PARTICIPANTES_POR_ESTRUCTURA = "/ejecuciones/finalizadas/participantes/estadisticas-estructura";
     public static final String ESTADISTICAS_PARTICIPANTES_POR_MES = "/ejecuciones/finalizadas/participantes/estadisticas-mes";
 
+    public static final String CONTAR_POBLACION_TOTAL = "/ejecuciones/finalizadas/poblacion/conteo";
+
     public static final String INDICADORES_PARA_ACTIVIDADES = "/actividades";
 
     private ApiEndpointConstante() {

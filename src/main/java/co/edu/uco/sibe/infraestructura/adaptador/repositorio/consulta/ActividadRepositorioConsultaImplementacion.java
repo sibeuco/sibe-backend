@@ -342,6 +342,50 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         return new EstadisticaDTO(nombreNodo, tipoNodo, totalParticipantes, totalAsistencias);
     }
 
+    @Override
+    public Long contarPoblacionTotal(FiltroEstadisticaDTO filtro) {
+        StringBuilder jpql = new StringBuilder();
+        Map<String, Object> parametros = new HashMap<>();
+
+        String tipoParticipante = filtro.getTipoParticipante();
+
+        if (!estaCadenaVacia(tipoParticipante) && TipoInterno.ESTUDIANTE.name().equalsIgnoreCase(tipoParticipante)) {
+            jpql.append("SELECT COUNT(e) FROM EstudianteEntidad e ");
+            boolean tieneWhere = false;
+
+            if (!estaCadenaVacia(filtro.getProgramaAcademico())) {
+                jpql.append("WHERE e.programaAcademico = :programa ");
+                parametros.put(PARAM_PROGRAMA, filtro.getProgramaAcademico());
+                tieneWhere = true;
+            }
+
+            if (!estaCadenaVacia(filtro.getTipoProgramaAcademico())) {
+                jpql.append(tieneWhere ? "AND " : "WHERE ");
+                String tipo = filtro.getTipoProgramaAcademico().toUpperCase();
+
+                if (TipoPrograma.POSTGRADO.name().equals(tipo)) {
+                    jpql.append("(UPPER(e.programaAcademico) LIKE '%ESPECIALIZACION%' OR UPPER(e.programaAcademico) LIKE '%MAESTRIA%' OR UPPER(e.programaAcademico) LIKE '%DOCTORADO%') ");
+                } else if (TipoPrograma.PREGRADO.name().equals(tipo)) {
+                    jpql.append("(UPPER(e.programaAcademico) NOT LIKE '%ESPECIALIZACION%' AND UPPER(e.programaAcademico) NOT LIKE '%MAESTRIA%' AND UPPER(e.programaAcademico) NOT LIKE '%DOCTORADO%') ");
+                }
+            }
+        } else if (!estaCadenaVacia(tipoParticipante) && TipoInterno.EMPLEADO.name().equalsIgnoreCase(tipoParticipante)) {
+            jpql.append("SELECT COUNT(e) FROM EmpleadoEntidad e ");
+
+            if (!estaCadenaVacia(filtro.getCentroCostos())) {
+                jpql.append("WHERE e.centroCostos.centroCostos.descripcion = :centroCostos ");
+                parametros.put(PARAM_CENTRO_COSTOS, filtro.getCentroCostos());
+            }
+        } else {
+            jpql.append("SELECT COUNT(m) FROM MiembroEntidad m ");
+        }
+
+        Query query = entityManager.createQuery(jpql.toString());
+        parametros.forEach(query::setParameter);
+
+        return (Long) query.getSingleResult();
+    }
+
     private Long ejecutarConsultaDinamica(String selectClause, FiltroEstadisticaDTO filtro) {
         StringBuilder jpql = new StringBuilder();
         Map<String, Object> parametros = new HashMap<>();

@@ -462,4 +462,11 @@ public class UseCaseBean {
             IndicadorRepositorioConsulta indicadorRepositorioConsulta) {
         return new ConsultarIndicadoresParaActividadesUseCase(indicadorRepositorioConsulta);
     }
+
+    @Bean
+    public ContarPoblacionTotalUseCase contarPoblacionTotalUseCase(
+            ActividadRepositorioConsulta actividadRepositorioConsulta,
+            AutorizacionContextoOrganizacionalServicio autorizacionServicio) {
+        return new ContarPoblacionTotalUseCase(actividadRepositorioConsulta, autorizacionServicio);
+    }
 }

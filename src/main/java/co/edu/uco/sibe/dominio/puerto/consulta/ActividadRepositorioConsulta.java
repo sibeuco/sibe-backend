@@ -50,4 +50,6 @@ public interface ActividadRepositorioConsulta {
     List<EstadisticaDTO> consultarEstadisticasParticipantesPorEstructura(FiltroEstadisticaDTO filtro);
 
     List<EstadisticaMesDTO> consultarEstadisticasParticipantesPorMes(FiltroEstadisticaDTO filtro);
+
+    Long contarPoblacionTotal(FiltroEstadisticaDTO filtro);
 }
