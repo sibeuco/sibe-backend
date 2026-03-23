@@ -2,6 +2,8 @@ package co.edu.uco.sibe.aplicacion.consulta;
 
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorRespuesta;
 import co.edu.uco.sibe.dominio.dto.AccionDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.AccionRepositorioConsulta;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,5 +17,9 @@ public class ConsultarAccionesManejador implements ManejadorRespuesta<List<Accio
     @Override
     public List<AccionDTO> ejecutar() {
         return this.accionRepositorioConsulta.consultarDTOs();
+    }
+
+    public RespuestaPaginada<AccionDTO> ejecutar(SolicitudPaginacion solicitud) {
+        return this.accionRepositorioConsulta.consultarDTOsPaginado(solicitud);
     }
 }

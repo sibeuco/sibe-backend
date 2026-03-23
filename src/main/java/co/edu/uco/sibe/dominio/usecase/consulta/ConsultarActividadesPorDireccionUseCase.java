@@ -1,6 +1,8 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
@@ -32,6 +34,14 @@ public class ConsultarActividadesPorDireccionUseCase {
         var direccion = validarSiExisteDireccion(id, identificadorDireccion);
 
         return actividadRepositorioConsulta.consultarPorDireccion(direccion);
+    }
+
+    public RespuestaPaginada<ActividadDTO> ejecutar(String identificadorDireccion, SolicitudPaginacion solicitud) {
+        var id = UtilUUID.textoAUUID(identificadorDireccion);
+        autorizacionServicio.validarAccesoADireccion(id);
+        var direccion = validarSiExisteDireccion(id, identificadorDireccion);
+
+        return actividadRepositorioConsulta.consultarPorDireccion(direccion, solicitud);
     }
 
     private Direccion validarSiExisteDireccion(UUID id, String idComando) {

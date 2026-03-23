@@ -1,6 +1,8 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ContextoUsuarioAutenticado;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.enums.TipoArea;
 import co.edu.uco.sibe.dominio.modelo.Area;
@@ -10,6 +12,7 @@ import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -55,6 +58,17 @@ public class ConsultarUsuariosUseCase {
         return usuarios;
     }
 
+    public RespuestaPaginada<UsuarioDTO> ejecutar(SolicitudPaginacion solicitud, String tipoUsuario, String excluirTipoUsuario) {
+        ContextoUsuarioAutenticado contexto = autorizacionServicio.obtenerContexto();
+        List<UUID> idsOrganizacionales = null;
+
+        if (ADMINISTRADOR_AREA.equals(contexto.getRol())) {
+            idsOrganizacionales = obtenerIdsOrganizacionalesDeAreaComoLista(contexto.getAreaId());
+        }
+
+        return personaRepositorioConsulta.consultarUsuariosPaginado(solicitud, idsOrganizacionales, tipoUsuario, excluirTipoUsuario);
+    }
+
     private Set<String> obtenerIdsOrganizacionalesDeArea(UUID areaId) {
         Set<String> ids = new java.util.HashSet<>();
         ids.add(areaId.toString());
@@ -62,6 +76,18 @@ public class ConsultarUsuariosUseCase {
         if (area != null && area.getSubareas() != null) {
             area.getSubareas().stream()
                     .map(s -> s.getIdentificador().toString())
+                    .forEach(ids::add);
+        }
+        return ids;
+    }
+
+    private List<UUID> obtenerIdsOrganizacionalesDeAreaComoLista(UUID areaId) {
+        List<UUID> ids = new ArrayList<>();
+        ids.add(areaId);
+        Area area = areaRepositorioConsulta.consultarPorIdentificador(areaId);
+        if (area != null && area.getSubareas() != null) {
+            area.getSubareas().stream()
+                    .map(Subarea::getIdentificador)
                     .forEach(ids::add);
         }
         return ids;

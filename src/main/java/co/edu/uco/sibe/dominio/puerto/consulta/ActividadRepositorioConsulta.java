@@ -19,11 +19,21 @@ public interface ActividadRepositorioConsulta {
 
     List<ActividadDTO> consultarPorDireccion(Direccion direccion);
 
+    RespuestaPaginada<ActividadDTO> consultarPorArea(Area area, SolicitudPaginacion solicitud);
+
+    RespuestaPaginada<ActividadDTO> consultarPorDireccion(Direccion direccion, SolicitudPaginacion solicitud);
+
+    RespuestaPaginada<ActividadDTO> consultarPorSubarea(Subarea subarea, SolicitudPaginacion solicitud);
+
     List<EjecucionActividadDTO> consultarFechasProgramadasPorActividad(Actividad actividad);
+
+    RespuestaPaginada<EjecucionActividadDTO> consultarFechasProgramadasPorActividad(Actividad actividad, SolicitudPaginacion solicitud);
 
     EjecucionActividad consultarEjecucionActividadPorIdentificador(UUID identificador);
 
     List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad);
+
+    RespuestaPaginada<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad, SolicitudPaginacion solicitud);
 
     List<String> consultarMesesEjecucionesFinalizadas();
 

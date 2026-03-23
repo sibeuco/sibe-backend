@@ -2,6 +2,8 @@ package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.MiembroDTO;
 import co.edu.uco.sibe.dominio.dto.ParticipanteDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
@@ -26,6 +28,13 @@ public class ConsultarParticipantesPorEjecucionActividadUseCase {
         validarSiExisteEjecucionActividad(identificador);
 
         return actividadRepositorioConsulta.consultarParticipantesPorEjecucionActividad(identificador);
+    }
+
+    public RespuestaPaginada<ParticipanteDTO> ejecutar(UUID identificador, SolicitudPaginacion solicitud) {
+        autorizacionServicio.validarAccesoAEjecucionActividad(identificador);
+        validarSiExisteEjecucionActividad(identificador);
+
+        return actividadRepositorioConsulta.consultarParticipantesPorEjecucionActividad(identificador, solicitud);
     }
 
     private void validarSiExisteEjecucionActividad(UUID identificador) {

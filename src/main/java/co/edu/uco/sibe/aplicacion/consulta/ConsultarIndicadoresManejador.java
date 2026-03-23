@@ -2,6 +2,8 @@ package co.edu.uco.sibe.aplicacion.consulta;
 
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorRespuesta;
 import co.edu.uco.sibe.dominio.dto.IndicadorDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.puerto.consulta.IndicadorRepositorioConsulta;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,5 +17,9 @@ public class ConsultarIndicadoresManejador  implements ManejadorRespuesta<List<I
     @Override
     public List<IndicadorDTO> ejecutar() {
         return this.indicadorRepositorioConsulta.consultarDTOs();
+    }
+
+    public RespuestaPaginada<IndicadorDTO> ejecutar(SolicitudPaginacion solicitud) {
+        return this.indicadorRepositorioConsulta.consultarDTOsPaginado(solicitud);
     }
 }

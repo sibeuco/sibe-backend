@@ -12,9 +12,11 @@ import co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorTexto;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.*;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.*;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.*;
+import co.edu.uco.sibe.infraestructura.adaptador.repositorio.util.PaginacionUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.Month;
@@ -115,10 +117,44 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     }
 
     @Override
+    public RespuestaPaginada<ActividadDTO> consultarPorArea(Area area, SolicitudPaginacion solicitud) {
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "nombre"));
+        var page = estaCadenaVacia(solicitud.getBusqueda())
+                ? actividadDAO.consultarPorArea(area.getIdentificador(), pageable)
+                : actividadDAO.consultarPorAreaConBusqueda(area.getIdentificador(), solicitud.getBusqueda(), pageable);
+        return PaginacionUtil.convertir(page, actividadMapeador::construirDTO);
+    }
+
+    @Override
+    public RespuestaPaginada<ActividadDTO> consultarPorDireccion(Direccion direccion, SolicitudPaginacion solicitud) {
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "nombre"));
+        var page = estaCadenaVacia(solicitud.getBusqueda())
+                ? actividadDAO.consultarPorDireccion(direccion.getIdentificador(), pageable)
+                : actividadDAO.consultarPorDireccionConBusqueda(direccion.getIdentificador(), solicitud.getBusqueda(), pageable);
+        return PaginacionUtil.convertir(page, actividadMapeador::construirDTO);
+    }
+
+    @Override
+    public RespuestaPaginada<ActividadDTO> consultarPorSubarea(Subarea subarea, SolicitudPaginacion solicitud) {
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "nombre"));
+        var page = estaCadenaVacia(solicitud.getBusqueda())
+                ? actividadDAO.consultarPorSubarea(subarea.getIdentificador(), pageable)
+                : actividadDAO.consultarPorSubareaConBusqueda(subarea.getIdentificador(), solicitud.getBusqueda(), pageable);
+        return PaginacionUtil.convertir(page, actividadMapeador::construirDTO);
+    }
+
+    @Override
     public List<EjecucionActividadDTO> consultarFechasProgramadasPorActividad(Actividad actividad) {
         var entidades = this.ejecucionActividadDAO.findByActividadIdentificador(actividad.getIdentificador());
 
         return this.ejecucionActividadMapeador.construirDTOs(entidades);
+    }
+
+    @Override
+    public RespuestaPaginada<EjecucionActividadDTO> consultarFechasProgramadasPorActividad(Actividad actividad, SolicitudPaginacion solicitud) {
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "fechaProgramada"));
+        var page = ejecucionActividadDAO.findByActividadIdentificador(actividad.getIdentificador(), pageable);
+        return PaginacionUtil.convertir(page, ejecucionActividadMapeador::construirDTO);
     }
 
     @Override
@@ -137,6 +173,13 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
         List<ParticipanteEntidad> participantes = this.ejecucionActividadDAO.findParticipantesByEjecucionActividadId(ejecucionActividad);
 
         return this.participanteDetalladoMapeador.construirDTOs(participantes);
+    }
+
+    @Override
+    public RespuestaPaginada<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad, SolicitudPaginacion solicitud) {
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "identificador"));
+        var page = ejecucionActividadDAO.findParticipantesPaginadosByEjecucionActividadId(ejecucionActividad, pageable);
+        return PaginacionUtil.convertir(page, participanteDetalladoMapeador::construirDTO);
     }
 
     @Override

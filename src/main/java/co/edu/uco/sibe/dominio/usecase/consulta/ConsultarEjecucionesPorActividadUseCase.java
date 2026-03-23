@@ -1,6 +1,8 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.EjecucionActividadDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
@@ -28,6 +30,14 @@ public class ConsultarEjecucionesPorActividadUseCase {
         var actividad = validarSiExisteActividad(id, identificadorActvidad);
 
         return actividadRepositorioConsulta.consultarFechasProgramadasPorActividad(actividad);
+    }
+
+    public RespuestaPaginada<EjecucionActividadDTO> ejecutar(String identificadorActividad, SolicitudPaginacion solicitud) {
+        var id = UtilUUID.textoAUUID(identificadorActividad);
+        autorizacionServicio.validarAccesoAActividad(id);
+        var actividad = validarSiExisteActividad(id, identificadorActividad);
+
+        return actividadRepositorioConsulta.consultarFechasProgramadasPorActividad(actividad, solicitud);
     }
 
     private Actividad validarSiExisteActividad(UUID id, String idComando) {

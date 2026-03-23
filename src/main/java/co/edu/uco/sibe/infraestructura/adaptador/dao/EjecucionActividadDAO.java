@@ -2,6 +2,9 @@ package co.edu.uco.sibe.infraestructura.adaptador.dao;
 
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.EjecucionActividadEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEntidad;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +15,13 @@ import static co.edu.uco.sibe.dominio.transversal.constante.PersistenciaConstant
 
 public interface EjecucionActividadDAO extends JpaRepository<EjecucionActividadEntidad, UUID> {
     List<EjecucionActividadEntidad> findByActividadIdentificador(UUID actividadId);
+
+    Page<EjecucionActividadEntidad> findByActividadIdentificador(UUID actividadId, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"miembro"})
+    @Query("SELECT DISTINCT p FROM RegistroAsistenciaEntidad ra JOIN ra.participante p WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId")
+    Page<ParticipanteEntidad> findParticipantesPaginadosByEjecucionActividadId(
+            @Param("ejecucionActividadId") UUID ejecucionActividadId, Pageable pageable);
 
     @Query(CONSULTAR_PARTICIPANTES_POR_EJECUCION_ACTIVIDAD)
     List<ParticipanteEntidad> findParticipantesByEjecucionActividadId(

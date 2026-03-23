@@ -1,11 +1,15 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ProyectoDTO;
+import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
+import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.modelo.Proyecto;
 import co.edu.uco.sibe.dominio.puerto.consulta.ProyectoRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.ProyectoDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.ProyectoMapeador;
+import co.edu.uco.sibe.infraestructura.adaptador.repositorio.util.PaginacionUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
@@ -44,5 +48,17 @@ public class ProyectoRepositorioConsultaImplementacion implements ProyectoReposi
         }
 
         return this.proyectoMapeador.construriModelo(entidad);
+    }
+
+    @Override
+    public RespuestaPaginada<ProyectoDTO> consultarDTOsPaginado(SolicitudPaginacion solicitud) {
+        var pageRequest = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "numeroProyecto"));
+        String busqueda = solicitud.getBusqueda();
+
+        var pagina = (busqueda == null || busqueda.isBlank())
+                ? proyectoDAO.findAll(pageRequest)
+                : proyectoDAO.buscarPaginado(busqueda, pageRequest);
+
+        return PaginacionUtil.convertir(pagina, proyectoMapeador::construirDTO);
     }
 }
