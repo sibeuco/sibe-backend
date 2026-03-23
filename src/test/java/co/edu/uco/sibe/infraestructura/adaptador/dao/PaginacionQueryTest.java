@@ -52,7 +52,14 @@ class PaginacionQueryTest {
     @Test
     void personaBuscarUsuariosPaginado_deberiaFuncionar() {
         var pageable = PageRequest.of(0, 10, Sort.by("nombres", "apellidos").and(Sort.by("identificador")));
-        var page = personaDAO.buscarUsuariosPaginado(null, null, null, pageable);
+        var page = personaDAO.buscarUsuariosPaginado("", "", "", pageable);
+        assertNotNull(page);
+    }
+
+    @Test
+    void personaBuscarUsuariosPaginadoConBusqueda_deberiaFuncionar() {
+        var pageable = PageRequest.of(0, 10, Sort.by("nombres", "apellidos").and(Sort.by("identificador")));
+        var page = personaDAO.buscarUsuariosPaginado("test", "Administrador", "", pageable);
         assertNotNull(page);
     }
 
@@ -60,7 +67,7 @@ class PaginacionQueryTest {
     void personaBuscarUsuariosPaginadoConFiltro_deberiaFuncionar() {
         var pageable = PageRequest.of(0, 10, Sort.by("nombres", "apellidos").and(Sort.by("identificador")));
         var page = personaDAO.buscarUsuariosPaginadoConFiltroOrganizacional(
-                List.of(UUID.randomUUID()), null, null, null, pageable);
+                List.of(UUID.randomUUID()), "", "", "", pageable);
         assertNotNull(page);
     }
 

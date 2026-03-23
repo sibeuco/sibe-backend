@@ -210,13 +210,15 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
     @Override
     public RespuestaPaginada<UsuarioDTO> consultarUsuariosPaginado(SolicitudPaginacion solicitud, List<UUID> idsOrganizacionales, String tipoUsuario, String excluirTipoUsuario) {
         var pageRequest = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "nombres", "apellidos"));
-        String busqueda = solicitud.getBusqueda();
+        String busqueda = solicitud.getBusqueda() == null ? "" : solicitud.getBusqueda().trim();
+        String tipoUsr = tipoUsuario == null ? "" : tipoUsuario;
+        String excluirTipoUsr = excluirTipoUsuario == null ? "" : excluirTipoUsuario;
 
         Page<PersonaEntidad> pagina;
         if (idsOrganizacionales == null || idsOrganizacionales.isEmpty()) {
-            pagina = personaDAO.buscarUsuariosPaginado(busqueda, tipoUsuario, excluirTipoUsuario, pageRequest);
+            pagina = personaDAO.buscarUsuariosPaginado(busqueda, tipoUsr, excluirTipoUsr, pageRequest);
         } else {
-            pagina = personaDAO.buscarUsuariosPaginadoConFiltroOrganizacional(idsOrganizacionales, busqueda, tipoUsuario, excluirTipoUsuario, pageRequest);
+            pagina = personaDAO.buscarUsuariosPaginadoConFiltroOrganizacional(idsOrganizacionales, busqueda, tipoUsr, excluirTipoUsr, pageRequest);
         }
 
         return PaginacionUtil.convertir(pagina, usuarioMapeador::construirDTO);
