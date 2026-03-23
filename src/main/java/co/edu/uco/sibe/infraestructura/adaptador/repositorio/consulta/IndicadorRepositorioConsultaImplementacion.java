@@ -12,12 +12,14 @@ import co.edu.uco.sibe.infraestructura.adaptador.repositorio.util.PaginacionUtil
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.esNulo;
 
 @Repository
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class IndicadorRepositorioConsultaImplementacion implements IndicadorRepositorioConsulta {
     private final IndicadorDAO indicadorDAO;
     private final IndicadorMapeador indicadorMapeador;
