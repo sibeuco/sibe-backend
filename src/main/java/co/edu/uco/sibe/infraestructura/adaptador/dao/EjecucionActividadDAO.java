@@ -4,7 +4,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.entidad.EjecucionActividadEntid
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.ParticipanteEntidad;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,8 +17,8 @@ public interface EjecucionActividadDAO extends JpaRepository<EjecucionActividadE
 
     Page<EjecucionActividadEntidad> findByActividadIdentificador(UUID actividadId, Pageable pageable);
 
-    @EntityGraph(attributePaths = {"miembro"})
-    @Query("SELECT DISTINCT p FROM RegistroAsistenciaEntidad ra JOIN ra.participante p WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId")
+    @Query(value = "SELECT DISTINCT p FROM RegistroAsistenciaEntidad ra JOIN ra.participante p JOIN FETCH p.miembro WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId",
+           countQuery = "SELECT COUNT(DISTINCT p) FROM RegistroAsistenciaEntidad ra JOIN ra.participante p WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId")
     Page<ParticipanteEntidad> findParticipantesPaginadosByEjecucionActividadId(
             @Param("ejecucionActividadId") UUID ejecucionActividadId, Pageable pageable);
 
