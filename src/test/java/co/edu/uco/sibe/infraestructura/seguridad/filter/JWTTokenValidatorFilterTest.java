@@ -84,6 +84,18 @@ class JWTTokenValidatorFilterTest {
         verify(filterChain).doFilter(request, response);
     }
 
+    @Test
+    void deberiaNoFiltrarEnEndpointDeLogin() {
+        when(request.getServletPath()).thenReturn("/login");
+        assertTrue(filtro.shouldNotFilter(request));
+    }
+
+    @Test
+    void deberiaFiltrarEnEndpointsProtegidos() {
+        when(request.getServletPath()).thenReturn("/api/usuarios");
+        assertFalse(filtro.shouldNotFilter(request));
+    }
+
     private String generarJWTConContexto(String rol) {
         var key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
