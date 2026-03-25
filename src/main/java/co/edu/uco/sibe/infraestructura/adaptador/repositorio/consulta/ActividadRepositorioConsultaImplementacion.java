@@ -177,7 +177,7 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
 
     @Override
     public RespuestaPaginada<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad, SolicitudPaginacion solicitud) {
-        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "identificador"));
+        var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.unsorted());
         var pageIds = ejecucionActividadDAO.findParticipanteIdsPaginadosByEjecucionActividadId(ejecucionActividad, pageable);
 
         List<ParticipanteDTO> contenido = List.of();
