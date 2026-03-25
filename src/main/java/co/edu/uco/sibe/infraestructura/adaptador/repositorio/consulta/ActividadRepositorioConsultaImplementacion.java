@@ -178,8 +178,22 @@ public class ActividadRepositorioConsultaImplementacion implements ActividadRepo
     @Override
     public RespuestaPaginada<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(UUID ejecucionActividad, SolicitudPaginacion solicitud) {
         var pageable = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "identificador"));
-        var page = ejecucionActividadDAO.findParticipantesPaginadosByEjecucionActividadId(ejecucionActividad, pageable);
-        return PaginacionUtil.convertir(page, participanteDetalladoMapeador::construirDTO);
+        var pageIds = ejecucionActividadDAO.findParticipanteIdsPaginadosByEjecucionActividadId(ejecucionActividad, pageable);
+
+        List<ParticipanteDTO> contenido = List.of();
+        if (!pageIds.getContent().isEmpty()) {
+            var participantes = participanteDAO.findAllById(pageIds.getContent());
+            contenido = participantes.stream()
+                    .map(participanteDetalladoMapeador::construirDTO)
+                    .toList();
+        }
+
+        return new RespuestaPaginada<>(
+                contenido,
+                pageIds.getTotalElements(),
+                pageIds.getTotalPages(),
+                pageIds.getNumber()
+        );
     }
 
     @Override

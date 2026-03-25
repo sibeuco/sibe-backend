@@ -268,9 +268,12 @@ class ActividadRepositorioConsultaImplementacionTest {
     @Test
     void deberiaConsultarParticipantesPorEjecucionActividadPaginado() {
         UUID ejId = UUID.randomUUID();
+        UUID participanteId = UUID.randomUUID();
         SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().construir();
-        Page<ParticipanteEntidad> page = new PageImpl<>(List.of(new ParticipanteEntidad()));
-        when(ejecucionActividadDAO.findParticipantesPaginadosByEjecucionActividadId(eq(ejId), any(Pageable.class))).thenReturn(page);
+        Page<UUID> pageIds = new PageImpl<>(List.of(participanteId));
+        ParticipanteEntidad entidad = new ParticipanteEntidad();
+        when(ejecucionActividadDAO.findParticipanteIdsPaginadosByEjecucionActividadId(eq(ejId), any(Pageable.class))).thenReturn(pageIds);
+        when(participanteDAO.findAllById(List.of(participanteId))).thenReturn(List.of(entidad));
         when(participanteDetalladoMapeador.construirDTO(any(ParticipanteEntidad.class))).thenReturn(new ParticipanteDTO());
 
         RespuestaPaginada<ParticipanteDTO> resultado = repositorio.consultarParticipantesPorEjecucionActividad(ejId, solicitud);

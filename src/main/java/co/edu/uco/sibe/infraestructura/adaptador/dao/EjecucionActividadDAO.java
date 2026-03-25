@@ -17,9 +17,9 @@ public interface EjecucionActividadDAO extends JpaRepository<EjecucionActividadE
 
     Page<EjecucionActividadEntidad> findByActividadIdentificador(UUID actividadId, Pageable pageable);
 
-    @Query(value = "SELECT p FROM ParticipanteEntidad p WHERE p.identificador IN (SELECT DISTINCT ra.participante.identificador FROM RegistroAsistenciaEntidad ra WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId)",
+    @Query(value = "SELECT DISTINCT ra.participante.identificador FROM RegistroAsistenciaEntidad ra WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId",
            countQuery = "SELECT COUNT(DISTINCT ra.participante.identificador) FROM RegistroAsistenciaEntidad ra WHERE ra.ejecucionActividad.identificador = :ejecucionActividadId")
-    Page<ParticipanteEntidad> findParticipantesPaginadosByEjecucionActividadId(
+    Page<UUID> findParticipanteIdsPaginadosByEjecucionActividadId(
             @Param("ejecucionActividadId") UUID ejecucionActividadId, Pageable pageable);
 
     @Query(CONSULTAR_PARTICIPANTES_POR_EJECUCION_ACTIVIDAD)
