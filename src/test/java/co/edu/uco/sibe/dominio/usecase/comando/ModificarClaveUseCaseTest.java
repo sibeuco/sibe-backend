@@ -1,10 +1,13 @@
 package co.edu.uco.sibe.dominio.usecase.comando;
 
+import co.edu.uco.sibe.dominio.modelo.Persona;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
 import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
 import co.edu.uco.sibe.dominio.puerto.consulta.PersonaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
+import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,5 +63,64 @@ class ModificarClaveUseCaseTest {
         assertThrows(AuthorizationException.class, () -> useCase.ejecutar("old", "new", userId));
 
         verify(personaRepositorioComando, never()).modificarClave(any(), any());
+    }
+
+    @Test
+    void deberiaLanzarNullPointerCuandoUsuarioNoExiste() {
+        UUID userId = UUID.randomUUID();
+
+        when(personaRepositorioConsulta.consultarPersonaPorIdentificador(userId)).thenReturn(null);
+
+        assertThrows(NullPointerException.class, () -> useCase.ejecutar("old", "new", userId));
+    }
+
+    @Test
+    void deberiaLanzarValorInvalidoCuandoClaveNuevaEsIgualAAntigua() {
+        UUID userId = UUID.randomUUID();
+        Persona persona = mock(Persona.class);
+
+        when(personaRepositorioConsulta.consultarPersonaPorIdentificador(userId)).thenReturn(persona);
+
+        assertThrows(ValorInvalidoExcepcion.class, () -> useCase.ejecutar("mismaClave", "mismaClave", userId));
+    }
+
+    @Test
+    void deberiaLanzarValorInvalidoCuandoClaveAntiguaEsIncorrecta() {
+        UUID userId = UUID.randomUUID();
+        Persona persona = mock(Persona.class);
+        Usuario usuario = mock(Usuario.class);
+
+        when(personaRepositorioConsulta.consultarPersonaPorIdentificador(userId)).thenReturn(persona);
+        when(persona.getCorreo()).thenReturn("test@test.com");
+        when(personaRepositorioConsulta.consultarUsuarioPorCorreo("test@test.com")).thenReturn(usuario);
+        when(usuario.getCorreo()).thenReturn("test@test.com");
+        when(personaRepositorioConsulta.consultarClaveConCorreo("test@test.com")).thenReturn("hashedOld");
+        when(encriptarClaveServicio.existe("oldIncorrecta", "hashedOld")).thenReturn(false);
+
+        assertThrows(ValorInvalidoExcepcion.class, () -> useCase.ejecutar("oldIncorrecta", "newPass", userId));
+    }
+
+    @Test
+    void deberiaModificarClaveExitosamente() {
+        UUID userId = UUID.randomUUID();
+        UUID idEsperado = UUID.randomUUID();
+        Persona persona = mock(Persona.class);
+        Usuario usuario = mock(Usuario.class);
+
+        when(personaRepositorioConsulta.consultarPersonaPorIdentificador(userId)).thenReturn(persona);
+        when(persona.getCorreo()).thenReturn("test@test.com");
+        when(personaRepositorioConsulta.consultarUsuarioPorCorreo("test@test.com")).thenReturn(usuario);
+        when(usuario.getCorreo()).thenReturn("test@test.com");
+        when(usuario.getIdentificador()).thenReturn(userId);
+        when(personaRepositorioConsulta.consultarClaveConCorreo("test@test.com")).thenReturn("hashedOld");
+        when(encriptarClaveServicio.existe("oldPass", "hashedOld")).thenReturn(true);
+        when(usuario.getClave()).thenReturn("newPass");
+        when(encriptarClaveServicio.ejecutar("newPass")).thenReturn("hashedNew");
+        when(personaRepositorioComando.modificarClave("hashedNew", userId)).thenReturn(idEsperado);
+
+        UUID resultado = useCase.ejecutar("oldPass", "newPass", userId);
+
+        assertEquals(idEsperado, resultado);
+        verify(usuario).actualizarClave("newPass");
     }
 }

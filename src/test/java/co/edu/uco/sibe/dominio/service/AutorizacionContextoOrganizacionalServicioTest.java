@@ -275,6 +275,65 @@ class AutorizacionContextoOrganizacionalServicioTest {
         assertDoesNotThrow(() -> servicio.validarAccesoAEjecucionActividad(ejecucionId));
     }
 
+    @Test
+    void deberiaLanzarExcepcionCuandoActividadNoExiste() {
+        configurarContexto(ADMINISTRADOR_AREA);
+        var actividadId = UUID.randomUUID();
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(null);
+        assertThrows(AuthorizationException.class, () -> servicio.validarAccesoAActividad(actividadId));
+    }
+
+    @Test
+    void deberiaPermitirAccesoAActividadDeSubareaDeSuAreaCuandoEsAdminArea() {
+        configurarContexto(ADMINISTRADOR_AREA);
+        var actividadId = UUID.randomUUID();
+        var actividad = new ActividadTestDataBuilder().conIdentificador(actividadId).construir();
+        var otraArea = new AreaTestDataBuilder().conIdentificador(otraAreaId).construir();
+        var subarea = new SubareaTestDataBuilder().conIdentificador(subareaId).construir();
+        var areaAdmin = new AreaTestDataBuilder().conIdentificador(areaId).conSubareas(List.of(subarea)).construir();
+
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(actividad);
+        when(areaRepositorioConsulta.consultarPorActividad(actividad)).thenReturn(otraArea);
+        when(subareaRepositorioConsulta.consultarPorActividad(actividad)).thenReturn(subarea);
+        when(areaRepositorioConsulta.consultarPorIdentificador(areaId)).thenReturn(areaAdmin);
+
+        assertDoesNotThrow(() -> servicio.validarAccesoAActividad(actividadId));
+    }
+
+    @Test
+    void deberiaPermitirAccesoAActividadDeSuSubareaCuandoEsColaborador() {
+        var contexto = new ContextoUsuarioAutenticadoTestDataBuilder()
+                .conIdentificador(usuarioId).comoColaborador()
+                .conDireccionId(direccionId).conAreaId(areaId).conSubareaId(subareaId)
+                .construir();
+        when(contextoProveedorServicio.obtenerContextoActual()).thenReturn(contexto);
+
+        var actividadId = UUID.randomUUID();
+        var actividad = new ActividadTestDataBuilder().conIdentificador(actividadId).conColaborador(null).construir();
+        var subarea = new SubareaTestDataBuilder().conIdentificador(subareaId).construir();
+
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(actividad);
+        when(subareaRepositorioConsulta.consultarPorActividad(actividad)).thenReturn(subarea);
+
+        assertDoesNotThrow(() -> servicio.validarAccesoAActividad(actividadId));
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoEjecucionNoExiste() {
+        var ejecucionId = UUID.randomUUID();
+        when(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(ejecucionId)).thenReturn(null);
+        assertThrows(AuthorizationException.class, () -> servicio.validarAccesoAEjecucionActividad(ejecucionId));
+    }
+
+    @Test
+    void deberiaDenegarAccesoAActividadCuandoRolDesconocido() {
+        configurarContexto("OBSERVADOR");
+        var actividadId = UUID.randomUUID();
+        var actividad = new ActividadTestDataBuilder().conIdentificador(actividadId).construir();
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(actividad);
+        assertThrows(AuthorizationException.class, () -> servicio.validarAccesoAActividad(actividadId));
+    }
+
     // ==================== Helpers ====================
 
     private void configurarContexto(String rol) {

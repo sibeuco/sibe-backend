@@ -59,4 +59,42 @@ class ConsultarEjecucionesPorActividadUseCaseTest {
         verify(autorizacionServicio).validarAccesoAActividad(actividadId);
         verify(actividadRepositorioConsulta).consultarFechasProgramadasPorActividad(actividad, solicitud);
     }
+
+    @Test
+    void deberiaConsultarEjecucionesSinPaginacionCuandoTieneAcceso() {
+        UUID actividadId = UUID.randomUUID();
+        Actividad actividad = new ActividadTestDataBuilder().conIdentificador(actividadId).construir();
+        List<EjecucionActividadDTO> listaEsperada = List.of(new EjecucionActividadDTO());
+
+        doNothing().when(autorizacionServicio).validarAccesoAActividad(actividadId);
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(actividad);
+        when(actividadRepositorioConsulta.consultarFechasProgramadasPorActividad(actividad)).thenReturn(listaEsperada);
+
+        List<EjecucionActividadDTO> resultado = useCase.ejecutar(actividadId.toString());
+
+        assertEquals(listaEsperada, resultado);
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoActividadNoExisteEnConsultaSinPaginacion() {
+        UUID actividadId = UUID.randomUUID();
+
+        doNothing().when(autorizacionServicio).validarAccesoAActividad(actividadId);
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(null);
+
+        assertThrows(co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion.class,
+                () -> useCase.ejecutar(actividadId.toString()));
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoActividadNoExisteEnConsultaPaginada() {
+        UUID actividadId = UUID.randomUUID();
+        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().construir();
+
+        doNothing().when(autorizacionServicio).validarAccesoAActividad(actividadId);
+        when(actividadRepositorioConsulta.consultarPorIdentificador(actividadId)).thenReturn(null);
+
+        assertThrows(co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion.class,
+                () -> useCase.ejecutar(actividadId.toString(), solicitud));
+    }
 }

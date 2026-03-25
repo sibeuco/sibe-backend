@@ -1,5 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
+import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.dominio.dto.IndicadorDTO;
 import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
 import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -136,5 +139,51 @@ class IndicadorRepositorioConsultaImplementacionTest {
 
         assertNotNull(resultado);
         assertEquals(1, resultado.getContenido().size());
+    }
+
+    @Test
+    void deberiaRetornarIndicadorCuandoExisteIdentificador() {
+        UUID id = UUID.randomUUID();
+        IndicadorEntidad entidad = new IndicadorEntidad();
+        Indicador modelo = mock(Indicador.class);
+
+        when(indicadorDAO.findById(id)).thenReturn(Optional.of(entidad));
+        when(indicadorMapeador.construriModelo(entidad)).thenReturn(modelo);
+
+        Indicador resultado = repositorio.consultarPorIdentificador(id);
+
+        assertNotNull(resultado);
+        assertEquals(modelo, resultado);
+    }
+
+    @Test
+    void deberiaRetornarNuloCuandoNoExisteIdentificador() {
+        UUID id = UUID.randomUUID();
+
+        when(indicadorDAO.findById(id)).thenReturn(Optional.empty());
+
+        assertNull(repositorio.consultarPorIdentificador(id));
+    }
+
+    @Test
+    void deberiaRetornarIndicadorCuandoExisteNombre() {
+        String nombre = "Satisfacción";
+        IndicadorEntidad entidad = new IndicadorEntidad();
+        Indicador modelo = mock(Indicador.class);
+
+        when(indicadorDAO.findByNombre(nombre)).thenReturn(entidad);
+        when(indicadorMapeador.construriModelo(entidad)).thenReturn(modelo);
+
+        Indicador resultado = repositorio.consultarPorNombre(nombre);
+
+        assertNotNull(resultado);
+        assertEquals(modelo, resultado);
+    }
+
+    @Test
+    void deberiaRetornarNuloCuandoNoExisteNombre() {
+        when(indicadorDAO.findByNombre("Inexistente")).thenReturn(null);
+
+        assertNull(repositorio.consultarPorNombre("Inexistente"));
     }
 }

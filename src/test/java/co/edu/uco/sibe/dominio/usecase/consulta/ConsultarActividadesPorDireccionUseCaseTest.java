@@ -7,6 +7,7 @@ import co.edu.uco.sibe.dominio.modelo.Direccion;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.DireccionRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
+import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.testdatabuilder.RespuestaPaginadaTestDataBuilder;
 import co.edu.uco.sibe.dominio.testdatabuilder.SolicitudPaginacionTestDataBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,5 +64,30 @@ class ConsultarActividadesPorDireccionUseCaseTest {
         assertEquals(respuestaEsperada, resultado);
         verify(autorizacionServicio).validarAccesoADireccion(direccionId);
         verify(actividadRepositorioConsulta).consultarPorDireccion(direccion, solicitud);
+    }
+
+    @Test
+    void deberiaConsultarActividadesSinPaginacionPorDireccion() {
+        UUID direccionId = UUID.randomUUID();
+        Direccion direccion = Direccion.construir(direccionId, "Direccion Test", new ArrayList<>(), new ArrayList<>());
+        List<ActividadDTO> esperado = List.of(new ActividadDTO());
+
+        doNothing().when(autorizacionServicio).validarAccesoADireccion(direccionId);
+        when(direccionRepositorioConsulta.consultarPorIdentificador(direccionId)).thenReturn(direccion);
+        when(actividadRepositorioConsulta.consultarPorDireccion(direccion)).thenReturn(esperado);
+
+        List<ActividadDTO> resultado = useCase.ejecutar(direccionId.toString());
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoDireccionNoExiste() {
+        UUID direccionId = UUID.randomUUID();
+
+        doNothing().when(autorizacionServicio).validarAccesoADireccion(direccionId);
+        when(direccionRepositorioConsulta.consultarPorIdentificador(direccionId)).thenReturn(null);
+
+        assertThrows(ValorInvalidoExcepcion.class, () -> useCase.ejecutar(direccionId.toString()));
     }
 }

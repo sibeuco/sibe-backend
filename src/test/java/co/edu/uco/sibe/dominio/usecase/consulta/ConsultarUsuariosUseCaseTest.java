@@ -140,4 +140,28 @@ class ConsultarUsuariosUseCaseTest {
         dto.setArea(area);
         return dto;
     }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoNoHayUsuarios() {
+        when(personaRepositorioConsulta.consultarUsuariosDTO()).thenReturn(List.of());
+
+        assertThrows(co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion.class,
+                () -> useCase.ejecutar());
+    }
+
+    @Test
+    void deberiaRetornarTodosLosUsuariosCuandoEsColaborador() {
+        UUID areaId = UUID.randomUUID();
+        ContextoUsuarioAutenticado contexto = new ContextoUsuarioAutenticadoTestDataBuilder()
+                .conRol(COLABORADOR).conAreaId(areaId).construir();
+
+        UsuarioDTO usuario1 = crearUsuarioConArea(areaId);
+
+        when(personaRepositorioConsulta.consultarUsuariosDTO()).thenReturn(List.of(usuario1));
+        when(autorizacionServicio.obtenerContexto()).thenReturn(contexto);
+
+        List<UsuarioDTO> resultado = useCase.ejecutar();
+
+        assertEquals(1, resultado.size());
+    }
 }

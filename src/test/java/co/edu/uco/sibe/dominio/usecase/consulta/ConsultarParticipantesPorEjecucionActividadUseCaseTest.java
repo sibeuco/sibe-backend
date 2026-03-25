@@ -59,4 +59,42 @@ class ConsultarParticipantesPorEjecucionActividadUseCaseTest {
         verify(autorizacionServicio).validarAccesoAEjecucionActividad(ejecucionId);
         verify(actividadRepositorioConsulta).consultarParticipantesPorEjecucionActividad(ejecucionId, solicitud);
     }
+
+    @Test
+    void deberiaConsultarParticipantesSinPaginacionCuandoTieneAcceso() {
+        UUID ejecucionId = UUID.randomUUID();
+        EjecucionActividad ejecucion = new EjecucionActividadTestDataBuilder().conIdentificador(ejecucionId).construir();
+        List<ParticipanteDTO> listaEsperada = List.of(new ParticipanteDTO());
+
+        doNothing().when(autorizacionServicio).validarAccesoAEjecucionActividad(ejecucionId);
+        when(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(ejecucionId)).thenReturn(ejecucion);
+        when(actividadRepositorioConsulta.consultarParticipantesPorEjecucionActividad(ejecucionId)).thenReturn(listaEsperada);
+
+        List<ParticipanteDTO> resultado = useCase.ejecutar(ejecucionId);
+
+        assertEquals(listaEsperada, resultado);
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoEjecucionNoExiste() {
+        UUID ejecucionId = UUID.randomUUID();
+
+        doNothing().when(autorizacionServicio).validarAccesoAEjecucionActividad(ejecucionId);
+        when(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(ejecucionId)).thenReturn(null);
+
+        assertThrows(co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion.class,
+                () -> useCase.ejecutar(ejecucionId));
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoEjecucionNoExisteEnConsultaPaginada() {
+        UUID ejecucionId = UUID.randomUUID();
+        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().construir();
+
+        doNothing().when(autorizacionServicio).validarAccesoAEjecucionActividad(ejecucionId);
+        when(actividadRepositorioConsulta.consultarEjecucionActividadPorIdentificador(ejecucionId)).thenReturn(null);
+
+        assertThrows(co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion.class,
+                () -> useCase.ejecutar(ejecucionId, solicitud));
+    }
 }

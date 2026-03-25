@@ -7,6 +7,7 @@ import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
+import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import co.edu.uco.sibe.dominio.testdatabuilder.RespuestaPaginadaTestDataBuilder;
 import co.edu.uco.sibe.dominio.testdatabuilder.SolicitudPaginacionTestDataBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,5 +64,30 @@ class ConsultarActividadesPorSubareaUseCaseTest {
         assertEquals(respuestaEsperada, resultado);
         verify(autorizacionServicio).validarAccesoASubarea(subareaId);
         verify(actividadRepositorioConsulta).consultarPorSubarea(subarea, solicitud);
+    }
+
+    @Test
+    void deberiaConsultarActividadesSinPaginacionPorSubarea() {
+        UUID subareaId = UUID.randomUUID();
+        Subarea subarea = Subarea.construir(subareaId, "Subarea Test", new ArrayList<>());
+        List<ActividadDTO> esperado = List.of(new ActividadDTO());
+
+        doNothing().when(autorizacionServicio).validarAccesoASubarea(subareaId);
+        when(subareaRepositorioConsulta.consultarPorIdentificador(subareaId)).thenReturn(subarea);
+        when(actividadRepositorioConsulta.consultarPorSubarea(subarea)).thenReturn(esperado);
+
+        List<ActividadDTO> resultado = useCase.ejecutar(subareaId.toString());
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    void deberiaLanzarExcepcionCuandoSubareaNoExiste() {
+        UUID subareaId = UUID.randomUUID();
+
+        doNothing().when(autorizacionServicio).validarAccesoASubarea(subareaId);
+        when(subareaRepositorioConsulta.consultarPorIdentificador(subareaId)).thenReturn(null);
+
+        assertThrows(ValorInvalidoExcepcion.class, () -> useCase.ejecutar(subareaId.toString()));
     }
 }
