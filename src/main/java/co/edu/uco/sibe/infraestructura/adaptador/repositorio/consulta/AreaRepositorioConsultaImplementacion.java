@@ -10,7 +10,6 @@ import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 import static co.edu.uco.sibe.dominio.transversal.constante.NumeroConstante.CERO;
@@ -19,7 +18,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 
 @Repository
 @AllArgsConstructor
-@Transactional(readOnly = true)
 public class AreaRepositorioConsultaImplementacion implements AreaRepositorioConsulta {
     private final AreaDAO areaDAO;
     private final AreaMapeador areaMapeador;

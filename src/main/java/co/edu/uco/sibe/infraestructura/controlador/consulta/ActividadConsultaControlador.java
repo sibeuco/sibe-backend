@@ -36,41 +36,20 @@ public class ActividadConsultaControlador {
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_AREA)
-    public RespuestaPaginada<ActividadDTO> consultarPorArea(
-            @PathVariable String identificador,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String busqueda,
-            @RequestParam(required = false) String sort,
-            @RequestParam(required = false) String direction) {
-        var solicitud = new SolicitudPaginacion(page, size, busqueda, sort, direction);
-        return this.consultarActividadesPorAreaManejador.ejecutar(identificador, solicitud);
+    public List<ActividadDTO> consultarPorArea(@PathVariable String identificador) {
+        return this.consultarActividadesPorAreaManejador.ejecutar(identificador);
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_DIRECCION)
-    public RespuestaPaginada<ActividadDTO> consultarPorDireccion(
-            @PathVariable String identificador,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String busqueda,
-            @RequestParam(required = false) String sort,
-            @RequestParam(required = false) String direction) {
-        var solicitud = new SolicitudPaginacion(page, size, busqueda, sort, direction);
-        return this.consultarActividadesPorDireccionManejador.ejecutar(identificador, solicitud);
+    public List<ActividadDTO> consultarPorDireccion(@PathVariable String identificador) {
+        return this.consultarActividadesPorDireccionManejador.ejecutar(identificador);
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(ACTIVIDADES_SUBAREA)
-    public RespuestaPaginada<ActividadDTO> consultarPorSubarea(
-            @PathVariable String identificador,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String busqueda,
-            @RequestParam(required = false) String sort,
-            @RequestParam(required = false) String direction) {
-        var solicitud = new SolicitudPaginacion(page, size, busqueda, sort, direction);
-        return this.consultarActividadesPorSubareaManejador.ejecutar(identificador, solicitud);
+    public List<ActividadDTO> consultarPorSubarea(@PathVariable String identificador) {
+        return this.consultarActividadesPorSubareaManejador.ejecutar(identificador);
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
@@ -80,23 +59,9 @@ public class ActividadConsultaControlador {
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
-    @GetMapping(ACTIVIDADES_EJECUCIONES_PAGINADO)
-    public RespuestaPaginada<EjecucionActividadDTO> consultarEjecucionesPaginado(
-            @PathVariable String identificador,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        var solicitud = new SolicitudPaginacion(page, size, null, null, null);
-        return this.consultarEjecucionesPorActividadManejador.ejecutar(identificador, solicitud);
-    }
-
-    @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)
     @GetMapping(PARTICIPANTES_EJECUCION_ACTIVIDAD)
-    public RespuestaPaginada<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(
-            @PathVariable String identificador,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        var solicitud = new SolicitudPaginacion(page, size, null, null, null);
-        return this.consultarParticipantesPorEjecucionActividadManejador.ejecutar(textoAUUID(identificador), solicitud);
+    public List<ParticipanteDTO> consultarParticipantesPorEjecucionActividad(@PathVariable String identificador) {
+        return this.consultarParticipantesPorEjecucionActividadManejador.ejecutar(textoAUUID(identificador));
     }
 
     @PreAuthorize(HAS_USER_OR_AREA_ADMIN_OR_ADMIN_GET_AUTHORITY)

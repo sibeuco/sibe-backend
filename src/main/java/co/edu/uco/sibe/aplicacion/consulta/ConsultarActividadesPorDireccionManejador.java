@@ -2,8 +2,6 @@ package co.edu.uco.sibe.aplicacion.consulta;
 
 import co.edu.uco.sibe.aplicacion.transversal.manejador.ManejadorComandoRespuesta;
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.usecase.consulta.ConsultarActividadesPorDireccionUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,9 +15,5 @@ public class ConsultarActividadesPorDireccionManejador implements ManejadorComan
     @Override
     public List<ActividadDTO> ejecutar(String comando) {
         return consultarActividadesPorDireccionUseCase.ejecutar(comando);
-    }
-
-    public RespuestaPaginada<ActividadDTO> ejecutar(String comando, SolicitudPaginacion solicitud) {
-        return consultarActividadesPorDireccionUseCase.ejecutar(comando, solicitud);
     }
 }

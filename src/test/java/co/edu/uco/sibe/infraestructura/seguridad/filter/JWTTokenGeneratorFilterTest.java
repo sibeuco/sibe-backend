@@ -128,18 +128,6 @@ class JWTTokenGeneratorFilterTest {
         assertThrows(AuthorizationException.class, () -> filtro.doFilterInternal(request, response, filterChain));
     }
 
-    @Test
-    void deberiaNoFiltrarEnEndpointsProtegidos() {
-        when(request.getServletPath()).thenReturn("/api/usuarios");
-        assertTrue(filtro.shouldNotFilter(request));
-    }
-
-    @Test
-    void deberiaFiltrarEnEndpointDeLogin() {
-        when(request.getServletPath()).thenReturn("/login");
-        assertFalse(filtro.shouldNotFilter(request));
-    }
-
     private UsuarioEntidad crearUsuarioEntidad(String codigoRol) {
         var tipoUsuario = new TipoUsuarioEntidad();
         tipoUsuario.setIdentificador(UUID.randomUUID());

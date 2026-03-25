@@ -40,9 +40,9 @@ public class ActividadEntidad {
     @JoinColumn(name = CAMPO_INDICADOR)
     private IndicadorEntidad indicador;
 
-    @Column(name = CAMPO_COLABORADOR, nullable = false)
+    @JoinColumn(name = CAMPO_COLABORADOR, nullable = false)
     private UUID colaborador;
     
-    @Column(name = CAMPO_CREADOR, nullable = false)
+    @JoinColumn(name = CAMPO_CREADOR, nullable = false)
     private UUID creador;
 }

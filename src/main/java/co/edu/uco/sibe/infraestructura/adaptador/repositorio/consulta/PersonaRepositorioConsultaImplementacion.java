@@ -1,8 +1,6 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
 import co.edu.uco.sibe.dominio.dto.PersonaDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
@@ -11,16 +9,11 @@ import co.edu.uco.sibe.infraestructura.adaptador.dao.IdentificacionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PersonaDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.PeticionRecuperacionClaveDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.UsuarioDAO;
-import co.edu.uco.sibe.infraestructura.adaptador.entidad.PersonaEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PersonaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.PeticionRecuperacionClaveMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.UsuarioMapeador;
-import co.edu.uco.sibe.infraestructura.adaptador.repositorio.util.PaginacionUtil;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +23,6 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 
 @Repository
 @AllArgsConstructor
-@Transactional(readOnly = true)
 public class PersonaRepositorioConsultaImplementacion implements PersonaRepositorioConsulta {
     private final PersonaDAO personaDAO;
     private final PersonaMapeador personaMapeador;
@@ -205,22 +197,5 @@ public class PersonaRepositorioConsultaImplementacion implements PersonaReposito
         }
 
         return entidad.getClave();
-    }
-
-    @Override
-    public RespuestaPaginada<UsuarioDTO> consultarUsuariosPaginado(SolicitudPaginacion solicitud, List<UUID> idsOrganizacionales, String tipoUsuario, String excluirTipoUsuario) {
-        var pageRequest = PaginacionUtil.crearPageRequest(solicitud, Sort.by(Sort.Direction.ASC, "nombres", "apellidos"));
-        String busqueda = solicitud.getBusqueda() == null ? "" : solicitud.getBusqueda().trim();
-        String tipoUsr = tipoUsuario == null ? "" : tipoUsuario;
-        String excluirTipoUsr = excluirTipoUsuario == null ? "" : excluirTipoUsuario;
-
-        Page<PersonaEntidad> pagina;
-        if (idsOrganizacionales == null || idsOrganizacionales.isEmpty()) {
-            pagina = personaDAO.buscarUsuariosPaginado(busqueda, tipoUsr, excluirTipoUsr, pageRequest);
-        } else {
-            pagina = personaDAO.buscarUsuariosPaginadoConFiltroOrganizacional(idsOrganizacionales, busqueda, tipoUsr, excluirTipoUsr, pageRequest);
-        }
-
-        return PaginacionUtil.convertir(pagina, usuarioMapeador::construirDTO);
     }
 }

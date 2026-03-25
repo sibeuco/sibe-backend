@@ -1,14 +1,10 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.dominio.service.AutorizacionContextoOrganizacionalServicio;
-import co.edu.uco.sibe.dominio.testdatabuilder.RespuestaPaginadaTestDataBuilder;
-import co.edu.uco.sibe.dominio.testdatabuilder.SolicitudPaginacionTestDataBuilder;
 import co.edu.uco.sibe.dominio.transversal.excepcion.AuthorizationException;
 import co.edu.uco.sibe.dominio.transversal.excepcion.ValorInvalidoExcepcion;
 import org.junit.jupiter.api.BeforeEach;
@@ -96,54 +92,5 @@ class ConsultarActividadesPorAreaUseCaseTest {
         assertThrows(AuthorizationException.class, () -> useCase.ejecutar(areaId.toString()));
 
         verify(actividadRepositorioConsulta, never()).consultarPorArea(any());
-    }
-
-    @Test
-    void deberiaConsultarActividadesPaginadasPorAreaCuandoTieneAcceso() {
-        UUID areaId = UUID.randomUUID();
-        Area area = Area.construir(areaId, "Area Test", new ArrayList<>(), new ArrayList<>());
-        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().construir();
-        RespuestaPaginada<ActividadDTO> respuestaEsperada = new RespuestaPaginadaTestDataBuilder<ActividadDTO>()
-                .conContenido(List.of(new ActividadDTO()))
-                .conTotalElementos(1)
-                .conTotalPaginas(1)
-                .conPaginaActual(0)
-                .construir();
-
-        doNothing().when(autorizacionServicio).validarAccesoAArea(areaId);
-        when(areaRepositorioConsulta.consultarPorIdentificador(areaId)).thenReturn(area);
-        when(actividadRepositorioConsulta.consultarPorArea(area, solicitud)).thenReturn(respuestaEsperada);
-
-        RespuestaPaginada<ActividadDTO> resultado = useCase.ejecutar(areaId.toString(), solicitud);
-
-        assertEquals(respuestaEsperada, resultado);
-        assertEquals(1, resultado.getContenido().size());
-        assertEquals(1, resultado.getTotalElementos());
-        verify(autorizacionServicio).validarAccesoAArea(areaId);
-        verify(actividadRepositorioConsulta).consultarPorArea(area, solicitud);
-    }
-
-    @Test
-    void deberiaRetornarRespuestaPaginadaConTotalElementosYPaginas() {
-        UUID areaId = UUID.randomUUID();
-        Area area = Area.construir(areaId, "Area Test", new ArrayList<>(), new ArrayList<>());
-        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().conTamanio(5).construir();
-        RespuestaPaginada<ActividadDTO> respuestaEsperada = new RespuestaPaginadaTestDataBuilder<ActividadDTO>()
-                .conContenido(List.of(new ActividadDTO(), new ActividadDTO(), new ActividadDTO(), new ActividadDTO(), new ActividadDTO()))
-                .conTotalElementos(12)
-                .conTotalPaginas(3)
-                .conPaginaActual(0)
-                .construir();
-
-        doNothing().when(autorizacionServicio).validarAccesoAArea(areaId);
-        when(areaRepositorioConsulta.consultarPorIdentificador(areaId)).thenReturn(area);
-        when(actividadRepositorioConsulta.consultarPorArea(area, solicitud)).thenReturn(respuestaEsperada);
-
-        RespuestaPaginada<ActividadDTO> resultado = useCase.ejecutar(areaId.toString(), solicitud);
-
-        assertEquals(12, resultado.getTotalElementos());
-        assertEquals(3, resultado.getTotalPaginas());
-        assertEquals(0, resultado.getPaginaActual());
-        assertEquals(5, resultado.getContenido().size());
     }
 }

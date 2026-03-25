@@ -1,8 +1,6 @@
 package co.edu.uco.sibe.dominio.usecase.consulta;
 
 import co.edu.uco.sibe.dominio.dto.ActividadDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.modelo.Subarea;
 import co.edu.uco.sibe.dominio.puerto.consulta.ActividadRepositorioConsulta;
 import co.edu.uco.sibe.dominio.puerto.consulta.SubareaRepositorioConsulta;
@@ -33,13 +31,6 @@ public class ConsultarActividadesPorSubareaUseCase {
         autorizacionServicio.validarAccesoASubarea(id);
         var subarea = validarSiExisteSubarea(id, identificadorSubarea);
         return actividadRepositorioConsulta.consultarPorSubarea(subarea);
-    }
-
-    public RespuestaPaginada<ActividadDTO> ejecutar(String identificadorSubarea, SolicitudPaginacion solicitud) {
-        var id = UtilUUID.textoAUUID(identificadorSubarea);
-        autorizacionServicio.validarAccesoASubarea(id);
-        var subarea = validarSiExisteSubarea(id, identificadorSubarea);
-        return actividadRepositorioConsulta.consultarPorSubarea(subarea, solicitud);
     }
 
     private Subarea validarSiExisteSubarea(UUID id, String idComando) {

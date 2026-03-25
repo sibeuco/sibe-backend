@@ -69,12 +69,6 @@ public final class ApiEndpointConstante {
 
     public static final String INDICADORES_PARA_ACTIVIDADES = "/actividades";
 
-    public static final String USUARIOS_PAGINADO = "/paginado";
-    public static final String INDICADORES_PAGINADO = "/paginado";
-    public static final String PROYECTOS_PAGINADO = "/paginado";
-    public static final String ACCIONES_PAGINADO = "/paginado";
-    public static final String ACTIVIDADES_EJECUCIONES_PAGINADO = "/ejecuciones/paginado/{identificador}";
-
     private ApiEndpointConstante() {
         throw new UnsupportedOperationException(NO_SE_PUEDE_INSTANCIAR_UNA_CLASE_UTILITARIA);
     }

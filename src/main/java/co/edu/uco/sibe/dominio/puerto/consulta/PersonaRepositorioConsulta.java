@@ -1,8 +1,6 @@
 package co.edu.uco.sibe.dominio.puerto.consulta;
 
 import co.edu.uco.sibe.dominio.dto.PersonaDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.dto.UsuarioDTO;
 import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.Usuario;
@@ -28,8 +26,6 @@ public interface PersonaRepositorioConsulta {
     Usuario consultarUsuarioPorCorreo(String correo);
 
     List<UsuarioDTO> consultarUsuariosDTO();
-
-    RespuestaPaginada<UsuarioDTO> consultarUsuariosPaginado(SolicitudPaginacion solicitud, List<UUID> idsOrganizacionales, String tipoUsuario, String excluirTipoUsuario);
 
     boolean hayDatos();
 

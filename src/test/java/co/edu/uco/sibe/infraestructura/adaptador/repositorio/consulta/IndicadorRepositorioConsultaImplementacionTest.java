@@ -1,11 +1,7 @@
 package co.edu.uco.sibe.infraestructura.adaptador.repositorio.consulta;
 
-import co.edu.uco.sibe.dominio.modelo.Indicador;
 import co.edu.uco.sibe.dominio.dto.IndicadorDTO;
-import co.edu.uco.sibe.dominio.dto.RespuestaPaginada;
-import co.edu.uco.sibe.dominio.dto.SolicitudPaginacion;
 import co.edu.uco.sibe.dominio.testdatabuilder.IndicadorDTOTestDataBuilder;
-import co.edu.uco.sibe.dominio.testdatabuilder.SolicitudPaginacionTestDataBuilder;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.IndicadorDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.IndicadorEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.IndicadorMapeador;
@@ -14,13 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -106,84 +97,5 @@ class IndicadorRepositorioConsultaImplementacionTest {
 
         assertEquals(2, resultado.size());
         assertTrue(resultado.stream().anyMatch(dto -> dto.getNombre().equals("Participación")));
-    }
-
-    @Test
-    void deberiaRetornarIndicadoresPaginadosSinBusqueda() {
-        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().construir();
-        IndicadorEntidad entidad = new IndicadorEntidad();
-        Page<IndicadorEntidad> page = new PageImpl<>(List.of(entidad));
-        IndicadorDTO dto = new IndicadorDTOTestDataBuilder().conNombre("Test").construir();
-
-        when(indicadorDAO.findAll(any(Pageable.class))).thenReturn(page);
-        when(indicadorMapeador.construirDTO(entidad)).thenReturn(dto);
-
-        RespuestaPaginada<IndicadorDTO> resultado = repositorio.consultarDTOsPaginado(solicitud);
-
-        assertNotNull(resultado);
-        assertEquals(1, resultado.getContenido().size());
-        assertEquals(1L, resultado.getTotalElementos());
-    }
-
-    @Test
-    void deberiaRetornarIndicadoresPaginadosConBusqueda() {
-        SolicitudPaginacion solicitud = new SolicitudPaginacionTestDataBuilder().conBusqueda("test").construir();
-        IndicadorEntidad entidad = new IndicadorEntidad();
-        Page<IndicadorEntidad> page = new PageImpl<>(List.of(entidad));
-        IndicadorDTO dto = new IndicadorDTOTestDataBuilder().conNombre("Test").construir();
-
-        when(indicadorDAO.buscarPaginado(eq("test"), any(Pageable.class))).thenReturn(page);
-        when(indicadorMapeador.construirDTO(entidad)).thenReturn(dto);
-
-        RespuestaPaginada<IndicadorDTO> resultado = repositorio.consultarDTOsPaginado(solicitud);
-
-        assertNotNull(resultado);
-        assertEquals(1, resultado.getContenido().size());
-    }
-
-    @Test
-    void deberiaRetornarIndicadorCuandoExisteIdentificador() {
-        UUID id = UUID.randomUUID();
-        IndicadorEntidad entidad = new IndicadorEntidad();
-        Indicador modelo = mock(Indicador.class);
-
-        when(indicadorDAO.findById(id)).thenReturn(Optional.of(entidad));
-        when(indicadorMapeador.construriModelo(entidad)).thenReturn(modelo);
-
-        Indicador resultado = repositorio.consultarPorIdentificador(id);
-
-        assertNotNull(resultado);
-        assertEquals(modelo, resultado);
-    }
-
-    @Test
-    void deberiaRetornarNuloCuandoNoExisteIdentificador() {
-        UUID id = UUID.randomUUID();
-
-        when(indicadorDAO.findById(id)).thenReturn(Optional.empty());
-
-        assertNull(repositorio.consultarPorIdentificador(id));
-    }
-
-    @Test
-    void deberiaRetornarIndicadorCuandoExisteNombre() {
-        String nombre = "Satisfacción";
-        IndicadorEntidad entidad = new IndicadorEntidad();
-        Indicador modelo = mock(Indicador.class);
-
-        when(indicadorDAO.findByNombre(nombre)).thenReturn(entidad);
-        when(indicadorMapeador.construriModelo(entidad)).thenReturn(modelo);
-
-        Indicador resultado = repositorio.consultarPorNombre(nombre);
-
-        assertNotNull(resultado);
-        assertEquals(modelo, resultado);
-    }
-
-    @Test
-    void deberiaRetornarNuloCuandoNoExisteNombre() {
-        when(indicadorDAO.findByNombre("Inexistente")).thenReturn(null);
-
-        assertNull(repositorio.consultarPorNombre("Inexistente"));
     }
 }
