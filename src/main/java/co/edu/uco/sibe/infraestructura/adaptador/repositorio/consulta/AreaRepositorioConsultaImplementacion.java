@@ -6,6 +6,7 @@ import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.dominio.puerto.consulta.AreaRepositorioConsulta;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import static co.edu.uco.sibe.dominio.transversal.utilitarios.ValidadorObjeto.es
 @AllArgsConstructor
 public class AreaRepositorioConsultaImplementacion implements AreaRepositorioConsulta {
     private final AreaDAO areaDAO;
+    private final DireccionDAO direccionDAO;
     private final AreaMapeador areaMapeador;
     private final AreaDetalladaMapeador areaDetalladaMapeador;
 
@@ -85,7 +87,14 @@ public class AreaRepositorioConsultaImplementacion implements AreaRepositorioCon
             return null;
         }
 
-        return this.areaDetalladaMapeador.construirDTO(entidad);
+        var dto = this.areaDetalladaMapeador.construirDTO(entidad);
+
+        var direccionEntidad = this.direccionDAO.findByAreas_Identificador(identificador);
+        if (!esNulo(direccionEntidad)) {
+            dto.setDireccionNombre(direccionEntidad.getNombre());
+        }
+
+        return dto;
     }
 
     @Override

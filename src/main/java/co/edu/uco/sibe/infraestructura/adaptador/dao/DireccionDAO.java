@@ -8,4 +8,6 @@ public interface DireccionDAO extends JpaRepository<DireccionEntidad, UUID> {
     DireccionEntidad findByNombre(String nombre);
 
     DireccionEntidad findByActividades_Identificador(UUID actividadId);
+
+    DireccionEntidad findByAreas_Identificador(UUID areaId);
 }

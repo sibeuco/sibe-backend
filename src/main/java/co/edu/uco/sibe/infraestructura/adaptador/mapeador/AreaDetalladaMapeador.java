@@ -18,7 +18,8 @@ public class AreaDetalladaMapeador {
                 entidad.getIdentificador(),
                 entidad.getNombre(),
                 subareaDetalladaMapeador.construirDTOs(entidad.getSubareas()),
-                actividadDetalladaMapeador.construirDTOs(entidad.getActividades())
+                actividadDetalladaMapeador.construirDTOs(entidad.getActividades()),
+                null
         );
     }
 

@@ -16,7 +16,9 @@ public class SubareaDetalladaMapeador {
         return new SubareaDetalladaDTO(
                 entidad.getIdentificador().toString(),
                 entidad.getNombre(),
-                actividadDetalladaMapeador.construirDTOs(entidad.getActividades())
+                actividadDetalladaMapeador.construirDTOs(entidad.getActividades()),
+                null,
+                null
         );
     }
 

@@ -14,4 +14,6 @@ public class SubareaDetalladaDTO {
     private String identificador;
     private String nombre;
     private List<ActividadDetalladaDTO> actividades;
+    private String areaNombre;
+    private String direccionNombre;
 }
