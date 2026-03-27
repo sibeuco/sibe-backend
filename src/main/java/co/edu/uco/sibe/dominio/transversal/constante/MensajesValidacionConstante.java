@@ -83,7 +83,7 @@ public final class MensajesValidacionConstante {
 
     public static final String NOMBRE_INDICADOR_OBLIGATORIO = "El nombre del indicador es obligatorio.";
     public static final String NOMBRE_INDICADOR_INVALIDO = "El nombre proporcionado para el indicador es inválido.";
-    public static final String LONGITUD_NOMBRE_INDICADOR_INVALIDA = "El nombre del indicador debe tener entre 10 y 100 caracteres.";
+    public static final String LONGITUD_NOMBRE_INDICADOR_INVALIDA = "El nombre del indicador debe tener entre 5 y 100 caracteres.";
 
     public static final String ID_CARNET_OBLIGATORIO = "El ID de carnet es obligatorio.";
     public static final String ID_CARNET_INVALIDO = "El ID de carnet proporcionado es inválido.";

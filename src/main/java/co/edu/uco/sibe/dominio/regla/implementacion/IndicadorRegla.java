@@ -33,6 +33,6 @@ public final class IndicadorRegla implements Regla<Indicador> {
     private void validarNombre(String nombre) {
         validarObligatorio(nombre, NOMBRE_INDICADOR_OBLIGATORIO);
         validarTextoAlfanumericoValido(nombre, NOMBRE_INDICADOR_INVALIDO);
-        validarNumeroEntre(nombre.length(), 10, 100, LONGITUD_NOMBRE_INDICADOR_INVALIDA);
+        validarNumeroEntre(nombre.length(), 5, 100, LONGITUD_NOMBRE_INDICADOR_INVALIDA);
     }
 }

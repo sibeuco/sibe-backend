@@ -39,7 +39,7 @@ class IndicadorReglaTest {
 
     @Test
     void deberiaFallarConNombreCorto() {
-        Indicador modelo = Indicador.construir(UUID.randomUUID(), "Corto", null, null, null, new ArrayList<>());
+        Indicador modelo = Indicador.construir(UUID.randomUUID(), "Cort", null, null, null, new ArrayList<>());
         assertThrows(LongitudExcepcion.class, () -> regla.validarCampos(modelo));
     }
 
