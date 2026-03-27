@@ -83,7 +83,7 @@ class IndicadorProyectoMapeadorTest {
         UUID id = UUID.randomUUID();
         ProyectoEntidad proyectoEntidad = new ProyectoEntidad(id, "P-003", "Nombre DTO", "Obj DTO", List.of());
         IndicadorProyectoEntidad entidad = new IndicadorProyectoEntidad(UUID.randomUUID(), proyectoEntidad);
-        ProyectoDTO proyectoDTO = new ProyectoDTO(id.toString(), "P-003", "Nombre DTO", "Obj DTO");
+        ProyectoDTO proyectoDTO = new ProyectoDTO(id.toString(), "P-003", "Nombre DTO", "Obj DTO", List.of());
 
         when(proyectoMapeador.construirDTO(proyectoEntidad)).thenReturn(proyectoDTO);
 

@@ -126,7 +126,7 @@ class IndicadorMapeadorTest {
 
         when(indicadorTipoIndicadorMapeador.construirDTO(any())).thenReturn(new TipoIndicadorDTO(UUID.randomUUID().toString(), "T", "R"));
         when(indicadorTemporalidadMapeador.construirDTO(any())).thenReturn(new TemporalidadDTO(UUID.randomUUID().toString(), "M"));
-        when(indicadorProyectoMapeador.construirDTO(any())).thenReturn(new ProyectoDTO(UUID.randomUUID().toString(), "P", "N", "O"));
+        when(indicadorProyectoMapeador.construirDTO(any())).thenReturn(new ProyectoDTO(UUID.randomUUID().toString(), "P", "N", "O", List.of()));
         when(indicadorPublicoInteresMapeador.construirDTOs(anyList())).thenReturn(List.of());
 
         IndicadorDTO dto = mapeador.construirDTO(entidad);
@@ -146,7 +146,7 @@ class IndicadorMapeadorTest {
 
         when(indicadorTipoIndicadorMapeador.construirDTO(any())).thenReturn(new TipoIndicadorDTO(UUID.randomUUID().toString(), "T", "R"));
         when(indicadorTemporalidadMapeador.construirDTO(any())).thenReturn(new TemporalidadDTO(UUID.randomUUID().toString(), "M"));
-        when(indicadorProyectoMapeador.construirDTO(any())).thenReturn(new ProyectoDTO(UUID.randomUUID().toString(), "P", "N", "O"));
+        when(indicadorProyectoMapeador.construirDTO(any())).thenReturn(new ProyectoDTO(UUID.randomUUID().toString(), "P", "N", "O", List.of()));
         when(indicadorPublicoInteresMapeador.construirDTOs(anyList())).thenReturn(List.of());
 
         List<IndicadorDTO> dtos = mapeador.construirDTOs(List.of(entidad));

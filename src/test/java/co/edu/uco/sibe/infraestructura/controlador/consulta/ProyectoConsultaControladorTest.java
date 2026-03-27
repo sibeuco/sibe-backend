@@ -28,7 +28,7 @@ class ProyectoConsultaControladorTest {
 
     @Test
     void deberiaConsultarTodos() {
-        List<ProyectoDTO> proyectos = List.of(new ProyectoDTO("1", "P001", "Proyecto 1", "Objetivo"));
+        List<ProyectoDTO> proyectos = List.of(new ProyectoDTO("1", "P001", "Proyecto 1", "Objetivo", List.of()));
         when(consultarProyectosManejador.ejecutar()).thenReturn(proyectos);
 
         List<ProyectoDTO> resultado = controlador.consultarTodos();

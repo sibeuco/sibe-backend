@@ -5,6 +5,7 @@ import co.edu.uco.sibe.dominio.dto.AreaDetalladaDTO;
 import co.edu.uco.sibe.dominio.modelo.Actividad;
 import co.edu.uco.sibe.dominio.modelo.Area;
 import co.edu.uco.sibe.infraestructura.adaptador.dao.AreaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
 import co.edu.uco.sibe.infraestructura.adaptador.entidad.AreaEntidad;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaDetalladaMapeador;
 import co.edu.uco.sibe.infraestructura.adaptador.mapeador.AreaMapeador;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.*;
 class AreaRepositorioConsultaImplementacionTest {
 
     @Mock private AreaDAO areaDAO;
+    @Mock private DireccionDAO direccionDAO;
     @Mock private AreaMapeador areaMapeador;
     @Mock private AreaDetalladaMapeador areaDetalladaMapeador;
 
@@ -32,7 +34,7 @@ class AreaRepositorioConsultaImplementacionTest {
 
     @BeforeEach
     void setUp() {
-        repositorio = new AreaRepositorioConsultaImplementacion(areaDAO, areaMapeador, areaDetalladaMapeador);
+        repositorio = new AreaRepositorioConsultaImplementacion(areaDAO, direccionDAO, areaMapeador, areaDetalladaMapeador);
     }
 
     @Test

@@ -40,7 +40,7 @@ class ProyectoRepositorioConsultaImplementacionTest {
         List<ProyectoEntidad> entidades = List.of(new ProyectoEntidad());
         ProyectoDTO dto = new ProyectoDTO();
 
-        when(proyectoDAO.findAll()).thenReturn(entidades);
+        when(proyectoDAO.findAllConAcciones()).thenReturn(entidades);
         when(proyectoMapeador.construirDTOs(entidades)).thenReturn(List.of(dto));
 
         List<ProyectoDTO> resultado = repositorio.consultarDTOs();

@@ -36,7 +36,15 @@ public class ProyectoMapeador {
                 proyecto.getIdentificador().toString(),
                 proyecto.getNumeroProyecto(),
                 proyecto.getNombre(),
-                proyecto.getObjetivo()
+                proyecto.getObjetivo(),
+                proyecto.getAcciones() != null
+                    ? proyecto.getAcciones().stream()
+                        .map(pa -> new co.edu.uco.sibe.dominio.dto.AccionDTO(
+                                pa.getAccion().getIdentificador().toString(),
+                                pa.getAccion().getDetalle(),
+                                pa.getAccion().getObjetivo()))
+                        .toList()
+                    : java.util.List.of()
         );
     }
 

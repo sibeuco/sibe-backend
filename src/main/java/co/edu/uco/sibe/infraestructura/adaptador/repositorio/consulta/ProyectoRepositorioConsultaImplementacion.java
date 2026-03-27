@@ -19,7 +19,7 @@ public class ProyectoRepositorioConsultaImplementacion implements ProyectoReposi
 
     @Override
     public List<ProyectoDTO> consultarDTOs() {
-        var entidades = this.proyectoDAO.findAll();
+        var entidades = this.proyectoDAO.findAllConAcciones();
 
         return this.proyectoMapeador.construirDTOs(entidades);
     }
