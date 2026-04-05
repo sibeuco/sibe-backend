@@ -1,9 +1,9 @@
 package co.edu.uco.sibe.infraestructura.configuracion.dataloader;
 
 import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarAreaManejador;
-import co.edu.uco.sibe.aplicacion.consulta.ConsultarSubareasManejador;
 import co.edu.uco.sibe.aplicacion.consulta.HayDatosAreaManejador;
-import co.edu.uco.sibe.dominio.modelo.Subarea;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.SubareaDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.SubareaEntidad;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -19,21 +20,23 @@ class AreaDataLoaderTest {
 
     @Mock private HayDatosAreaManejador hayDatosAreaManejador;
     @Mock private GuardarAreaManejador guardarAreaManejador;
-    @Mock private ConsultarSubareasManejador consultarSubareasManejador;
+    @Mock private SubareaDAO subareaDAO;
 
     private AreaDataLoader dataLoader;
 
     @BeforeEach
     void setUp() {
-        dataLoader = new AreaDataLoader(hayDatosAreaManejador, guardarAreaManejador, consultarSubareasManejador);
+        dataLoader = new AreaDataLoader(hayDatosAreaManejador, guardarAreaManejador, subareaDAO);
     }
 
     @Test
     void deberiaCargarDatosCuandoNoExistenAreas() throws Exception {
-        List<Subarea> subareas = List.of(mock(Subarea.class));
+        SubareaEntidad entidad = new SubareaEntidad();
+        entidad.setIdentificador(UUID.randomUUID());
+        entidad.setNombre("Subarea Test");
 
         when(hayDatosAreaManejador.ejecutar()).thenReturn(false);
-        when(consultarSubareasManejador.ejecutar()).thenReturn(subareas);
+        when(subareaDAO.findAll()).thenReturn(List.of(entidad));
 
         dataLoader.run();
 

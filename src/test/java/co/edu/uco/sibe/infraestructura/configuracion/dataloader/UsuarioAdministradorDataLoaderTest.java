@@ -1,13 +1,19 @@
 package co.edu.uco.sibe.infraestructura.configuracion.dataloader;
 
-import co.edu.uco.sibe.aplicacion.comando.manejador.GuardarUsuarioManejador;
-import co.edu.uco.sibe.aplicacion.consulta.ConsultarDireccionPorNombreManejador;
+import co.edu.uco.sibe.aplicacion.comando.fabrica.PersonaFabrica;
+import co.edu.uco.sibe.aplicacion.comando.fabrica.UsuarioFabrica;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarTipoIdentificacionPorSiglaManejador;
 import co.edu.uco.sibe.aplicacion.consulta.ConsultarTipoUsuarioPorCodigoManejador;
 import co.edu.uco.sibe.aplicacion.consulta.HayDatosUsuarioManejador;
-import co.edu.uco.sibe.dominio.modelo.Direccion;
+import co.edu.uco.sibe.dominio.modelo.Persona;
 import co.edu.uco.sibe.dominio.modelo.TipoIdentificacion;
 import co.edu.uco.sibe.dominio.modelo.TipoUsuario;
+import co.edu.uco.sibe.dominio.modelo.Usuario;
+import co.edu.uco.sibe.dominio.puerto.comando.PersonaRepositorioComando;
+import co.edu.uco.sibe.dominio.puerto.servicio.EncriptarClaveServicio;
+import co.edu.uco.sibe.dominio.service.VincularUsuarioConAreaService;
+import co.edu.uco.sibe.infraestructura.adaptador.dao.DireccionDAO;
+import co.edu.uco.sibe.infraestructura.adaptador.entidad.DireccionEntidad;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,10 +28,14 @@ import static org.mockito.Mockito.*;
 class UsuarioAdministradorDataLoaderTest {
 
     @Mock private HayDatosUsuarioManejador hayDatosUsuarioManejador;
-    @Mock private GuardarUsuarioManejador guardarUsuarioManejador;
     @Mock private ConsultarTipoUsuarioPorCodigoManejador consultarTipoUsuarioPorCodigoManejador;
     @Mock private ConsultarTipoIdentificacionPorSiglaManejador consultarTipoIdentificacionPorSiglaManejador;
-    @Mock private ConsultarDireccionPorNombreManejador consultarDireccionPorNombreManejador;
+    @Mock private DireccionDAO direccionDAO;
+    @Mock private UsuarioFabrica usuarioFabrica;
+    @Mock private PersonaFabrica personaFabrica;
+    @Mock private PersonaRepositorioComando personaRepositorioComando;
+    @Mock private EncriptarClaveServicio encriptarClaveServicio;
+    @Mock private VincularUsuarioConAreaService vincularUsuarioConAreaService;
 
     private UsuarioAdministradorDataLoader dataLoader;
 
@@ -33,10 +43,14 @@ class UsuarioAdministradorDataLoaderTest {
     void setUp() {
         dataLoader = new UsuarioAdministradorDataLoader(
                 hayDatosUsuarioManejador,
-                guardarUsuarioManejador,
                 consultarTipoUsuarioPorCodigoManejador,
                 consultarTipoIdentificacionPorSiglaManejador,
-                consultarDireccionPorNombreManejador
+                direccionDAO,
+                usuarioFabrica,
+                personaFabrica,
+                personaRepositorioComando,
+                encriptarClaveServicio,
+                vincularUsuarioConAreaService
         );
     }
 
@@ -44,19 +58,27 @@ class UsuarioAdministradorDataLoaderTest {
     void deberiaCargarDatosCuandoNoExistenUsuarios() throws Exception {
         TipoUsuario tipoUsuario = mock(TipoUsuario.class);
         TipoIdentificacion tipoIdentificacion = mock(TipoIdentificacion.class);
-        Direccion direccion = mock(Direccion.class);
+        DireccionEntidad direccionEntidad = new DireccionEntidad();
+        direccionEntidad.setIdentificador(UUID.randomUUID());
+        Usuario usuario = mock(Usuario.class);
+        Persona persona = mock(Persona.class);
 
         when(hayDatosUsuarioManejador.ejecutar()).thenReturn(false);
         when(consultarTipoUsuarioPorCodigoManejador.ejecutar(any())).thenReturn(tipoUsuario);
         when(consultarTipoIdentificacionPorSiglaManejador.ejecutar(any())).thenReturn(tipoIdentificacion);
-        when(consultarDireccionPorNombreManejador.ejecutar(any())).thenReturn(direccion);
+        when(direccionDAO.findByNombre(any())).thenReturn(direccionEntidad);
         when(tipoUsuario.getIdentificador()).thenReturn(UUID.randomUUID());
         when(tipoIdentificacion.getIdentificador()).thenReturn(UUID.randomUUID());
-        when(direccion.getIdentificador()).thenReturn(UUID.randomUUID());
+        when(usuarioFabrica.construir(any())).thenReturn(usuario);
+        when(personaFabrica.construir(any())).thenReturn(persona);
+        when(usuario.getClave()).thenReturn("clave123");
+        when(encriptarClaveServicio.ejecutar(any())).thenReturn("encrypted");
+        when(personaRepositorioComando.agregarNuevoUsuario(any(), any(), any())).thenReturn(UUID.randomUUID());
 
         dataLoader.run();
 
-        verify(guardarUsuarioManejador).ejecutar(any());
+        verify(personaRepositorioComando).agregarNuevoUsuario(any(), any(), any());
+        verify(vincularUsuarioConAreaService).ejecutar(any(), any(), any());
     }
 
     @Test
@@ -65,6 +87,6 @@ class UsuarioAdministradorDataLoaderTest {
 
         dataLoader.run();
 
-        verify(guardarUsuarioManejador, never()).ejecutar(any());
+        verify(personaRepositorioComando, never()).agregarNuevoUsuario(any(), any(), any());
     }
 }
